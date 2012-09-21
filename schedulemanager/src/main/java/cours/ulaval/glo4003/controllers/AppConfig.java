@@ -13,7 +13,6 @@ public class AppConfig {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("WEB-INF/views/");
 		resolver.setSuffix(".jsp");
-		int variable = 1;
 		return resolver;
 	}
 
