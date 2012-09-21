@@ -1,5 +1,7 @@
 package cours.ulaval.glo4003.persistence;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.Marshaller;
 
@@ -12,8 +14,7 @@ public class CourseBeanRetriever implements ICourseRetriever {
 	private Marshaller marshaller;
 
 	@Override
-	public Iterable<Course> getCourses() {
-		// TODO Auto-generated method stub
+	public Collection<Course> getCourses() {
 		return null;
 	}
 

@@ -1,6 +1,6 @@
-
-
 package cours.ulaval.glo4003.repository;
+
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,12 +16,12 @@ public class CourseRepository {
 	public void setCourseRetriever(ICourseRetriever courseRetriever) {
 		this.courseRetriever = courseRetriever;
 	}
-	
+
 	public ICourseRetriever getCourseRetriever() {
 		return courseRetriever;
 	}
 
-	public Iterable<Course> getAll() {
+	public Collection<Course> getAll() {
 		return courseRetriever.getCourses();
 	}
 }
