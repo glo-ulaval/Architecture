@@ -17,7 +17,7 @@ public class CourseRepository {
 		this.courseRetriever = courseRetriever;
 	}
 	
-	public ICourseRetriever getCourseRetriver() {
+	public ICourseRetriever getCourseRetriever() {
 		return courseRetriever;
 	}
 
