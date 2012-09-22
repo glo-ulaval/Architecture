@@ -8,58 +8,59 @@
 <link href="assets/css/bootstrap.css" rel="stylesheet">
 <link href="assets/css/app.css" rel="stylesheet">
 </head>
-<header>
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="container">
-			<a class="brand" href="#">ScheduleManager<img src="assets/img/logo_mini.png"/></a>
-			<div class="nav-collapse collapse">
-				<ul class="nav">
-					<li><a href="#">Accueil</a></li>
-					<li><a href="#">À propos</a></li>
-					<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
-				</ul>
+<body>
+	<header>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#"><img src="assets/img/logo_mini.png"/>ScheduleManager</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="#">Accueil</a></li>
+						<li><a href="#">À propos</a></li>
+						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-</header>
-<body>
+	</header>
 	<div class="container">
 		<div class="hero-unit">
+			<h1></h1>
 			<img src="assets/img/logo.png"/>
 			<p>Bienvenue sur l'application ScheduleManager développée dans le
 				cadre du cours "GLO-4003 - Architecture Logicielle".</p>
 		</div>
 		<div class="row-fluid">
-			<div class="span4 well fixed_height">
-				<h2>Automatisé</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					magna mollis euismod. Donec sed odio dui.
+			<div class="span6 well fixed_height">
+				<h2>Gestion des horaires automatisé IFT-GLO</h2>
+				<h4>De quoi faire rêver toutes les autres facultées.</h4>
+				<p class="justified">
+				Entrez les disponibilités des professeurs,
+				selectionnez l'offre de cours pour l'année et laissez le système vous proposer un horraire. Remaniez l'horraire à votre guise et
+				suivez les recommandations du système afin d'éviter les conflits d'horraire.
 				</p>
 			</div>
-			<div class="span4 well fixed_height">
-				<h2>Simple & Efficace</h2>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce
-					dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-					ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-					magna mollis euismod. Donec sed odio dui.
-				</p>
-			</div>
-			<div class="span4 well fixed_height">
+			<div class="span6 well fixed_height">
 				<h2>Zone Membre</h2>
 				<p>Zone membre pour organiser, visualer et accepter vos horaires.</p>
 				<form>
 					<input type="text" placeholder="IDUL">
-					<input type="password" placeholder="Mot de passe">
+					<input type="password" placeholder="Mot de passe"><br/>
 					<button type="submit" class="btn">Se connecter</button>
 				</form>
 			</div>
 		</div>
 	</div>
-
+	<footer class="footer">
+		<div class="container">
+			<p>Projet développé dans le cadre du cours GLO-4003 -
+				Architecture Logicielle, Université Laval</p>
+			<p>Développé par Philippe Bourdages, William Fortin, Bruno
+				Gagnon-Adam, Jonathan Rochette, Vincent Séguin, Olivier Sylvain</p>
+		</div>
+	</footer>
 </body>
 
 </html>

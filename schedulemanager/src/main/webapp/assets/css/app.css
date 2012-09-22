@@ -3,12 +3,35 @@ body {
 	padding-bottom: 40px;
 }
 
-.brand img{
+.brand img {
 	height: 30px;
-	margin-left: 5px;
+	margin-right: 5px;
 	margin-top: -5px;
 }
 
-.fixed_height{
+.fixed_height {
 	height: 280px;
+}
+
+.footer {
+	padding: 70px 0;
+	margin-top: 70px;
+	border-top: 1px solid #E5E5E5;
+	background-color: whiteSmoke;
+}
+
+.justified {
+	text-align: justify;
+}
+
+.centered {
+	text-align: center;
+}
+
+.floatLeft{
+	float: left;
+}
+
+.floatRight{
+	float: right;
 }
