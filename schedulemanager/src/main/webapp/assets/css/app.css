@@ -3,6 +3,12 @@ body {
 	padding-bottom: 40px;
 }
 
+.brand img{
+	height: 30px;
+	margin-left: 5px;
+	margin-top: -5px;
+}
+
 .fixed_height{
 	height: 280px;
 }

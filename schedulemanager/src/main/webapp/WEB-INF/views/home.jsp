@@ -12,13 +12,12 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="brand" href="#">ScheduleManager</a>
+			<a class="brand" href="#">ScheduleManager<img src="assets/img/logo_mini.png"/></a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li><a href="#">Accueil</a></li>
 					<li><a href="#">À propos</a></li>
-					<li><a href="https://github.com/glo-ulaval/Architecture">Code
-							Source</a></li>
+					<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
 				</ul>
 			</div>
 		</div>
@@ -28,7 +27,7 @@
 <body>
 	<div class="container">
 		<div class="hero-unit">
-			<h1>ScheduleManager</h1>
+			<img src="assets/img/logo.png"/>
 			<p>Bienvenue sur l'application ScheduleManager développée dans le
 				cadre du cours "GLO-4003 - Architecture Logicielle".</p>
 		</div>
@@ -53,8 +52,8 @@
 				<h2>Zone Membre</h2>
 				<p>Zone membre pour organiser, visualer et accepter vos horaires.</p>
 				<form>
-					<input type="text" placeholder="Email">
-					<input type="password" placeholder="Password">
+					<input type="text" placeholder="IDUL">
+					<input type="password" placeholder="Mot de passe">
 					<button type="submit" class="btn">Se connecter</button>
 				</form>
 			</div>
