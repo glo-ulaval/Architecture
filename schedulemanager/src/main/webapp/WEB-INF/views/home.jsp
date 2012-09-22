@@ -35,11 +35,11 @@
 		<div class="row-fluid">
 			<div class="span6 well fixed_height">
 				<h2>Gestion des horaires automatisé IFT-GLO</h2>
-				<h4>De quoi faire rêver toutes les autres facultées.</h4>
+				<h4>De quoi faire rêver toutes les autres facultés.</h4>
 				<p class="justified">
 				Entrez les disponibilités des professeurs,
-				selectionnez l'offre de cours pour l'année et laissez le système vous proposer un horraire. Remaniez l'horraire à votre guise et
-				suivez les recommandations du système afin d'éviter les conflits d'horraire.
+				sélectionnez l'offre de cours pour l'année et laissez le système vous proposer un horaire. Remaniez l'horaire à votre guise et
+				suivez les recommandations du système afin d'éviter les conflits.
 				</p>
 			</div>
 			<div class="span6 well fixed_height">
