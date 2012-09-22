@@ -10,9 +10,5 @@
  
     <context:component-scan base-package="cours.ulaval.glo4003.controller" />
     <mvc:annotation-driven />
-    
-    <!-- Bean for XML Marshalling -->
-    <bean id="CourseBeanRetriever" class="cours.ulaval.glo4003.persistence.CourseBeanRetriever" />
-    <bean id="marshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
  
 </beans>
