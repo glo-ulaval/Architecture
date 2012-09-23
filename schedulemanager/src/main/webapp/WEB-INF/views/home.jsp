@@ -13,7 +13,7 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="#"><img src="assets/img/logo_mini.png"/>ScheduleManager</a>
+				<a class="brand" href="#"><img src="assets/img/logo_mini.png" alt=""/>ScheduleManager</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="#">Accueil</a></li>
@@ -28,7 +28,7 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h1></h1>
-			<img src="assets/img/logo.png"/>
+			<img src="assets/img/logo.png" alt=""/>
 			<p>Bienvenue sur l'application ScheduleManager développée dans le
 				cadre du cours "GLO-4003 - Architecture Logicielle".</p>
 		</div>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="span6 well fixed_height">
 				<h2>Zone Membre</h2>
-				<p>Zone membre pour organiser, visualer et accepter vos horaires.</p>
+				<p>Zone membre pour organiser, visualiser et accepter vos horaires.</p>
 				<form>
 					<input type="text" placeholder="IDUL">
 					<input type="password" placeholder="Mot de passe"><br/>
@@ -59,6 +59,7 @@
 				Architecture Logicielle, Université Laval</p>
 			<p>Développé par Philippe Bourdages, William Fortin, Bruno
 				Gagnon-Adam, Jonathan Rochette, Vincent Séguin, Olivier Sylvain</p>
+			<img src="assets/img/ul_logo.png" alt=""/>
 		</div>
 	</footer>
 </body>
