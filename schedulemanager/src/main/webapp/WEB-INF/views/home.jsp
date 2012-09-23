@@ -34,7 +34,7 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span6 well fixed_height">
-				<h2>Gestion des horaires automatisé IFT-GLO</h2>
+				<h2>Gestion des horaires automatisée IFT-GLO</h2>
 				<h4>De quoi faire rêver toutes les autres facultés.</h4>
 				<p class="justified">
 				Entrez les disponibilités des professeurs,

@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.Unmarshaller;
 
 import cours.ulaval.glo4003.model.Course;
 import cours.ulaval.glo4003.repository.ICourseRetriever;
@@ -13,18 +13,18 @@ public class CourseBeanRetriever implements ICourseRetriever {
 
 	@Autowired
 	@Qualifier("org.springframework.oxm.castor.CastorMarshaller")
-	private Marshaller marshaller;
+	private Unmarshaller unmarshaller;
 
 	@Override
 	public Collection<Course> getCourses() {
 		return null;
 	}
 
-	public Marshaller getMarshaller() {
-		return marshaller;
+	public Unmarshaller getUnmarshaller() {
+		return unmarshaller;
 	}
 
-	public void setMarshaller(Marshaller marshaller) {
-		this.marshaller = marshaller;
+	public void setUnmarshaller(Unmarshaller unmarshaller) {
+		this.unmarshaller = unmarshaller;
 	}
 }

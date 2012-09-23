@@ -4,17 +4,17 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.Test;
-import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.Unmarshaller;
 
 public class CourseBeanRetrieverUnitTest {
 
 	@Test
-	public void canSetMarshallerInRetriever() {
-		Marshaller marshaller = mock(Marshaller.class);
+	public void canSetUnmarshallerInRetriever() {
+		Unmarshaller unmarshaller = mock(Unmarshaller.class);
 		CourseBeanRetriever retriever = new CourseBeanRetriever();
 
-		retriever.setMarshaller(marshaller);
+		retriever.setUnmarshaller(unmarshaller);
 
-		assertEquals(marshaller, retriever.getMarshaller());
+		assertEquals(unmarshaller, retriever.getUnmarshaller());
 	}
 }
