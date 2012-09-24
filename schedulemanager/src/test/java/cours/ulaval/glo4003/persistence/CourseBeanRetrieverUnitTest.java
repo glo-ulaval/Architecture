@@ -3,13 +3,25 @@ package cours.ulaval.glo4003.persistence;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.io.InputStream;
+
 import javax.xml.bind.Unmarshaller;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.model.CoursesPool;
+import cours.ulaval.glo4003.utils.ResourcesLoader;
+import cours.ulaval.glo4003.utils.ResourcesNames;
 
 public class CourseBeanRetrieverUnitTest {
+
+	private Unmarshaller unmarshaller;
+
+	@Before
+	public void setUp() {
+		unmarshaller = mock(Unmarshaller.class);
+	}
 
 	@Test
 	public void canInstantiateRetriever() throws Exception {
@@ -27,7 +39,6 @@ public class CourseBeanRetrieverUnitTest {
 
 	@Test
 	public void canSetUnmarshallerInRetriever() throws Exception {
-		Unmarshaller unmarshaller = mock(Unmarshaller.class);
 		CourseBeanRetriever retriever = new CourseBeanRetriever();
 
 		retriever.setUnmarshaller(unmarshaller);
@@ -38,7 +49,15 @@ public class CourseBeanRetrieverUnitTest {
 	@Test
 	public void canGetCourses() throws Exception {
 		CourseBeanRetriever retriever = new CourseBeanRetriever();
+		CoursesPool pool = mock(CoursesPool.class);
+		ResourcesLoader loader = mock(ResourcesLoader.class);
+		InputStream stream = mock(InputStream.class);
+		when(loader.loadResource(CourseBeanRetriever.class, ResourcesNames.COURSES_FILE)).thenReturn(stream);
+		when(unmarshaller.unmarshal(stream)).thenReturn(pool);
 
-		CoursesPool pool = retriever.getCourses();
+		retriever.setUnmarshaller(unmarshaller);
+		retriever.setResourcesLoader(loader);
+
+		assertEquals(pool, retriever.getCourses());
 	}
 }

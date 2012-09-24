@@ -11,4 +11,8 @@ public class CoursesPool {
 
 	@XmlElement(name = "course")
 	private List<Course> courses = new ArrayList<Course>();
+
+	public int getCoursesCount() {
+		return courses.size();
+	}
 }
