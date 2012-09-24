@@ -11,6 +11,7 @@ public class Course {
 	private Integer credits;
 	private String description;
 	private Prerequisites prerequisites;
+	private Cycle cycle;
 
 	public String getAcronym() {
 		return acronym;
@@ -18,6 +19,14 @@ public class Course {
 
 	public void setAcronym(String acronym) {
 		this.acronym = acronym;
+	}
+
+	public void setCycle(Cycle cycle) {
+		this.cycle = cycle;
+	}
+
+	public Cycle getCycle() {
+		return cycle;
 	}
 
 	public int getNumber() {
@@ -40,28 +49,12 @@ public class Course {
 		this.credits = credits;
 	}
 
-	public String getAccronym() {
-		return acronym;
-	}
-
-	public void setAccronym(String accronym) {
-		this.acronym = accronym;
-	}
-
-	public int getNo() {
-		return number;
-	}
-
-	public void setNo(int no) {
-		this.number = no;
+	public Integer getCredits() {
+		return credits;
 	}
 
 	public String getTitle() {
 		return title;
-	}
-
-	public Integer getCredits() {
-		return credits;
 	}
 
 	public void setTitle(String title) {
@@ -75,5 +68,4 @@ public class Course {
 	public void setPrerequisites(Prerequisites prerequisites) {
 		this.prerequisites = prerequisites;
 	}
-
 }
