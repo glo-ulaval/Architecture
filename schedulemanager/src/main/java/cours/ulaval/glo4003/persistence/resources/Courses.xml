@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <course>
+    <acronym>This is acronym</acronym>
+    <number>1</number>
+    <title>toto</title>
+    <credits>3-0-3</credits>
+    <description>Bonjour</description>
+  </course>

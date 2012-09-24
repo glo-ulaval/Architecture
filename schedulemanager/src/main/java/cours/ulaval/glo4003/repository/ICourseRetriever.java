@@ -9,5 +9,5 @@ import cours.ulaval.glo4003.model.Course;
 @Component
 public interface ICourseRetriever {
 
-	Collection<Course> getCourses();
+	Collection<Course> getCourses() throws Exception;
 }

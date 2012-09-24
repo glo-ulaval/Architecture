@@ -21,7 +21,7 @@ public class CourseRepository {
 		return courseRetriever;
 	}
 
-	public Collection<Course> getAll() {
+	public Collection<Course> getAll() throws Exception {
 		return courseRetriever.getCourses();
 	}
 }

@@ -20,7 +20,7 @@ public class CourseRepositoryTest {
 	private Collection<Course> courses;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		createCourses();
 		courseRetriever = mock(ICourseRetriever.class);
 		when(courseRetriever.getCourses()).thenReturn(courses);
@@ -30,7 +30,7 @@ public class CourseRepositoryTest {
 	}
 
 	@Test
-	public void canGetAllCourses() {
+	public void canGetAllCourses() throws Exception {
 		assertEquals(NUMBER_OF_COURSE, courseRepository.getAll().size());
 	}
 
