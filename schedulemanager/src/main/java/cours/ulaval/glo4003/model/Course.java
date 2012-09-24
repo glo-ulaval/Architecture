@@ -10,6 +10,7 @@ public class Course {
 	private String title;
 	private Integer credits;
 	private String description;
+	private Prerequisites prerequisites;
 
 	public String getAcronym() {
 		return acronym;
@@ -67,6 +68,12 @@ public class Course {
 		this.title = title;
 	}
 
-	// private cycles
-	// private prealables
+	public Prerequisites getPrerequisites() {
+		return prerequisites;
+	}
+
+	public void setPrerequisites(Prerequisites prerequisites) {
+		this.prerequisites = prerequisites;
+	}
+
 }
