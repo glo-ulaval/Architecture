@@ -1,11 +1,9 @@
 package cours.ulaval.glo4003.repository;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import cours.ulaval.glo4003.model.Course;
+import cours.ulaval.glo4003.model.CoursesPool;
 
 public class CourseRepository {
 
@@ -21,7 +19,7 @@ public class CourseRepository {
 		return courseRetriever;
 	}
 
-	public Collection<Course> getAll() throws Exception {
+	public CoursesPool getAll() throws Exception {
 		return courseRetriever.getCourses();
 	}
 }

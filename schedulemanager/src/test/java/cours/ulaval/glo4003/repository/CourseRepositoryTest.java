@@ -3,25 +3,19 @@ package cours.ulaval.glo4003.repository;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.Course;
+import cours.ulaval.glo4003.model.CoursesPool;
 
 public class CourseRepositoryTest {
 
-	private static int NUMBER_OF_COURSE = 5;
-
 	private CourseRepository courseRepository;
 	private ICourseRetriever courseRetriever;
-	private Collection<Course> courses;
+	private CoursesPool courses;
 
 	@Before
 	public void setUp() throws Exception {
-		createCourses();
 		courseRetriever = mock(ICourseRetriever.class);
 		when(courseRetriever.getCourses()).thenReturn(courses);
 
@@ -31,13 +25,6 @@ public class CourseRepositoryTest {
 
 	@Test
 	public void canGetAllCourses() throws Exception {
-		assertEquals(NUMBER_OF_COURSE, courseRepository.getAll().size());
-	}
-
-	private void createCourses() {
-		courses = new ArrayList<Course>();
-		for (int i = 0; i < NUMBER_OF_COURSE; i++) {
-			courses.add(mock(Course.class));
-		}
+		assertEquals(courses, courseRepository.getAll());
 	}
 }

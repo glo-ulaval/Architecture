@@ -7,6 +7,8 @@ import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
 
+import cours.ulaval.glo4003.model.CoursesPool;
+
 public class CourseBeanRetrieverUnitTest {
 
 	@Test
@@ -37,6 +39,6 @@ public class CourseBeanRetrieverUnitTest {
 	public void canGetCourses() throws Exception {
 		CourseBeanRetriever retriever = new CourseBeanRetriever();
 
-		retriever.getCourses();
+		CoursesPool pool = retriever.getCourses();
 	}
 }
