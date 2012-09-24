@@ -4,8 +4,8 @@
     <acronym>This is acronym</acronym>
     <number>1</number>
     <title>toto</title>
-    <credits>3-0-3</credits>
+    <credits>3</credits>
     <description>Bonjour</description>
-    <cycle>Second</cycle>
+    <cycle>SECOND</cycle>
   </course>
 </courses>
