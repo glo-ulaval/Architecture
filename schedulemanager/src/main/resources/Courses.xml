@@ -8,8 +8,6 @@
     <description>Bonjour</description>
     <cycle>SECOND</cycle>
     <prerequisites>
-    	<condition>UNION</condition>
-    	<prerequisites>
     		<prerequisite>
 	    		<acronym>MAT1</acronym>
 	    		<acronym>MAT2</acronym>
@@ -18,7 +16,6 @@
 	    		<acronym>MAT1</acronym>
 	    		<acronym>MAT2</acronym>
     		</prerequisite>
-    	</prerequisites>
     </prerequisites>
   </course>
 </courses>

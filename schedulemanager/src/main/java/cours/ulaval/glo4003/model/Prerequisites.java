@@ -4,20 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
 @SuppressWarnings("rawtypes")
 public class Prerequisites implements Iterable {
 
-	@XmlElement(name = "condition")
-	private ConditionType condition;
 	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
-
-	public ConditionType getCondition() {
-		return condition;
-	}
 
 	public List<Prerequisite> getPrerequisites() {
 		return prerequisites;
