@@ -1,16 +1,21 @@
 package cours.ulaval.glo4003.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Course {
 
 	private String acronym;
-	private int number;
 	private String title;
 	private Integer credits;
 	private String description;
-	private Prerequisites prerequisites;
+	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
 	private Cycle cycle;
 
 	public String getAcronym() {
@@ -27,14 +32,6 @@ public class Course {
 
 	public Cycle getCycle() {
 		return cycle;
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
 	}
 
 	public String getDescription() {
@@ -61,11 +58,11 @@ public class Course {
 		this.title = title;
 	}
 
-	public Prerequisites getPrerequisites() {
+	public List<Prerequisite> getPrerequisites() {
 		return prerequisites;
 	}
 
-	public void setPrerequisites(Prerequisites prerequisites) {
+	public void setPrerequisites(List<Prerequisite> prerequisites) {
 		this.prerequisites = prerequisites;
 	}
 }

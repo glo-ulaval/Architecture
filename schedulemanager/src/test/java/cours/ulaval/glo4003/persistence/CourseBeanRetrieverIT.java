@@ -7,7 +7,7 @@ import org.junit.Test;
 import cours.ulaval.glo4003.model.CoursesPool;
 import cours.ulaval.glo4003.utils.ResourcesLoader;
 
-public class CourseBeanRetrieverIntegrationTest {
+public class CourseBeanRetrieverIT {
 
 	@Test
 	public void canGetCourses() throws Exception {

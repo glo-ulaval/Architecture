@@ -1,18 +1,20 @@
 package cours.ulaval.glo4003.model;
 
-import java.util.ArrayList;
-
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Prerequisite {
 
-	@XmlElement(name = "acronym")
-	private ArrayList<String> courses = new ArrayList<String>();
+	private Course course;
 
-	public ArrayList<String> getCourses() {
-		return courses;
+	public Course getCourse() {
+		return course;
 	}
 
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 }

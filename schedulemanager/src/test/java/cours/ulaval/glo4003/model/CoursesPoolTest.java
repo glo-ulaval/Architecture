@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-public class CoursesPoolUnitTest {
+public class CoursesPoolTest {
 
 	@Test
 	public void canGetCoursesCountWithNoCourse() {

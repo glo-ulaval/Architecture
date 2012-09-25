@@ -2,20 +2,20 @@
 <courses>
   <course>
     <acronym>This is acronym</acronym>
-    <number>1</number>
     <title>toto</title>
     <credits>3</credits>
     <description>Bonjour</description>
     <cycle>SECOND</cycle>
     <prerequisites>
-    		<prerequisite>
-	    		<acronym>MAT1</acronym>
-	    		<acronym>MAT2</acronym>
-    		</prerequisite>
-    		<prerequisite>
-	    		<acronym>MAT1</acronym>
-	    		<acronym>MAT2</acronym>
-    		</prerequisite>
+      <prerequisite>
+        <prerequisitecourse>
+          <acronym>This is acronym</acronym>
+          <title>toto</title>
+          <credits>3</credits>
+          <description>Bonjour</description>
+          <cycle>SECOND</cycle>
+        </prerequisitecourse>
+      </prerequisite>
     </prerequisites>
   </course>
 </courses>

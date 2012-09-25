@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import cours.ulaval.glo4003.model.CoursesPool;
 import cours.ulaval.glo4003.repository.ICourseRetriever;
 import cours.ulaval.glo4003.utils.ResourcesLoader;
-import cours.ulaval.glo4003.utils.ResourcesNames;
+import cours.ulaval.glo4003.utils.ResourcesPaths;
 
 public class CourseBeanRetriever implements ICourseRetriever {
 
@@ -29,7 +29,7 @@ public class CourseBeanRetriever implements ICourseRetriever {
 	@Override
 	public CoursesPool getCourses() throws JAXBException {
 		InputStream stream = resourcesLoader.loadResource(
-				CourseBeanRetriever.class, ResourcesNames.COURSES_FILE);
+				CourseBeanRetriever.class, ResourcesPaths.COURSES_FILE);
 		CoursesPool courses = (CoursesPool) unmarshaller.unmarshal(stream);
 
 		return courses;
