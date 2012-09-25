@@ -3,18 +3,23 @@ package cours.ulaval.glo4003.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
-@XmlType
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Prerequisite {
 
-	private List<Acronym> acronyms = new ArrayList<Acronym>();
+	@XmlElementWrapper(name = "acronyms")
+	@XmlElement(name = "acronym")
+	private List<String> acronyms = new ArrayList<String>();
 
-	public List<Acronym> getAcronyms() {
+	public List<String> getAcronyms() {
 		return acronyms;
 	}
 
-	public void setAcronyms(List<Acronym> acronyms) {
+	public void setAcronyms(List<String> acronyms) {
 		this.acronyms = acronyms;
 	}
 }

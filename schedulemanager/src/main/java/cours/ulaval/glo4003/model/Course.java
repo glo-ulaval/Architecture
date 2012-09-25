@@ -3,9 +3,12 @@ package cours.ulaval.glo4003.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
-@XmlType
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Course {
 
 	private String acronym;
@@ -13,6 +16,9 @@ public class Course {
 	private Integer credits;
 	private String description;
 	private Cycle cycle;
+
+	@XmlElementWrapper(name = "prerequisites")
+	@XmlElement(name = "prerequisite")
 	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
 
 	public String getAcronym() {
