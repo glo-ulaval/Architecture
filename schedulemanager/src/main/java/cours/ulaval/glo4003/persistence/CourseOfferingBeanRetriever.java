@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.Unmarshaller;
 
 import cours.ulaval.glo4003.model.CourseOffering;
-import cours.ulaval.glo4003.repository.ICourseOfferingRetriever;
+import cours.ulaval.glo4003.repository.CourseOfferingRetriever;
 
-public class CourseOfferingBeanRetriever implements ICourseOfferingRetriever{
+public class CourseOfferingBeanRetriever implements CourseOfferingRetriever{
 
 	@Autowired
 	@Qualifier("org.springframework.oxm.castor.CastorMarshaller")

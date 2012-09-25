@@ -12,18 +12,18 @@ public class CourseOfferingRepository {
 
 	@Autowired
 	@Qualifier("CourseOfferingBeanRetriever")
-	private ICourseOfferingRetriever offeringRetriever;
+	private CourseOfferingRetriever offeringRetriever;
 	
 	public Map<String, CourseOffering> getAll() {
 		
 		return offeringRetriever.getOfferings();
 	}
 
-	public ICourseOfferingRetriever getOfferingRetriever() {
+	public CourseOfferingRetriever getOfferingRetriever() {
 		return offeringRetriever;
 	}
 
-	public void setOfferingRetriever(ICourseOfferingRetriever offeringRetriever) {
+	public void setOfferingRetriever(CourseOfferingRetriever offeringRetriever) {
 		this.offeringRetriever = offeringRetriever;
 	}
 }

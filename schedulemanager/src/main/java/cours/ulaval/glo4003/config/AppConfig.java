@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.controller;
+package cours.ulaval.glo4003.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

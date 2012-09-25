@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import cours.ulaval.glo4003.model.CoursesPool;
-import cours.ulaval.glo4003.repository.ICourseRetriever;
+import cours.ulaval.glo4003.repository.CourseRetriever;
 import cours.ulaval.glo4003.utils.ResourcesLoader;
 import cours.ulaval.glo4003.utils.ResourcesPaths;
 
-public class CourseBeanRetriever implements ICourseRetriever {
+public class CourseBeanRetriever implements CourseRetriever {
 
 	@Autowired
 	@Qualifier("ResourcesLoader")

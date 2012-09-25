@@ -3,12 +3,9 @@ package cours.ulaval.glo4003.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Course {
 
 	private String acronym;

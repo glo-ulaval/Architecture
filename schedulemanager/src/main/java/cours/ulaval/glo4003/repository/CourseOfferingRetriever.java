@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import cours.ulaval.glo4003.model.CourseOffering;
 
 @Component
-public interface ICourseOfferingRetriever {
+public interface CourseOfferingRetriever {
 
 	Map<String, CourseOffering> getOfferings();
 	

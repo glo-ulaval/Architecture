@@ -17,12 +17,12 @@ public class CourseOfferingRepositoryTest {
 	private static final String OFFERING_YEAR = "year";
 	private Map<String, CourseOffering> courseOfferings;
 	private CourseOfferingRepository courseOfferingRepository;
-	private ICourseOfferingRetriever offeringRetriever;
+	private CourseOfferingRetriever offeringRetriever;
 
 	@Before
 	public void setUp() {
 		createOfferings();
-		offeringRetriever = mock(ICourseOfferingRetriever.class);
+		offeringRetriever = mock(CourseOfferingRetriever.class);
 		when(offeringRetriever.getOfferings()).thenReturn(courseOfferings);
 
 		courseOfferingRepository = new CourseOfferingRepository();

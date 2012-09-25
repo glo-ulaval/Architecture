@@ -9,13 +9,13 @@ public class CourseRepository {
 
 	@Autowired
 	@Qualifier("CourseBeanRetriever")
-	private ICourseRetriever courseRetriever;
+	private CourseRetriever courseRetriever;
 
-	public void setCourseRetriever(ICourseRetriever courseRetriever) {
+	public void setCourseRetriever(CourseRetriever courseRetriever) {
 		this.courseRetriever = courseRetriever;
 	}
 
-	public ICourseRetriever getCourseRetriever() {
+	public CourseRetriever getCourseRetriever() {
 		return courseRetriever;
 	}
 
