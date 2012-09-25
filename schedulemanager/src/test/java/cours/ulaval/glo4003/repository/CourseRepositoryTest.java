@@ -27,6 +27,11 @@ public class CourseRepositoryTest {
 	}
 
 	@Test
+	public void canGetCourseDAO() {
+		assertEquals(courseDAO, courseRepository.getCourseDAO());
+	}
+
+	@Test
 	public void canGetAllCoursesWithNoCourse() throws Exception {
 		when(courseDAO.getCourses()).thenReturn(courses);
 
