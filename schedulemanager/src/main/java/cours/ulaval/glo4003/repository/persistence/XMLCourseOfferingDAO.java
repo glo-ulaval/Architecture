@@ -7,15 +7,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.Unmarshaller;
 
 import cours.ulaval.glo4003.model.CourseOffering;
-import cours.ulaval.glo4003.repository.CourseOfferingRetriever;
 
-public class CourseOfferingBeanRetriever implements CourseOfferingRetriever{
+public class XMLCourseOfferingDAO {
 
 	@Autowired
 	@Qualifier("org.springframework.oxm.castor.CastorMarshaller")
 	private Unmarshaller unmarshaller;
 
-	@Override
 	public Map<String, CourseOffering> getOfferings() {
 		return null;
 	}
@@ -27,5 +25,5 @@ public class CourseOfferingBeanRetriever implements CourseOfferingRetriever{
 	public void setUnmarshaller(Unmarshaller unmarshaller) {
 		this.unmarshaller = unmarshaller;
 	}
-	
+
 }

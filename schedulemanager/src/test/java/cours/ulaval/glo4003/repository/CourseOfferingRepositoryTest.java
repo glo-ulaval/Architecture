@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.model.CourseOffering;
+import cours.ulaval.glo4003.repository.persistence.XMLCourseOfferingDAO;
 
 public class CourseOfferingRepositoryTest {
 
@@ -17,12 +18,12 @@ public class CourseOfferingRepositoryTest {
 	private static final String OFFERING_YEAR = "year";
 	private Map<String, CourseOffering> courseOfferings;
 	private CourseOfferingRepository courseOfferingRepository;
-	private CourseOfferingRetriever offeringRetriever;
+	private XMLCourseOfferingDAO offeringRetriever;
 
 	@Before
 	public void setUp() {
 		createOfferings();
-		offeringRetriever = mock(CourseOfferingRetriever.class);
+		offeringRetriever = mock(XMLCourseOfferingDAO.class);
 		when(offeringRetriever.getOfferings()).thenReturn(courseOfferings);
 
 		courseOfferingRepository = new CourseOfferingRepository();

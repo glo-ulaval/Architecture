@@ -4,22 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import cours.ulaval.glo4003.model.CoursesPool;
+import cours.ulaval.glo4003.repository.persistence.XMLCourseDAO;
 
 public class CourseRepository {
 
 	@Autowired
-	@Qualifier("CourseBeanRetriever")
-	private CourseRetriever courseRetriever;
+	@Qualifier("XMLCourseDAO")
+	private XMLCourseDAO courseDAO;
 
-	public void setCourseRetriever(CourseRetriever courseRetriever) {
-		this.courseRetriever = courseRetriever;
+	public void setCourseDAO(XMLCourseDAO courseDAO) {
+		this.courseDAO = courseDAO;
 	}
 
-	public CourseRetriever getCourseRetriever() {
-		return courseRetriever;
+	public XMLCourseDAO getCourseDAO() {
+		return courseDAO;
 	}
 
 	public CoursesPool getAll() throws Exception {
-		return courseRetriever.getCourses();
+		return courseDAO.getCourses();
 	}
 }
