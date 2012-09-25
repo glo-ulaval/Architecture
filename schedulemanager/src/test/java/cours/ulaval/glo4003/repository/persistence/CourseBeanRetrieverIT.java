@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.persistence;
+package cours.ulaval.glo4003.repository.persistence;
 
 import static org.junit.Assert.*;
 

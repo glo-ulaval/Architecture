@@ -8,13 +8,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class Prerequisite {
 
-	private List<String> acronyms = new ArrayList<String>();
+	private List<Acronym> acronyms = new ArrayList<Acronym>();
 
-	public List<String> getAcronyms() {
+	public List<Acronym> getAcronyms() {
 		return acronyms;
 	}
 
-	public void setAcronyms(List<String> acronyms) {
+	public void setAcronyms(List<Acronym> acronyms) {
 		this.acronyms = acronyms;
 	}
 }

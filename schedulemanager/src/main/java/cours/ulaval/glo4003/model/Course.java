@@ -12,8 +12,8 @@ public class Course {
 	private String title;
 	private Integer credits;
 	private String description;
-	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
 	private Cycle cycle;
+	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
 
 	public String getAcronym() {
 		return acronym;
