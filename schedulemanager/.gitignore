@@ -1,0 +1,38 @@
+# Maven #
+target/
+*target*
+
+# Java #
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse #
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
