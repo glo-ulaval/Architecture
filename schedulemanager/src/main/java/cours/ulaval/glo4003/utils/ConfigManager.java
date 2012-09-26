@@ -1,6 +1,5 @@
 package cours.ulaval.glo4003.utils;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -21,11 +20,16 @@ public final class ConfigManager {
 			in = rs.loadResource(String.class, CONFIG_FILE_PATH);
 			properties = new Properties();
 			properties.load(in);
-			in.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+
+				}
+			}
 		}
 	}
 
