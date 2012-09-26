@@ -15,11 +15,22 @@ public class Prerequisite {
 	@XmlElement(name = "acronym")
 	private List<String> acronyms = new ArrayList<String>();
 
+	@XmlElement(name = "isconcomitant")
+	private Boolean isConcomitant = false;
+
 	public List<String> getAcronyms() {
 		return acronyms;
 	}
 
 	public void setAcronyms(List<String> acronyms) {
 		this.acronyms = acronyms;
+	}
+
+	public Boolean isConcomitant() {
+		return isConcomitant;
+	}
+
+	public void setIsConcomitant(Boolean isConcomitant) {
+		this.isConcomitant = isConcomitant;
 	}
 }

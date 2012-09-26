@@ -4,7 +4,6 @@ import javax.xml.bind.JAXBException;
 
 import cours.ulaval.glo4003.model.CoursesPool;
 import cours.ulaval.glo4003.utils.ConfigManager;
-import cours.ulaval.glo4003.utils.XMLSerializer;
 
 public class XMLCourseDAO {
 

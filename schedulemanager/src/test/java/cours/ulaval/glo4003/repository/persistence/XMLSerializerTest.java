@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.utils;
+package cours.ulaval.glo4003.repository.persistence;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.model.CoursesPool;
 import cours.ulaval.glo4003.repository.persistence.DAOException;
+import cours.ulaval.glo4003.repository.persistence.XMLSerializer;
+import cours.ulaval.glo4003.utils.ResourcesLoader;
 
 public class XMLSerializerTest {
 

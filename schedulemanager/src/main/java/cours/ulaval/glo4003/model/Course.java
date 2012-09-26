@@ -13,7 +13,7 @@ public class Course {
 
 	private String acronym;
 	private String title;
-	private Integer credits;
+	private int credits;
 	private String description;
 	private Cycle cycle;
 
@@ -45,11 +45,11 @@ public class Course {
 		this.description = description;
 	}
 
-	public void setCredits(Integer credits) {
+	public void setCredits(int credits) {
 		this.credits = credits;
 	}
 
-	public Integer getCredits() {
+	public int getCredits() {
 		return credits;
 	}
 

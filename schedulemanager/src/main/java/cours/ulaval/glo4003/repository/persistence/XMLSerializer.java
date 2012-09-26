@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.utils;
+package cours.ulaval.glo4003.repository.persistence;
 
 import java.io.InputStream;
 
@@ -10,7 +10,7 @@ import javax.xml.bind.Unmarshaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import cours.ulaval.glo4003.repository.persistence.DAOException;
+import cours.ulaval.glo4003.utils.ResourcesLoader;
 
 public class XMLSerializer<T> {
 

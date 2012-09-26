@@ -34,7 +34,7 @@ public class CourseTest {
 
 	@Test
 	public void canGetCredits() {
-		Integer someCredits = 3;
+		int someCredits = 3;
 		course.setCredits(someCredits);
 
 		assertEquals(someCredits, course.getCredits());

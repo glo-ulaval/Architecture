@@ -4,9 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import cours.ulaval.glo4003.model.Course;
 import cours.ulaval.glo4003.model.CoursesPool;
+import cours.ulaval.glo4003.model.Cycle;
 import cours.ulaval.glo4003.utils.ResourcesLoader;
-import cours.ulaval.glo4003.utils.XMLSerializer;
 
 public class XMLCourseDAOIT {
 
@@ -18,7 +19,13 @@ public class XMLCourseDAOIT {
 		dao.setSerializer(serializer);
 
 		CoursesPool pool = dao.getCourses();
+		Course course = pool.iterator().next();
 
-		assertEquals(1, pool.getCoursesCount());
+		assertEquals(8, pool.getCoursesCount());
+		assertEquals("GLO-1010", course.getAcronym());
+		assertEquals("Pratique du génie logiciel", course.getTitle());
+		assertEquals(1, course.getCredits());
+		assertNotNull(course.getDescription());
+		assertEquals(Cycle.FIRST, course.getCycle());
 	}
 }
