@@ -38,7 +38,7 @@ public class CourseOfferingTest {
 	
 	@Test
 	public void canGetOffering() {
-		Collection<Course> offering = createValidOffering();
+		Collection<String> offering = createValidOffering();
 		courseOffering.setOffering(offering);
 		
 		assertEquals(offering, courseOffering.getOffering());
@@ -50,9 +50,9 @@ public class CourseOfferingTest {
 		assertEquals(0, courseOffering.getOffering().size());
 	}
 	
-	private ArrayList<Course> createValidOffering() {
-		Course course = mock(Course.class);
-		ArrayList<Course> offering = new ArrayList<Course>();
+	private ArrayList<String> createValidOffering() {
+		String course = "ift-0000";
+		ArrayList<String> offering = new ArrayList<String>();
 		
 		for(int i = 0; i < NUMBER_OF_COURSES; i++) {
 			offering.add(course);

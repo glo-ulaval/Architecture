@@ -5,14 +5,14 @@ import java.util.Collection;
 
 public class CourseOffering {
 
-	private Collection<Course> offering = new ArrayList<Course>();
+	private Collection<String> offering = new ArrayList<String>();
 	private String year; // 2012-2013 from autumn ?
 	
-	public Collection<Course> getOffering() {
+	public Collection<String> getOffering() {
 		return offering;
 	}
 	
-	public void setOffering(Collection<Course> courses) {
+	public void setOffering(Collection<String> courses) {
 		this.offering = courses;
 	}
 
