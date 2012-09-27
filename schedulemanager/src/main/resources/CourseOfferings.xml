@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<courseOfferings>
+	<offering>
+		<year>2011-2012</year>
+		<courses>
+          <course>IFT-1904</course>
+          <course>IFT-2005</course>
+          <course>GLO-1900</course>
+          <course>GIF-1003</course>
+          <course>GLO-1901</course>
+		</courses>
+	</offering>
+	<offering>
+		<year>2010-2011</year>
+		<courses>
+			<course>IFT-2007</course>
+			<course>GLO-2901</course>
+		</courses>
+	</offering>
+</courseOfferings>

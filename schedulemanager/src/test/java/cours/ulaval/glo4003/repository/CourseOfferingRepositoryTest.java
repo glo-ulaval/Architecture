@@ -16,6 +16,7 @@ public class CourseOfferingRepositoryTest {
 
 	private static final int OFFERING_SIZE = 5;
 	private static final String OFFERING_YEAR = "year";
+	
 	private Map<String, CourseOffering> courseOfferings;
 	private CourseOfferingRepository courseOfferingRepository;
 	private XMLCourseOfferingDAO offeringRetriever;
