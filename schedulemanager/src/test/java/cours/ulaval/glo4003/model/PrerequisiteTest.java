@@ -36,4 +36,11 @@ public class PrerequisiteTest {
 
 		assertEquals(1, prerequisite.getAcronyms().size());
 	}
+
+	@Test
+	public void canGetIfPrerequisiteIsConcomitant() {
+		prerequisite.setIsConcomitant(true);
+
+		assertTrue(prerequisite.isConcomitant());
+	}
 }
