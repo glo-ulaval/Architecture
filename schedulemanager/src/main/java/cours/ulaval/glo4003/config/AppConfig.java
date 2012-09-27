@@ -16,4 +16,8 @@ public class AppConfig {
 		return resolver;
 	}
 
+//	@Bean
+//    XMLCourseDAO xmlCourseDao() throws JAXBException{
+//            return new XMLCourseDAO();
+//    }
 }
