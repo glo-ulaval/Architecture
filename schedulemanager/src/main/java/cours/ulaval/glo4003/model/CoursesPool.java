@@ -25,4 +25,8 @@ public class CoursesPool implements Iterable {
 	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
+	
+	public List<Course> getList(){
+		return courses;
+	}
 }

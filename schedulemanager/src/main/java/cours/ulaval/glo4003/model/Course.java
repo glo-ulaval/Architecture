@@ -20,6 +20,21 @@ public class Course {
 	@XmlElementWrapper(name = "prerequisites")
 	@XmlElement(name = "prerequisite")
 	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
+	
+	public Course() {
+		super();
+	}
+
+	public Course(String acronym, String title, int credits,
+			String description, Cycle cycle, List<Prerequisite> prerequisites) {
+		super();
+		this.acronym = acronym;
+		this.title = title;
+		this.credits = credits;
+		this.description = description;
+		this.cycle = cycle;
+		this.prerequisites = prerequisites;
+	}
 
 	public String getAcronym() {
 		return acronym;
