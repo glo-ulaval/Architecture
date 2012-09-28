@@ -4,6 +4,6 @@
 			Logicielle, Université Laval</p>
 		<p>Développé par Philippe Bourdages, William Fortin, Bruno
 			Gagnon-Adam, Jonathan Rochette, Vincent Séguin, Olivier Sylvain</p>
-		<img src="assets/img/ul_logo.png" alt="" />
+		<img src="resources/img/ul_logo.png" alt="" />
 	</div>
 </footer>

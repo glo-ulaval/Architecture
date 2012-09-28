@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h1></h1>
-			<img src="assets/img/logo.png" alt=""/>
+			<img src="resources/img/logo.png" alt=""/>
 			<p>Bienvenue sur l'application ScheduleManager développée dans le
 				cadre du cours "GLO-4003 - Architecture Logicielle".</p>
 		</div>
