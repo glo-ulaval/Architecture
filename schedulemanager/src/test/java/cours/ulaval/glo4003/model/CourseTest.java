@@ -21,7 +21,21 @@ public class CourseTest {
 
 	@Test
 	public void canInstantiateCourse() {
+		String anAcronym = "acronym";
+		String aTitle = "title";
+		int credits = 2;
+		String aDescription = "description";
+		Cycle aCycle = Cycle.FIRST;
+		List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
+		course = new Course(anAcronym, aTitle, credits, aDescription, aCycle, prerequisites);
+
 		assertNotNull(course);
+		assertEquals(anAcronym, course.getAcronym());
+		assertEquals(aTitle, course.getTitle());
+		assertEquals(credits, course.getCredits());
+		assertEquals(aDescription, course.getDescription());
+		assertEquals(aCycle, course.getCycle());
+		assertEquals(prerequisites, course.getPrerequisites());
 	}
 
 	@Test

@@ -1,9 +1,7 @@
 package cours.ulaval.glo4003.repository.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
@@ -23,10 +21,8 @@ public class XMLCourseDAOTest {
 	public void canGetCourses() throws Exception {
 		XMLSerializer<CoursesPool> serializer = mock(XMLSerializer.class);
 		CoursesPool pool = mock(CoursesPool.class);
-		ConfigManager resourcesPaths = ConfigManager
-				.getConfigManager();
-		when(serializer.deserialize(resourcesPaths.getCoursesFilePath()))
-				.thenReturn(pool);
+		ConfigManager resourcesPaths = ConfigManager.getConfigManager();
+		when(serializer.deserialize(resourcesPaths.getCoursesFilePath())).thenReturn(pool);
 
 		XMLCourseDAO dao = new XMLCourseDAO();
 		dao.setSerializer(serializer);

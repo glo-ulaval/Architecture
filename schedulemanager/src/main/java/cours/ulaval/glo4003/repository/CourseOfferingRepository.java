@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import cours.ulaval.glo4003.model.CourseOffering;
+import cours.ulaval.glo4003.model.Offering;
 import cours.ulaval.glo4003.repository.persistence.XMLCourseOfferingDAO;
 
 public class CourseOfferingRepository {
@@ -14,7 +14,7 @@ public class CourseOfferingRepository {
 	@Qualifier("XMLCourseOfferingDAO")
 	private XMLCourseOfferingDAO offeringRetriever;
 
-	public Map<String, CourseOffering> getAll() {
+	public Map<String, Offering> getAll() {
 
 		return offeringRetriever.getOfferings();
 	}
