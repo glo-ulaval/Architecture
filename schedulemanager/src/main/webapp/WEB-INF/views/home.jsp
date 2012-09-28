@@ -9,22 +9,7 @@
 <link href="assets/css/app.css" rel="stylesheet">
 </head>
 <body>
-	<header>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="#"><img src="assets/img/logo_mini.png" alt=""/>ScheduleManager</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li><a href="#">Accueil</a></li>
-						<li><a href="#">À propos</a></li>
-						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	</header>
+	<c:import url = "header.jsp"/>
 	<div class="container">
 		<div class="hero-unit">
 			<h1></h1>
@@ -54,15 +39,7 @@
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
-		<div class="container">
-			<p>Projet développé dans le cadre du cours GLO-4003 -
-				Architecture Logicielle, Université Laval</p>
-			<p>Développé par Philippe Bourdages, William Fortin, Bruno
-				Gagnon-Adam, Jonathan Rochette, Vincent Séguin, Olivier Sylvain</p>
-			<img src="assets/img/ul_logo.png" alt=""/>
-		</div>
-	</footer>
+	<c:import url = "footer.jsp"/>
 </body>
 
 </html>
