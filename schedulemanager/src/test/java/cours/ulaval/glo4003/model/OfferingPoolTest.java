@@ -1,6 +1,7 @@
 package cours.ulaval.glo4003.model;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,11 +12,9 @@ import org.junit.Test;
 public class OfferingPoolTest {
 
 	private static final String YEAR_OF_OFFERING = "1";
-	private static final String ANOTHER_COURSE_NAME = "un autre cours";
-	private static final String COURSE_NAME = "un cours";
 	private static final int NUMBER_OF_OFFERINGS = 4;
 
-	private HashMap<String, ArrayList<String>> offerings;
+	private HashMap<String, Offering> offerings;
 	private OfferingPool pool;
 	
 	@Before
@@ -38,21 +37,28 @@ public class OfferingPoolTest {
 	}
 	
 	@Test
+	public void canSaveAnOffering() {
+		Offering offering = mock(Offering.class);
+		
+		pool.saveOffering(offering);
+		
+		assertTrue(pool.contains(offering));
+		
+	}
+	
+	@Test
 	public void canGetOfferingCount() {
 		
 		assertEquals(NUMBER_OF_OFFERINGS, pool.getOfferingCount());
 	}
 	
-	private HashMap<String, ArrayList<String>> getOfferings() {
+	private HashMap<String, Offering> getOfferings() {
+		Offering offering = mock(Offering.class);
 		
-		ArrayList<String> array = new ArrayList<String>();
-		array.add(COURSE_NAME);
-		array.add(ANOTHER_COURSE_NAME);
-		
-		HashMap<String, ArrayList<String>> offerings = new HashMap<String, ArrayList<String>>();
+		HashMap<String, Offering> offerings = new HashMap<String, Offering>();
 		
 		for (Integer i=0; i < NUMBER_OF_OFFERINGS; i++) {
-			offerings.put(i.toString(), array);
+			offerings.put(i.toString(), offering);
 		}
 		
 		return offerings;
