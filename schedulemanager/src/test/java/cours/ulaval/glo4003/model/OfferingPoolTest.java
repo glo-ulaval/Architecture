@@ -8,7 +8,7 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CourseOfferingPoolTest {
+public class OfferingPoolTest {
 
 	private static final String YEAR_OF_OFFERING = "1";
 	private static final String ANOTHER_COURSE_NAME = "un autre cours";
@@ -16,12 +16,12 @@ public class CourseOfferingPoolTest {
 	private static final int NUMBER_OF_OFFERINGS = 4;
 
 	private HashMap<String, ArrayList<String>> offerings;
-	private CourseOfferingPool pool;
+	private OfferingPool pool;
 	
 	@Before
 	public void setUp() {
 		offerings = getOfferings();
-		pool = new CourseOfferingPool();
+		pool = new OfferingPool();
 		pool.setCourseOfferings(offerings);
 	}
 	

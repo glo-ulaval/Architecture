@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CourseOfferingPool {
+public class OfferingPool {
 
 	Map<String, ArrayList<String>> courseOfferings = new HashMap<String, ArrayList<String>>();
 
