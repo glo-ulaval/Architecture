@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.repository.persistence;
+package cours.ulaval.glo4003.persistence;
 
 import java.util.Map;
 

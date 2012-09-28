@@ -1,25 +1,21 @@
-package cours.ulaval.glo4003.model;
+package cours.ulaval.glo4003.persistence;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@SuppressWarnings("rawtypes")
-@XmlRootElement(name = "courses")
-public class CoursesPool implements Iterable {
+import cours.ulaval.glo4003.model.Course;
 
-	@XmlElement(name = "course")
+@XmlRootElement(name = "courses")
+public class CoursesDTO {
+
 	private List<Course> courses = new ArrayList<Course>();
 
-	public int getCoursesCount() {
-		return courses.size();
-	}
-
-	public Iterator<Course> iterator() {
-		return courses.iterator();
+	@XmlElement(name = "course")
+	public List<Course> getCourses() {
+		return courses;
 	}
 
 	public void setCourses(List<Course> courses) {

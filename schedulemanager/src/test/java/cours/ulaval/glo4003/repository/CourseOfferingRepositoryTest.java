@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.model.Offering;
-import cours.ulaval.glo4003.repository.persistence.XMLCourseOfferingDAO;
+import cours.ulaval.glo4003.persistence.XMLCourseOfferingDAO;
 
 public class CourseOfferingRepositoryTest {
 

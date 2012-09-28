@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.CoursesPool;
+import cours.ulaval.glo4003.persistence.CoursesDTO;
 
 public class ResourcesLoaderTest {
 
@@ -21,13 +21,13 @@ public class ResourcesLoaderTest {
 	public void canLoadExistingResource() {
 		ConfigManager resourcesPaths = ConfigManager
 				.getConfigManager();
-		assertNotNull(loader.loadResource(CoursesPool.class,
+		assertNotNull(loader.loadResource(CoursesDTO.class,
 				resourcesPaths.getCoursesFilePath()));
 	}
 
 	@Test
 	public void cantLoadUnexistingResource() {
-		assertNull(loader.loadResource(CoursesPool.class,
+		assertNull(loader.loadResource(CoursesDTO.class,
 				"This is an unexisting resource"));
 	}
 }
