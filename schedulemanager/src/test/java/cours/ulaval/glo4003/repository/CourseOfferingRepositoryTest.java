@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.CourseOffering;
+import cours.ulaval.glo4003.model.Offering;
 import cours.ulaval.glo4003.repository.persistence.XMLCourseOfferingDAO;
 
 public class CourseOfferingRepositoryTest {
@@ -17,7 +17,7 @@ public class CourseOfferingRepositoryTest {
 	private static final int OFFERING_SIZE = 5;
 	private static final String OFFERING_YEAR = "year";
 	
-	private Map<String, CourseOffering> courseOfferings;
+	private Map<String, Offering> courseOfferings;
 	private CourseOfferingRepository courseOfferingRepository;
 	private XMLCourseOfferingDAO offeringRetriever;
 
@@ -37,9 +37,9 @@ public class CourseOfferingRepositoryTest {
 	}
 
 	private void createOfferings() {
-		courseOfferings = new HashMap<String, CourseOffering>();
+		courseOfferings = new HashMap<String, Offering>();
 		for (Integer i = 0; i < OFFERING_SIZE; i++) {
-			courseOfferings.put(OFFERING_YEAR + i.toString(), mock(CourseOffering.class));
+			courseOfferings.put(OFFERING_YEAR + i.toString(), mock(Offering.class));
 		}
 	}
 

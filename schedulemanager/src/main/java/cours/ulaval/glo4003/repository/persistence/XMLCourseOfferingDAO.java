@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.oxm.Unmarshaller;
 
-import cours.ulaval.glo4003.model.CourseOffering;
+import cours.ulaval.glo4003.model.Offering;
 
 public class XMLCourseOfferingDAO {
 
@@ -14,7 +14,7 @@ public class XMLCourseOfferingDAO {
 	@Qualifier("org.springframework.oxm.castor.CastorMarshaller")
 	private Unmarshaller unmarshaller;
 
-	public Map<String, CourseOffering> getOfferings() {
+	public Map<String, Offering> getOfferings() {
 		return null;
 	}
 
