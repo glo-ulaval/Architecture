@@ -9,23 +9,7 @@
 <link href="assets/css/app.css" rel="stylesheet">
 </head>
 <body>
-	<header>
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="#"><img src="assets/img/logo_mini.png"
-						alt="" />ScheduleManager</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav">
-							<li><a href="#">Accueil</a></li>
-							<li><a href="#">À propos</a></li>
-							<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+	<c:import url = "header.jsp"/>
 	<div class="container">
 		<select>
 			<option value="2009">2009</option>
@@ -33,7 +17,7 @@
 			<option value="2011">2011</option>
 			<option value="2012">2012</option>
 		</select>
-		<div class=row-fluid">
+		<div class="row-fluid">
 			<div class="span6">
 				<h1>Cours disponibles</h1>
 				<c:if test="${not empty list}">
@@ -82,5 +66,6 @@
 			</div>
 		</div>
 	</div>
+	<c:import url = "footer.jsp"/>
 </body>
 </html>
