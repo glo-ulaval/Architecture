@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.model.Course;
-import cours.ulaval.glo4003.model.CoursesPool;
 import cours.ulaval.glo4003.model.Cycle;
 
 @Controller
@@ -16,12 +15,6 @@ public class CourseOfferingController {
 	@RequestMapping(value = "/courseoffering")
 	public ModelAndView courseoffering() {
 
-		CoursesPool coursesPool = new CoursesPool();
-		// try {
-		// coursesPool = courseRepository.getAll();
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
 		ArrayList<Course> courseOffering = new ArrayList<Course>();
 		courseOffering.add(new Course("GLO-1010", "Pratique du génie logiciel",
 				1, "Description du cours", Cycle.FIRST, null));
@@ -42,5 +35,4 @@ public class CourseOfferingController {
 		mv.addObject("list", courseOffering);
 		return mv;
 	}
-
 }
