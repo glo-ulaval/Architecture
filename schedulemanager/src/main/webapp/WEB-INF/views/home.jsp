@@ -48,7 +48,8 @@
 				<form>
 					<input type="text" placeholder="IDUL">
 					<input type="password" placeholder="Mot de passe"><br/>
-					<button type="submit" class="btn">Se connecter</button>
+					<!-- <button type="submit" class="btn">Se connecter</button> -->
+					<a href="courseoffering" class="btn">Se connecter</a>
 				</form>
 			</div>
 		</div>
