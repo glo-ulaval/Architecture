@@ -44,10 +44,11 @@
 			</div>
 			<div class="span6 well fixed_height">
 				<h2>Zone Membre</h2>
+				<p>Zone membre pour organiser, visualiser et accepter vos horaires.</p>
 				<form>
-					<p>Entrez l'année de l'offre de cours à visualiser</p>
-					<input type="text" placeholder="ANNÉE"><br>
-					<a class="btn" href="courseoffering">Go</a>
+					<input type="text" placeholder="IDUL">
+					<input type="password" placeholder="Mot de passe"><br/>
+					<button type="submit" class="btn">Se connecter</button>
 				</form>
 			</div>
 		</div>

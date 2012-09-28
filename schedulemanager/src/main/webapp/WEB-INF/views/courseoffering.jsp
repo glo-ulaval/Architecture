@@ -27,6 +27,12 @@
 		</div>
 	</header>
 	<div class="container">
+		<select>
+			<option value="2009">2009</option>
+			<option value="2010">2010</option>
+			<option value="2011">2011</option>
+			<option value="2012">2012</option>
+		</select>
 		<div class=row-fluid">
 			<div class="span6">
 				<h1>Cours disponibles</h1>
