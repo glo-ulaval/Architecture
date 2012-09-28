@@ -1,35 +1,23 @@
 package cours.ulaval.glo4003.utils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public final class ConfigManager {
 
-	private static final String CONFIG_FILE_PATH = "/Configs.txt";
+	private static final String CONFIG_FILE_PATH = "/Configs.properties";
 
 	private static ConfigManager configManager;
 
 	private Properties properties;
 
 	private ConfigManager() {
-		InputStream in = null;
-		ResourcesLoader rs = new ResourcesLoader();
-
 		try {
-			in = rs.loadResource(String.class, CONFIG_FILE_PATH);
 			properties = new Properties();
-			properties.load(in);
+			properties.load(ConfigManager.class
+					.getResourceAsStream(CONFIG_FILE_PATH));
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
