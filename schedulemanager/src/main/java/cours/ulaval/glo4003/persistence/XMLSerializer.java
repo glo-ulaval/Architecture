@@ -28,6 +28,7 @@ public class XMLSerializer<T> {
 		JAXBContext context = JAXBContext.newInstance(type);
 		marshaller = context.createMarshaller();
 		unmarshaller = context.createUnmarshaller();
+		resourcesLoader = new ResourcesLoader();
 	}
 
 	@SuppressWarnings("unchecked")
