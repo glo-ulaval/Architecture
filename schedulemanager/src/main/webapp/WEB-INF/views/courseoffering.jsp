@@ -5,8 +5,8 @@
 <head>
 <meta charset="utf-8">
 <title>Schedule Manager</title>
-<link href="assets/css/bootstrap.css" rel="stylesheet">
-<link href="assets/css/app.css" rel="stylesheet">
+<link href="resources/css/bootstrap.css" rel="stylesheet">
+<link href="resources/css/app.css" rel="stylesheet">
 </head>
 <body>
 	<c:import url = "header.jsp"/>
