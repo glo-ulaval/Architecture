@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import cours.ulaval.glo4003.model.Offering;
-import cours.ulaval.glo4003.repository.persistence.XMLCourseOfferingDAO;
+import cours.ulaval.glo4003.persistence.XMLCourseOfferingDAO;
 
 public class CourseOfferingRepository {
 

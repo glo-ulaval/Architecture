@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.repository.persistence;
+package cours.ulaval.glo4003.persistence;
 
 import java.io.InputStream;
 
@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.lang.SerializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -30,13 +31,13 @@ public class XMLSerializer<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public T deserialize(String resourceName) throws JAXBException, DAOException {
+	public T deserialize(String resourceName) throws JAXBException, SerializationException {
 		InputStream stream = resourcesLoader.loadResource(type, resourceName);
 
 		if (stream != null) {
 			return (T) unmarshaller.unmarshal(stream);
 		} else {
-			throw new DAOException("Invalid resource name : " + resourceName);
+			throw new SerializationException("Invalid resource name : " + resourceName);
 		}
 	}
 
