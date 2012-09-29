@@ -35,13 +35,13 @@
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
-								<td class="centered"><i class="icon-plus"></i></td>
+								<td class="centered"><button class="btn"><i class="icon-plus"></i></button></td>
 							</tr>
 						</c:forEach>
 					</table>
 				</c:if>
 			</div>
-			<div class="span6">
+			<div class="span6"></button>
 			<h1>Offre de cours</h1>
 				<c:if test="${not empty list}">
 					<table class="table table-striped">
@@ -58,7 +58,7 @@
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
-								<td class="centered"><i class="icon-minus"></i></td>
+								<td class="centered"><button class="btn"><i class="icon-minus"></i></button></td>
 							</tr>
 						</c:forEach>
 					</table>
