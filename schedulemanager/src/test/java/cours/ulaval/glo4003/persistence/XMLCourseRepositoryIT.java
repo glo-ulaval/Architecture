@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.model.Course;
 import cours.ulaval.glo4003.model.Cycle;
+import cours.ulaval.glo4003.model.Prerequisite;
 import cours.ulaval.glo4003.utils.ResourcesLoader;
 
 public class XMLCourseRepositoryIT {
@@ -20,13 +21,21 @@ public class XMLCourseRepositoryIT {
 		repository.setSerializer(serializer);
 
 		List<Course> courses = repository.findAll();
-		Course course = courses.get(0);
+		Course course = courses.get(2);
 
 		assertEquals(8, courses.size());
-		assertEquals("GLO-1010", course.getAcronym());
-		assertEquals("Pratique du génie logiciel", course.getTitle());
-		assertEquals(1, course.getCredits());
+		assertEquals("GLO-2003", course.getAcronym());
+		assertEquals("Introduction aux processus du génie logiciel", course.getTitle());
+		assertEquals(3, course.getCredits());
 		assertNotNull(course.getDescription());
 		assertEquals(Cycle.FIRST, course.getCycle());
+
+		List<Prerequisite> prerequisites = course.getPrerequisites();
+		assertEquals(1, prerequisites.size());
+
+		Prerequisite prerequisite = prerequisites.get(0);
+		List<String> acronyms = prerequisite.getAcronyms();
+		assertEquals(3, acronyms.size());
+		assertEquals("GLO-2004", acronyms.get(0));
 	}
 }
