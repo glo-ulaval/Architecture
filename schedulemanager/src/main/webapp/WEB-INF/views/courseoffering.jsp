@@ -35,7 +35,7 @@
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
-								<td class="centered"><i class="icon-plus"></i></td>
+								<td class="centered"><i class="icon-plus"></i></td> //TEST DE MERGE
 							</tr>
 						</c:forEach>
 					</table>
