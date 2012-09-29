@@ -3,6 +3,7 @@ package cours.ulaval.glo4003.persistence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +23,11 @@ public class XMLOfferingRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		repository = new XMLOfferingRepository();
+		try {
+			repository = new XMLOfferingRepository();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		offering = mock(Offering.class);
 		when(offering.getYear()).thenReturn(VALID_YEAR);
 	}
@@ -57,7 +62,8 @@ public class XMLOfferingRepositoryTest {
 		
 		repository.store(offering);
 		
-		assertEquals(years, repository.findYears());
+		assertNotNull(repository.findYears());
+		assertTrue(repository.findYears().contains(VALID_YEAR));
 	}
 	
 	@Test
