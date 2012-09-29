@@ -41,7 +41,7 @@
 					</table>
 				</c:if>
 			</div>
-			<div class="span6">
+			<div class="span6"></button>
 			<h1>Offre de cours</h1>
 				<c:if test="${not empty list}">
 					<table class="table table-striped">
