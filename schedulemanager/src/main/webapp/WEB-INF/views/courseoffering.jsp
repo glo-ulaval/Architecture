@@ -35,7 +35,7 @@
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
-								<td class="centered"><i class="icon-plus"></i></td>
+								<td class="centered"><button class="btn"><i class="icon-plus"></i></button></td> //MERGE SUCCESSFUL
 							</tr>
 						</c:forEach>
 					</table>
@@ -58,7 +58,7 @@
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
-								<td class="centered"><i class="icon-minus"></i></td>
+								<td class="centered"><button class="btn"><i class="icon-minus"></i></button></td>
 							</tr>
 						</c:forEach>
 					</table>
