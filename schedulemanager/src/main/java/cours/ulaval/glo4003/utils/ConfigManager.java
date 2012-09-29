@@ -31,4 +31,8 @@ public final class ConfigManager {
 	public String getCoursesFilePath() {
 		return properties.getProperty("CoursesFilePath");
 	}
+
+	public String getOfferingsFilePath() {
+		return properties.getProperty("OfferingsFilePath");
+	}
 }
