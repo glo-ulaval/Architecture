@@ -13,6 +13,8 @@ import cours.ulaval.glo4003.utils.ConfigManager;
 @XmlRootElement(name = "courses")
 public class XMLCourseRepository implements CourseRepository {
 
+	private CoursesDTO coursesDto;
+
 	@XmlElement(name = "course")
 	private List<Course> courses = new ArrayList<Course>();
 
@@ -23,7 +25,11 @@ public class XMLCourseRepository implements CourseRepository {
 	}
 
 	public CoursesDTO findAll() throws Exception {
-		return serializer.deserialize(ConfigManager.getConfigManager().getCoursesFilePath());
+		if (coursesDto == null) {
+			coursesDto = serializer.deserialize(ConfigManager.getConfigManager().getCoursesFilePath());
+		}
+
+		return coursesDto;
 	}
 
 	public void setSerializer(XMLSerializer<CoursesDTO> serializer) {
