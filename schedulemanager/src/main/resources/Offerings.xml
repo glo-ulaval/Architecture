@@ -2,19 +2,19 @@
 <courseOfferings>
 	<offering>
 		<year>2011-2012</year>
-		<courses>
+		<acronyms>
           <acronym>IFT-1904</acronym>
           <acronym>IFT-2005</acronym>
           <acronym>GLO-1900</acronym>
           <acronym>GIF-1003</acronym>
           <acronym>GLO-1901</acronym>
-		</courses>
+		</acronyms>
 	</offering>
 	<offering>
 		<year>2010-2011</year>
-		<courses>
+		<acronyms>
 			<acronym>IFT-2007</acronym>
 			<acronym>GLO-2901</acronym>
-		</courses>
+		</acronyms>
 	</offering>
 </courseOfferings>

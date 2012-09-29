@@ -1,22 +1,26 @@
 package cours.ulaval.glo4003.model;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
 
 public class Offering {
 
-	private ArrayList<String> acronyms = new ArrayList<String>();
-	private String year; // 2012-2013 from autumn ?
+	
+	private List<String> acronyms = new ArrayList<String>();
+	private String year;
 	
 	public Offering() {	
 	}
 	
 	public Offering(String year, Offering courseOffering) {
 		this.year = year;
-		this.acronyms = courseOffering.getOffering();
+		this.acronyms = courseOffering.getAcronyms();
 		
 	}
 
-	public ArrayList<String> getOffering() {
+	public List<String> getAcronyms() {
 		return acronyms;
 	}
 	

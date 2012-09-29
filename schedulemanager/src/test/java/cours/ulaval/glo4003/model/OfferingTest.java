@@ -37,7 +37,7 @@ public class OfferingTest {
 	public void canAddCourse() {
 		courseOffering.addCourse(VALID_ACRONYM);
 		
-		assertTrue(courseOffering.getOffering().contains(VALID_ACRONYM));
+		assertTrue(courseOffering.getAcronyms().contains(VALID_ACRONYM));
 	}
 	
 	@Test
@@ -46,7 +46,7 @@ public class OfferingTest {
 		
 		courseOffering.removeCourse(VALID_ACRONYM);
 		
-		assertFalse(courseOffering.getOffering().contains(VALID_ACRONYM));
+		assertFalse(courseOffering.getAcronyms().contains(VALID_ACRONYM));
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class OfferingTest {
 		ArrayList<String> offering = createValidAcronymList();
 		courseOffering.setOffering(offering);
 		
-		assertEquals(offering, courseOffering.getOffering());
+		assertEquals(offering, courseOffering.getAcronyms());
 	}
 	
 	@Test
@@ -62,14 +62,14 @@ public class OfferingTest {
 		Offering newCourseOffering = new Offering(GOOD_YEAR, courseOffering);
 		
 		assertEquals(GOOD_YEAR, newCourseOffering.getYear());
-		assertEquals(courseOffering.getOffering(), newCourseOffering.getOffering());
+		assertEquals(courseOffering.getAcronyms(), newCourseOffering.getAcronyms());
 		
 	}
 	
 	@Test
-	public void canGetEmptyOfferingWhenDefault() {//TODO : À RENOMMER? pas d'idée...
+	public void canGetEmptyOfferingWhenDefault() {
 
-		assertEquals(0, courseOffering.getOffering().size());
+		assertEquals(0, courseOffering.getAcronyms().size());
 	}
 	
 	private ArrayList<String> createValidAcronymList() {
