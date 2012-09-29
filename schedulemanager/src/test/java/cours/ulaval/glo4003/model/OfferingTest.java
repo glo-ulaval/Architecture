@@ -46,6 +46,8 @@ public class OfferingTest {
 		
 		courseOffering.removeCourse(VALID_ACRONYM);
 		
+		courseOffering.removeCourse("IFT-1111");
+		
 		assertFalse(courseOffering.getAcronyms().contains(VALID_ACRONYM));
 	}
 	

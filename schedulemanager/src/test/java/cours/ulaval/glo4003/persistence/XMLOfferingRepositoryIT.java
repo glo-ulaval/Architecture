@@ -24,11 +24,8 @@ public class XMLOfferingRepositoryIT {
 		assertNotNull(offering);
 		assertEquals("2011-2012", offering.getYear());
 		assertEquals(2, years.size());
-		
-		//PASSE PAS, TROUVER COMMENT PARSER LISTE - 
-		//créer un objet acronym qui contient juste un string.
-		assertEquals(2, offering.getAcronyms().size());  
-		assertTrue(offering.getAcronyms().contains("GLO-2901"));
+		assertEquals(5, offering.getAcronyms().size());  
+		assertTrue(offering.getAcronyms().contains("IFT-1904"));
 	}
 	
 	
