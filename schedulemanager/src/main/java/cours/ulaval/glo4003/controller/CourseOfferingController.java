@@ -18,7 +18,7 @@ public class CourseOfferingController {
 	public ModelAndView courseoffering() throws Exception {
 
 		ModelAndView mv = new ModelAndView("courseoffering");
-		mv.addObject("list", courseRepository.findAll().getCourses());
+		mv.addObject("list", courseRepository.findAll());
 		return mv;
 	}
 }

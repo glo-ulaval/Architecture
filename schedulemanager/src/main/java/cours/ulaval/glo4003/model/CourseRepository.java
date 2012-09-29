@@ -1,8 +1,8 @@
 package cours.ulaval.glo4003.model;
 
-import cours.ulaval.glo4003.persistence.CoursesDTO;
+import java.util.List;
 
 public interface CourseRepository {
 
-	public CoursesDTO findAll() throws Exception;
+	public List<Course> findAll() throws Exception;
 }

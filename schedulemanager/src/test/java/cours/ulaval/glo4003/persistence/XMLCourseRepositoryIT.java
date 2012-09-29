@@ -19,8 +19,7 @@ public class XMLCourseRepositoryIT {
 		XMLCourseRepository repository = new XMLCourseRepository();
 		repository.setSerializer(serializer);
 
-		CoursesDTO dto = repository.findAll();
-		List<Course> courses = dto.getCourses();
+		List<Course> courses = repository.findAll();
 		Course course = courses.get(0);
 
 		assertEquals(8, courses.size());
