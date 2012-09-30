@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang.SerializationException;
@@ -15,11 +17,14 @@ import cours.ulaval.glo4003.utils.ResourcesLoader;
 
 public class XMLSerializerTest {
 
+	private final String A_RESOURCE_NAME = "A Resource Name";
+	private ResourcesLoader loader;
 	private XMLSerializer<CoursesDTO> serializer;
 
 	@Before
 	public void setUp() throws Exception {
 		serializer = new XMLSerializer<CoursesDTO>(CoursesDTO.class);
+		loader = mock(ResourcesLoader.class);
 	}
 
 	@Test
@@ -29,27 +34,38 @@ public class XMLSerializerTest {
 
 	@Test
 	public void canDeserialize() throws Exception {
-		String aResourceName = "A Resource Name";
-		ResourcesLoader loader = mock(ResourcesLoader.class);
 		InputStream stream = mock(InputStream.class);
-		when(loader.loadResource(CoursesDTO.class, aResourceName)).thenReturn(stream);
+		when(loader.loadResource(CoursesDTO.class, A_RESOURCE_NAME)).thenReturn(stream);
 		serializer.setResourcesLoader(loader);
 
-		CoursesDTO pool = mock(CoursesDTO.class);
+		CoursesDTO dto = mock(CoursesDTO.class);
 		Unmarshaller unmarshaller = mock(Unmarshaller.class);
-		when(unmarshaller.unmarshal(stream)).thenReturn(pool);
+		when(unmarshaller.unmarshal(stream)).thenReturn(dto);
 		serializer.setUnmarshaller(unmarshaller);
 
-		assertEquals(pool, serializer.deserialize(aResourceName));
+		assertEquals(dto, serializer.deserialize(A_RESOURCE_NAME));
 	}
 
 	@Test(expected = SerializationException.class)
 	public void cantDeserializeInvalidResource() throws Exception {
-		String aResourceName = "A Resource Name";
-		ResourcesLoader loader = mock(ResourcesLoader.class);
-		when(loader.loadResource(CoursesDTO.class, aResourceName)).thenReturn(null);
+		when(loader.loadResource(CoursesDTO.class, A_RESOURCE_NAME)).thenReturn(null);
 		serializer.setResourcesLoader(loader);
 
-		serializer.deserialize(aResourceName);
+		serializer.deserialize(A_RESOURCE_NAME);
+	}
+
+	@Test()
+	public void canSerialize() throws Exception {
+		CoursesDTO dto = mock(CoursesDTO.class);
+		Marshaller marshaller = mock(Marshaller.class);
+		OutputStream stream = mock(OutputStream.class);
+		when(loader.loadResourceForWriting(A_RESOURCE_NAME)).thenReturn(stream);
+		serializer.setResourcesLoader(loader);
+		serializer.setMarshaller(marshaller);
+
+		serializer.serialize(dto, A_RESOURCE_NAME);
+
+		verify(loader).loadResourceForWriting(A_RESOURCE_NAME);
+		verify(marshaller).marshal(dto, stream);
 	}
 }

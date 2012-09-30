@@ -1,6 +1,9 @@
 package cours.ulaval.glo4003.persistence;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,6 +30,7 @@ public class XMLSerializer<T> {
 		this.type = type;
 		JAXBContext context = JAXBContext.newInstance(type);
 		marshaller = context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		unmarshaller = context.createUnmarshaller();
 		resourcesLoader = new ResourcesLoader();
 	}
@@ -40,6 +44,17 @@ public class XMLSerializer<T> {
 		} else {
 			throw new SerializationException("Invalid resource name : " + resourceName);
 		}
+	}
+
+	public void serialize(T element, String resourceName) throws JAXBException, URISyntaxException,
+			FileNotFoundException {
+		OutputStream stream = resourcesLoader.loadResourceForWriting(resourceName);
+
+		marshaller.marshal(element, stream);
+	}
+
+	public void setMarshaller(Marshaller marshaller) {
+		this.marshaller = marshaller;
 	}
 
 	public void setResourcesLoader(ResourcesLoader loader) {
