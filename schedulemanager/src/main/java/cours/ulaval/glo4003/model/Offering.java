@@ -10,12 +10,12 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Offering {
+	@XmlElement(name = "year")
+	private String year;
 
 	@XmlElementWrapper(name = "acronyms")
 	@XmlElement(name = "acronym")
 	private List<String> acronyms = new ArrayList<String>();
-	@XmlElement(name = "year")
-	private String year;
 	
 	public Offering() {	
 	}
