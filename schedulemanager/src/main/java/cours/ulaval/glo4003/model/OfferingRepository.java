@@ -8,7 +8,7 @@ public interface OfferingRepository {
 
 	public Offering find(String year);
 
-	public void store(Offering offering);
+	public void store(Offering offering) throws Exception;
 
 	public void delete(String year);
 
