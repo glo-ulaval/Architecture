@@ -14,6 +14,7 @@ public class Offering {
 	@XmlElementWrapper(name = "acronyms")
 	@XmlElement(name = "acronym")
 	private List<String> acronyms = new ArrayList<String>();
+	@XmlElement(name = "year")
 	private String year;
 	
 	public Offering() {	
