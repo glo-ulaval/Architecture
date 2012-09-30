@@ -9,9 +9,11 @@ import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLOfferingRepository implements OfferingRepository {
 
+	private XMLSerializer<OfferingDTO> serializer;
 	private HashMap<String, Offering> offerings = new HashMap<String, Offering>();
 
 	public XMLOfferingRepository() throws Exception {
+		serializer = new XMLSerializer<OfferingDTO>(OfferingDTO.class);
 		parseXML();
 	}
 
@@ -44,7 +46,6 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	private void parseXML() throws Exception {
-		XMLSerializer<OfferingDTO> serializer = new XMLSerializer<OfferingDTO>(OfferingDTO.class);
 		ArrayList<Offering> deserializedOfferings = serializer.deserialize(ConfigManager.getConfigManager().getOfferingsFilePath()).getOfferings();
 		for (Offering offering : deserializedOfferings) {
 			offerings.put(offering.getYear(), offering);
@@ -52,15 +53,8 @@ public class XMLOfferingRepository implements OfferingRepository {
 	} 
 
 	private void saveXML() throws Exception {
-		XMLSerializer<OfferingDTO> serializer = new XMLSerializer<OfferingDTO>(OfferingDTO.class);
-		
-		ArrayList<Offering> newOfferings = new ArrayList<Offering>();
-		for(Offering offering : offerings.values()) {
-			newOfferings.add(offering);
-		}
-		
 		OfferingDTO offeringDTO = new OfferingDTO();
-		offeringDTO.setOfferings(newOfferings);
+		offeringDTO.setOfferings(new ArrayList<Offering>(offerings.values()));
 		serializer.serialize(offeringDTO, ConfigManager.getConfigManager().getOfferingsFilePath());		
 	}
 }
