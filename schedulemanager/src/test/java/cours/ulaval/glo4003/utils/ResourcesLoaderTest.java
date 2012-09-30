@@ -11,6 +11,7 @@ import cours.ulaval.glo4003.persistence.CoursesDTO;
 
 public class ResourcesLoaderTest {
 
+	private final String A_TEST_RESOURCE = "/TestResource.txt";
 	private final String AN_UNEXISTING_RESOURCE_NAME = "An unexisting resource";
 	private ResourcesLoader loader;
 
@@ -23,6 +24,11 @@ public class ResourcesLoaderTest {
 	public void canLoadExistingResource() {
 		ConfigManager resourcesPaths = ConfigManager.getConfigManager();
 		assertNotNull(loader.loadResource(CoursesDTO.class, resourcesPaths.getCoursesFilePath()));
+	}
+
+	@Test
+	public void canLoadExistingResourceForWriting() throws Exception {
+		assertNotNull(loader.loadResourceForWriting(A_TEST_RESOURCE));
 	}
 
 	@Test
