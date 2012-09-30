@@ -38,19 +38,19 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	@Override
-	public void delete(String year) {
+	public void delete(String year) throws Exception {
 		offerings.remove(year);
+		saveXML();
 	}
 
 	private void parseXML() throws Exception {
 		XMLSerializer<OfferingDTO> serializer = new XMLSerializer<OfferingDTO>(OfferingDTO.class);
-		ArrayList<Offering> deserializedOfferings = serializer.deserialize(
-				ConfigManager.getConfigManager().getOfferingsFilePath()).getOfferings();
+		ArrayList<Offering> deserializedOfferings = serializer.deserialize(ConfigManager.getConfigManager().getOfferingsFilePath()).getOfferings();
 		for (Offering offering : deserializedOfferings) {
 			offerings.put(offering.getYear(), offering);
 		}
 	} 
-	
+
 	private void saveXML() throws Exception {
 		XMLSerializer<OfferingDTO> serializer = new XMLSerializer<OfferingDTO>(OfferingDTO.class);
 		

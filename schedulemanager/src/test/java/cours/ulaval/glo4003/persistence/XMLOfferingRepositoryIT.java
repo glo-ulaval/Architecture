@@ -45,14 +45,33 @@ public class XMLOfferingRepositoryIT {
 		offering.setYear(NEW_OFFERING_YEAR);
 		
 		repository.store(offering);
+		repository = null;
 		
 		XMLOfferingRepository refreshedRepository = new XMLOfferingRepository();
 		
 		ArrayList<String> storedOfferingYears = refreshedRepository.findYears();
 		Offering storedOffering = refreshedRepository.find(NEW_OFFERING_YEAR);
-		
-		
+				
 		assertTrue(storedOfferingYears.contains(NEW_OFFERING_YEAR));
 		assertTrue(storedOffering.getAcronyms().contains("IFT-1001"));	
+	}
+	
+	@Test
+	public void canDeleteAnOffering() throws Exception {
+		Offering offering = new Offering();
+		ArrayList<String> acronyms = new ArrayList<String>();
+		acronyms.add("IFT-2001");
+		acronyms.add("IFT-2002");
+		acronyms.add("IFT-2003");
+		offering.setOffering(acronyms);
+		offering.setYear("2007-2008");
+		repository.store(offering);
+		
+		repository.delete("2007-2008");
+		repository = null;
+		
+		XMLOfferingRepository refreshedRepository = new XMLOfferingRepository();
+		ArrayList<String> storedOfferingYears = refreshedRepository.findYears();				
+		assertFalse(storedOfferingYears.contains("2007-2008"));
 	}
 }

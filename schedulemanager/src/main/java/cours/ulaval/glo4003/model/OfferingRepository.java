@@ -10,6 +10,6 @@ public interface OfferingRepository {
 
 	public void store(Offering offering) throws Exception;
 
-	public void delete(String year);
+	public void delete(String year) throws Exception;
 
 }
