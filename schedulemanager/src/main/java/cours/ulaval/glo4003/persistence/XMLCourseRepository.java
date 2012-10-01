@@ -22,22 +22,19 @@ public class XMLCourseRepository implements CourseRepository {
 		return new ArrayList<Course>(courses.values());
 	}
 
-	public void setSerializer(XMLSerializer<CoursesDTO> serializer) {
-		this.serializer = serializer;
-	}
-
 	private void parseXML() throws Exception {
-		List<Course> deserializedCourses = serializer.deserialize(ConfigManager.getConfigManager().getCoursesFilePath()).getCourses();
+		List<Course> deserializedCourses = serializer
+				.deserialize(ConfigManager.getConfigManager().getCoursesFilePath()).getCourses();
 		System.out.println("Deserialized");
 		for (Course course : deserializedCourses) {
 			courses.put(course.getAcronym(), course);
 		}
-	} 	
-	
+	}
+
 	public Course findByAcronym(String acronym) {
 		return courses.get(acronym);
 	}
-	
+
 	// Do not use : for test purpose only
 	protected XMLCourseRepository(XMLSerializer<CoursesDTO> serializer) throws Exception {
 		this.serializer = serializer;
