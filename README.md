@@ -21,3 +21,21 @@ Légende des symboles de commits :
 * ! Correction d'un bug
 * * Modification de code existant
 
+Configuration d'Eclipse
+=======================
+
+Dans 'Java > Code Style > Organize Imports'
+  * Number of STATIC imports needed for .* (e.g. 'java.lang.Math.*'): 0
+	
+Dans 'Java > Editor > Save Actions'
+  * Cocher 'Perform the selected actions on save'
+  * Cocher 'Format source code', select 'Format all lines'
+  * Cocher 'Organize imports'
+	
+Dans 'General > Workspace'
+  * Text file encoding:
+    **Other: UTF-8
+
+Dans 'Java > Code Style > Formatter'
+  * Cliquer sur import et sélectionner le fichier Formatter.xml à la racine du projet
+
