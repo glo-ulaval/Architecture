@@ -25,14 +25,14 @@ Configuration d'Eclipse
 =======================
 
 Dans 'Java > Code Style > Organize Imports'
-  Number of STATIC imports needed for .* (e.g. 'java.lang.Math.*'): 0
+  * Number of STATIC imports needed for .* (e.g. 'java.lang.Math.*'): 0
 	
 Dans 'Java > Editor > Save Actions'
-	* Cocher 'Perform the selected actions on save'
-	* Cocher 'Format source code', select 'Format all lines'
-	* Cocher 'Organize imports'
+  * Cocher 'Perform the selected actions on save'
+  * Cocher 'Format source code', select 'Format all lines'
+  * Cocher 'Organize imports'
 	
 Dans 'General > Workspace'
-	Text file encoding:
-		Other: UTF-8
+  * Text file encoding:
+    **Other: UTF-8
 
