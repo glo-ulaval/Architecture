@@ -27,7 +27,7 @@ public class XMLCourseRepositoryIT {
 		assertEquals("Introduction aux processus du génie logiciel", course.getTitle());
 		assertEquals(3, course.getCredits());
 		assertNotNull(course.getDescription());
-		assertEquals(Cycle.FIRST, course.getCycle());
+		assertEquals(Cycle.Premier, course.getCycle());
 
 		List<Prerequisite> prerequisites = course.getPrerequisites();
 		assertEquals(1, prerequisites.size());

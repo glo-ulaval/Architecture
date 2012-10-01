@@ -25,7 +25,7 @@ public class CourseTest {
 		String aTitle = "title";
 		int credits = 2;
 		String aDescription = "description";
-		Cycle aCycle = Cycle.FIRST;
+		Cycle aCycle = Cycle.Premier;
 		List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
 		course = new Course(anAcronym, aTitle, credits, aDescription, aCycle, prerequisites);
 
@@ -80,9 +80,9 @@ public class CourseTest {
 
 	@Test
 	public void canGetCycle() {
-		course.setCycle(Cycle.SECOND);
+		course.setCycle(Cycle.Deuxieme);
 
-		assertEquals(Cycle.SECOND, course.getCycle());
+		assertEquals(Cycle.Deuxieme, course.getCycle());
 	}
 
 	@Test

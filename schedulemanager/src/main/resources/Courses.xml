@@ -5,21 +5,21 @@
     <title>Pratique du génie logiciel</title>
     <credits>1</credits>
     <description>Exposés animés la plupart par des ingénieurs logiciels œuvrant tant en milieu industriel qu'en recherche pour donner à l'étudiant une image plus concrète et plus globale des domaines d'intervention de l'ingénieur logiciel. Il vise à faire connaître différents aspects de la carrière en génie logiciel et à amener l'étudiant à mieux définir ses objectifs de carrière. On y fait également un survol des données sur le marché du travail et des meilleures stratégies de réussite.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
   </course>
   <course>
     <acronym>GLO-1901</acronym>
     <title>Introduction à la programmation avec Python</title>
     <credits>3</credits>
     <description>Ce cours introduit les principaux paradigmes de programmation servant à la résolution de problèmes en informatique. Il couvre notamment les programmations procédurale, fonctionnelle, orientée objet et événementielle. Pour illustrer ces paradigmes, il utilise le langage Python.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
   </course>
   <course>
     <acronym>GLO-2003</acronym>
     <title>Introduction aux processus du génie logiciel</title>
     <credits>3</credits>
     <description>Concepts fondamentaux des processus de génie logiciel. Cycle de vie du développement logiciel. Outils et modélisation du processus unifié. Disciplines techniques du processus de génie logiciel et leurs pratiques : exigences, analyse et conception, implémentation et tests. Disciplines de gestion du processus de génie logiciel : gestion des modifications et des configurations, gestion de projet. Notions d'équipe. Évaluation et amélioration des processus. Processus agiles et méthodes.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
     <prerequisites>
       <prerequisite>
         <acronyms>
@@ -35,7 +35,7 @@
     <title>Algorithmes et structures de données pour ingénieurs</title>
     <credits>3</credits>
     <description>Conception et analyse d'algorithmes : notions d'ordre; comportement du meilleur, du moyen et du pire cas. Conception et développement d'algorithmes : notion de types abstraits et modularité, programmation générique, structures de données classiques : les listes, les piles, les files (avec et sans priorité), les arborescences, les graphes, les tables de dispersion et les monceaux binaires, algorithmes de tri.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
     <prerequisites>
       <prerequisite>
         <acronyms>
@@ -49,7 +49,7 @@
     <title>Qualité et métriques du logiciel</title>
     <credits>3</credits>
     <description>Caractéristiques et facteurs de la qualité (maintenabilité, sécurité, fiabilité, etc.), normes et standards internationaux, qualité dans les processus logiciels, mesures et métriques. Validation et vérification : types d'essais (test unitaire, fonctionnel, système, intégration, acceptation), techniques, pratiques et outils (xUnit, détection automatisée des anomalies, etc.). Bonnes pratiques de programmation, de conception orientée objet et architecturales. Application et prise en charge de la qualité dans un projet (suivi des anomalies, intégration continue, etc.). Audit et certification. Outils spécialisés et automatisation.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
     <prerequisites>
       <prerequisite>
         <acronyms>
@@ -67,7 +67,7 @@
     <title>Informatique théorique</title>
     <credits>3</credits>
     <description>Introduction à la théorie des machines abstraites et des langages formels. Classification des machines abstraites: automates finis, automates à pile, machine de Turing. Classification des langages: réguliers, non contextuels, récursifs, récursivement énumérables, non récursivement énumérables. Grammaires: syntaxe, classification de Chomsky, rapports avec les machines abstraites et les langages. Théorie des séquences. Ensembles finis, infinis, dénombrables et non dénombrables.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
     <prerequisites>
       <prerequisite>
         <acronyms>
@@ -83,7 +83,7 @@
     <title>Analyse et conception des systèmes orientés objets</title>
     <credits>3</credits>
     <description>L'objectif principal de ce cours est de former l'étudiant à la conception d'applications logicielles d'envergure selon les principes fondamentaux du génie logiciel et de la programmation par objets. L'approche « Unified », combinée à l'apprentissage du langage UML, est présentée et mise en pratique dans un projet de conception et d'implantation d'un système logiciel réalisé en groupe. Le langage de programmation Java est utilisé comme outil d'implantation.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
     <prerequisites>
       <prerequisite>
         <acronyms>
@@ -104,7 +104,7 @@
     <title>Compilation et interprétation</title>
     <credits>3</credits>
     <description>Processus général de la compilation. Analyse lexicale et automates finis. Analyse syntaxique descendante prédictive et grammaires hors contexte. Forme intermédiaire. Grammaires attribuées. Typage. Infrastructure d'exécution. Allocation de la mémoire. Génération du code. Optimisation.</description>
-    <cycle>FIRST</cycle>
+    <cycle>Premier</cycle>
     <prerequisites>
       <prerequisite>
         <acronyms>
