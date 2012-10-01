@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
+import cours.ulaval.glo4003.model.exception.InvalidOfferingOperation;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Offering {
 	@XmlElement(name = "year")
@@ -41,13 +43,17 @@ public class Offering {
 		this.year = year;
 	}
 
-	public void addCourse(String acronym) {
-		acronyms.add(acronym);
+	public void addCourse(String acronym) throws InvalidOfferingOperation {
+		if(!acronyms.contains(acronym)){
+			acronyms.add(acronym);
+		}else{
+			throw new InvalidOfferingOperation("Le cours "+acronym+" est déjà dans l'offre de cours de l'année "+year);
+		}
 	}
 
-	public void removeCourse(String acronym) {
+	public void removeCourse(String acronym) throws InvalidOfferingOperation {
 		if (!acronyms.remove(acronym)) {
-			System.out.println("Impossible de retirer le cours " + acronym
+			throw new InvalidOfferingOperation("Impossible de retirer le cours " + acronym
 					+ " de l'offre de cours de l'année " + year);
 		}
 	}

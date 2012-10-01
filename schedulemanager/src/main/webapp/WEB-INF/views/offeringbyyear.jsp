@@ -15,14 +15,15 @@
 			<div class="span12">
 				<h1>Offre de cours ${year}</h1>
 				<c:choose>
-					<c:when test="${error == true}">
+					<c:when test="${ empty error }"></c:when>
+					<c:when test="${error != 'success'}">
 						<div class="alert alert-error">
 							<button type="button" class="close" data-dismiss="alert">×</button>
 							<strong>Erreur!</strong> Une erreur est survenue, veuillez
-							réessayer.
+							réessayer - ${error}.
 						</div>
 					</c:when>
-					<c:when test="${error == false}">
+					<c:when test="${ error == 'success'}">
 						<div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert">×</button>
 							<strong>Succès!</strong>La requête s'est effectuée avec succès.

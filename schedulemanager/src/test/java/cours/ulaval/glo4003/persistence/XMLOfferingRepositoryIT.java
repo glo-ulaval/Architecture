@@ -34,7 +34,7 @@ public class XMLOfferingRepositoryIT {
 		assertNotNull(offering);
 		assertEquals(STORED_OFFERING_YEAR, offering.getYear());
 		assertEquals(5, offering.getAcronyms().size());
-		assertTrue(offering.getAcronyms().contains("IFT-1904"));
+		assertTrue(offering.getAcronyms().contains("GLO-2003"));
 	}
 
 	@Test

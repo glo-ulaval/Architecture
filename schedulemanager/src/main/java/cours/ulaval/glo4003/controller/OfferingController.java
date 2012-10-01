@@ -20,6 +20,8 @@ import cours.ulaval.glo4003.model.OfferingRepository;
 @Controller
 public class OfferingController {
 
+	private static final String SUCCESS = "success";
+
 	@Inject
 	CourseRepository courseRepository;
 
@@ -65,9 +67,9 @@ public class OfferingController {
 			
 			mv.addObject("year", year);
 			mv.addObject("courses", courses);
-			mv.addObject("error", false);
+			mv.addObject("error", SUCCESS);
 		}catch (Exception e){
-			mv.addObject("error", true);
+			mv.addObject("error", e.getMessage());
 		}
 
 		return mv;
@@ -100,9 +102,9 @@ public class OfferingController {
 
 			mv.addObject("year", year);
 			mv.addObject("courses", courses);
-			mv.addObject("error", false);
+			mv.addObject("error", SUCCESS);
 		} catch (Exception e) {
-			mv.addObject("error", true);
+			mv.addObject("error", e.getMessage());
 		}
 
 		return mv;
