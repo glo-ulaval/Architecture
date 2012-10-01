@@ -2,6 +2,8 @@ package cours.ulaval.glo4003.persistence;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cours.ulaval.glo4003.model.Offering;
 import cours.ulaval.glo4003.model.OfferingRepository;
@@ -10,7 +12,7 @@ import cours.ulaval.glo4003.utils.ConfigManager;
 public class XMLOfferingRepository implements OfferingRepository {
 
 	private XMLSerializer<OfferingDTO> serializer;
-	private HashMap<String, Offering> offerings = new HashMap<String, Offering>();
+	private Map<String, Offering> offerings = new HashMap<String, Offering>();
 
 	public XMLOfferingRepository() throws Exception {
 		serializer = new XMLSerializer<OfferingDTO>(OfferingDTO.class);
@@ -18,8 +20,8 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	@Override
-	public ArrayList<String> findYears() {
-		ArrayList<String> years = new ArrayList<String>();
+	public List<String> findYears() {
+		List<String> years = new ArrayList<String>();
 
 		for (String x : offerings.keySet()) {
 			years.add(x);
@@ -46,15 +48,18 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	private void parseXML() throws Exception {
-		ArrayList<Offering> deserializedOfferings = serializer.deserialize(ConfigManager.getConfigManager().getOfferingsFilePath()).getOfferings();
+		List<Offering> deserializedOfferings = serializer.deserialize(
+				ConfigManager.getConfigManager().getOfferingsFilePath())
+				.getOfferings();
 		for (Offering offering : deserializedOfferings) {
 			offerings.put(offering.getYear(), offering);
 		}
-	} 
+	}
 
 	private void saveXML() throws Exception {
 		OfferingDTO offeringDTO = new OfferingDTO();
 		offeringDTO.setOfferings(new ArrayList<Offering>(offerings.values()));
-		serializer.serialize(offeringDTO, ConfigManager.getConfigManager().getOfferingsFilePath());		
+		serializer.serialize(offeringDTO, ConfigManager.getConfigManager()
+				.getOfferingsFilePath());
 	}
 }
