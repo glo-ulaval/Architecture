@@ -18,7 +18,7 @@
 			<option value="2012">2012</option>
 		</select>
 		<div class="row-fluid">
-			<div class="span6">
+			<div class="span12">
 				<h1>Cours disponibles</h1>
 				<c:if test="${not empty list}">
 					<table class="table table-striped">
@@ -36,29 +36,6 @@
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
 								<td class="centered"><button class="btn"><i class="icon-plus"></i></button></td>
-							</tr>
-						</c:forEach>
-					</table>
-				</c:if>
-			</div>
-			<div class="span6"></button>
-			<h1>Offre de cours</h1>
-				<c:if test="${not empty list}">
-					<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Titre</th>
-									<th>Credits</th>
-									<th>Cycle</th>
-									<th class="centered">Actions</th>
-								</tr>
-							</thead>
-						<c:forEach var="course" items="${list}">
-							<tr id="${course.acronym}">
-								<td><b>${course.acronym} - ${course.title}</b></td>
-								<td>${course.credits}</td>
-								<td>${course.cycle}</td>
-								<td class="centered"><button class="btn"><i class="icon-minus"></i></button></td>
 							</tr>
 						</c:forEach>
 					</table>

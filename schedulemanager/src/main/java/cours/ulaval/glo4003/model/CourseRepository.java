@@ -5,4 +5,6 @@ import java.util.List;
 public interface CourseRepository {
 
 	public List<Course> findAll() throws Exception;
+	
+	public Course findByAcronym(String acronym);
 }

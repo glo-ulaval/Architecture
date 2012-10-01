@@ -6,7 +6,9 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.model.CourseRepository;
+import cours.ulaval.glo4003.model.OfferingRepository;
 import cours.ulaval.glo4003.persistence.XMLCourseRepository;
+import cours.ulaval.glo4003.persistence.XMLOfferingRepository;
 
 @Configuration
 public class AppConfig {
@@ -14,6 +16,11 @@ public class AppConfig {
 	@Bean
 	public CourseRepository courseRepository() throws Exception {
 		return new XMLCourseRepository();
+	}
+	
+	@Bean
+	public OfferingRepository offeringRepository() throws Exception {
+		return new XMLOfferingRepository();
 	}
 
 	@Bean

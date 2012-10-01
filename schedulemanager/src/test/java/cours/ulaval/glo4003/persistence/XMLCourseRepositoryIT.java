@@ -17,11 +17,10 @@ public class XMLCourseRepositoryIT {
 	public void canGetCourses() throws Exception {
 		XMLSerializer<CoursesDTO> serializer = new XMLSerializer<CoursesDTO>(CoursesDTO.class);
 		serializer.setResourcesLoader(new ResourcesLoader());
-		XMLCourseRepository repository = new XMLCourseRepository();
-		repository.setSerializer(serializer);
+		XMLCourseRepository repository = new XMLCourseRepository(serializer);
 
 		List<Course> courses = repository.findAll();
-		Course course = courses.get(2);
+		Course course = repository.findByAcronym("GLO-2003");
 
 		assertEquals(8, courses.size());
 		assertEquals("GLO-2003", course.getAcronym());
