@@ -27,7 +27,7 @@
 					<tr id="${year}">
 						<td><b>${year}</b></td>
 						<td class="centered">
-							<a class="btn" href="offering/${year}"><i class="icon-search"></i></a>
+							<a class="btn" href="${year}"><i class="icon-search"></i></a>
 						</td>
 					</tr>
 				</c:forEach>

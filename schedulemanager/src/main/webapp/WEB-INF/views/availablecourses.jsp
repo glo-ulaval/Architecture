@@ -9,33 +9,29 @@
 <link href="resources/css/app.css" rel="stylesheet">
 </head>
 <body>
-	<c:import url = "header.jsp"/>
+	<c:import url="header.jsp" />
 	<div class="container">
-		<select>
-			<option value="2009">2009</option>
-			<option value="2010">2010</option>
-			<option value="2011">2011</option>
-			<option value="2012">2012</option>
-		</select>
 		<div class="row-fluid">
 			<div class="span12">
 				<h1>Cours disponibles</h1>
-				<c:if test="${not empty list}">
+				<c:if test="${not empty courses}">
 					<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Titre</th>
-									<th>Credits</th>
-									<th>Cycle</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-						<c:forEach var="course" items="${list}">
+						<thead>
+							<tr>
+								<th>Titre</th>
+								<th>Credits</th>
+								<th>Cycle</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<c:forEach var="course" items="${courses}">
 							<tr id="${course.acronym}">
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
-								<td class="centered"><button class="btn"><i class="icon-plus"></i></button></td>
+								<td class="centered"><a class="btn btn-success"
+									href="addcourse?year=${year}&acronym=${course.acronym}"><i
+										class="icon-plus-sign icon-white"></i></a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -43,6 +39,6 @@
 			</div>
 		</div>
 	</div>
-	<c:import url = "footer.jsp"/>
+	<c:import url="footer.jsp" />
 </body>
 </html>

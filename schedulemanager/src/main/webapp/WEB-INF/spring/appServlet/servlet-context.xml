@@ -11,10 +11,7 @@
 
 	<resources mapping="/resources/**" location="/resources/" />
  	
- 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
- 		<beans:property name="prefix" value="WEB-INF/views/"></beans:property>
- 		<beans:property name="suffix" value=".jsp"></beans:property>
- 	</beans:bean>
+
  
     <context:component-scan base-package="cours.ulaval.glo4003" />
     
