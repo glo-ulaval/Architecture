@@ -8,8 +8,10 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.stereotype.Repository;
 
 import cours.ulaval.glo4003.model.Offering;
 
@@ -50,7 +52,6 @@ public class XMLOfferingRepositoryIT {
 		offering.setYear(NEW_OFFERING_YEAR);
 
 		repository.store(offering);
-		repository = null;
 
 		XMLOfferingRepository refreshedRepository = new XMLOfferingRepository();
 
@@ -73,10 +74,15 @@ public class XMLOfferingRepositoryIT {
 		repository.store(offering);
 
 		repository.delete("2007-2008");
-		repository = null;
 
 		XMLOfferingRepository refreshedRepository = new XMLOfferingRepository();
 		List<String> storedOfferingYears = refreshedRepository.findYears();
 		assertFalse(storedOfferingYears.contains("2007-2008"));
+	}
+	
+	@AfterClass
+	public static void reset() throws Exception {
+		XMLOfferingRepository repo = new XMLOfferingRepository();	
+		repo.delete(NEW_OFFERING_YEAR);	
 	}
 }
