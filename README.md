@@ -36,3 +36,6 @@ Dans 'General > Workspace'
   * Text file encoding:
     **Other: UTF-8
 
+Dans 'Java > Code Style > Formatter'
+  * Cliquer sur import et sélectionner le fichier Formatter.xml à la racine du projet
+
