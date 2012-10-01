@@ -1,10 +1,10 @@
 package cours.ulaval.glo4003.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface OfferingRepository {
 
-	public ArrayList<String> findYears();
+	public List<String> findYears();
 
 	public Offering find(String year);
 
