@@ -7,23 +7,25 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import cours.ulaval.glo4003.model.Offering;
 
 public class XMLOfferingRepositoryTest {
-
 	private static final String VALID_YEAR = "2011";
-	private XMLOfferingRepository repository;
+
+	@Mock
+	private XMLSerializer<OfferingDTO> serializer;
+	@Mock
 	private Offering offering;
+	@InjectMocks
+	private XMLOfferingRepository repository;
 
 	@Before
 	public void setUp() {
-		try {
-			repository = new XMLOfferingRepository();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		offering = mock(Offering.class);
+		MockitoAnnotations.initMocks(this);
 		when(offering.getYear()).thenReturn(VALID_YEAR);
 	}
 
