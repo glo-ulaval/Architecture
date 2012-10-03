@@ -34,7 +34,7 @@
 					<input type="text" placeholder="IDUL">
 					<input type="password" placeholder="Mot de passe"><br/>
 					<!-- <button type="submit" class="btn">Se connecter</button> -->
-					<a href="offering" class="btn">Se connecter</a>
+					<a href="menu" class="btn">Se connecter</a>
 				</form>
 			</div>
 		</div>
