@@ -5,8 +5,8 @@
 <head>
 <meta charset="utf-8">
 <title>Schedule Manager</title>
-<link href="resources/css/bootstrap.css" rel="stylesheet">
-<link href="resources/css/app.css" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
 </head>
 <body>
 	<c:import url="header.jsp" />
@@ -27,7 +27,7 @@
 					<tr id="${year}">
 						<td><b>${year}</b></td>
 						<td class="centered">
-							<a class="btn" href="${year}"><i class="icon-search"></i></a>
+							<a class="btn" href="schedule/${year}"><i class="icon-search"></i></a>
 						</td>
 					</tr>
 				</c:forEach>

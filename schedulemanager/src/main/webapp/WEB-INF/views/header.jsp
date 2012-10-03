@@ -1,9 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="/schedulemanager"><img src="resources/img/logo_mini.png"
-					alt="" />ScheduleManager</a>
+				<a class="brand" href="/schedulemanager">
+				<img src="<c:url value="/resources/img/logo_mini.png" />" />
+        ScheduleManager</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="/schedulemanager">Accueil</a></li>

@@ -14,19 +14,21 @@ import cours.ulaval.glo4003.persistence.XMLOfferingRepository;
 public class AppConfig {
 
 	@Bean
-	public CourseRepository courseRepository() throws Exception {
+	public CourseRepository courseRepository()
+			throws Exception {
 		return new XMLCourseRepository();
 	}
-	
+
 	@Bean
-	public OfferingRepository offeringRepository() throws Exception {
+	public OfferingRepository offeringRepository()
+			throws Exception {
 		return new XMLOfferingRepository();
 	}
 
 	@Bean
 	ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("WEB-INF/views/");
+		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}

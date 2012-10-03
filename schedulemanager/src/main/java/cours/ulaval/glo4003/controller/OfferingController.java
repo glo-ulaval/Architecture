@@ -18,6 +18,7 @@ import cours.ulaval.glo4003.model.Offering;
 import cours.ulaval.glo4003.model.OfferingRepository;
 
 @Controller
+@RequestMapping(value = "/offering")
 public class OfferingController {
 
 	private static final String SUCCESS = "success";
@@ -28,8 +29,9 @@ public class OfferingController {
 	@Inject
 	OfferingRepository offeringRepository;
 
-	@RequestMapping(value = "/offering")
-	public ModelAndView offering() throws Exception {
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView offering()
+			throws Exception {
 
 		ModelAndView mv = new ModelAndView("offering");
 		mv.addObject("years", offeringRepository.findYears());
@@ -52,23 +54,21 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/deletecourse")
-	public ModelAndView deleteCourse(
-			@RequestParam(required = true, value = "year") String year,
-			@RequestParam(required = true, value = "acronym") String acronym)
-			{
-		
+	public ModelAndView deleteCourse(@RequestParam(required = true, value = "year") String year,
+			@RequestParam(required = true, value = "acronym") String acronym) {
+
 		ModelAndView mv = new ModelAndView("offeringbyyear");
 
-		try{
+		try {
 			Offering offering = offeringRepository.find(year);
 			offering.removeCourse(acronym);
-			
+
 			List<Course> courses = getCoursesFromAcronyms(offering);
-			
+
 			mv.addObject("year", year);
 			mv.addObject("courses", courses);
 			mv.addObject("error", SUCCESS);
-		}catch (Exception e){
+		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}
 
@@ -76,8 +76,7 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/availablecourses")
-	public ModelAndView availableCourses(
-			@RequestParam(required = true, value = "year") String year)
+	public ModelAndView availableCourses(@RequestParam(required = true, value = "year") String year)
 			throws Exception {
 
 		ModelAndView mv = new ModelAndView("availablecourses");
@@ -88,8 +87,7 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/addcourse")
-	public ModelAndView addCourseFromAvailableCourses(
-			@RequestParam(required = true, value = "year") String year,
+	public ModelAndView addCourseFromAvailableCourses(@RequestParam(required = true, value = "year") String year,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 
 		ModelAndView mv = new ModelAndView("offeringbyyear");
