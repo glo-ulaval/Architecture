@@ -7,6 +7,8 @@
 <title>Schedule Manager</title>
 <link href="resources/css/bootstrap.css" rel="stylesheet">
 <link href="resources/css/app.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="resources/js/app.js"></script>
 </head>
 <body>
 	<c:import url="header.jsp" />
