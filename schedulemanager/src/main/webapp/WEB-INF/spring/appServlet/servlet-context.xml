@@ -10,8 +10,6 @@
 	<annotation-driven />
 
 	<resources mapping="/resources/**" location="/resources/" />
- 	
-
  
     <context:component-scan base-package="cours.ulaval.glo4003" />
     

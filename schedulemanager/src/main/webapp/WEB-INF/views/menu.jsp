@@ -12,6 +12,10 @@
 <body>
   <c:import url = "header.jsp"/>
   <div class="container">
+  	<div class="alert alert-info">
+  	 	<button type="button" class="close" data-dismiss="alert">×</button>
+		<p>Vous êtes connecté en tant que : ${username}</p>
+	</div>
     <div class="hero-unit">
       <h1>Menu</h1>
       <p>Veuillez sélectionner une option :</p>

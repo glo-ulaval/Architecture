@@ -30,11 +30,16 @@
 			<div class="span6 well fixed_height">
 				<h2>Zone Membre</h2>
 				<p>Zone membre pour organiser, visualiser et accepter vos horaires.</p>
-				<form>
-					<input type="text" placeholder="IDUL">
-					<input type="password" placeholder="Mot de passe"><br/>
-					<!-- <button type="submit" class="btn">Se connecter</button> -->
-					<a href="menu" class="btn">Se connecter</a>
+				<c:if test="${not empty loginError}">
+					<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						${loginError}
+					</div>
+				</c:if>
+				<form name='login' action="<c:url value='j_spring_security_check' />" method='POST'>
+					<input type="text" name="j_username" placeholder="IDUL">
+					<input type="password" name="j_password" placeholder="Mot de passe"><br/>
+					<button type="submit" name="submit" class="btn">Se connecter</button>
 				</form>
 			</div>
 		</div>
