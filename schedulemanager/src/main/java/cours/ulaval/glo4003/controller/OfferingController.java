@@ -30,17 +30,14 @@ public class OfferingController {
 	OfferingRepository offeringRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView offering()
-			throws Exception {
-
+	public ModelAndView offering() throws Exception {
 		ModelAndView mv = new ModelAndView("offering");
 		mv.addObject("years", offeringRepository.findYears());
 		return mv;
 	}
 
 	@RequestMapping(value = "/{year}", method = RequestMethod.GET)
-	public ModelAndView offeringByYear(@PathVariable String year)
-			throws Exception {
+	public ModelAndView offeringByYear(@PathVariable String year) throws Exception {
 
 		Offering offering = offeringRepository.find(year);
 
@@ -76,8 +73,7 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/availablecourses")
-	public ModelAndView availableCourses(@RequestParam(required = true, value = "year") String year)
-			throws Exception {
+	public ModelAndView availableCourses(@RequestParam(required = true, value = "year") String year) throws Exception {
 
 		ModelAndView mv = new ModelAndView("availablecourses");
 		mv.addObject("year", year);
@@ -108,8 +104,8 @@ public class OfferingController {
 		return mv;
 	}
 
-	private ArrayList<Course> getCoursesFromAcronyms(Offering offering) {
-		ArrayList<Course> courses = new ArrayList<Course>();
+	private List<Course> getCoursesFromAcronyms(Offering offering) {
+		List<Course> courses = new ArrayList<Course>();
 		for (String acronym : offering.getAcronyms()) {
 			courses.add(courseRepository.findByAcronym(acronym));
 		}
