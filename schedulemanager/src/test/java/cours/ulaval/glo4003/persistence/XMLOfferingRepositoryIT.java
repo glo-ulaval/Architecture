@@ -1,9 +1,6 @@
 package cours.ulaval.glo4003.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +8,6 @@ import java.util.List;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.stereotype.Repository;
 
 import cours.ulaval.glo4003.model.Offering;
 
@@ -29,8 +25,7 @@ public class XMLOfferingRepositoryIT {
 	@Test
 	public void canGetOfferings() {
 		List<String> years = repository.findYears();
-		Offering offering = repository.find(years.get(years
-				.indexOf(STORED_OFFERING_YEAR)));
+		Offering offering = repository.find(years.get(years.indexOf(STORED_OFFERING_YEAR)));
 
 		assertTrue(years.contains(STORED_OFFERING_YEAR));
 		assertNotNull(offering);
@@ -79,10 +74,10 @@ public class XMLOfferingRepositoryIT {
 		List<String> storedOfferingYears = refreshedRepository.findYears();
 		assertFalse(storedOfferingYears.contains("2007-2008"));
 	}
-	
+
 	@AfterClass
 	public static void reset() throws Exception {
-		XMLOfferingRepository repo = new XMLOfferingRepository();	
-		repo.delete(NEW_OFFERING_YEAR);	
+		XMLOfferingRepository repo = new XMLOfferingRepository();
+		repo.delete(NEW_OFFERING_YEAR);
 	}
 }

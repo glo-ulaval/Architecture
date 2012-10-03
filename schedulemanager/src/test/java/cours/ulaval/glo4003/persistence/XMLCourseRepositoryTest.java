@@ -6,9 +6,6 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-
-import org.apache.commons.lang.SerializationException;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.model.Course;
@@ -37,15 +34,15 @@ public class XMLCourseRepositoryTest {
 
 		assertEquals(courses, repository.findAll());
 	}
-	
+
 	@Test
-	public void canFindACourseByAcronym() throws Exception{
+	public void canFindACourseByAcronym() throws Exception {
 		XMLSerializer<CoursesDTO> mockedSerializer = mock(XMLSerializer.class);
 		CoursesDTO dto = prepareMockedCourseDTO();
 		ConfigManager resourcesPaths = ConfigManager.getConfigManager();
 		when(mockedSerializer.deserialize(resourcesPaths.getCoursesFilePath())).thenReturn(dto);
 		XMLCourseRepository repository = new XMLCourseRepository(mockedSerializer);
-		
+
 		Course course = repository.findByAcronym(AN_ACRONYM);
 
 		assertEquals(AN_ACRONYM, course.getAcronym());
