@@ -3,6 +3,7 @@ package cours.ulaval.glo4003.persistence;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cours.ulaval.glo4003.model.Course;
 import cours.ulaval.glo4003.model.CourseRepository;
@@ -10,7 +11,7 @@ import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLCourseRepository implements CourseRepository {
 
-	private HashMap<String, Course> courses = new HashMap<String, Course>();
+	private Map<String, Course> courses = new HashMap<String, Course>();
 	private XMLSerializer<CoursesDTO> serializer;
 
 	public XMLCourseRepository() throws Exception {
@@ -23,8 +24,7 @@ public class XMLCourseRepository implements CourseRepository {
 	}
 
 	private void parseXML() throws Exception {
-		List<Course> deserializedCourses = serializer
-				.deserialize(ConfigManager.getConfigManager().getCoursesFilePath()).getCourses();
+		List<Course> deserializedCourses = serializer.deserialize(ConfigManager.getConfigManager().getCoursesFilePath()).getCourses();
 		System.out.println("Deserialized");
 		for (Course course : deserializedCourses) {
 			courses.put(course.getAcronym(), course);

@@ -28,7 +28,7 @@
 					<c:when test="${ error == 'success'}">
 						<div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert">×</button>
-							<strong>Succès!</strong>La requête s'est effectuée avec succès.
+							<strong>Succès!</strong> La requête s'est effectuée avec succès.
 						</div>
 					</c:when>
 				</c:choose>

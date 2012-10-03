@@ -10,8 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.ModelAndView;
 
-public class MenuControllerTest {
+public class LoginControllerTest {
 
 	@Mock
 	private ModelMap model;
@@ -20,7 +21,7 @@ public class MenuControllerTest {
 	private Principal principal;
 
 	@InjectMocks
-	private MenuController controller;
+	private LoginController controller;
 
 	@Before
 	public void setUp() {
@@ -30,5 +31,19 @@ public class MenuControllerTest {
 	@Test
 	public void canGetMenu() {
 		assertEquals("menu", controller.menu(model, principal));
+	}
+
+	@Test
+	public void canGetLoginFailedPage() {
+		ModelAndView mv = controller.loginFailed(model);
+
+		assertTrue(mv.getModel().containsKey("loginError"));
+	}
+
+	@Test
+	public void canLogout() {
+		ModelAndView mv = controller.logout(model);
+
+		assertEquals("home", mv.getViewName());
 	}
 }
