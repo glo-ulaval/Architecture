@@ -7,6 +7,7 @@
 <title>Schedule Manager</title>
 <link href="resources/css/bootstrap.css" rel="stylesheet">
 <link href="resources/css/app.css" rel="stylesheet">
+<link href="resources/css/menu.css" rel="stylesheet">
 </head>
 <body>
 	<c:import url = "header.jsp"/>
@@ -15,11 +16,31 @@
 			<h1>Menu</h1>
 			<p>Veuillez sélectionner une option :</p>
 		</div>
-		<div>
-			<a class="btn" href="offering">Éditer/visualiser l'offre de cours   &raquo;</a><br/>
-			<a class="btn" href="addschedule">Ajouter un horaire   &raquo;</a><br/>
-			<a class="btn" href="schedule">Visualiser un horaire   &raquo;</a><br/>
-		</div>
+    <div class="row-fluid">
+        <div class="span4">
+          <h2>Offre de cours</h2>
+          <p>Permet à l'utilisateur d'éditer une offre de cours ainsi que de visualiser les existantes.</p>
+        </div>
+        <div class="span4">
+          <h2>Ajouter un horaire</h2>
+          <p>Permet à l'utilisateur de créer un horaire pour l'année en cours, et de créer les sections de cours en fonction de l'offre actuelle.</p>
+       </div>
+        <div class="span4">
+          <h2>Visualiser un horaire</h2>
+          <p>Permet à l'utlisateur de visualiser les horaires sauvegardés dans le système, pour l'année actuelle et les années antérieures.</p>
+        </div>
+      </div>
+      <div class = "row-fluid">
+        <div class="span4">
+          <p><a class="btn btn-large" href="offering">Sélectionner &raquo;</a></p>
+        </div>
+        <div class="span4">
+          <p><a class="btn btn-large" href="addschedule">Sélectionner &raquo;</a></p>
+       </div>
+        <div class="span4">
+          <p><a class="btn btn-large" href="schedule">Sélectionner &raquo;</a></p>
+        </div>
+      </div>
 	</div>
 	<c:import url = "footer.jsp"/>
 </body>
