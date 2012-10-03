@@ -21,6 +21,11 @@ Légende des symboles de commits :
 * ! Correction d'un bug
 * * Modification de code existant
 
+Mot de passe temporaire pour l'utilisation de l'application
+===========================================================
+**User :** user
+**Password :** pass
+
 Configuration d'Eclipse
 =======================
 
