@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MenuController {
+public class LoginController {
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public String menu(ModelMap model, Principal principal) {
@@ -23,7 +23,7 @@ public class MenuController {
 	public ModelAndView loginFailed(ModelMap model) {
 
 		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("loginError", "Le nom d'utilisateur ou le mot de passe est incorrecte. Veuillez réessayer.");
+		mv.addObject("loginError", "Le nom d'utilisateur ou le mot de passe est incorrect. Veuillez réessayer.");
 		return mv;
 
 	}
