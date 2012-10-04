@@ -35,3 +35,8 @@ body {
 .floatRight{
 	float: right;
 }
+
+.username{
+	text-transform:capitalize;
+}
+	

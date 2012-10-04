@@ -10,6 +10,7 @@
 <link href="<c:url value="/resources/css/menu.css" />" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js" />" /></script>
 </head>
 <body>
   <c:import url = "header.jsp"/>
