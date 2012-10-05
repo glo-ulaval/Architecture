@@ -1,8 +1,9 @@
 package cours.ulaval.glo4003.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cours.ulaval.glo4003.model.TimeSlot;
+import cours.ulaval.glo4003.model.OfferingRepository;
 
 @Controller
 @RequestMapping(value = "/schedule")
 public class ScheduleController {
+
+	@Inject
+	private OfferingRepository offeringRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
@@ -30,30 +34,27 @@ public class ScheduleController {
 	@RequestMapping(value = "/{year}", method = RequestMethod.GET)
 	public ModelAndView scheduleByYear(@PathVariable String year)
 			throws Exception {
-		List<TimeSlot> slots = createSlots();
-
 		ModelAndView mv = new ModelAndView("schedulebyyear");
 		mv.addObject("year", year);
-		mv.addObject("slots", slots);
 
 		return mv;
 	}
 
-	private List<TimeSlot> createSlots() {
-		List<TimeSlot> slots = new ArrayList<TimeSlot>();
-		Calendar cal = Calendar.getInstance();
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public ModelAndView addSchedule()
+			throws Exception {
+		ModelAndView mv = new ModelAndView("addschedule");
+		mv.addObject("years", offeringRepository.findYears());
 
-		TimeSlot slot = new TimeSlot(cal, 2);
-		slots.add(slot);
+		return mv;
+	}
 
-		cal.add(Calendar.HOUR_OF_DAY, -6);
-		slot = new TimeSlot(cal, 2);
-		slots.add(slot);
+	@RequestMapping(value = "/add/{year}", method = RequestMethod.GET)
+	public ModelAndView addSchedule(@PathVariable String year)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("createschedule");
+		mv.addObject("year", year);
 
-		cal.add(Calendar.DAY_OF_WEEK, -1);
-		slot = new TimeSlot(cal, 2);
-		slots.add(slot);
-
-		return slots;
+		return mv;
 	}
 }

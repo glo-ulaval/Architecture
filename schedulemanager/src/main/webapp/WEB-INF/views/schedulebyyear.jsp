@@ -42,10 +42,10 @@
 		</ul>
 		<div class="tab-content">
 		  <div class="tab-pane active" id="fall">
-		  <c:import url="scheduledetails.jsp" />
+		  <c:import url="scheduledetails.jsp"/>
 		  </div>
-		  <div class="tab-pane" id="winter">le pénis de vince est bleu, il fait froid</div>
-		  <div class="tab-pane" id="summer">derp</div>
+		  <div class="tab-pane" id="winter"><c:import url="scheduledetails.jsp" /></div>
+		  <div class="tab-pane" id="summer"><c:import url="scheduledetails.jsp" /></div>
 		</div>
 	</div>
 	<c:import url="footer.jsp" />

@@ -42,7 +42,7 @@
           <p><a class="btn btn-large" href="offering">Sélectionner &raquo;</a></p>
         </div>
         <div class="span4">
-          <p><a class="btn btn-large" href="addschedule">Sélectionner &raquo;</a></p>
+          <p><a class="btn btn-large" href="schedule/add">Sélectionner &raquo;</a></p>
        </div>
         <div class="span4">
           <p><a class="btn btn-large" href="schedule">Sélectionner &raquo;</a></p>
