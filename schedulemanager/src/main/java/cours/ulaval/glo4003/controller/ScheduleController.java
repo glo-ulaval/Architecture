@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +21,15 @@ public class ScheduleController {
 
 		ModelAndView mv = new ModelAndView("schedule");
 		mv.addObject("years", years);
+		return mv;
+	}
+
+	@RequestMapping(value = "/{year}", method = RequestMethod.GET)
+	public ModelAndView scheduleByYear(@PathVariable String year)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("schedulebyyear");
+		mv.addObject("year", year);
+
 		return mv;
 	}
 }
