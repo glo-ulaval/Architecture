@@ -30,14 +30,30 @@ public class ScheduleController {
 	@RequestMapping(value = "/{year}", method = RequestMethod.GET)
 	public ModelAndView scheduleByYear(@PathVariable String year)
 			throws Exception {
-		List<TimeSlot> slots = new ArrayList<TimeSlot>();
-		TimeSlot slot = new TimeSlot(Calendar.getInstance(), 2);
-		slots.add(slot);
+		List<TimeSlot> slots = createSlots();
 
 		ModelAndView mv = new ModelAndView("schedulebyyear");
 		mv.addObject("year", year);
 		mv.addObject("slots", slots);
 
 		return mv;
+	}
+
+	private List<TimeSlot> createSlots() {
+		List<TimeSlot> slots = new ArrayList<TimeSlot>();
+		Calendar cal = Calendar.getInstance();
+
+		TimeSlot slot = new TimeSlot(cal, 2);
+		slots.add(slot);
+
+		cal.add(Calendar.HOUR_OF_DAY, -6);
+		slot = new TimeSlot(cal, 2);
+		slots.add(slot);
+
+		cal.add(Calendar.DAY_OF_WEEK, -1);
+		slot = new TimeSlot(cal, 2);
+		slots.add(slot);
+
+		return slots;
 	}
 }
