@@ -41,7 +41,9 @@
 		  <li><a href="#summer" data-toggle="tab">Été</a></li>
 		</ul>
 		<div class="tab-content">
-		  <div class="tab-pane active" id="fall">c'est lautomne</div>
+		  <div class="tab-pane active" id="fall">
+		  <c:import url="scheduledetails.jsp" />
+		  </div>
 		  <div class="tab-pane" id="winter">le pénis de vince est bleu, il fait froid</div>
 		  <div class="tab-pane" id="summer">derp</div>
 		</div>
