@@ -44,7 +44,7 @@
 				<h1>Section de cours</h1>
 			</div>
 		</div>
-		<a class="btn btn-success pull-right" href="">Générer</a>
+		<a class="btn btn-success pull-right" href="../${year}">Générer</a>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
