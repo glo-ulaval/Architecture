@@ -14,8 +14,7 @@ public final class ConfigManager {
 	private ConfigManager() {
 		try {
 			properties = new Properties();
-			properties.load(ConfigManager.class
-					.getResourceAsStream(CONFIG_FILE_PATH));
+			properties.load(ConfigManager.class.getResourceAsStream(CONFIG_FILE_PATH));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -34,5 +33,9 @@ public final class ConfigManager {
 
 	public String getOfferingsFilePath() {
 		return properties.getProperty("OfferingsFilePath");
+	}
+
+	public String getSchedulesFilepath() {
+		return properties.getProperty("SchedulesFilePath");
 	}
 }

@@ -10,4 +10,6 @@ public interface CourseRepository {
 	public List<Course> findByOffering(Offering offering);
 
 	public Course findByAcronym(String acronym);
+
+	public void store(Course course);
 }

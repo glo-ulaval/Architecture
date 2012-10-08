@@ -30,7 +30,6 @@ public class XMLCourseRepository implements CourseRepository {
 			throws Exception {
 		List<Course> deserializedCourses = serializer.deserialize(ConfigManager.getConfigManager().getCoursesFilePath())
 				.getCourses();
-		System.out.println("Deserialized");
 		for (Course course : deserializedCourses) {
 			courses.put(course.getAcronym(), course);
 		}
@@ -49,10 +48,29 @@ public class XMLCourseRepository implements CourseRepository {
 		return courses;
 	}
 
+	@Override
+	public void store(Course course) {
+		if (!courses.containsKey(course.getAcronym())) {
+			courses.put(course.getAcronym(), course);
+		}
+		saveXML();
+	}
+
+	private void saveXML() {
+		CoursesDTO coursesDTO = new CoursesDTO();
+		coursesDTO.setCourses(new ArrayList<Course>(courses.values()));
+		try {
+			serializer.serialize(coursesDTO, ConfigManager.getConfigManager().getCoursesFilePath());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// Do not use : for test purpose only
 	protected XMLCourseRepository(XMLSerializer<CoursesDTO> serializer)
 			throws Exception {
 		this.serializer = serializer;
 		parseXML();
 	}
+
 }
