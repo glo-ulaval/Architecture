@@ -8,6 +8,7 @@
 <link href="<c:url value="/resources/css/bootstrap.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/addsection.css" />" rel="stylesheet">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript"
@@ -30,32 +31,26 @@
 			<li><a href="#remotly" data-toggle="tab">À distance</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane active" id="incourse"><c:import url="sectiontemplate.jsp"><c:param name="credits" value="${course.credits}"></c:param></c:import></div>
-			<div class="tab-pane" id="virtual"><c:import url="sectiontemplate.jsp"><c:param name="credits" value="${course.credits}"></c:param></c:import></div>
+			<div class="tab-pane active" id="incourse">
+				<c:import url="sectiontemplate.jsp">
+					<c:param name="credits" value="${course.credits}"></c:param>
+					<c:param name="isdistance" value="false"></c:param>
+				</c:import>
+			</div>
+			<div class="tab-pane" id="virtual">
+				<c:import url="sectiontemplate.jsp">
+					<c:param name="credits" value="${course.credits}"></c:param>
+					<c:param name="isdistance" value="false"></c:param>
+				</c:import>
+			</div>
 			<div class="tab-pane" id="remotly">
-				<div class="row-fluid">
-					<div class="span2 pull-right">
-						<b>Crédits &raquo;</b> ${course.credits}
-					</div>
-					<div class="span11">
-						<label class="span3 control-label">Titulaire</label>
-						<div class="span8 controls">
-							<select class="input-xlarge">
-								<option>Thierry Eude</option>
-								<option>Nadia Tawbi</option>
-								<option>Denis Laurendeau</option>
-								<option>C'est ça la</option>
-								<option>Marc-Philippe Parent</option>
-							</select>
-						</div>
-					</div>
-					<div class="span11">
-						<label class="span3 control-label">Heures de travail
-							personnel</label> <label class="span2 control-label">#lerestant#</label>
-					</div>
-				</div>
+        <c:import url="sectiontemplate.jsp">
+          <c:param name="credits" value="${course.credits}"></c:param>
+          <c:param name="isdistance" value="true"></c:param>
+        </c:import>
 			</div>
 		</div>
+		<a class="btn btn-success pull-right" href="addsection">Sauvegarder</a>
 	</div>
 	<c:import url="footer.jsp" />
 </body>

@@ -5,11 +5,15 @@
 <head>
 <meta charset="utf-8">
 <title>Schedule Manager</title>
-<link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.css" />"
+	rel="stylesheet">
 <link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
-<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js" />" /></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/app.js" />" /></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/bootstrap.js" />" /></script>
 </head>
 <body>
 	<c:import url="header.jsp" />
@@ -40,7 +44,7 @@
 				<h1>Section de cours</h1>
 			</div>
 		</div>
-      <a class="btn btn-success pull-right" href="">Générer</a>
+		<a class="btn btn-success pull-right" href="">Générer</a>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
