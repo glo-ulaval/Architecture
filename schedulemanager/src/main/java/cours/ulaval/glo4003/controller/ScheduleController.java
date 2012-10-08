@@ -54,6 +54,7 @@ public class ScheduleController {
 			throws Exception {
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
+		mv.addObject("courses", offeringRepository.find(year));
 
 		return mv;
 	}

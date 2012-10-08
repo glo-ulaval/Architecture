@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<ul class="nav nav-tabs">
-		  <li><a href="#fall" data-toggle="tab">Automne</a></li>
+		  <li class = "active"><a href="#fall" data-toggle="tab">Automne</a></li>
 		  <li><a href="#winter" data-toggle="tab">Hiver</a></li>
 		  <li><a href="#summer" data-toggle="tab">Été</a></li>
 		</ul>
