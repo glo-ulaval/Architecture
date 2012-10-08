@@ -2,6 +2,7 @@ package cours.ulaval.glo4003.persistence;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -14,27 +15,35 @@ import cours.ulaval.glo4003.utils.ResourcesLoader;
 public class XMLCourseRepositoryIT {
 
 	@Test
-	public void canGetCourses() throws Exception {
+	public void canGetCourses()
+			throws Exception {
 		XMLSerializer<CoursesDTO> serializer = new XMLSerializer<CoursesDTO>(CoursesDTO.class);
 		serializer.setResourcesLoader(new ResourcesLoader());
 		XMLCourseRepository repository = new XMLCourseRepository(serializer);
 
-		List<Course> courses = repository.findAll();
-		Course course = repository.findByAcronym("GLO-2003");
+		Prerequisite prerequisite = new Prerequisite();
+		prerequisite.setAcronyms(Arrays.asList("GLO-2004", "GLO-1001"));
+		Course course = new Course("GLO-4003", "Architecture Logicielle", 3, "Derp derp herp derp McDerpington", Cycle.Premier,
+				Arrays.asList(prerequisite));
 
-		assertEquals(8, courses.size());
-		assertEquals("GLO-2003", course.getAcronym());
-		assertEquals("Introduction aux processus du génie logiciel", course.getTitle());
+		repository.store(course);
+
+		List<Course> courses = repository.findAll();
+		course = repository.findByAcronym("GLO-4003");
+
+		assertEquals(1, courses.size());
+		assertEquals("GLO-4003", course.getAcronym());
+		assertEquals("Architecture Logicielle", course.getTitle());
 		assertEquals(3, course.getCredits());
-		assertNotNull(course.getDescription());
+		assertEquals("Derp derp herp derp McDerpington", course.getDescription());
 		assertEquals(Cycle.Premier, course.getCycle());
 
 		List<Prerequisite> prerequisites = course.getPrerequisites();
 		assertEquals(1, prerequisites.size());
 
-		Prerequisite prerequisite = prerequisites.get(0);
-		List<String> acronyms = prerequisite.getAcronyms();
-		assertEquals(3, acronyms.size());
+		Prerequisite aPrerequisite = prerequisites.get(0);
+		List<String> acronyms = aPrerequisite.getAcronyms();
+		assertEquals(2, acronyms.size());
 		assertEquals("GLO-2004", acronyms.get(0));
 	}
 }
