@@ -1,15 +1,32 @@
 package cours.ulaval.glo4003.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Schedule {
 
-	private String session;
-	private List<CourseSection> coursesSections;
+	private String id;
+	private String session; // Année+saison
+	private Map<String, Section> sections;
 	private String personInCharge;
 
-	public Schedule() {
-		coursesSections = new ArrayList<CourseSection>();
+	public Schedule(String id) {
+		this.id = id;
+		sections = new HashMap<String, Section>();
+	}
+
+	public void add(Section section) {
+		if (!sectionExist(section)) {
+			sections.put(section.toString(), section);
+		}
+	}
+
+	private boolean sectionExist(Section section) {
+		return sections.containsKey(section.toString());
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public String getSession() {
@@ -20,12 +37,8 @@ public class Schedule {
 		this.session = session;
 	}
 
-	public List<CourseSection> getCoursesSections() {
-		return coursesSections;
-	}
-
-	public void setCoursesSections(List<CourseSection> coursesSections) {
-		this.coursesSections = coursesSections;
+	public Map<String, Section> getCoursesSections() {
+		return sections;
 	}
 
 	public String getPersonInCharge() {
