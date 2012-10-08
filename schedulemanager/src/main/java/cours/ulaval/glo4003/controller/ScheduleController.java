@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.model.CourseRepository;
@@ -59,6 +60,15 @@ public class ScheduleController {
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
 		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/addsection", method = RequestMethod.GET)
+	public ModelAndView addSection(@RequestParam(required = true, value = "acronym") String acronym) {
+		ModelAndView mv = new ModelAndView("addsection");
+		mv.addObject("acronym", acronym);
+		mv.addObject("course", courseRepository.findByAcronym(acronym));
 
 		return mv;
 	}
