@@ -26,6 +26,11 @@ Mot de passe temporaire pour l'utilisation de l'application
 **User :** user
 **Password :** pass
 
+Lancer les tests d'intégration à partir de Maven en CLI 
+=======================================================
+
+Entrer dans la console : mvn clean integration-test
+
 Configuration d'Eclipse
 =======================
 
