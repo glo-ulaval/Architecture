@@ -26,13 +26,39 @@
 		</ul>
 		<div class="tab-content">
 		  <div class="tab-pane active" id="incourse">
-		  	formulaire cours en classe
-		  </div>
+	  		<div class="pull-right"><b>Crédits &raquo;</b> ${course.credits}</div>
+				<form class="form-horizontal"><fieldset>
+					<div class="span11 control-group">
+						<label class="control-label">Titulaire</label>
+						<div class="controls">
+							<select>
+								<option>Thierry Eude</option>
+								<option>Nadia Tawbi</option>
+								<option>Denis Laurendeau</option>
+								<option>C'est ça la</option>
+								<option>Marc-Philippe Parent</option>
+							</select>
+						</div>
+					</div>
+					<div class="span11 control-group">
+						<label class="control-label">Heures en classe</label>
+						<div class="controls">
+							<select>
+								<option>Thierry Eude</option>
+								<option>Nadia Tawbi</option>
+								<option>Denis Laurendeau</option>
+								<option>C'est ça la</option>
+								<option>Marc-Philippe Parent</option>
+							</select>
+						</div>
+					</div>
+				</fieldset></form>	  	
+	  		</div>
 		  <div class="tab-pane" id="virtual">
-		  	formulaire cours virtuel	
+
 		  </div>
 		  <div class="tab-pane" id="remotly">
-		  	formulaire cours à distance
+
 		  </div>
 		</div>
 	</div>
