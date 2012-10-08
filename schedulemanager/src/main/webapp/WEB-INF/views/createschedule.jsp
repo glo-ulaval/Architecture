@@ -38,9 +38,9 @@
 			</div>
 			<div class="span6">
 				<h1>Section de cours</h1>
-				
 			</div>
 		</div>
+      <a class="btn btn-success pull-right" href="">Générer</a>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
