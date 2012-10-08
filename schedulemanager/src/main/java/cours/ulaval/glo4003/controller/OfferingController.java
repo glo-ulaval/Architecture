@@ -1,6 +1,5 @@
 package cours.ulaval.glo4003.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,18 +29,20 @@ public class OfferingController {
 	OfferingRepository offeringRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView offering() throws Exception {
+	public ModelAndView offering()
+			throws Exception {
 		ModelAndView mv = new ModelAndView("offering");
 		mv.addObject("years", offeringRepository.findYears());
 		return mv;
 	}
 
 	@RequestMapping(value = "/{year}", method = RequestMethod.GET)
-	public ModelAndView offeringByYear(@PathVariable String year) throws Exception {
+	public ModelAndView offeringByYear(@PathVariable String year)
+			throws Exception {
 
 		Offering offering = offeringRepository.find(year);
 
-		List<Course> courses = getCoursesFromAcronyms(offering);
+		List<Course> courses = courseRepository.findByOffering(offering);
 
 		ModelAndView mv = new ModelAndView("offeringbyyear");
 		mv.addObject("year", year);
@@ -60,7 +61,7 @@ public class OfferingController {
 			Offering offering = offeringRepository.find(year);
 			offering.removeCourse(acronym);
 
-			List<Course> courses = getCoursesFromAcronyms(offering);
+			List<Course> courses = courseRepository.findByOffering(offering);
 
 			mv.addObject("year", year);
 			mv.addObject("courses", courses);
@@ -73,7 +74,8 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/availablecourses")
-	public ModelAndView availableCourses(@RequestParam(required = true, value = "year") String year) throws Exception {
+	public ModelAndView availableCourses(@RequestParam(required = true, value = "year") String year)
+			throws Exception {
 
 		ModelAndView mv = new ModelAndView("availablecourses");
 		mv.addObject("year", year);
@@ -92,7 +94,7 @@ public class OfferingController {
 			Offering offering = offeringRepository.find(year);
 			offering.addCourse(acronym);
 
-			List<Course> courses = getCoursesFromAcronyms(offering);
+			List<Course> courses = courseRepository.findByOffering(offering);
 
 			mv.addObject("year", year);
 			mv.addObject("courses", courses);
@@ -103,13 +105,4 @@ public class OfferingController {
 
 		return mv;
 	}
-
-	private List<Course> getCoursesFromAcronyms(Offering offering) {
-		List<Course> courses = new ArrayList<Course>();
-		for (String acronym : offering.getAcronyms()) {
-			courses.add(courseRepository.findByAcronym(acronym));
-		}
-		return courses;
-	}
-
 }

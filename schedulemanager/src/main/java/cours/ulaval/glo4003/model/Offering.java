@@ -43,19 +43,20 @@ public class Offering {
 		this.year = year;
 	}
 
-	public void addCourse(String acronym) throws InvalidOfferingOperation {
-		if(!acronyms.contains(acronym)){
+	public void addCourse(String acronym)
+			throws InvalidOfferingOperation {
+		if (!acronyms.contains(acronym)) {
 			acronyms.add(acronym);
-		}else{
-			throw new InvalidOfferingOperation("Le cours "+acronym+" est déjà dans l'offre de cours de l'année "+year);
+		} else {
+			throw new InvalidOfferingOperation("Le cours " + acronym + " est déjà dans l'offre de cours de l'année " + year);
 		}
 	}
 
-	public void removeCourse(String acronym) throws InvalidOfferingOperation {
+	public void removeCourse(String acronym)
+			throws InvalidOfferingOperation {
 		if (!acronyms.remove(acronym)) {
-			throw new InvalidOfferingOperation("Impossible de retirer le cours " + acronym
-					+ " de l'offre de cours de l'année " + year);
+			throw new InvalidOfferingOperation("Impossible de retirer le cours " + acronym + " de l'offre de cours de l'année "
+					+ year);
 		}
 	}
-
 }

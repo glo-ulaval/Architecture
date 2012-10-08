@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.model.CourseRepository;
 import cours.ulaval.glo4003.model.OfferingRepository;
 
 @Controller
 @RequestMapping(value = "/schedule")
 public class ScheduleController {
+
+	@Inject
+	private CourseRepository courseRepository;
 
 	@Inject
 	private OfferingRepository offeringRepository;
@@ -54,7 +58,7 @@ public class ScheduleController {
 			throws Exception {
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
-		mv.addObject("courses", offeringRepository.find(year));
+		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
 
 		return mv;
 	}
