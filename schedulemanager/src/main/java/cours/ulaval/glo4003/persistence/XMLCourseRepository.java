@@ -30,7 +30,6 @@ public class XMLCourseRepository implements CourseRepository {
 			throws Exception {
 		List<Course> deserializedCourses = serializer.deserialize(ConfigManager.getConfigManager().getCoursesFilePath())
 				.getCourses();
-		System.out.println("Deserialized");
 		for (Course course : deserializedCourses) {
 			courses.put(course.getAcronym(), course);
 		}
