@@ -64,8 +64,8 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/addsection", method = RequestMethod.GET)
-	public ModelAndView addSection(@RequestParam(required = true, value = "acronym") String acronym) {
+	@RequestMapping(value = "/add/{year}/addsection", method = RequestMethod.GET)
+	public ModelAndView addSection(@PathVariable String year, @RequestParam(required = true, value = "acronym") String acronym) {
 		ModelAndView mv = new ModelAndView("addsection");
 		mv.addObject("acronym", acronym);
 		mv.addObject("course", courseRepository.findByAcronym(acronym));

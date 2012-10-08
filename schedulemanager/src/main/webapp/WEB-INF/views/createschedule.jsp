@@ -29,7 +29,7 @@
 							<tr id="${course.acronym}">
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td class="centered"><a class="btn btn-success"
-									href="addsection?acronym=${course.acronym}"><i
+									href="${year}/addsection?acronym=${course.acronym}"><i
 										class="icon-plus-sign icon-white"></i></a></td>
 							</tr>
 						</c:forEach>
