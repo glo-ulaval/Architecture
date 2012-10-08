@@ -6,7 +6,8 @@ import java.util.Map;
 public class Schedule {
 
 	private String id;
-	private String session; // Année+saison
+	private String year;
+	private String season;
 	private Map<String, Section> sections;
 	private String personInCharge;
 
@@ -29,12 +30,20 @@ public class Schedule {
 		return id;
 	}
 
-	public String getSession() {
-		return session;
+	public String getYear() {
+		return year;
 	}
 
-	public void setSession(String session) {
-		this.session = session;
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getSeason() {
+		return season;
+	}
+
+	public void setSeason(String season) {
+		this.season = season;
 	}
 
 	public Map<String, Section> getCoursesSections() {
