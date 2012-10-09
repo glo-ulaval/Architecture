@@ -6,6 +6,8 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
+import cours.ulaval.glo4003.domain.TimeSlot;
+
 public class TimeSlotTest {
 
 	private static final int A_HOUR = 10;

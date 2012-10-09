@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.Schedule;
+import cours.ulaval.glo4003.domain.Schedule;
 
 public class XMLScheduleRepositoryTest {
 

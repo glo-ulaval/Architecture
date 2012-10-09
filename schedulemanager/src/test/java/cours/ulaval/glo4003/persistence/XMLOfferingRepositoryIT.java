@@ -9,7 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.Offering;
+import cours.ulaval.glo4003.domain.Offering;
 
 public class XMLOfferingRepositoryIT {
 

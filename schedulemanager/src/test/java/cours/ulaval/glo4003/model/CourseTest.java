@@ -10,6 +10,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import cours.ulaval.glo4003.domain.Course;
+import cours.ulaval.glo4003.domain.Cycle;
+import cours.ulaval.glo4003.domain.Prerequisite;
+
 public class CourseTest {
 
 	private Course course;

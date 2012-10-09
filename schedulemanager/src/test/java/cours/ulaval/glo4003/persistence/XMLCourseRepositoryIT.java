@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.Course;
-import cours.ulaval.glo4003.model.Cycle;
-import cours.ulaval.glo4003.model.Prerequisite;
+import cours.ulaval.glo4003.domain.Course;
+import cours.ulaval.glo4003.domain.Cycle;
+import cours.ulaval.glo4003.domain.Prerequisite;
 import cours.ulaval.glo4003.utils.ResourcesLoader;
 
 public class XMLCourseRepositoryIT {
@@ -17,7 +17,7 @@ public class XMLCourseRepositoryIT {
 	@Test
 	public void canGetCourses()
 			throws Exception {
-		XMLSerializer<CoursesDTO> serializer = new XMLSerializer<CoursesDTO>(CoursesDTO.class);
+		XMLSerializer<CoursesXMLWrapper> serializer = new XMLSerializer<CoursesXMLWrapper>(CoursesXMLWrapper.class);
 		serializer.setResourcesLoader(new ResourcesLoader());
 		XMLCourseRepository repository = new XMLCourseRepository(serializer);
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.model.exception.InvalidOfferingOperation;
 
 public class OfferingTest {

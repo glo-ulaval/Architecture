@@ -8,20 +8,20 @@ import java.util.List;
 
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.Course;
+import cours.ulaval.glo4003.domain.Course;
 
 public class CoursesDTOTest {
 
 	@Test
 	public void canGetCoursesCountWithNoCourse() {
-		CoursesDTO dto = new CoursesDTO();
+		CoursesXMLWrapper dto = new CoursesXMLWrapper();
 
 		assertEquals(0, dto.getCourses().size());
 	}
 
 	@Test
 	public void canGetCoursesCountWithCourses() {
-		CoursesDTO dto = new CoursesDTO();
+		CoursesXMLWrapper dto = new CoursesXMLWrapper();
 		dto.setCourses(getCourses());
 
 		assertEquals(1, dto.getCourses().size());

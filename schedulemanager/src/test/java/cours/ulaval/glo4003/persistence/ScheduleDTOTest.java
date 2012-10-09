@@ -8,19 +8,19 @@ import java.util.List;
 
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.Schedule;
+import cours.ulaval.glo4003.domain.Schedule;
 
 public class ScheduleDTOTest {
 	@Test
 	public void canGetSchedulesCountWithNoCourse() {
-		ScheduleDTO dto = new ScheduleDTO();
+		ScheduleXMLWrapper dto = new ScheduleXMLWrapper();
 
 		assertEquals(0, dto.getSchedules().size());
 	}
 
 	@Test
 	public void canGetSchedulesCountWithCourses() {
-		ScheduleDTO dto = new ScheduleDTO();
+		ScheduleXMLWrapper dto = new ScheduleXMLWrapper();
 		dto.setSchedules(getSchedules());
 
 		assertEquals(1, dto.getSchedules().size());

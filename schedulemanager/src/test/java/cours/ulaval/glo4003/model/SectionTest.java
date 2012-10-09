@@ -9,6 +9,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.TeachMode;
+import cours.ulaval.glo4003.domain.TimeDedicated;
+import cours.ulaval.glo4003.domain.TimeSlot;
+
 public class SectionTest {
 	private static final int A_HOUR = 10;
 	private static final int A_MINUTE = 30;

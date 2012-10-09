@@ -11,13 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import cours.ulaval.glo4003.model.Offering;
+import cours.ulaval.glo4003.domain.Offering;
 
 public class XMLOfferingRepositoryTest {
 	private static final String VALID_YEAR = "2011";
 
 	@Mock
-	private XMLSerializer<OfferingDTO> serializer;
+	private XMLSerializer<OfferingXMLWrapper> serializer;
 	@Mock
 	private Offering offering;
 	@InjectMocks

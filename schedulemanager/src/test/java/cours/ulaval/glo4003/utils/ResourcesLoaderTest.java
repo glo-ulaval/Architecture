@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.persistence.CoursesDTO;
+import cours.ulaval.glo4003.persistence.CoursesXMLWrapper;
 
 public class ResourcesLoaderTest {
 
@@ -23,7 +23,7 @@ public class ResourcesLoaderTest {
 	@Test
 	public void canLoadExistingResource() {
 		ConfigManager resourcesPaths = ConfigManager.getConfigManager();
-		assertNotNull(loader.loadResource(CoursesDTO.class, resourcesPaths.getCoursesFilePath()));
+		assertNotNull(loader.loadResource(CoursesXMLWrapper.class, resourcesPaths.getCoursesFilePath()));
 	}
 
 	@Test
@@ -33,7 +33,7 @@ public class ResourcesLoaderTest {
 
 	@Test
 	public void cantLoadUnexistingResource() {
-		assertNull(loader.loadResource(CoursesDTO.class, AN_UNEXISTING_RESOURCE_NAME));
+		assertNull(loader.loadResource(CoursesXMLWrapper.class, AN_UNEXISTING_RESOURCE_NAME));
 	}
 
 	@Test(expected = FileNotFoundException.class)

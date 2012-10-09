@@ -6,10 +6,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import cours.ulaval.glo4003.model.Schedule;
+import cours.ulaval.glo4003.domain.Schedule;
 
 @XmlRootElement(name = "schedules")
-public class ScheduleDTO {
+public class ScheduleXMLWrapper {
 	private List<Schedule> schedules = new ArrayList<Schedule>();
 
 	public void setSchedules(List<Schedule> schedules) {

@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import cours.ulaval.glo4003.domain.Prerequisite;
+
 public class PrerequisiteTest {
 
 	private Prerequisite prerequisite;

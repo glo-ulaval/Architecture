@@ -6,6 +6,9 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.Section;
+
 public class ScheduleTest {
 
 	private static String AN_ID = "anId";

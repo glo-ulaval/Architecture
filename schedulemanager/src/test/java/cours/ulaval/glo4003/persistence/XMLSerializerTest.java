@@ -19,11 +19,11 @@ public class XMLSerializerTest {
 
 	private final String A_RESOURCE_NAME = "A Resource Name";
 	private ResourcesLoader loader;
-	private XMLSerializer<CoursesDTO> serializer;
+	private XMLSerializer<CoursesXMLWrapper> serializer;
 
 	@Before
 	public void setUp() throws Exception {
-		serializer = new XMLSerializer<CoursesDTO>(CoursesDTO.class);
+		serializer = new XMLSerializer<CoursesXMLWrapper>(CoursesXMLWrapper.class);
 		loader = mock(ResourcesLoader.class);
 	}
 
@@ -35,10 +35,10 @@ public class XMLSerializerTest {
 	@Test
 	public void canDeserialize() throws Exception {
 		InputStream stream = mock(InputStream.class);
-		when(loader.loadResource(CoursesDTO.class, A_RESOURCE_NAME)).thenReturn(stream);
+		when(loader.loadResource(CoursesXMLWrapper.class, A_RESOURCE_NAME)).thenReturn(stream);
 		serializer.setResourcesLoader(loader);
 
-		CoursesDTO dto = mock(CoursesDTO.class);
+		CoursesXMLWrapper dto = mock(CoursesXMLWrapper.class);
 		Unmarshaller unmarshaller = mock(Unmarshaller.class);
 		when(unmarshaller.unmarshal(stream)).thenReturn(dto);
 		serializer.setUnmarshaller(unmarshaller);
@@ -48,7 +48,7 @@ public class XMLSerializerTest {
 
 	@Test(expected = SerializationException.class)
 	public void cantDeserializeInvalidResource() throws Exception {
-		when(loader.loadResource(CoursesDTO.class, A_RESOURCE_NAME)).thenReturn(null);
+		when(loader.loadResource(CoursesXMLWrapper.class, A_RESOURCE_NAME)).thenReturn(null);
 		serializer.setResourcesLoader(loader);
 
 		serializer.deserialize(A_RESOURCE_NAME);
@@ -56,7 +56,7 @@ public class XMLSerializerTest {
 
 	@Test()
 	public void canSerialize() throws Exception {
-		CoursesDTO dto = mock(CoursesDTO.class);
+		CoursesXMLWrapper dto = mock(CoursesXMLWrapper.class);
 		Marshaller marshaller = mock(Marshaller.class);
 		OutputStream stream = mock(OutputStream.class);
 		when(loader.loadResourceForWriting(A_RESOURCE_NAME)).thenReturn(stream);

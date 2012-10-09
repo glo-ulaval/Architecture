@@ -10,8 +10,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.model.Course;
-import cours.ulaval.glo4003.model.Offering;
+import cours.ulaval.glo4003.domain.Course;
+import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLCourseRepositoryTest {
@@ -23,8 +23,8 @@ public class XMLCourseRepositoryTest {
 	@Before
 	public void setUp()
 			throws Exception {
-		XMLSerializer<CoursesDTO> mockedSerializer = mock(XMLSerializer.class);
-		CoursesDTO dto = prepareMockedCourseDTO();
+		XMLSerializer<CoursesXMLWrapper> mockedSerializer = mock(XMLSerializer.class);
+		CoursesXMLWrapper dto = prepareMockedCourseDTO();
 		ConfigManager resourcesPaths = ConfigManager.getConfigManager();
 		when(mockedSerializer.deserialize(resourcesPaths.getCoursesFilePath())).thenReturn(dto);
 
@@ -65,8 +65,8 @@ public class XMLCourseRepositoryTest {
 		assertEquals(AN_ACRONYM, courses.get(0).getAcronym());
 	}
 
-	private CoursesDTO prepareMockedCourseDTO() {
-		CoursesDTO dto = new CoursesDTO();
+	private CoursesXMLWrapper prepareMockedCourseDTO() {
+		CoursesXMLWrapper dto = new CoursesXMLWrapper();
 		List<Course> courses = new ArrayList<Course>();
 		Course course = mock(Course.class);
 		when(course.getAcronym()).thenReturn(AN_ACRONYM);

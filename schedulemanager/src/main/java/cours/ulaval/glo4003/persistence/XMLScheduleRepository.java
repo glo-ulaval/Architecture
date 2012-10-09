@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cours.ulaval.glo4003.model.Schedule;
-import cours.ulaval.glo4003.model.ScheduleRepository;
+import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.ScheduleRepository;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLScheduleRepository implements ScheduleRepository {
 
-	private XMLSerializer<ScheduleDTO> serializer;
+	private XMLSerializer<ScheduleXMLWrapper> serializer;
 	private Map<String, Schedule> schedules = new HashMap<String, Schedule>();
 
 	public XMLScheduleRepository() throws Exception {
-		serializer = new XMLSerializer<ScheduleDTO>(ScheduleDTO.class);
+		serializer = new XMLSerializer<ScheduleXMLWrapper>(ScheduleXMLWrapper.class);
 		parseXML();
 	}
 

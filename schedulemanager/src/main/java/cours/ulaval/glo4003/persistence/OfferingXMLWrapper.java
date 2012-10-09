@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import cours.ulaval.glo4003.model.Offering;
+import cours.ulaval.glo4003.domain.Offering;
 
 @XmlRootElement(name = "courseOfferings")
-public class OfferingDTO {
+public class OfferingXMLWrapper {
 
 	private List<Offering> offerings = new ArrayList<Offering>();
 

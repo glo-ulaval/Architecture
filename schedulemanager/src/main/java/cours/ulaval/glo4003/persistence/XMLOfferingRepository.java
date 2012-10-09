@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cours.ulaval.glo4003.model.Offering;
-import cours.ulaval.glo4003.model.OfferingRepository;
+import cours.ulaval.glo4003.domain.Offering;
+import cours.ulaval.glo4003.domain.OfferingRepository;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLOfferingRepository implements OfferingRepository {
 
-	private XMLSerializer<OfferingDTO> serializer;
+	private XMLSerializer<OfferingXMLWrapper> serializer;
 	private Map<String, Offering> offerings = new HashMap<String, Offering>();
 
 	public XMLOfferingRepository() throws Exception {
-		serializer = new XMLSerializer<OfferingDTO>(OfferingDTO.class);
+		serializer = new XMLSerializer<OfferingXMLWrapper>(OfferingXMLWrapper.class);
 		parseXML();
 	}
 
@@ -57,7 +57,7 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	private void saveXML() throws Exception {
-		OfferingDTO offeringDTO = new OfferingDTO();
+		OfferingXMLWrapper offeringDTO = new OfferingXMLWrapper();
 		offeringDTO.setOfferings(new ArrayList<Offering>(offerings.values()));
 		serializer.serialize(offeringDTO, ConfigManager.getConfigManager()
 				.getOfferingsFilePath());

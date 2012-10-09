@@ -5,19 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cours.ulaval.glo4003.model.Course;
-import cours.ulaval.glo4003.model.CourseRepository;
-import cours.ulaval.glo4003.model.Offering;
+import cours.ulaval.glo4003.domain.Course;
+import cours.ulaval.glo4003.domain.CourseRepository;
+import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLCourseRepository implements CourseRepository {
 
 	private Map<String, Course> courses = new HashMap<String, Course>();
-	private XMLSerializer<CoursesDTO> serializer;
+	private XMLSerializer<CoursesXMLWrapper> serializer;
 
 	public XMLCourseRepository()
 			throws Exception {
-		serializer = new XMLSerializer<CoursesDTO>(CoursesDTO.class);
+		serializer = new XMLSerializer<CoursesXMLWrapper>(CoursesXMLWrapper.class);
 		parseXML();
 	}
 
@@ -57,7 +57,7 @@ public class XMLCourseRepository implements CourseRepository {
 	}
 
 	private void saveXML() {
-		CoursesDTO coursesDTO = new CoursesDTO();
+		CoursesXMLWrapper coursesDTO = new CoursesXMLWrapper();
 		coursesDTO.setCourses(new ArrayList<Course>(courses.values()));
 		try {
 			serializer.serialize(coursesDTO, ConfigManager.getConfigManager().getCoursesFilePath());
@@ -67,7 +67,7 @@ public class XMLCourseRepository implements CourseRepository {
 	}
 
 	// Do not use : for test purpose only
-	protected XMLCourseRepository(XMLSerializer<CoursesDTO> serializer)
+	protected XMLCourseRepository(XMLSerializer<CoursesXMLWrapper> serializer)
 			throws Exception {
 		this.serializer = serializer;
 		parseXML();

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cours.ulaval.glo4003.model.Course;
-import cours.ulaval.glo4003.model.CourseRepository;
-import cours.ulaval.glo4003.model.Offering;
-import cours.ulaval.glo4003.model.OfferingRepository;
+import cours.ulaval.glo4003.domain.Course;
+import cours.ulaval.glo4003.domain.CourseRepository;
+import cours.ulaval.glo4003.domain.Offering;
+import cours.ulaval.glo4003.domain.OfferingRepository;
 
 @Controller
 @RequestMapping(value = "/offering")
