@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.model.CourseRepository;
 import cours.ulaval.glo4003.model.OfferingRepository;
+import cours.ulaval.glo4003.model.ScheduleRepository;
 
 @Controller
 @RequestMapping(value = "/schedule")
@@ -24,6 +25,9 @@ public class ScheduleController {
 
 	@Inject
 	private OfferingRepository offeringRepository;
+
+	@Inject
+	private ScheduleRepository scheduleRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
