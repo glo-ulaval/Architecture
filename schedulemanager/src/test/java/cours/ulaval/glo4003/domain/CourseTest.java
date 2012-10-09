@@ -10,10 +10,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.Course;
-import cours.ulaval.glo4003.domain.Cycle;
-import cours.ulaval.glo4003.domain.Prerequisite;
-
 public class CourseTest {
 
 	private Course course;
@@ -40,6 +36,13 @@ public class CourseTest {
 		assertEquals(aDescription, course.getDescription());
 		assertEquals(aCycle, course.getCycle());
 		assertEquals(prerequisites, course.getPrerequisites());
+	}
+
+	@Test
+	public void canGetTotalHours() {
+		course.setCredits(3);
+
+		assertEquals(Course.HOURS_PER_CREDITS * 3, course.getTotalHours());
 	}
 
 	@Test

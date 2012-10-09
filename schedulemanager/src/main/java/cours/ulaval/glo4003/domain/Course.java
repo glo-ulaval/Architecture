@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Course {
 
+	public static int HOURS_PER_CREDITS = 3;
+
 	private String acronym;
 	private String title;
 	private int credits;
@@ -24,6 +26,10 @@ public class Course {
 		this.description = description;
 		this.cycle = cycle;
 		this.prerequisites = prerequisites;
+	}
+
+	public int getTotalHours() {
+		return credits * HOURS_PER_CREDITS;
 	}
 
 	public String getAcronym() {
