@@ -13,6 +13,7 @@ public class Course {
 	private String description;
 	private Cycle cycle;
 	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
+	private int totalHours;
 
 	public Course() {
 		super();
@@ -26,10 +27,11 @@ public class Course {
 		this.description = description;
 		this.cycle = cycle;
 		this.prerequisites = prerequisites;
+		this.totalHours = credits * HOURS_PER_CREDITS;
 	}
 
 	public int getTotalHours() {
-		return credits * HOURS_PER_CREDITS;
+		return totalHours;
 	}
 
 	public String getAcronym() {
@@ -58,6 +60,7 @@ public class Course {
 
 	public void setCredits(int credits) {
 		this.credits = credits;
+		this.totalHours = credits * HOURS_PER_CREDITS;
 	}
 
 	public int getCredits() {

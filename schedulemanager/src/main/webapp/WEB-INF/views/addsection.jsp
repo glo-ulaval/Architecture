@@ -24,7 +24,7 @@
 				<h1>Ajout d'une section au cours ${acronym}</h1>
 			</div>
 		</div>
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs" id="myTab">
 			<li class="active"><a href="#incourse" data-toggle="tab">En
 					classe</a></li>
 			<li><a href="#virtual" data-toggle="tab">Virtuel</a></li>
