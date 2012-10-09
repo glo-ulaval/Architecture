@@ -6,7 +6,7 @@
 	<div class="span8" id="bordered">
 		<label class="span3 control-label">Titulaire :</label>
 		<div class="span8 controls">
-			<select class="input-xlarge">
+			<select class="input-xlarge" value="${section.personInCharge}">
 				<option>Thierry Eude</option>
 				<option>Nadia Tawbi</option>
 				<option>Denis Laurendeau</option>
