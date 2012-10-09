@@ -1,0 +1,19 @@
+<div class="row-fluid">
+	<div class="span6">
+		<h2>Mes disponibilités</h2>
+		<p>Permet à l'utilisateur d'entrer/modifier ses periodes d'enseignement et
+			de disponiblités.</p>
+	</div>
+	<div class="span6">
+		<h2>Accepter horaire</h2>
+		<p>Permet à l'utilisateur d'accepter/refuser un horraire généré par le systeme.</p>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<a class="btn btn-large" href="availabilities">Sélectionner &raquo;</a>
+	</div>
+	<div class="span6">
+		<a class="btn btn-large" href="#">Sélectionner &raquo;</a>
+	</div>
+</div>

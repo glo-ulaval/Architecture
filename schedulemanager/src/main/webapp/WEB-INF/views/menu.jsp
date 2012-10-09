@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html>
@@ -28,11 +29,13 @@
 			<h1>Menu</h1>
 			<p>Veuillez sélectionner une option :</p>
 		</div>
-		 <sec:authorize access="hasRole('ROLE_Directeur')">
-			<c:import url="menuDirector.jsp"/>
-		 </sec:authorize> 
+		<sec:authorize access="hasRole('ROLE_Directeur')">
+			<c:import url="menuDirector.jsp" />
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_Enseignant')">
+			<c:import url="menuTeacher.jsp" />
+		</sec:authorize>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
-
 </html>
