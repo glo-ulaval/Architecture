@@ -11,6 +11,7 @@
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin: 5px;
+	margin-top:20px;
 	padding: 10px;
 }
 
@@ -20,7 +21,7 @@
 
 .personal_hours {
 	text-align: left;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 #teachers {
@@ -30,5 +31,14 @@
 #hour_group {
 	float: left;
 	margin: 5px 10px 5px 5px;
-	text-align:left;
+	text-align: left;
+}
+
+.tab_a {
+	color: white;
+	margin:10px;
+}
+
+.tab_a:hover {
+	color: white;
 }

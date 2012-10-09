@@ -17,28 +17,35 @@ import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.CourseRepository;
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.OfferingRepository;
+import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.ScheduleRepository;
 
 public class ScheduleControllerTest {
 
 	private final String AN_ACRONYM = "IFT-2002";
 	private final String A_YEAR = "2012";
+	private final String AN_ID = "82987";
 
 	@Mock
 	private CourseRepository mockedCourseRepository;
 	@Mock
 	private OfferingRepository mockedOfferingRepository;
+	@Mock
+	private ScheduleRepository mockedScheduleRepository;
 
 	@InjectMocks
 	private ScheduleController controller;
 
 	private Course course;
 	private List<Course> courses;
+	private Schedule schedule;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
 		course = mock(Course.class);
+		schedule = mock(Schedule.class);
 		Offering offering = mock(Offering.class);
 		List<String> years = Arrays.asList(A_YEAR);
 		courses = Arrays.asList(course);
@@ -46,6 +53,7 @@ public class ScheduleControllerTest {
 		when(mockedOfferingRepository.find(A_YEAR)).thenReturn(offering);
 		when(mockedCourseRepository.findByOffering(offering)).thenReturn(courses);
 		when(mockedCourseRepository.findByAcronym(AN_ACRONYM)).thenReturn(course);
+		when(mockedScheduleRepository.findById(AN_ID)).thenReturn(schedule);
 	}
 
 	@Test
@@ -56,9 +64,9 @@ public class ScheduleControllerTest {
 	@Test
 	public void scheduleByYearReturnsTheCorrectModelAndView()
 			throws Exception {
-		ModelAndView mv = controller.scheduleByYear(A_YEAR);
+		ModelAndView mv = controller.scheduleById(AN_ID);
 
-		assertEquals(A_YEAR, mv.getModel().get("year"));
+		assertEquals(schedule, mv.getModel().get("schedule"));
 	}
 
 	@Test
