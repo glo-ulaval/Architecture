@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <courseOfferings>
-  <offering>
-    <year>2011-2012</year>
-    <acronyms>
-          <acronym>GLO-1010</acronym>
-          <acronym>GLO-1901</acronym>
-          <acronym>GLO-2003</acronym>
-          <acronym>GLO-2100</acronym>
-          <acronym>GLO-4002</acronym>
-    </acronyms>
-  </offering>
-  <offering>
-    <year>2010-2011</year>
-    <acronyms>
-      <acronym>IFT-2002</acronym>
-      <acronym>GLO-4002</acronym>
-    </acronyms>
-  </offering>
+	<offerings>
+		<acronyms>IFT-2002</acronyms>
+		<acronyms>GLO-4002</acronyms>
+		<year>2010-2011</year>
+	</offerings>
+	<offerings>
+		<acronyms>GLO-1010</acronyms>
+		<acronyms>GLO-1901</acronyms>
+		<acronyms>GLO-2003</acronyms>
+		<acronyms>GLO-2100</acronyms>
+		<acronyms>GLO-4002</acronyms>
+		<year>2011-2012</year>
+	</offerings>
 </courseOfferings>

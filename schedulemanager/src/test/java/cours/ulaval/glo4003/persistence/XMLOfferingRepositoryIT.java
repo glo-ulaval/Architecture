@@ -18,7 +18,8 @@ public class XMLOfferingRepositoryIT {
 	XMLOfferingRepository repository;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp()
+			throws Exception {
 		repository = new XMLOfferingRepository();
 	}
 
@@ -35,7 +36,8 @@ public class XMLOfferingRepositoryIT {
 	}
 
 	@Test
-	public void canSaveAnOffering() throws Exception {
+	public void canSaveAnOffering()
+			throws Exception {
 		Offering offering = new Offering();
 		ArrayList<String> acronyms = new ArrayList<String>();
 		acronyms.add("IFT-1001");
@@ -58,7 +60,8 @@ public class XMLOfferingRepositoryIT {
 	}
 
 	@Test
-	public void canDeleteAnOffering() throws Exception {
+	public void canDeleteAnOffering()
+			throws Exception {
 		Offering offering = new Offering();
 		ArrayList<String> acronyms = new ArrayList<String>();
 		acronyms.add("IFT-2001");
@@ -76,7 +79,8 @@ public class XMLOfferingRepositoryIT {
 	}
 
 	@AfterClass
-	public static void reset() throws Exception {
+	public static void reset()
+			throws Exception {
 		XMLOfferingRepository repo = new XMLOfferingRepository();
 		repo.delete(NEW_OFFERING_YEAR);
 	}

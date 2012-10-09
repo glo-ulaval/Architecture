@@ -41,6 +41,6 @@ public class PrerequisiteTest {
 	public void canGetIfPrerequisiteIsConcomitant() {
 		prerequisite.setIsConcomitant(true);
 
-		assertTrue(prerequisite.isConcomitant());
+		assertTrue(prerequisite.getIsConcomitant());
 	}
 }

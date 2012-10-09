@@ -23,16 +23,17 @@ public class XMLCourseRepositoryIT {
 
 		Prerequisite prerequisite = new Prerequisite();
 		prerequisite.setAcronyms(Arrays.asList("GLO-2004", "GLO-1001"));
-		Course course = new Course("GLO-4003", "Architecture Logicielle", 3, "Derp derp herp derp McDerpington", Cycle.Premier,
+		prerequisite.setIsConcomitant(true);
+		Course course = new Course("GLO-4444", "Architecture Logicielle", 3, "Derp derp herp derp McDerpington", Cycle.Premier,
 				Arrays.asList(prerequisite));
 
 		repository.store(course);
 
 		List<Course> courses = repository.findAll();
-		course = repository.findByAcronym("GLO-4003");
+		course = repository.findByAcronym("GLO-4444");
 
-		assertEquals(1, courses.size());
-		assertEquals("GLO-4003", course.getAcronym());
+		assertTrue(courses.contains(course));
+		assertEquals("GLO-4444", course.getAcronym());
 		assertEquals("Architecture Logicielle", course.getTitle());
 		assertEquals(3, course.getCredits());
 		assertEquals("Derp derp herp derp McDerpington", course.getDescription());

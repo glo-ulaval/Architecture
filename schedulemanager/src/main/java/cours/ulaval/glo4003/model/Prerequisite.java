@@ -6,7 +6,7 @@ import java.util.List;
 public class Prerequisite {
 
 	private List<String> acronyms = new ArrayList<String>();
-	private Boolean isConcomitant = false;
+	private Boolean isConcomitant;
 
 	public List<String> getAcronyms() {
 		return acronyms;
@@ -16,7 +16,7 @@ public class Prerequisite {
 		this.acronyms = acronyms;
 	}
 
-	public Boolean isConcomitant() {
+	public Boolean getIsConcomitant() {
 		return isConcomitant;
 	}
 
