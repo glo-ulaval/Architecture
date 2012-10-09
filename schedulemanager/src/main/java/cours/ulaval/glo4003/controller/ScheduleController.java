@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.domain.CourseRepository;
 import cours.ulaval.glo4003.domain.OfferingRepository;
+import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.ScheduleRepository;
 
 @Controller
@@ -41,8 +42,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{year}", method = RequestMethod.GET)
-	public ModelAndView scheduleByYear(@PathVariable String year)
-			throws Exception {
+	public ModelAndView scheduleByYear(@PathVariable String year) throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyyear");
 		mv.addObject("year", year);
 
@@ -50,8 +50,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView addSchedule()
-			throws Exception {
+	public ModelAndView addSchedule() throws Exception {
 		ModelAndView mv = new ModelAndView("addschedule");
 		mv.addObject("years", offeringRepository.findYears());
 
@@ -59,8 +58,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}", method = RequestMethod.GET)
-	public ModelAndView addSchedule(@PathVariable String year)
-			throws Exception {
+	public ModelAndView addSchedule(@PathVariable String year) throws Exception {
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
 		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
@@ -69,8 +67,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}", method = RequestMethod.POST)
-	public ModelAndView postSchedule(@PathVariable String year)
-			throws Exception {
+	public ModelAndView postSchedule(@PathVariable String year) throws Exception {
 		return addSchedule(year);
 	}
 
@@ -83,4 +80,24 @@ public class ScheduleController {
 
 		return mv;
 	}
+
+	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
+	public ModelAndView deleteSchedule(@PathVariable String scheduleId) throws Exception {
+		ModelAndView mv = new ModelAndView("delete");
+
+		scheduleRepository.delete(scheduleId);
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/delete/{scheduleId}/{sectionNrc}", method = RequestMethod.GET)
+	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc) {
+		ModelAndView mv = new ModelAndView("delete");
+
+		Schedule schedule = scheduleRepository.findById(scheduleId);
+		schedule.delete(sectionNrc);
+
+		return mv;
+	}
+
 }

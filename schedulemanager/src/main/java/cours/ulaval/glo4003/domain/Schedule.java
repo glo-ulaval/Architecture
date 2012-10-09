@@ -26,11 +26,8 @@ public class Schedule {
 		}
 	}
 
-	public void delete(String id) {
-		if (sectionExist(id)) {
-			Section section = sections.get(id);
-			sections.remove(id);
-		}
+	public void delete(String sectionNrc) {
+		sections.remove(sectionNrc);
 	}
 
 	private boolean sectionExist(String nrc) {
