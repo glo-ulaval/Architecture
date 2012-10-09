@@ -21,17 +21,25 @@ public class Schedule {
 	}
 
 	public void add(Section section) {
-		if (!sectionExist(section)) {
+		if (!sectionExist(section.getNrc())) {
 			sections.put(section.getNrc(), section);
 		}
 	}
 
-	private boolean sectionExist(Section section) {
-		return sections.containsKey(section.getNrc());
+	public void delete(String sectionNrc) {
+		sections.remove(sectionNrc);
+	}
+
+	private boolean sectionExist(String nrc) {
+		return sections.containsKey(nrc);
 	}
 
 	public String getId() {
 		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getYear() {

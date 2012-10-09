@@ -1,6 +1,7 @@
 package cours.ulaval.glo4003.persistence;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -19,11 +20,12 @@ public class XMLCourseRepositoryTest {
 	private static final String AN_ACRONYM = "GLO-4003";
 
 	private XMLCourseRepository repository;
+	private XMLSerializer<CoursesXMLWrapper> mockedSerializer;
 
 	@Before
 	public void setUp()
 			throws Exception {
-		XMLSerializer<CoursesXMLWrapper> mockedSerializer = mock(XMLSerializer.class);
+		mockedSerializer = mock(XMLSerializer.class);
 		CoursesXMLWrapper dto = prepareMockedCourseDTO();
 		ConfigManager resourcesPaths = ConfigManager.getConfigManager();
 		when(mockedSerializer.deserialize(resourcesPaths.getCoursesFilePath())).thenReturn(dto);
@@ -63,6 +65,17 @@ public class XMLCourseRepositoryTest {
 
 		assertEquals(1, courses.size());
 		assertEquals(AN_ACRONYM, courses.get(0).getAcronym());
+	}
+
+	@Test
+	public void canStoreCourseMultipleTimes()
+			throws Exception {
+		Course course = mock(Course.class);
+
+		repository.store(course);
+		repository.store(course);
+
+		verify(mockedSerializer, times(2)).serialize(any(CoursesXMLWrapper.class), anyString());
 	}
 
 	private CoursesXMLWrapper prepareMockedCourseDTO() {

@@ -24,12 +24,12 @@
 				<h1>Ajout d'une section au cours ${acronym}</h1>
 			</div>
 		</div>
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#incourse" data-toggle="tab">En
-					classe</a></li>
-			<li><a href="#virtual" data-toggle="tab">Virtuel</a></li>
-			<li><a href="#remotly" data-toggle="tab">À distance</a></li>
-		</ul>
+		<div class="btn-group" id="myTab" data-toggle="buttons-radio">
+			<button class="active btn btn-info btn-large"><a class="tab_a" href="#incourse" data-toggle="tab">En
+					classe</a></button>
+			<button class = "btn btn-info btn-large"><a class="tab_a" href="#virtual" data-toggle="tab">Virtuel</a></button>
+			<button class = "btn btn-info btn-large"><a class="tab_a" href="#remotly" data-toggle="tab">À distance</a></button>
+		</div>
 		<form action="../${year}" method=POST scope="request">
 		<div class="tab-content">
 			<div class="tab-pane active" id="incourse">

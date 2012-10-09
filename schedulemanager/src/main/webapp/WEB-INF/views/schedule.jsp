@@ -16,21 +16,21 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h1>Visualiser un horaire</h1>
-			<p>Choisissez l'année à visualiser :</p>
+			<p>Choisissez l'horaire à visualiser :</p>
 		</div>
-		<c:if test="${not empty years}">
+		<c:if test="${not empty schedules}">
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>Année</th>
+						<th>Horaires :</th>
 						<th></th>
 					</tr>
 				</thead>
-				<c:forEach var="year" items="${years}">
-					<tr id="${year}">
-						<td><b>${year}</b></td>
+				<c:forEach var="schedule" items="${schedules}">
+					<tr id="${schedule.id}">
+						<td><b>[ ${schedule.year} ] Horaire ${schedule.id}</b></td>
 						<td class="centered">
-							<a class="btn" href="schedule/${year}"><i class="icon-search"></i></a>
+							<a class="btn" href="schedule/${schedule.id}"><i class="icon-search"></i></a>
 						</td>
 					</tr>
 				</c:forEach>
