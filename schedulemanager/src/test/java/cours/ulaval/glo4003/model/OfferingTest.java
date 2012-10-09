@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Offering;
-import cours.ulaval.glo4003.model.exception.InvalidOfferingOperation;
+import cours.ulaval.glo4003.domain.exception.InvalidOfferingOperation;
 
 public class OfferingTest {
 

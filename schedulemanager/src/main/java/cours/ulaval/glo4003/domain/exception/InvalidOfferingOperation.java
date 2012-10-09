@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.model.exception;
+package cours.ulaval.glo4003.domain.exception;
 
 public class InvalidOfferingOperation extends Exception {
 	private static final long serialVersionUID = 1L;

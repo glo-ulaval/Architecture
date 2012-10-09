@@ -84,5 +84,6 @@ public class ScheduleControllerTest {
 
 		assertEquals(AN_ACRONYM, mv.getModel().get("acronym"));
 		assertEquals(course, mv.getModel().get("course"));
+		assertEquals(A_YEAR, mv.getModel().get("year"));
 	}
 }

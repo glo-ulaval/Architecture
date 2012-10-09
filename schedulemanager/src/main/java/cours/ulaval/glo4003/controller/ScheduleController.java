@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.domain.CourseRepository;
 import cours.ulaval.glo4003.domain.OfferingRepository;
+import cours.ulaval.glo4003.domain.ScheduleRepository;
 
 @Controller
 @RequestMapping(value = "/schedule")
@@ -24,6 +25,9 @@ public class ScheduleController {
 
 	@Inject
 	private OfferingRepository offeringRepository;
+
+	@Inject
+	private ScheduleRepository scheduleRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
@@ -64,11 +68,18 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/add/{year}", method = RequestMethod.POST)
+	public ModelAndView postSchedule(@PathVariable String year)
+			throws Exception {
+		return addSchedule(year);
+	}
+
 	@RequestMapping(value = "/add/{year}/addsection", method = RequestMethod.GET)
 	public ModelAndView addSection(@PathVariable String year, @RequestParam(required = true, value = "acronym") String acronym) {
 		ModelAndView mv = new ModelAndView("addsection");
 		mv.addObject("acronym", acronym);
 		mv.addObject("course", courseRepository.findByAcronym(acronym));
+		mv.addObject("year", year);
 
 		return mv;
 	}

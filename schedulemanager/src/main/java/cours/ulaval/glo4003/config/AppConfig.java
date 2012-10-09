@@ -7,8 +7,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.domain.CourseRepository;
 import cours.ulaval.glo4003.domain.OfferingRepository;
+import cours.ulaval.glo4003.domain.ScheduleRepository;
 import cours.ulaval.glo4003.persistence.XMLCourseRepository;
 import cours.ulaval.glo4003.persistence.XMLOfferingRepository;
+import cours.ulaval.glo4003.persistence.XMLScheduleRepository;
 
 @Configuration
 public class AppConfig {
@@ -23,6 +25,12 @@ public class AppConfig {
 	public OfferingRepository offeringRepository()
 			throws Exception {
 		return new XMLOfferingRepository();
+	}
+
+	@Bean
+	public ScheduleRepository scheduleRepository()
+			throws Exception {
+		return new XMLScheduleRepository();
 	}
 
 	@Bean

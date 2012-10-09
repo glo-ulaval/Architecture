@@ -3,7 +3,7 @@ package cours.ulaval.glo4003.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import cours.ulaval.glo4003.model.exception.InvalidOfferingOperation;
+import cours.ulaval.glo4003.domain.exception.InvalidOfferingOperation;
 
 public class Offering {
 	private String year;
