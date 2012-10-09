@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.model;
+package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
