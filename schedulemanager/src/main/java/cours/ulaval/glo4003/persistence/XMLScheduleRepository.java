@@ -39,7 +39,7 @@ public class XMLScheduleRepository implements ScheduleRepository {
 
 	@Override
 	public void store(Schedule schedule) throws Exception {
-		if (schedules.containsKey(schedule.getId())) {
+		if (!schedules.containsKey(schedule.getId())) {
 			schedules.put(schedule.getId(), schedule);
 		}
 	}
@@ -68,6 +68,10 @@ public class XMLScheduleRepository implements ScheduleRepository {
 		 * serializer.serialize(offeringDTO,
 		 * ConfigManager.getConfigManager().getOfferingsFilePath());
 		 */
+	}
+
+	public void setSchedules(Map<String, Schedule> schedules) {
+		this.schedules = schedules;
 	}
 
 }

@@ -11,6 +11,10 @@ public class Schedule {
 	private Map<String, Section> sections;
 	private String personInCharge;
 
+	public Schedule() {
+
+	}
+
 	public Schedule(String id) {
 		this.id = id;
 		sections = new HashMap<String, Section>();
@@ -18,12 +22,12 @@ public class Schedule {
 
 	public void add(Section section) {
 		if (!sectionExist(section)) {
-			sections.put(section.toString(), section);
+			sections.put(section.getNrc(), section);
 		}
 	}
 
 	private boolean sectionExist(Section section) {
-		return sections.containsKey(section.toString());
+		return sections.containsKey(section.getNrc());
 	}
 
 	public String getId() {
@@ -46,7 +50,7 @@ public class Schedule {
 		this.season = season;
 	}
 
-	public Map<String, Section> getCoursesSections() {
+	public Map<String, Section> getSections() {
 		return sections;
 	}
 
