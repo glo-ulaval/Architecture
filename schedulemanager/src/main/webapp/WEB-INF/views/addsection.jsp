@@ -30,7 +30,6 @@
 			<button class = "btn btn-info btn-large"><a class="tab_a" href="#virtual" data-toggle="tab">Virtuel</a></button>
 			<button class = "btn btn-info btn-large"><a class="tab_a" href="#remotly" data-toggle="tab">À distance</a></button>
 		</div>
-		<form action="../${year}" method=POST scope="request">
 		<div class="tab-content">
 			<div class="tab-pane active" id="incourse">
 				<c:import url="sectiontemplate.jsp">
@@ -51,8 +50,6 @@
         </c:import>
 			</div>
 		</div>
-		<input type = "submit" class="btn btn-success pull-right" value="Sauvegarder">
-		</form>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
