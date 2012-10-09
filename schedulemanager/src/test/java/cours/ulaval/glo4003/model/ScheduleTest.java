@@ -33,6 +33,8 @@ public class ScheduleTest {
 	public void cannotAddTheSameSection() {
 		schedule.add(section);
 
+		schedule.add(section);
+
 		assertEquals(1, schedule.getSections().size());
 	}
 }

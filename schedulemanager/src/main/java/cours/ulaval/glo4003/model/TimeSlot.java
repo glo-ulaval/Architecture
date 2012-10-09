@@ -8,6 +8,10 @@ public class TimeSlot {
 	private Calendar endTime;
 	private Integer duration;
 
+	public TimeSlot() {
+		super();
+	}
+
 	public TimeSlot(Calendar startTime, Integer duration) {
 		this.startTime = startTime;
 		this.duration = duration;

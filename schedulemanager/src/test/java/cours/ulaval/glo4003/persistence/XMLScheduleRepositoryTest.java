@@ -1,6 +1,7 @@
 package cours.ulaval.glo4003.persistence;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.HashMap;
@@ -68,6 +69,16 @@ public class XMLScheduleRepositoryTest {
 		scheduleRepo.delete(AN_ID);
 
 		assertEquals(0, scheduleRepo.findAll().size());
+	}
+
+	@Test
+	public void doesntDeleteAnythingIfTheScheduleDoesntExist() throws Exception {
+		Map<String, Schedule> schedules = mock(Map.class);
+		when(schedules.containsKey(anyString())).thenReturn(false);
+
+		scheduleRepo.delete("uneClé");
+
+		verify(schedules, never()).remove(anyString());
 	}
 
 	private void addAFewSchedule() {
