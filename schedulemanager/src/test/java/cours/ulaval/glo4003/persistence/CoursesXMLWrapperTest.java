@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Course;
 
-public class CoursesDTOTest {
+public class CoursesXMLWrapperTest {
 
 	@Test
 	public void canGetCoursesCountWithNoCourse() {

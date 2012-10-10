@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Schedule;
 
-public class ScheduleDTOTest {
+public class ScheduleXMLWrapperTest {
 	@Test
 	public void canGetSchedulesCountWithNoCourse() {
 		ScheduleXMLWrapper dto = new ScheduleXMLWrapper();

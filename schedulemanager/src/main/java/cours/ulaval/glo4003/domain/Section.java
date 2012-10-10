@@ -5,7 +5,6 @@ import java.util.List;
 public class Section {
 	private String nrc;
 	private String group;
-
 	private String personInCharge;
 	private List<String> teachers;
 	private TeachMode teachMode;

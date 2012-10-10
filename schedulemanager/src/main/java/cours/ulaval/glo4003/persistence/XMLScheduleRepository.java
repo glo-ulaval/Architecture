@@ -14,7 +14,8 @@ public class XMLScheduleRepository implements ScheduleRepository {
 	private XMLSerializer<ScheduleXMLWrapper> serializer;
 	private Map<String, Schedule> schedules = new HashMap<String, Schedule>();
 
-	public XMLScheduleRepository() throws Exception {
+	public XMLScheduleRepository()
+			throws Exception {
 		serializer = new XMLSerializer<ScheduleXMLWrapper>(ScheduleXMLWrapper.class);
 		parseXML();
 	}
@@ -38,40 +39,44 @@ public class XMLScheduleRepository implements ScheduleRepository {
 	}
 
 	@Override
-	public void store(Schedule schedule) throws Exception {
+	public void store(Schedule schedule)
+			throws Exception {
 		if (!schedules.containsKey(schedule.getId())) {
 			schedules.put(schedule.getId(), schedule);
+			saveXML();
 		}
 	}
 
 	@Override
-	public void delete(String id) throws Exception {
+	public void delete(String id)
+			throws Exception {
 		if (schedules.containsKey(id)) {
 			schedules.remove(id);
+			saveXML();
 		}
 	}
 
-	private void parseXML() throws Exception {
-		String path = ConfigManager.getConfigManager().getSchedulesFilepath();
-		// List<Schedule> deserializedSchedules = serializer.deserialize());
-		/*
-		 * for (Offering offering : deserializedOfferings) {
-		 * offerings.put(offering.getYear(), offering); }
-		 */
+	private void parseXML()
+			throws Exception {
+		List<Schedule> deserializedSchedules = serializer.deserialize(ConfigManager.getConfigManager().getSchedulesFilepath())
+				.getSchedules();
+		for (Schedule schedule : deserializedSchedules) {
+			schedules.put(schedule.getId(), schedule);
+		}
+
 	}
 
-	private void saveXML() throws Exception {
-		/*
-		 * OfferingDTO offeringDTO = new OfferingDTO();
-		 * offeringDTO.setOfferings(new
-		 * ArrayList<Offering>(offerings.values()));
-		 * serializer.serialize(offeringDTO,
-		 * ConfigManager.getConfigManager().getOfferingsFilePath());
-		 */
+	private void saveXML()
+			throws Exception {
+		ScheduleXMLWrapper scheduleXMLWrapper = new ScheduleXMLWrapper();
+		scheduleXMLWrapper.setSchedules(new ArrayList<Schedule>(schedules.values()));
+		serializer.serialize(scheduleXMLWrapper, ConfigManager.getConfigManager().getSchedulesFilepath());
 	}
 
-	public void setSchedules(Map<String, Schedule> schedules) {
-		this.schedules = schedules;
+	protected void clearAll()
+			throws Exception {
+		schedules.clear();
+		saveXML();
 	}
 
 }

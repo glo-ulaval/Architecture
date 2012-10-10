@@ -4,11 +4,13 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import cours.ulaval.glo4003.domain.Schedule;
 
@@ -17,62 +19,67 @@ public class XMLScheduleRepositoryTest {
 	private static int NB_OF_SCHEDULE = 10;
 	private static String AN_ID = "anId";
 
+	@Mock
+	private XMLSerializer<ScheduleXMLWrapper> mockedSerializer;
+	@Mock
+	private Schedule mockedSchedule;
+	@InjectMocks
 	private XMLScheduleRepository scheduleRepo;
-	private Map<String, Schedule> schedules;
 
 	@Before
-	public void setUp() throws Exception {
-		scheduleRepo = new XMLScheduleRepository();
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 	}
 
 	@Test
-	public void canFindAll() {
+	public void canFindAll()
+			throws Exception {
 		addAFewSchedule();
 
 		assertEquals(NB_OF_SCHEDULE, scheduleRepo.findAll().size());
 	}
 
 	@Test
-	public void canFindByYear() {
+	public void canFindByYear()
+			throws Exception {
 		addTwoScheduleWithTwoDifferentYear();
 
 		assertEquals(1, scheduleRepo.findBy("2012").size());
 	}
 
 	@Test
-	public void canStoreASchedule() throws Exception {
-		Schedule schedule = mock(Schedule.class);
-		when(schedule.getId()).thenReturn(AN_ID);
+	public void canStoreASchedule()
+			throws Exception {
+		scheduleRepo.store(mockedSchedule);
 
-		scheduleRepo.store(schedule);
-
-		assertEquals(schedule, scheduleRepo.findAll().get(0));
+		assertEquals(mockedSchedule, scheduleRepo.findAll().get(0));
 	}
 
 	@Test
-	public void cannotStoreADuplicateSchedule() throws Exception {
-		Schedule schedule = mock(Schedule.class);
-		when(schedule.getId()).thenReturn(AN_ID);
+	public void cannotStoreADuplicateSchedule()
+			throws Exception {
+		when(mockedSchedule.getId()).thenReturn(AN_ID);
 
-		scheduleRepo.store(schedule);
-		scheduleRepo.store(schedule);
+		scheduleRepo.store(mockedSchedule);
+		scheduleRepo.store(mockedSchedule);
 
 		assertEquals(1, scheduleRepo.findAll().size());
 	}
 
 	@Test
-	public void canDeleteASchedule() throws Exception {
-		Schedule schedule = mock(Schedule.class);
-		when(schedule.getId()).thenReturn(AN_ID);
+	public void canDeleteASchedule()
+			throws Exception {
+		when(mockedSchedule.getId()).thenReturn(AN_ID);
 
-		scheduleRepo.store(schedule);
+		scheduleRepo.store(mockedSchedule);
 		scheduleRepo.delete(AN_ID);
 
 		assertEquals(0, scheduleRepo.findAll().size());
 	}
 
 	@Test
-	public void doesntDeleteAnythingIfTheScheduleDoesntExist() throws Exception {
+	public void doesntDeleteAnythingIfTheScheduleDoesntExist()
+			throws Exception {
 		Map<String, Schedule> schedules = mock(Map.class);
 		when(schedules.containsKey(anyString())).thenReturn(false);
 
@@ -81,20 +88,17 @@ public class XMLScheduleRepositoryTest {
 		verify(schedules, never()).remove(anyString());
 	}
 
-	private void addAFewSchedule() {
-		schedules = new HashMap<String, Schedule>();
+	private void addAFewSchedule()
+			throws Exception {
 		for (Integer i = 0; i < NB_OF_SCHEDULE; i++) {
 			Schedule schedule = mock(Schedule.class);
 			when(schedule.getId()).thenReturn(AN_ID + i.toString());
-			schedules.put(schedule.getId(), schedule);
+			scheduleRepo.store(schedule);
 		}
-
-		scheduleRepo.setSchedules(schedules);
 	}
 
-	private void addTwoScheduleWithTwoDifferentYear() {
-		schedules = new HashMap<String, Schedule>();
-
+	private void addTwoScheduleWithTwoDifferentYear()
+			throws Exception {
 		Schedule schedule2011 = mock(Schedule.class);
 		Schedule schedule2012 = mock(Schedule.class);
 		when(schedule2011.getId()).thenReturn(AN_ID + "2011");
@@ -102,10 +106,8 @@ public class XMLScheduleRepositoryTest {
 		when(schedule2011.getYear()).thenReturn("2011");
 		when(schedule2012.getYear()).thenReturn("2012");
 
-		schedules.put("2011", schedule2011);
-		schedules.put("2012", schedule2012);
-
-		scheduleRepo.setSchedules(schedules);
+		scheduleRepo.store(schedule2011);
+		scheduleRepo.store(schedule2012);
 	}
 
 }

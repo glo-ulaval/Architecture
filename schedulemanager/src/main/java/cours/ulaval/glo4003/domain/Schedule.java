@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Schedule {
-
 	private String id;
 	private String year;
 	private String season;
@@ -12,7 +11,6 @@ public class Schedule {
 	private String personInCharge;
 
 	public Schedule() {
-
 	}
 
 	public Schedule(String id) {
@@ -34,6 +32,10 @@ public class Schedule {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getYear() {
 		return year;
 	}
@@ -52,6 +54,10 @@ public class Schedule {
 
 	public Map<String, Section> getSections() {
 		return sections;
+	}
+
+	public void setSections(Map<String, Section> sections) {
+		this.sections = sections;
 	}
 
 	public String getPersonInCharge() {

@@ -3,8 +3,6 @@ package cours.ulaval.glo4003.persistence;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -35,24 +33,24 @@ public class XMLOfferingRepositoryTest {
 	}
 
 	@Test
-	public void canStoreAnOffering() throws Exception {
+	public void canStoreAnOffering()
+			throws Exception {
 		repository.store(offering);
 
 		assertEquals(offering, repository.find(VALID_YEAR));
 	}
 
 	@Test
-	public void canFindAnOffering() throws Exception {
+	public void canFindAnOffering()
+			throws Exception {
 		repository.store(offering);
 
 		assertEquals(offering, repository.find(VALID_YEAR));
 	}
 
 	@Test
-	public void canFindYearsOfOfferings() throws Exception {
-		ArrayList<String> years = new ArrayList<String>();
-		years.add(VALID_YEAR);
-
+	public void canFindYearsOfOfferings()
+			throws Exception {
 		repository.store(offering);
 
 		assertNotNull(repository.findYears());
@@ -60,7 +58,8 @@ public class XMLOfferingRepositoryTest {
 	}
 
 	@Test
-	public void canDeleteAnOffering() throws Exception {
+	public void canDeleteAnOffering()
+			throws Exception {
 		repository.store(offering);
 
 		repository.delete(VALID_YEAR);
