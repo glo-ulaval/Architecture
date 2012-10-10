@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.exception.InvalidOfferingOperation;
 
 public class OfferingTest {
@@ -36,20 +35,23 @@ public class OfferingTest {
 	}
 
 	@Test
-	public void canAddCourse() throws Exception {
+	public void canAddCourse()
+			throws Exception {
 		courseOffering.addCourse(VALID_ACRONYM);
 
 		assertTrue(courseOffering.getAcronyms().contains(VALID_ACRONYM));
 	}
 
 	@Test(expected = InvalidOfferingOperation.class)
-	public void cannotAddCourseAlreadyInOffering() throws Exception {
+	public void cannotAddCourseAlreadyInOffering()
+			throws Exception {
 		courseOffering.addCourse(VALID_ACRONYM);
 		courseOffering.addCourse(VALID_ACRONYM);
 	}
 
 	@Test
-	public void canRemoveCourse() throws Exception {
+	public void canRemoveCourse()
+			throws Exception {
 		courseOffering.addCourse(VALID_ACRONYM);
 
 		courseOffering.removeCourse(VALID_ACRONYM);
@@ -58,7 +60,8 @@ public class OfferingTest {
 	}
 
 	@Test(expected = InvalidOfferingOperation.class)
-	public void cannotRemoveCourseNotInOffering() throws Exception {
+	public void cannotRemoveCourseNotInOffering()
+			throws Exception {
 		courseOffering.removeCourse(VALID_ACRONYM);
 	}
 
@@ -72,12 +75,11 @@ public class OfferingTest {
 
 	@Test
 	public void canSetOfferingByContructor() {
-		Offering newCourseOffering = new Offering(GOOD_YEAR, courseOffering);
+		Offering newCourseOffering = new Offering(GOOD_YEAR, Semester.Automne);
 
 		assertEquals(GOOD_YEAR, newCourseOffering.getYear());
-		assertEquals(courseOffering.getAcronyms(),
-				newCourseOffering.getAcronyms());
-
+		assertEquals(Semester.Automne, newCourseOffering.getSemester());
+		assertEquals(courseOffering.getAcronyms(), newCourseOffering.getAcronyms());
 	}
 
 	@Test

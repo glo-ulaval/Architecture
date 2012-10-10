@@ -32,8 +32,9 @@
 						<c:forEach var="course" items="${courses}">
 							<tr id="${course.acronym}">
 								<td><b>${course.acronym} - ${course.title}</b></td>
+								<c:url value="/offering/${year}/${semester}" var="url"/>
 								<td class="centered"><a class="btn btn-success"
-									href="${year}/addsection?acronym=${course.acronym}"><i
+									href="${url}/addsection?acronym=${course.acronym}"><i
 										class="icon-plus-sign icon-white"></i></a></td>
 							</tr>
 						</c:forEach>

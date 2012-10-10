@@ -3,6 +3,7 @@
 	<offerings>
 		<acronyms>IFT-2002</acronyms>
 		<acronyms>GLO-4002</acronyms>
+    <semester>Ete</semester>
 		<year>2010-2011</year>
 	</offerings>
 	<offerings>
@@ -11,6 +12,7 @@
 		<acronyms>GLO-2003</acronyms>
 		<acronyms>GLO-2100</acronyms>
 		<acronyms>GLO-4002</acronyms>
+    <semester>Automne</semester>
 		<year>2011-2012</year>
 	</offerings>
 </courseOfferings>

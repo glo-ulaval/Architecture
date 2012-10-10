@@ -7,15 +7,16 @@ import cours.ulaval.glo4003.domain.exception.InvalidOfferingOperation;
 
 public class Offering {
 	private String year;
+	private Semester semester;
 	private List<String> acronyms = new ArrayList<String>();
 
 	public Offering() {
 		super();
 	}
 
-	public Offering(String year, Offering courseOffering) {
+	public Offering(String year, Semester semester) {
 		this.year = year;
-		this.acronyms = courseOffering.getAcronyms();
+		this.semester = semester;
 	}
 
 	public List<String> getAcronyms() {
@@ -36,6 +37,14 @@ public class Offering {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public Semester getSemester() {
+		return semester;
+	}
+
+	public void setSemester(Semester semester) {
+		this.semester = semester;
 	}
 
 	public void addCourse(String acronym)

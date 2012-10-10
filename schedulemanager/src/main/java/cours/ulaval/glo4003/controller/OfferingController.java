@@ -15,6 +15,7 @@ import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.CourseRepository;
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.OfferingRepository;
+import cours.ulaval.glo4003.domain.Semester;
 
 @Controller
 @RequestMapping(value = "/offering")
@@ -36,34 +37,37 @@ public class OfferingController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/{year}", method = RequestMethod.GET)
-	public ModelAndView offeringByYear(@PathVariable String year)
+	@RequestMapping(value = "/{year}/{semester}", method = RequestMethod.GET)
+	public ModelAndView offeringBySemester(@PathVariable String year, @PathVariable Semester semester)
 			throws Exception {
 
-		Offering offering = offeringRepository.find(year);
+		Offering offering = offeringRepository.find(year, semester);
 
 		List<Course> courses = courseRepository.findByOffering(offering);
 
-		ModelAndView mv = new ModelAndView("offeringbyyear");
+		ModelAndView mv = new ModelAndView("offeringbysemester");
 		mv.addObject("year", year);
+		mv.addObject("semester", semester);
 		mv.addObject("courses", courses);
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/deletecourse")
-	public ModelAndView deleteCourse(@RequestParam(required = true, value = "year") String year,
+	@RequestMapping(value = "/{year}/deletecourse")
+	public ModelAndView deleteCourse(@PathVariable String year,
+			@RequestParam(required = true, value = "semester") String semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 
-		ModelAndView mv = new ModelAndView("offeringbyyear");
+		ModelAndView mv = new ModelAndView("offeringbysemester");
 
 		try {
-			Offering offering = offeringRepository.find(year);
+			Offering offering = offeringRepository.find(year, Semester.valueOf(semester));
 			offering.removeCourse(acronym);
 
 			List<Course> courses = courseRepository.findByOffering(offering);
 
 			mv.addObject("year", year);
+			mv.addObject("semester", semester);
 			mv.addObject("courses", courses);
 			mv.addObject("error", SUCCESS);
 		} catch (Exception e) {
@@ -73,30 +77,38 @@ public class OfferingController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/availablecourses")
-	public ModelAndView availableCourses(@RequestParam(required = true, value = "year") String year)
+	@RequestMapping(value = "/{year}/availablecourses")
+	public ModelAndView availableCourses(@PathVariable String year,
+			@RequestParam(required = true, value = "semester") String semester)
 			throws Exception {
 
 		ModelAndView mv = new ModelAndView("availablecourses");
 		mv.addObject("year", year);
+		mv.addObject("semester", semester);
 		mv.addObject("courses", courseRepository.findAll());
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/addcourse")
-	public ModelAndView addCourseFromAvailableCourses(@RequestParam(required = true, value = "year") String year,
+	@RequestMapping(value = "/{year}/addcourse")
+	public ModelAndView addCourseFromAvailableCourses(@PathVariable String year,
+			@RequestParam(required = true, value = "semester") String semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 
-		ModelAndView mv = new ModelAndView("offeringbyyear");
+		ModelAndView mv = new ModelAndView("offeringbysemester");
 
 		try {
-			Offering offering = offeringRepository.find(year);
+			Semester semesterValue = Semester.valueOf(semester);
+			if (!offeringRepository.containsOfferingFor(year, semesterValue)) {
+				offeringRepository.store(new Offering(year, semesterValue));
+			}
+			Offering offering = offeringRepository.find(year, semesterValue);
 			offering.addCourse(acronym);
 
 			List<Course> courses = courseRepository.findByOffering(offering);
 
 			mv.addObject("year", year);
+			mv.addObject("semester", semester);
 			mv.addObject("courses", courses);
 			mv.addObject("error", SUCCESS);
 		} catch (Exception e) {

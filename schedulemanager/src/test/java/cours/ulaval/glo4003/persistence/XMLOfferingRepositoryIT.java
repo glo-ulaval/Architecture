@@ -10,11 +10,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Offering;
+import cours.ulaval.glo4003.domain.Semester;
 
 public class XMLOfferingRepositoryIT {
 
 	private static final String STORED_OFFERING_YEAR = "2011-2012";
 	private static final String NEW_OFFERING_YEAR = "2009-2010";
+	private static final Semester A_SEMESTER = Semester.Automne;
 	XMLOfferingRepository repository;
 
 	@Before
@@ -26,7 +28,7 @@ public class XMLOfferingRepositoryIT {
 	@Test
 	public void canGetOfferings() {
 		List<String> years = repository.findYears();
-		Offering offering = repository.find(years.get(years.indexOf(STORED_OFFERING_YEAR)));
+		Offering offering = repository.find(years.get(years.indexOf(STORED_OFFERING_YEAR)), A_SEMESTER);
 
 		assertTrue(years.contains(STORED_OFFERING_YEAR));
 		assertNotNull(offering);
@@ -47,14 +49,16 @@ public class XMLOfferingRepositoryIT {
 		acronyms.add("IFT-1005");
 		offering.setOffering(acronyms);
 		offering.setYear(NEW_OFFERING_YEAR);
+		offering.setSemester(A_SEMESTER);
 
 		repository.store(offering);
 
 		XMLOfferingRepository refreshedRepository = new XMLOfferingRepository();
 
 		List<String> storedOfferingYears = refreshedRepository.findYears();
-		Offering storedOffering = refreshedRepository.find(NEW_OFFERING_YEAR);
+		Offering storedOffering = refreshedRepository.find(NEW_OFFERING_YEAR, A_SEMESTER);
 
+		assertEquals(storedOffering.getSemester(), A_SEMESTER);
 		assertTrue(storedOfferingYears.contains(NEW_OFFERING_YEAR));
 		assertTrue(storedOffering.getAcronyms().contains("IFT-1001"));
 	}
@@ -69,9 +73,10 @@ public class XMLOfferingRepositoryIT {
 		acronyms.add("IFT-2003");
 		offering.setOffering(acronyms);
 		offering.setYear("2007-2008");
+		offering.setSemester(A_SEMESTER);
 		repository.store(offering);
 
-		repository.delete("2007-2008");
+		repository.delete("2007-2008", A_SEMESTER);
 
 		XMLOfferingRepository refreshedRepository = new XMLOfferingRepository();
 		List<String> storedOfferingYears = refreshedRepository.findYears();
@@ -82,6 +87,7 @@ public class XMLOfferingRepositoryIT {
 	public static void reset()
 			throws Exception {
 		XMLOfferingRepository repo = new XMLOfferingRepository();
+		repo.delete(NEW_OFFERING_YEAR, A_SEMESTER);
 		repo.delete(NEW_OFFERING_YEAR);
 	}
 }

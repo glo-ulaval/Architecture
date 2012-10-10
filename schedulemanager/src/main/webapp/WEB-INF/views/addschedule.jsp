@@ -26,11 +26,23 @@
           </tr>
         </thead>
         <c:forEach var="year" items="${years}">
-          <tr id="${year}">
+          <tr class="well" id="${year}">
             <td><b>${year}</b></td>
-            <td class="centered">
-              <a class="btn btn-success" href="add/${year}"><i class="icon-plus-sign icon-white"></i></a>
-            </td>
+          </tr>
+          <tr id="automn">
+            <td class="span12"><b>Automne</b></td>
+            <td class="centered"><a class="btn btn-success" href="add/${year}/Automne"><i
+                class="icon-plus-sign icon-white"></i></a></td>
+          </tr>
+          <tr id="hiver">
+            <td class="span12"><b>Hiver</b></td>
+            <td class="centered"><a class="btn btn-success" href="add/${year}/Hiver"><i
+                class="icon-plus-sign icon-white"></i></a></td>
+          </tr>
+          <tr id="summer">
+            <td class="span12"><b>Été</b></td>
+            <td class="centered"><a class="btn btn-success" href="add/${year}/Ete"><i
+                class="icon-plus-sign icon-white"></i></a></td>
           </tr>
         </c:forEach>
       </table>
