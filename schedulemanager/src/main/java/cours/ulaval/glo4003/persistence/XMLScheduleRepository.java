@@ -79,4 +79,9 @@ public class XMLScheduleRepository implements ScheduleRepository {
 		saveXML();
 	}
 
+	@Override
+	public Schedule findById(String id) {
+		return schedules.get(id);
+	}
+
 }

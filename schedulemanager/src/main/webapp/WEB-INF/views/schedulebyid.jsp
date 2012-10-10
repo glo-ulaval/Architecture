@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<h1>Horaire ${year}</h1>
+				<h1>[ ${schedule.year} ] Horaire ${schedule.id}</h1>
 				<c:choose>
 					<c:when test="${ empty error }"></c:when>
 					<c:when test="${error != 'success'}">

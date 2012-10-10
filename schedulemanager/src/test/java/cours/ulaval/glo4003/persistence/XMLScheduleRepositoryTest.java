@@ -48,6 +48,15 @@ public class XMLScheduleRepositoryTest {
 	}
 
 	@Test
+	public void canFindById() throws Exception {
+		Schedule schedule = mock(Schedule.class);
+		when(schedule.getId()).thenReturn(AN_ID);
+		scheduleRepo.store(schedule);
+
+		assertEquals(schedule, scheduleRepo.findById(AN_ID));
+	}
+
+	@Test
 	public void canStoreASchedule()
 			throws Exception {
 		scheduleRepo.store(mockedSchedule);
