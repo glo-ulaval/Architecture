@@ -20,13 +20,16 @@
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Enseignants :</label>
 			<div class="span8 controls">
-				<div class="btn-group" data-toggle="buttons-radio">
-					<button type="button" class="btn btn-info" onClick=addTeacher(1)>1
-						enseignant</button>
-					<button type="button" class="btn btn-info" onClick=addTeacher(2)>2
-						enseignants</button>
+				<div id="teachers">
+					<select class="input-xlarge" name="teachers" value="${selected}"><option>Thierry
+							Eude</option>
+						<option>Nadia Tawbi</option>
+						<option>Denis Laurendeau</option>
+						<option>C\'est ça la</option>
+						<option>Marc-Philippe Parent</option></select>
 				</div>
-				<div id="teachers"></div>
+				<a class="btn btn-success"
+            onClick=addTeacher()><i class="icon-plus-sign icon-white"></i></a>
 			</div>
 		</div>
 		<c:choose>

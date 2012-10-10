@@ -49,11 +49,15 @@ function addHours(hours) {
 	element.innerHTML = html;
 };
 
-function addTeacher(number) {
+function addTeacher() {
 	var element = document.getElementById("teachers");
-	var html = '';
-	for (i = 0; i < number; i++) {
-		html += '<select class="input-xlarge" name="teachers" value="${selected}"><option>Thierry Eude</option><option>Nadia Tawbi</option><option>Denis Laurendeau</option><option>C\'est ça la</option><option>Marc-Philippe Parent</option></select>';
-	}
-	element.innerHTML = html;
+	var newDiv = document.createElement('div');
+	newDiv.setAttribute('id', 'divteacher');
+	newDiv.innerHTML = "<select class=\"input-xlarge\" name=\"teachers\" value=\"${selected}\"><option>Thierry Eude</option><option>Nadia Tawbi</option><option>Denis Laurendeau</option><option>C\'est ça la</option><option>Marc-Philippe Parent</option></select><a class=\"btn btn-danger removeTeacher\" onClick=removeTeacher()><i class=\"icon-minus-sign icon-white\"></i></a>";
+	element.appendChild(newDiv)
+}
+
+function removeTeacher() {
+	var element = document.getElementById("teachers");
+	element.removeChild(document.getElementById('divteacher'));
 }
