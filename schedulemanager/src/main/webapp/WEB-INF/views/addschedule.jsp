@@ -18,7 +18,7 @@
       <h1>Choisissez l'année de l'horaire.</h1>
     </div>
     <c:if test="${not empty years}">
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
             <th>Année</th>
