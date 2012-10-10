@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div class="btn-group" id="myTab" data-toggle="buttons-radio">
-			<button class="active btn btn-info btn-large"><a class="tab_a" href="#incourse" data-toggle="tab">En
+			<button class="active btn btn-info btn-large"><a class="tab_a" href="#incourse">En
 					classe</a></button>
 			<button class = "btn btn-info btn-large"><a class="tab_a" href="#virtual" data-toggle="tab">Virtuel</a></button>
 			<button class = "btn btn-info btn-large"><a class="tab_a" href="#remotly" data-toggle="tab">À distance</a></button>

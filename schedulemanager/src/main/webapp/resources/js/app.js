@@ -53,7 +53,7 @@ function addTeacher(number) {
 	var element = document.getElementById("teachers");
 	var html = '';
 	for (i = 0; i < number; i++) {
-		html += '<select class="input-xlarge" value="${section.teachers}"><option>Thierry Eude</option><option>Nadia Tawbi</option><option>Denis Laurendeau</option><option>C\'est ça la</option><option>Marc-Philippe Parent</option></select>';
+		html += '<select class="input-xlarge" name="teachers" value="${selected}"><option>Thierry Eude</option><option>Nadia Tawbi</option><option>Denis Laurendeau</option><option>C\'est ça la</option><option>Marc-Philippe Parent</option></select>';
 	}
 	element.innerHTML = html;
 }
