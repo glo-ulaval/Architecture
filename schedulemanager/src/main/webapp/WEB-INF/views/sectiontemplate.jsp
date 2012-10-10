@@ -20,7 +20,7 @@
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Enseignants :</label>
 			<div class="span8 controls">
-				<div id="teachers">
+				<div class="teachers">
 					<select class="input-xlarge" name="teachers" value="${selected}"><option>Thierry
 							Eude</option>
 						<option>Nadia Tawbi</option>
@@ -29,7 +29,7 @@
 						<option>Marc-Philippe Parent</option></select>
 				</div>
 				<a class="btn btn-success"
-            onClick=addTeacher()><i class="icon-plus-sign icon-white"></i></a>
+            onClick=addTeacher("${param.teachmode}")><i class="icon-plus-sign icon-white"></i></a>
 			</div>
 		</div>
 		<c:choose>

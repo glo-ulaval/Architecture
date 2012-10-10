@@ -34,18 +34,21 @@
 			<div class="tab-pane active" id="incourse">
 				<c:import url="sectiontemplate.jsp">
 					<c:param name="credits" value="${course.credits}"></c:param>
+					<c:param name="teachmode" value="incourse"></c:param>
 					<c:param name="isdistance" value="false"></c:param>
 				</c:import>
 			</div>
 			<div class="tab-pane" id="virtual">
 				<c:import url="sectiontemplate.jsp">
 					<c:param name="credits" value="${course.credits}"></c:param>
+					<c:param name="teachmode" value="virtual"></c:param>
 					<c:param name="isdistance" value="false"></c:param>
 				</c:import>
 			</div>
 			<div class="tab-pane" id="remotly">
         <c:import url="sectiontemplate.jsp">
           <c:param name="credits" value="${course.credits}"></c:param>
+          <c:param name="teachmode" value="remotly"></c:param>
           <c:param name="isdistance" value="true"></c:param>
         </c:import>
 			</div>

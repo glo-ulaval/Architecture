@@ -49,15 +49,19 @@ function addHours(hours) {
 	element.innerHTML = html;
 };
 
-function addTeacher() {
-	var element = document.getElementById("teachers");
+function addTeacher(teachmode) {
 	var newDiv = document.createElement('div');
-	newDiv.setAttribute('id', 'divteacher');
-	newDiv.innerHTML = "<select class=\"input-xlarge\" name=\"teachers\" value=\"${selected}\"><option>Thierry Eude</option><option>Nadia Tawbi</option><option>Denis Laurendeau</option><option>C\'est ça la</option><option>Marc-Philippe Parent</option></select><a class=\"btn btn-danger removeTeacher\" onClick=removeTeacher()><i class=\"icon-minus-sign icon-white\"></i></a>";
-	element.appendChild(newDiv)
+	newDiv.setAttribute('class', 'divteacher');
+	newDiv.innerHTML = "<select class=\"input-xlarge\" name=\"teachers\" value=\"${selected}\"><option>Thierry Eude</option><option>Nadia Tawbi</option><option>Denis Laurendeau</option><option>C\'est ça la</option><option>Marc-Philippe Parent</option></select><a class=\"btn btn-danger removeTeacher\" onClick=removeTeacher(\"" + teachmode + "\")><i class=\"icon-minus-sign icon-white\"></i></a>";
+	
+	var pane = document.getElementById(teachmode);
+	var teacher = pane.getElementsByClassName("teachers")[0];
+	teacher.appendChild(newDiv);
 }
 
-function removeTeacher() {
-	var element = document.getElementById("teachers");
-	element.removeChild(document.getElementById('divteacher'));
+function removeTeacher(teachmode) {
+	var pane = document.getElementById(teachmode);
+	var teacher = pane.getElementsByClassName("teachers")[0];
+	var teachers = teacher.getElementsByClassName('divteacher');
+	teacher.removeChild(teachers[teachers.length-1]);
 }
