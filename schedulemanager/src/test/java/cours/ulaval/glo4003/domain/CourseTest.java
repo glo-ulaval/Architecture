@@ -39,13 +39,6 @@ public class CourseTest {
 	}
 
 	@Test
-	public void canGetTotalHours() {
-		course.setCredits(3);
-
-		assertEquals(Course.HOURS_PER_CREDITS * 3, course.getTotalHours());
-	}
-
-	@Test
 	public void canGetAcronym() {
 		String acronym = "An acronym";
 		course.setAcronym(acronym);

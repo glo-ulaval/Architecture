@@ -19,11 +19,6 @@
 	margin-left: 28px;
 }
 
-.personal_hours {
-	text-align: left;
-	margin-top: 10px;
-}
-
 #teachers {
 	margin-top: 9px;
 }
@@ -53,4 +48,9 @@
 	margin-left:-80px;
   margin-right:20px;
   margin-bottom:10px;
+}
+.group input {
+	width:30px;
+	text-align:center;
+	margin:1px;
 }

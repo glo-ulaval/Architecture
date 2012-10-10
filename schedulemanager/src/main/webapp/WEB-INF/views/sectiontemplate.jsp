@@ -4,9 +4,11 @@
 		scope="request"> <input type="hidden" name="acronym"
 		value="${course.acronym}" scope="request">
 	<div class="row-fluid section_details">
-		<div class="span2 pull-right">
+		<div class="span3 pull-right group">
+		    <b>Groupe :   </b><input class="groupInput" type="text" name="group"
+    value="A" scope="request">
 			<b>Crédits &raquo;</b> ${course.credits}
-		</div>
+		</div>  
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Titulaire :</label>
 			<div class="span8 controls">
@@ -70,13 +72,13 @@
 									séances</button>
 							</div>
 							<div id="hours">
-								<select class="input-medium days"><option>Lundi</option>
+								<select class="input-medium days" name="days"><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>
 									<option>Jeudi</option>
 									<option>Vendredi</option></select><input type="text" placeholder="HH:MM"
-									class="input-small" /> &agrave; <input type="text"
-									placeholder="HH:MM" class="input-small" /> <br />
+									class="input-small" name="timeSlotStart"/> &agrave; <input type="text"
+									placeholder="HH:MM" class="input-small" name="timeSlotEnd"/> <br />
 							</div>
 						</div>
 					</div>
@@ -87,31 +89,13 @@
 							dirigé :</label>
 						<div class="span8 controls">
 							<div class="hours">
-								<input type="text" placeholder="HH:MM" class="input-small">
-								à <input type="text" placeholder="HH:MM" class="input-small">
+								<input type="text" placeholder="HH:MM" class="input-small" name="laboTimeSlotStart">
+								à <input type="text" placeholder="HH:MM" class="input-small" name="laboTimeSlotEnd">
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="hours_other_div">
-					<div class="span8 " id="bordered">
-						<label class="span3 control-label">Heures de travail
-							personnel :</label> <label class="span2 control-label centered"><div
-								class="personal_hours">heures</div></label>
-					</div>
-				</div>
 			</c:when>
-			<c:otherwise>
-				<div class="hours_div">
-					<div class="span8 " id="bordered">
-						<label class="span3 control-label">Heures de travail
-							personnel :</label> <label class="span2 control-label centered"><div
-								class="personal_hours">${course.totalHours} heures</div></label> <input
-							type="hidden" name="hoursAtHome" value="${course.totalHours}"
-							scope="request">
-					</div>
-				</div>
-			</c:otherwise>
 		</c:choose>
 	</div>
 	<input type="submit" class="btn btn-success pull-right"

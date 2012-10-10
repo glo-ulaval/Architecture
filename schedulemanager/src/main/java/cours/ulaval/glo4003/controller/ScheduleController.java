@@ -76,9 +76,15 @@ public class ScheduleController {
 			@RequestParam(required = true, value = "teachers") List<String> teachers,
 			@RequestParam(required = true, value = "teachMode") String teachMode,
 			@RequestParam(required = true, value = "acronym") String acronym,
+			@RequestParam(required = true, value = "group") String group,
 			@RequestParam(required = false, value = "hoursInClass") Integer hoursInClass,
 			@RequestParam(required = false, value = "hoursInLab") Integer hoursInLab,
-			@RequestParam(required = true, value = "hoursAtHome") Integer hoursAtHome)
+			@RequestParam(required = true, value = "hoursAtHome") Integer hoursAtHome,
+			@RequestParam(required = false, value = "days") List<String> days,
+			@RequestParam(required = false, value = "timeSlotStart") List<String> timeSlotsStarts,
+			@RequestParam(required = false, value = "timeSlotEnd") List<String> timeSlotsEnds,
+			@RequestParam(required = false, value = "laboTimeSlotStart") String laboTimeSlotStart,
+			@RequestParam(required = false, value = "laboTimeSlotEnd") String laboTimeSlotEnd)
 			throws Exception {
 		return addSchedule(year);
 	}
