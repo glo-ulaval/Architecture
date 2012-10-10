@@ -14,6 +14,8 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/app.js" />" /></script>
 <script type="text/javascript"
+  src="<c:url value="/resources/js/addsection.js" />" /></script>
+<script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.js" />" /></script>
 </head>
 <body>
