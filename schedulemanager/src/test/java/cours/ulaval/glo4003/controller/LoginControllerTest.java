@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -20,6 +22,9 @@ public class LoginControllerTest {
 	@Mock
 	private Principal principal;
 
+	@Mock
+	private HttpServletRequest request;
+
 	@InjectMocks
 	private LoginController controller;
 
@@ -30,7 +35,7 @@ public class LoginControllerTest {
 
 	@Test
 	public void canGetMenu() {
-		assertEquals("menu", controller.menu(model, principal));
+		assertEquals("menu", controller.menu(model, principal, request));
 	}
 
 	@Test

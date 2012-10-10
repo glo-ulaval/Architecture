@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="alert alert-info">
 			<button type="button" class="close" data-dismiss="alert">×</button>
-			<p>Vous êtes connecté en tant que : ${user}</p>
+			<p>Vous êtes connecté en tant que : ${user.idul}</p>
 		</div>
 		<div class="hero-unit">
 			<h1>Menu</h1>

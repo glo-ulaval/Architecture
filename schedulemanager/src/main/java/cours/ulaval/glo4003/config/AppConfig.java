@@ -11,6 +11,7 @@ import cours.ulaval.glo4003.domain.ScheduleRepository;
 import cours.ulaval.glo4003.persistence.XMLCourseRepository;
 import cours.ulaval.glo4003.persistence.XMLOfferingRepository;
 import cours.ulaval.glo4003.persistence.XMLScheduleRepository;
+import cours.ulaval.glo4003.persistence.XMLUserRepository;
 
 @Configuration
 public class AppConfig {
@@ -31,6 +32,12 @@ public class AppConfig {
 	public ScheduleRepository scheduleRepository()
 			throws Exception {
 		return new XMLScheduleRepository();
+	}
+
+	@Bean
+	public XMLUserRepository userRepository()
+			throws Exception {
+		return new XMLUserRepository();
 	}
 
 	@Bean
