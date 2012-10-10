@@ -73,7 +73,8 @@ public class ScheduleController {
 	@RequestMapping(value = "/add/{year}", method = RequestMethod.POST)
 	public ModelAndView postSchedule(@PathVariable String year,
 			@RequestParam(required = true, value = "personInCharge") String personInCharge,
-			@RequestParam(required = false, value = "teachers") List<String> teachers)
+			@RequestParam(required = false, value = "teachers") List<String> teachers,
+			@RequestParam(required = true, value = "teachMode") String teachMode)
 			throws Exception {
 		return addSchedule(year);
 	}

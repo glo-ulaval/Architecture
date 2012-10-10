@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form action="../${year}" method=POST scope="request">
+	<input type="hidden" name="teachMode" value="${param.teachmode}"
+		scope="request">
 	<div class="row-fluid section_details">
 		<div class="span2 pull-right">
 			<b>Crédits &raquo;</b> ${course.credits}
@@ -28,8 +30,8 @@
 						<option>C\'est ça la</option>
 						<option>Marc-Philippe Parent</option></select>
 				</div>
-				<a class="btn btn-success"
-            onClick=addTeacher("${param.teachmode}")><i class="icon-plus-sign icon-white"></i></a>
+				<a class="btn btn-success" onClick=addTeacher("${param.teachmode}")><i
+					class="icon-plus-sign icon-white"></i></a>
 			</div>
 		</div>
 		<c:choose>
@@ -97,6 +99,7 @@
 							personnel :</label> <label class="span2 control-label centered"><div
 								class="personal_hours">${course.totalHours} heures</div></label>
 					</div>
+				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>
