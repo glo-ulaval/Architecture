@@ -1,0 +1,12 @@
+.selectable .ui-selecting {
+	background: grey;
+}
+
+.selectable .ui-selected {
+	background: #4BCC00;
+}
+
+.selectable {
+	list-style-type: none;
+	margin: 0;
+}

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,17 +23,17 @@
 	<div class="container">
 		<div class="alert alert-info">
 			<button type="button" class="close" data-dismiss="alert">×</button>
-			<p>Vous êtes connecté en tant que : ${username}</p>
+			<p>Vous êtes connecté en tant que : ${user}</p>
 		</div>
 		<div class="hero-unit">
 			<h1>Menu</h1>
 			<p>Veuillez sélectionner une option :</p>
 		</div>
 		<sec:authorize access="hasRole('ROLE_Directeur')">
-			<c:import url="menuDirector.jsp" />
+			<c:import url="partialViews/menuDirector.jsp" />
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_Enseignant')">
-			<c:import url="menuTeacher.jsp" />
+			<c:import url="partialViews/menuTeacher.jsp" />
 		</sec:authorize>
 	</div>
 	<c:import url="footer.jsp" />

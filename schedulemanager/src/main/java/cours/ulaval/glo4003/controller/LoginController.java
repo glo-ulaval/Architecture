@@ -2,6 +2,8 @@ package cours.ulaval.glo4003.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	public String menu(ModelMap model, Principal principal) {
+	public String menu(ModelMap model, Principal principal, HttpServletRequest request) {
 
 		String name = principal.getName();
-		model.addAttribute("username", name);
+		request.getSession().setAttribute("user", name);
+
 		return "menu";
 	}
 

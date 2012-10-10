@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 
@@ -18,18 +19,18 @@ public class TeacherController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	@ResponseBody
 	public String availibilities(@RequestBody String availibilityJSON) {
 
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availibility;
 		try {
 			availibility = mapper.readValue(availibilityJSON, AvailabilityModel.class);
-			System.out.println("AVAILIBITY RECEIVED !!! : " + availibility.getMonday().toString());
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "Une erreur est survenue, veuillez réessayer.";
 		}
 
-		return "availabilities";
+		return "Vos disponibilités ont été enregistrés avec succès";
 	}
 
 }

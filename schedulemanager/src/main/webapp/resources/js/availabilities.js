@@ -4,59 +4,96 @@ $(document).ready(function() {
 		postTeacherAvailabilities();
 	});
 
+	$(".selectable").bind("mousedown", function(e) {
+		e.metaKey = true;
+	}).selectable();
+
 });
 
 function postTeacherAvailabilities() {
 
-	var availibilitiesJSON = {
-		"monday" : [ $('#mon8').is(':checked'), $('#mon9').is(':checked'),
-				$('#mon10').is(':checked'), $('#mon11').is(':checked'),
-				$('#mon12').is(':checked'), $('#mon13').is(':checked'),
-				$('#mon14').is(':checked'), $('#mon15').is(':checked'),
-				$('#mon16').is(':checked'), $('#mon17').is(':checked'),
-				$('#mon18').is(':checked'), $('#mon19').is(':checked'),
-				$('#mon20').is(':checked'), ],
-		"tuesday" : [ $('#tue8').is(':checked'), $('#tue9').is(':checked'),
-				$('#tue10').is(':checked'), $('#tue11').is(':checked'),
-				$('#tue12').is(':checked'), $('#tue13').is(':checked'),
-				$('#tue14').is(':checked'), $('#tue15').is(':checked'),
-				$('#tue16').is(':checked'), $('#tue17').is(':checked'),
-				$('#tue18').is(':checked'), $('#tue19').is(':checked'),
-				$('#tue20').is(':checked'), ],
-		"wednesday" : [ $('#wed8').is(':checked'), $('#wed9').is(':checked'),
-				$('#wed10').is(':checked'), $('#wed11').is(':checked'),
-				$('#wed12').is(':checked'), $('#wed13').is(':checked'),
-				$('#wed14').is(':checked'), $('#wed15').is(':checked'),
-				$('#wed16').is(':checked'), $('#wed17').is(':checked'),
-				$('#wed18').is(':checked'), $('#wed19').is(':checked'),
-				$('#wed20').is(':checked'), ],
-		"thursday" : [ $('#thu8').is(':checked'), $('#thu9').is(':checked'),
-				$('#thu10').is(':checked'), $('#thu11').is(':checked'),
-				$('#thu12').is(':checked'), $('#thu13').is(':checked'),
-				$('#thu14').is(':checked'), $('#thu15').is(':checked'),
-				$('#thu16').is(':checked'), $('#thu17').is(':checked'),
-				$('#thu18').is(':checked'), $('#thu19').is(':checked'),
-				$('#thu20').is(':checked'), ],
-		"friday" : [ $('#fri8').is(':checked'), $('#fri9').is(':checked'),
-				$('#fri10').is(':checked'), $('#fri11').is(':checked'),
-				$('#fri12').is(':checked'), $('#fri13').is(':checked'),
-				$('#fri14').is(':checked'), $('#fri15').is(':checked'),
-				$('#fri16').is(':checked'), $('#fri17').is(':checked'),
-				$('#fri18').is(':checked'), $('#fri19').is(':checked'),
-				$('#fri20').is(':checked'), ]
-	};
+	availibilitiesJSON = generateAvailibilitiesJSON();
 
 	$.ajax({
 		url : 'availabilities/edit',
 		type : 'POST',
 		data : JSON.stringify(availibilitiesJSON),
-		success : callback,
-		dataType : "json",
-		contentType : "application/json"
+		success : function(data) {
+			$('#successLabel').show();
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			$('#errorLabel').show();
+			console.log("Error details: " + errorThrown);
+		}
 	});
 }
 
-function callback() {
-	
-	alert('SUCCESS');
+function generateAvailibilitiesJSON() {
+	return {
+		"monday" : [ $('#mon8').hasClass('ui-selected'),
+				$('#mon9').hasClass('ui-selected'),
+				$('#mon10').hasClass('ui-selected'),
+				$('#mon11').hasClass('ui-selected'),
+				$('#mon12').hasClass('ui-selected'),
+				$('#mon13').hasClass('ui-selected'),
+				$('#mon14').hasClass('ui-selected'),
+				$('#mon15').hasClass('ui-selected'),
+				$('#mon16').hasClass('ui-selected'),
+				$('#mon17').hasClass('ui-selected'),
+				$('#mon18').hasClass('ui-selected'),
+				$('#mon19').hasClass('ui-selected'),
+				$('#mon20').hasClass('ui-selected') ],
+		"tuesday" : [ $('#tue8').hasClass('ui-selected'),
+				$('#tue9').hasClass('ui-selected'),
+				$('#tue10').hasClass('ui-selected'),
+				$('#tue11').hasClass('ui-selected'),
+				$('#tue12').hasClass('ui-selected'),
+				$('#tue13').hasClass('ui-selected'),
+				$('#tue14').hasClass('ui-selected'),
+				$('#tue15').hasClass('ui-selected'),
+				$('#tue16').hasClass('ui-selected'),
+				$('#tue17').hasClass('ui-selected'),
+				$('#tue18').hasClass('ui-selected'),
+				$('#tue19').hasClass('ui-selected'),
+				$('#tue20').hasClass('ui-selected') ],
+		"wednesday" : [ $('#wed8').hasClass('ui-selected'),
+				$('#wed9').hasClass('ui-selected'),
+				$('#wed10').hasClass('ui-selected'),
+				$('#wed11').hasClass('ui-selected'),
+				$('#wed12').hasClass('ui-selected'),
+				$('#wed13').hasClass('ui-selected'),
+				$('#wed14').hasClass('ui-selected'),
+				$('#wed15').hasClass('ui-selected'),
+				$('#wed16').hasClass('ui-selected'),
+				$('#wed17').hasClass('ui-selected'),
+				$('#wed18').hasClass('ui-selected'),
+				$('#wed19').hasClass('ui-selected'),
+				$('#wed20').hasClass('ui-selected') ],
+		"thursday" : [ $('#thu8').hasClass('ui-selected'),
+				$('#thu9').hasClass('ui-selected'),
+				$('#thu10').hasClass('ui-selected'),
+				$('#thu11').hasClass('ui-selected'),
+				$('#thu12').hasClass('ui-selected'),
+				$('#thu13').hasClass('ui-selected'),
+				$('#thu14').hasClass('ui-selected'),
+				$('#thu15').hasClass('ui-selected'),
+				$('#thu16').hasClass('ui-selected'),
+				$('#thu17').hasClass('ui-selected'),
+				$('#thu18').hasClass('ui-selected'),
+				$('#thu19').hasClass('ui-selected'),
+				$('#thu20').hasClass('ui-selected') ],
+		"friday" : [ $('#fri8').hasClass('ui-selected'),
+				$('#fri9').hasClass('ui-selected'),
+				$('#fri10').hasClass('ui-selected'),
+				$('#fri11').hasClass('ui-selected'),
+				$('#fri12').hasClass('ui-selected'),
+				$('#fri13').hasClass('ui-selected'),
+				$('#fri14').hasClass('ui-selected'),
+				$('#fri15').hasClass('ui-selected'),
+				$('#fri16').hasClass('ui-selected'),
+				$('#fri17').hasClass('ui-selected'),
+				$('#fri18').hasClass('ui-selected'),
+				$('#fri19').hasClass('ui-selected'),
+				$('#fri20').hasClass('ui-selected') ]
+	};
 }
