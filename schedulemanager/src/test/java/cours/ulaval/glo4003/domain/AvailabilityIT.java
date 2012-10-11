@@ -21,14 +21,14 @@ public class AvailabilityIT {
 	private static final int A_THREE_HOUR_DURATION = 3;
 
 	@Test
-	public void canParseJSONToAvailibilityModel()
+	public void canParseJSONToavailabilityModel()
 			throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		AvailabilityModel availibilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
+		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		assertNotNull(availibilityModel);
-		assertTrue(availibilityModel.getMonday().get(0));
-		assertFalse(availibilityModel.getMonday().get(8));
+		assertNotNull(availabilityModel);
+		assertTrue(availabilityModel.getMonday().get(0));
+		assertFalse(availabilityModel.getMonday().get(8));
 	}
 
 	@Test
@@ -38,18 +38,18 @@ public class AvailabilityIT {
 		Integer duration = A_THREE_HOUR_DURATION;
 		TimeSlot timeSlot = new TimeSlot(startTime, duration);
 		ObjectMapper mapper = new ObjectMapper();
-		AvailabilityModel availibilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
+		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		Availability availabilities = new Availability(availibilityModel, UN_IDUL);
+		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
 
 		assertNotNull(availabilities);
-		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailibilities().get(1).getStartTime()
+		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailabilities().get(1).getStartTime()
 				.get(Calendar.DAY_OF_WEEK));
 		assertEquals(timeSlot.getStartTime().get(Calendar.MINUTE),
-				availabilities.getAvailibilities().get(1).getStartTime().get(Calendar.MINUTE));
-		assertEquals(timeSlot.getDuration(), availabilities.getAvailibilities().get(1).getDuration());
+				availabilities.getAvailabilities().get(1).getStartTime().get(Calendar.MINUTE));
+		assertEquals(timeSlot.getDuration(), availabilities.getAvailabilities().get(1).getDuration());
 		assertEquals(timeSlot.getStartTime().get(Calendar.AM_PM),
-				availabilities.getAvailibilities().get(1).getStartTime().get(Calendar.AM_PM));
+				availabilities.getAvailabilities().get(1).getStartTime().get(Calendar.AM_PM));
 
 	}
 
@@ -60,18 +60,18 @@ public class AvailabilityIT {
 		Integer duration = A_SEVEN_HOUR_DURATION;
 		TimeSlot timeSlot = new TimeSlot(startTime, duration);
 		ObjectMapper mapper = new ObjectMapper();
-		AvailabilityModel availibilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
+		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		Availability availabilities = new Availability(availibilityModel, UN_IDUL);
+		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
 
 		assertNotNull(availabilities);
-		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailibilities().get(0).getStartTime()
+		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailabilities().get(0).getStartTime()
 				.get(Calendar.DAY_OF_WEEK));
 		assertEquals(timeSlot.getStartTime().get(Calendar.MINUTE),
-				availabilities.getAvailibilities().get(0).getStartTime().get(Calendar.MINUTE));
-		assertEquals(timeSlot.getDuration(), availabilities.getAvailibilities().get(0).getDuration());
+				availabilities.getAvailabilities().get(0).getStartTime().get(Calendar.MINUTE));
+		assertEquals(timeSlot.getDuration(), availabilities.getAvailabilities().get(0).getDuration());
 		assertEquals(timeSlot.getStartTime().get(Calendar.AM_PM),
-				availabilities.getAvailibilities().get(0).getStartTime().get(Calendar.AM_PM));
+				availabilities.getAvailabilities().get(0).getStartTime().get(Calendar.AM_PM));
 
 	}
 
