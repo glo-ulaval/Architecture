@@ -11,7 +11,7 @@ public class Availability {
 	private static final int STARTING_HOUR = 8;
 	private static final int THIRTY_MINUTES = 30;
 	private String idul;
-	private List<TimeSlot> availibilities = new ArrayList<TimeSlot>();
+	private List<TimeSlot> availabilities = new ArrayList<TimeSlot>();
 
 	public Availability() {
 		super();
@@ -38,7 +38,7 @@ public class Availability {
 
 				Calendar startTime = convertToTimeSlot(start, dayOfWeek);
 
-				availibilities.add(new TimeSlot(startTime, duration));
+				availabilities.add(new TimeSlot(startTime, duration));
 
 				duration = 0;
 			}
@@ -72,12 +72,12 @@ public class Availability {
 		this.idul = idul;
 	}
 
-	public List<TimeSlot> getAvailibilities() {
-		return availibilities;
+	public List<TimeSlot> getAvailabilities() {
+		return availabilities;
 	}
 
 	public void setAvailibilities(List<TimeSlot> availibilities) {
-		this.availibilities = availibilities;
+		this.availabilities = availibilities;
 	}
 
 }

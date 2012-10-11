@@ -14,18 +14,18 @@ import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 public class TeacherController {
 
 	@RequestMapping(value = "")
-	public String availibilities() {
+	public String availabilities() {
 		return "availabilities";
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
-	public String availibilities(@RequestBody String availibilityJSON) {
+	public String availabilities(@RequestBody String availabilityJSON) {
 
 		ObjectMapper mapper = new ObjectMapper();
-		AvailabilityModel availibility;
+		AvailabilityModel availability;
 		try {
-			availibility = mapper.readValue(availibilityJSON, AvailabilityModel.class);
+			availability = mapper.readValue(availabilityJSON, AvailabilityModel.class);
 		} catch (Exception e) {
 			return "Une erreur est survenue, veuillez réessayer.";
 		}
