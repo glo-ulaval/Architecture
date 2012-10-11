@@ -36,11 +36,11 @@ public class XMLAvailabilityRepositoryIT {
 	public void canLoadAnAvailability() {
 		Availability availability = createAvailabilities();
 
-		assertEquals(availability.getAvailibilities().get(0).getStartTime().get(Calendar.DAY_OF_WEEK),
-				repository.findByIdul(UN_IDUL).getAvailibilities().get(0).getStartTime().get(Calendar.DAY_OF_WEEK));
-		assertEquals(availability.getAvailibilities().get(0).getStartTime().get(Calendar.HOUR), repository.findByIdul(UN_IDUL)
-				.getAvailibilities().get(0).getStartTime().get(Calendar.HOUR));
-		assertEquals(availability.getAvailibilities().get(0).getDuration(), repository.findByIdul(UN_IDUL).getAvailibilities()
+		assertEquals(availability.getAvailabilities().get(0).getStartTime().get(Calendar.DAY_OF_WEEK),
+				repository.findByIdul(UN_IDUL).getAvailabilities().get(0).getStartTime().get(Calendar.DAY_OF_WEEK));
+		assertEquals(availability.getAvailabilities().get(0).getStartTime().get(Calendar.HOUR), repository.findByIdul(UN_IDUL)
+				.getAvailabilities().get(0).getStartTime().get(Calendar.HOUR));
+		assertEquals(availability.getAvailabilities().get(0).getDuration(), repository.findByIdul(UN_IDUL).getAvailabilities()
 				.get(0).getDuration());
 	}
 

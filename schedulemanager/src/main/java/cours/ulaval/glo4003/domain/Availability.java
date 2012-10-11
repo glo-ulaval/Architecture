@@ -17,12 +17,12 @@ public class Availability {
 		super();
 	}
 
-	public Availability(AvailabilityModel availibility, String idul) {
-		findTimeSlots(availibility.getMonday(), Calendar.MONDAY);
-		findTimeSlots(availibility.getTuesday(), Calendar.TUESDAY);
-		findTimeSlots(availibility.getWednesday(), Calendar.WEDNESDAY);
-		findTimeSlots(availibility.getThursday(), Calendar.THURSDAY);
-		findTimeSlots(availibility.getFriday(), Calendar.FRIDAY);
+	public Availability(AvailabilityModel availability, String idul) {
+		findTimeSlots(availability.getMonday(), Calendar.MONDAY);
+		findTimeSlots(availability.getTuesday(), Calendar.TUESDAY);
+		findTimeSlots(availability.getWednesday(), Calendar.WEDNESDAY);
+		findTimeSlots(availability.getThursday(), Calendar.THURSDAY);
+		findTimeSlots(availability.getFriday(), Calendar.FRIDAY);
 		this.idul = idul;
 	}
 
@@ -76,8 +76,8 @@ public class Availability {
 		return availabilities;
 	}
 
-	public void setAvailibilities(List<TimeSlot> availibilities) {
-		this.availabilities = availibilities;
+	public void setAvailabilities(List<TimeSlot> availabilities) {
+		this.availabilities = availabilities;
 	}
 
 }
