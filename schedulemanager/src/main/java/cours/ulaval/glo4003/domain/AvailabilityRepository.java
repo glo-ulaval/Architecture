@@ -4,6 +4,7 @@ public interface AvailabilityRepository {
 
 	public Availability findByIdul(String idul);
 
-	public void store(Availability availabilities);
+	public void store(Availability availabilities)
+			throws Exception;
 
 }

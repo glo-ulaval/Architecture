@@ -35,7 +35,8 @@ public class XMLAvailabilityRepositoryTest {
 	}
 
 	@Test
-	public void canFindAnAvailabilityWithAnIdul() {
+	public void canFindAnAvailabilityWithAnIdul()
+			throws Exception {
 		repo.store(availability);
 
 		assertEquals(availability, repo.findByIdul(UN_IDUL));

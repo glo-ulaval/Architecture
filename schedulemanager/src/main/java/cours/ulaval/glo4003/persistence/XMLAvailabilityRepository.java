@@ -1,10 +1,13 @@
 package cours.ulaval.glo4003.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cours.ulaval.glo4003.domain.Availability;
 import cours.ulaval.glo4003.domain.AvailabilityRepository;
+import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLAvailabilityRepository implements AvailabilityRepository {
 
@@ -14,6 +17,7 @@ public class XMLAvailabilityRepository implements AvailabilityRepository {
 	public XMLAvailabilityRepository()
 			throws Exception {
 		serializer = new XMLSerializer<AvailabilityXMLWrapper>(AvailabilityXMLWrapper.class);
+		parseXML();
 	}
 
 	@Override
@@ -22,12 +26,25 @@ public class XMLAvailabilityRepository implements AvailabilityRepository {
 	}
 
 	@Override
-	public void store(Availability availability) {
+	public void store(Availability availability)
+			throws Exception {
 		this.availabilities.put(availability.getIdul(), availability);
 		saveXML();
 	}
 
-	private void saveXML() {
-		// TODO
+	public void parseXML()
+			throws Exception {
+		List<Availability> deserializedAvailabilities = serializer.deserialize(
+				ConfigManager.getConfigManager().getAvailabilitiesFilePath()).getAvailabilities();
+		for (Availability availability : deserializedAvailabilities) {
+			availabilities.put(availability.getIdul(), availability);
+		}
+	}
+
+	private void saveXML()
+			throws Exception {
+		AvailabilityXMLWrapper availabilityDTO = new AvailabilityXMLWrapper();
+		availabilityDTO.setAvailabilities(new ArrayList<Availability>(availabilities.values()));
+		serializer.serialize(availabilityDTO, ConfigManager.getConfigManager().getAvailabilitiesFilePath());
 	}
 }

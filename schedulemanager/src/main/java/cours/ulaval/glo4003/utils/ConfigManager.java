@@ -38,4 +38,8 @@ public final class ConfigManager {
 	public String getSchedulesFilepath() {
 		return properties.getProperty("SchedulesFilePath");
 	}
+
+	public String getAvailabilitiesFilePath() {
+		return properties.getProperty("AvailabilitiesFilePath");
+	}
 }
