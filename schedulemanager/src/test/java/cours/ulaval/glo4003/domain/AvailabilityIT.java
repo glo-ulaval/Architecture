@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 
-public class AvailabilitiesIT {
+public class AvailabilityIT {
 
 	private static final String UN_IDUL = "UN_IDUL";
 	private static final String JSON_STRING = "{\"monday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"tuesday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"wednesday\":[true,true,true,true,true,true,true,true,true,true,false,false,false],\"thursday\":[false,false,false,false,false,true,true,true,true,true,true,true,true],\"friday\":[true,true,true,true,true,true,true,true,true,true,false,false,false]}";
@@ -40,7 +40,7 @@ public class AvailabilitiesIT {
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availibilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		Availabilities availabilities = new Availabilities(availibilityModel, UN_IDUL);
+		Availability availabilities = new Availability(availibilityModel, UN_IDUL);
 
 		assertNotNull(availabilities);
 		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailibilities().get(1).getStartTime()
@@ -62,7 +62,7 @@ public class AvailabilitiesIT {
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availibilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		Availabilities availabilities = new Availabilities(availibilityModel, UN_IDUL);
+		Availability availabilities = new Availability(availibilityModel, UN_IDUL);
 
 		assertNotNull(availabilities);
 		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailibilities().get(0).getStartTime()

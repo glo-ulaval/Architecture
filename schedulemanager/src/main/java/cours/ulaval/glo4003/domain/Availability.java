@@ -6,18 +6,18 @@ import java.util.List;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 
-public class Availabilities {
+public class Availability {
 
 	private static final int STARTING_HOUR = 8;
 	private static final int THIRTY_MINUTES = 30;
 	private String idul;
 	private List<TimeSlot> availibilities = new ArrayList<TimeSlot>();
 
-	public Availabilities() {
+	public Availability() {
 		super();
 	}
 
-	public Availabilities(AvailabilityModel availibility, String idul) {
+	public Availability(AvailabilityModel availibility, String idul) {
 		findTimeSlots(availibility.getMonday(), Calendar.MONDAY);
 		findTimeSlots(availibility.getTuesday(), Calendar.TUESDAY);
 		findTimeSlots(availibility.getWednesday(), Calendar.WEDNESDAY);

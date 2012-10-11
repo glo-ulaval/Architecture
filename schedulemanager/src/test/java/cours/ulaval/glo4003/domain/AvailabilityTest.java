@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 
-public class AvailabilitiesTest {
+public class AvailabilityTest {
 
 	private static final String JSON_STRING = "{\"monday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"tuesday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"wednesday\":[true,true,true,true,true,true,true,true,true,true,false,false,false],\"thursday\":[false,false,false,false,false,true,true,true,true,true,true,true,true],\"friday\":[true,true,true,true,true,true,true,true,true,true,false,false,false]}";
 
@@ -23,7 +23,7 @@ public class AvailabilitiesTest {
 	AvailabilityModel availabilityModel;
 
 	@InjectMocks
-	Availabilities availabilities;
+	Availability availabilities;
 
 	@Before
 	public void setUp()
