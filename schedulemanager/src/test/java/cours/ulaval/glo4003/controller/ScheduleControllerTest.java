@@ -19,12 +19,14 @@ import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.OfferingRepository;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.ScheduleRepository;
+import cours.ulaval.glo4003.domain.Semester;
 
 public class ScheduleControllerTest {
 
 	private final String AN_ACRONYM = "IFT-2002";
 	private final String A_YEAR = "2012";
 	private final String AN_ID = "82987";
+	private final Semester A_SEMESTER = Semester.Automne;
 
 	@Mock
 	private CourseRepository mockedCourseRepository;
@@ -50,7 +52,7 @@ public class ScheduleControllerTest {
 		List<String> years = Arrays.asList(A_YEAR);
 		courses = Arrays.asList(course);
 		when(mockedOfferingRepository.findYears()).thenReturn(years);
-		when(mockedOfferingRepository.find(A_YEAR)).thenReturn(offering);
+		when(mockedOfferingRepository.find(A_YEAR, A_SEMESTER)).thenReturn(offering);
 		when(mockedCourseRepository.findByOffering(offering)).thenReturn(courses);
 		when(mockedCourseRepository.findByAcronym(AN_ACRONYM)).thenReturn(course);
 		when(mockedScheduleRepository.findById(AN_ID)).thenReturn(schedule);
@@ -80,7 +82,7 @@ public class ScheduleControllerTest {
 	@Test
 	public void addScheduleWithYearReturnsTheCorrectModelAndView()
 			throws Exception {
-		ModelAndView mv = controller.addSchedule(A_YEAR);
+		ModelAndView mv = controller.addSchedule(A_YEAR, A_SEMESTER);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
 		assertEquals(courses, mv.getModel().get("courses"));
@@ -88,10 +90,11 @@ public class ScheduleControllerTest {
 
 	@Test
 	public void addSectionReturnsTheCorrectModelAndView() {
-		ModelAndView mv = controller.addSection(A_YEAR, AN_ACRONYM);
+		ModelAndView mv = controller.addSection(A_YEAR, A_SEMESTER, AN_ACRONYM);
 
 		assertEquals(AN_ACRONYM, mv.getModel().get("acronym"));
 		assertEquals(course, mv.getModel().get("course"));
 		assertEquals(A_YEAR, mv.getModel().get("year"));
+		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
 	}
 }

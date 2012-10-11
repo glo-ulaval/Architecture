@@ -10,12 +10,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import cours.ulaval.glo4003.domain.Offering;
+import cours.ulaval.glo4003.domain.Semester;
 
 public class XMLOfferingRepositoryTest {
 	private static final String VALID_YEAR = "2011";
+	private static final Semester A_SEMESTER = Semester.Ete;
 
-	@Mock
-	private XMLSerializer<OfferingXMLWrapper> serializer;
 	@Mock
 	private Offering offering;
 	@InjectMocks
@@ -25,6 +25,7 @@ public class XMLOfferingRepositoryTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		when(offering.getYear()).thenReturn(VALID_YEAR);
+		when(offering.getSemester()).thenReturn(A_SEMESTER);
 	}
 
 	@Test
@@ -37,7 +38,16 @@ public class XMLOfferingRepositoryTest {
 			throws Exception {
 		repository.store(offering);
 
-		assertEquals(offering, repository.find(VALID_YEAR));
+		assertEquals(offering, repository.find(VALID_YEAR, A_SEMESTER));
+	}
+
+	@Test
+	public void canStoreAnOfferingWhenRepositoryAlreadyContainsYear()
+			throws Exception {
+		repository.store(offering);
+
+		repository.store(offering);
+		assertEquals(offering, repository.find(VALID_YEAR, A_SEMESTER));
 	}
 
 	@Test
@@ -45,7 +55,7 @@ public class XMLOfferingRepositoryTest {
 			throws Exception {
 		repository.store(offering);
 
-		assertEquals(offering, repository.find(VALID_YEAR));
+		assertEquals(offering, repository.find(VALID_YEAR, A_SEMESTER));
 	}
 
 	@Test
@@ -62,8 +72,32 @@ public class XMLOfferingRepositoryTest {
 			throws Exception {
 		repository.store(offering);
 
-		repository.delete(VALID_YEAR);
+		repository.delete(VALID_YEAR, A_SEMESTER);
 
-		assertNull(repository.find(VALID_YEAR));
+		assertNull(repository.find(VALID_YEAR, A_SEMESTER));
+	}
+
+	@Test
+	public void canCheckIfContainsOffering()
+			throws Exception {
+		repository.store(offering);
+
+		assertTrue(repository.containsOfferingFor(VALID_YEAR, A_SEMESTER));
+	}
+
+	@Test
+	public void canCheckIfContainsOfferingWhenYearDoesntExist()
+			throws Exception {
+		repository.store(offering);
+
+		assertFalse(repository.containsOfferingFor("AN_INVALID_YEAR", Semester.Ete));
+	}
+
+	@Test
+	public void canCheckIfContainsOfferingWhenSemesterDoesntExist()
+			throws Exception {
+		repository.store(offering);
+
+		assertFalse(repository.containsOfferingFor(VALID_YEAR, Semester.Automne));
 	}
 }

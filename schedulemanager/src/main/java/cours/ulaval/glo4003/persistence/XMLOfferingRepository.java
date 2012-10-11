@@ -7,14 +7,16 @@ import java.util.Map;
 
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.OfferingRepository;
+import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLOfferingRepository implements OfferingRepository {
 
 	private XMLSerializer<OfferingXMLWrapper> serializer;
-	private Map<String, Offering> offerings = new HashMap<String, Offering>();
+	private Map<String, Map<Semester, Offering>> offerings = new HashMap<String, Map<Semester, Offering>>();
 
-	public XMLOfferingRepository() throws Exception {
+	public XMLOfferingRepository()
+			throws Exception {
 		serializer = new XMLSerializer<OfferingXMLWrapper>(OfferingXMLWrapper.class);
 		parseXML();
 	}
@@ -31,35 +33,62 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	@Override
-	public Offering find(String year) {
-		return offerings.get(year);
+	public Offering find(String year, Semester semester) {
+		return offerings.get(year).get(semester);
 	}
 
 	@Override
-	public void store(Offering offering) throws Exception {
-		offerings.put(offering.getYear(), offering);
+	public Boolean containsOfferingFor(String year, Semester semester) {
+		if (!offerings.containsKey(year) || !offerings.get(year).containsKey(semester)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void store(Offering offering)
+			throws Exception {
+		if (!offerings.containsKey(offering.getYear())) {
+			offerings.put(offering.getYear(), new HashMap<Semester, Offering>());
+		}
+		offerings.get(offering.getYear()).put(offering.getSemester(), offering);
 		saveXML();
 	}
 
 	@Override
-	public void delete(String year) throws Exception {
+	public void delete(String year, Semester semester)
+			throws Exception {
+		offerings.get(year).remove(semester);
+		saveXML();
+	}
+
+	@Override
+	public void delete(String year)
+			throws Exception {
 		offerings.remove(year);
 		saveXML();
 	}
 
-	private void parseXML() throws Exception {
-		List<Offering> deserializedOfferings = serializer.deserialize(
-				ConfigManager.getConfigManager().getOfferingsFilePath())
+	private void parseXML()
+			throws Exception {
+		List<Offering> deserializedOfferings = serializer.deserialize(ConfigManager.getConfigManager().getOfferingsFilePath())
 				.getOfferings();
 		for (Offering offering : deserializedOfferings) {
-			offerings.put(offering.getYear(), offering);
+			if (!offerings.containsKey(offering.getYear())) {
+				offerings.put(offering.getYear(), new HashMap<Semester, Offering>());
+			}
+			offerings.get(offering.getYear()).put(offering.getSemester(), offering);
 		}
 	}
 
-	private void saveXML() throws Exception {
+	private void saveXML()
+			throws Exception {
 		OfferingXMLWrapper offeringDTO = new OfferingXMLWrapper();
-		offeringDTO.setOfferings(new ArrayList<Offering>(offerings.values()));
-		serializer.serialize(offeringDTO, ConfigManager.getConfigManager()
-				.getOfferingsFilePath());
+		List<Offering> offeringList = new ArrayList<Offering>();
+		for (Map<Semester, Offering> map : offerings.values()) {
+			offeringList.addAll(map.values());
+		}
+		offeringDTO.setOfferings(offeringList);
+		serializer.serialize(offeringDTO, ConfigManager.getConfigManager().getOfferingsFilePath());
 	}
 }

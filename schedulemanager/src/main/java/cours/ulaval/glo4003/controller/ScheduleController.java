@@ -16,6 +16,7 @@ import cours.ulaval.glo4003.domain.CourseRepository;
 import cours.ulaval.glo4003.domain.OfferingRepository;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.ScheduleRepository;
+import cours.ulaval.glo4003.domain.Semester;
 
 @Controller
 @RequestMapping(value = "/schedule")
@@ -60,18 +61,19 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/add/{year}", method = RequestMethod.GET)
-	public ModelAndView addSchedule(@PathVariable String year)
+	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.GET)
+	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester)
 			throws Exception {
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
-		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
+		mv.addObject("semester", semester);
+		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester)));
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/add/{year}", method = RequestMethod.POST)
-	public ModelAndView postSchedule(@PathVariable String year,
+	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.POST)
+	public ModelAndView postSchedule(@PathVariable String year, @PathVariable Semester semester,
 			@RequestParam(required = true, value = "personInCharge") String personInCharge,
 			@RequestParam(required = true, value = "teachers") List<String> teachers,
 			@RequestParam(required = true, value = "teachMode") String teachMode,
@@ -86,14 +88,16 @@ public class ScheduleController {
 			@RequestParam(required = false, value = "laboTimeSlotStart") String laboTimeSlotStart,
 			@RequestParam(required = false, value = "laboTimeSlotEnd") String laboTimeSlotEnd)
 			throws Exception {
-		return addSchedule(year);
+		return addSchedule(year, semester);
 	}
 
-	@RequestMapping(value = "/add/{year}/addsection", method = RequestMethod.GET)
-	public ModelAndView addSection(@PathVariable String year, @RequestParam(required = true, value = "acronym") String acronym) {
+	@RequestMapping(value = "/add/{year}/{semester}/addsection", method = RequestMethod.GET)
+	public ModelAndView addSection(@PathVariable String year, @PathVariable Semester semester,
+			@RequestParam(required = true, value = "acronym") String acronym) {
 		ModelAndView mv = new ModelAndView("addsection");
 		mv.addObject("acronym", acronym);
 		mv.addObject("course", courseRepository.findByAcronym(acronym));
+		mv.addObject("semester", semester);
 		mv.addObject("year", year);
 
 		return mv;

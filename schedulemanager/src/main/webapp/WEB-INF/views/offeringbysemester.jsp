@@ -16,7 +16,7 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<h1>Offre de cours ${year}</h1>
+				<h1>Offre de cours ${year} - ${semester}</h1>
 				<c:choose>
 					<c:when test="${ empty error }"></c:when>
 					<c:when test="${error != 'success'}">
@@ -49,7 +49,7 @@
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
 								<td class="centered"><a class="btn btn-danger"
-									href="deletecourse?year=${year}&acronym=${course.acronym}"><i
+									href="deletecourse?acronym=${course.acronym}&semester=${semester}"><i
 										class="icon-trash icon-white"></i></a></td>
 							</tr>
 						</c:forEach>
@@ -60,7 +60,7 @@
 		<div class="row-fluid">
 			<div class="span12 well">
 				<h3>Ajouter un cours à cette offre</h3>
-				<a href="availablecourses?year=${year}" class="btn btn-success">Ajouter
+				<a href="availablecourses?semester=${semester}" class="btn btn-success">Ajouter
 					un cours &raquo;</a>
 			</div>
 		</div>

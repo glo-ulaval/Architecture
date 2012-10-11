@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<h1>Ajout d'une section au cours ${acronym}</h1>
+				<h1>Ajout d'une section au cours ${acronym} - ${semester}</h1>
 			</div>
 		</div>
 		<div class="btn-group" id="myTab" data-toggle="buttons-radio">
