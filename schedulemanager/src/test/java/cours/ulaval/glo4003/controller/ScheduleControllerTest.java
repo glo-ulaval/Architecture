@@ -57,7 +57,7 @@ public class ScheduleControllerTest {
 		courses = Arrays.asList(course);
 		when(mockedOfferingRepository.findYears()).thenReturn(years);
 		when(mockedOfferingRepository.find(A_YEAR, A_SEMESTER)).thenReturn(offering);
-		when(mockedCourseRepository.findByOffering(offering)).thenReturn(courses);
+		when(mockedCourseRepository.findByOffering(offering, Semester.Automne)).thenReturn(courses);
 		when(mockedCourseRepository.findByAcronym(AN_ACRONYM)).thenReturn(course);
 		when(mockedScheduleRepository.findById(A_SCHEDULE_ID)).thenReturn(schedule);
 	}

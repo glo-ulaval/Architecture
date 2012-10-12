@@ -7,28 +7,52 @@ import cours.ulaval.glo4003.domain.exception.InvalidOfferingOperation;
 
 public class Offering {
 	private String year;
-	private Semester semester;
-	private List<String> acronyms = new ArrayList<String>();
+	private List<String> fallOffering = new ArrayList<String>();
+	private List<String> winterOffering = new ArrayList<String>();
+	private List<String> summerOffering = new ArrayList<String>();
 
 	public Offering() {
-		super();
 	}
 
-	public Offering(String year, Semester semester) {
+	public Offering(String year) {
 		this.year = year;
-		this.semester = semester;
 	}
 
-	public List<String> getAcronyms() {
-		return acronyms;
+	public void addCourse(String acronym, Semester semester)
+			throws InvalidOfferingOperation {
+		if (!getBySemester(semester).contains(acronym)) {
+			getBySemester(semester).add(acronym);
+		} else {
+			throw new InvalidOfferingOperation("Le cours " + acronym + " est déjà dans l'offre de cours de l'année " + year);
+		}
 	}
 
-	public void setAcronyms(List<String> acronyms) {
-		this.acronyms = acronyms;
+	public void removeCourse(String acronym, Semester semester)
+			throws InvalidOfferingOperation {
+		if (!getBySemester(semester).remove(acronym)) {
+			throw new InvalidOfferingOperation("Impossible de retirer le cours " + acronym + " de l'offre de cours de l'année "
+					+ year);
+		}
 	}
 
-	public void setOffering(List<String> courses) {
-		this.acronyms = courses;
+	public List<String> getBySemester(Semester semester) {
+		if (semester == Semester.Automne) {
+			return fallOffering;
+		} else if (semester == Semester.Hiver) {
+			return winterOffering;
+		} else {
+			return summerOffering;
+		}
+	}
+
+	public void setBySemester(Semester semester, ArrayList<String> acronyms) {
+		if (semester == Semester.Automne) {
+			fallOffering = acronyms;
+		} else if (semester == Semester.Hiver) {
+			winterOffering = acronyms;
+		} else {
+			summerOffering = acronyms;
+		}
 	}
 
 	public String getYear() {
@@ -39,28 +63,28 @@ public class Offering {
 		this.year = year;
 	}
 
-	public Semester getSemester() {
-		return semester;
+	public List<String> getFallOffering() {
+		return fallOffering;
 	}
 
-	public void setSemester(Semester semester) {
-		this.semester = semester;
+	public void setFallOffering(List<String> fallOffering) {
+		this.fallOffering = fallOffering;
 	}
 
-	public void addCourse(String acronym)
-			throws InvalidOfferingOperation {
-		if (!acronyms.contains(acronym)) {
-			acronyms.add(acronym);
-		} else {
-			throw new InvalidOfferingOperation("Le cours " + acronym + " est déjà dans l'offre de cours de l'année " + year);
-		}
+	public List<String> getWinterOffering() {
+		return winterOffering;
 	}
 
-	public void removeCourse(String acronym)
-			throws InvalidOfferingOperation {
-		if (!acronyms.remove(acronym)) {
-			throw new InvalidOfferingOperation("Impossible de retirer le cours " + acronym + " de l'offre de cours de l'année "
-					+ year);
-		}
+	public void setWinterOffering(List<String> winterOffering) {
+		this.winterOffering = winterOffering;
 	}
+
+	public List<String> getSummerOffering() {
+		return summerOffering;
+	}
+
+	public void setSummerOffering(List<String> summerOffering) {
+		this.summerOffering = summerOffering;
+	}
+
 }
