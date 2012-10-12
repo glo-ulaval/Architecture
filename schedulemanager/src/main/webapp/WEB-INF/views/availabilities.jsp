@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ page session="true"%>
@@ -14,6 +15,10 @@
 	href="<c:url value="/resources/css/availibilities.css" />">
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+	
+<script type="text/javascript">
+	var json = ${availabilitiesJSON};
+</script>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript"
@@ -124,8 +129,7 @@
 				</ol>
 			</div>
 		</div>
-		<br />
-		<br />
+		<br /> <br />
 		<div class="row-fluid">
 			<div class="span12">
 				<button class="btn btn-primary" id="submit">Enregistrer mes

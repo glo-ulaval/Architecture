@@ -5,9 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
+import cours.ulaval.glo4003.domain.repository.UserRepository;
+import cours.ulaval.glo4003.persistence.XMLAvailabilityRepository;
 import cours.ulaval.glo4003.persistence.XMLCourseRepository;
 import cours.ulaval.glo4003.persistence.XMLOfferingRepository;
 import cours.ulaval.glo4003.persistence.XMLScheduleRepository;
@@ -35,9 +38,15 @@ public class AppConfig {
 	}
 
 	@Bean
-	public XMLUserRepository userRepository()
+	public UserRepository userRepository()
 			throws Exception {
 		return new XMLUserRepository();
+	}
+
+	@Bean
+	public AvailabilityRepository availabilityRepository()
+			throws Exception {
+		return new XMLAvailabilityRepository();
 	}
 
 	@Bean

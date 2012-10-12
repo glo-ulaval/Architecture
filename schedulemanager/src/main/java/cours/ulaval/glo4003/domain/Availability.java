@@ -12,6 +12,7 @@ public class Availability {
 	private static final int THIRTY_MINUTES = 30;
 	private String idul;
 	private List<TimeSlot> availabilities = new ArrayList<TimeSlot>();
+	private AvailabilityModel model;
 
 	public Availability() {
 		super();
@@ -24,6 +25,7 @@ public class Availability {
 		findTimeSlots(availability.getThursday(), DayOfWeek.THURSDAY);
 		findTimeSlots(availability.getFriday(), DayOfWeek.FRIDAY);
 		this.idul = idul;
+		this.model = availability;
 	}
 
 	private void findTimeSlots(List<Boolean> listOfBoolean, DayOfWeek dayOfWeek) {
@@ -67,4 +69,11 @@ public class Availability {
 		this.availabilities = availabilities;
 	}
 
+	public AvailabilityModel getModel() {
+		return model;
+	}
+
+	public void setModel(AvailabilityModel model) {
+		this.model = model;
+	}
 }

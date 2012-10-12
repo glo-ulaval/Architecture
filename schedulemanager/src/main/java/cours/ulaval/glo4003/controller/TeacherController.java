@@ -1,13 +1,20 @@
 package cours.ulaval.glo4003.controller;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
+import cours.ulaval.glo4003.domain.Availability;
+import cours.ulaval.glo4003.domain.User;
+import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
 @Controller
 @RequestMapping(value = "/availabilities")
@@ -15,18 +22,39 @@ public class TeacherController {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
+	@Inject
+	private AvailabilityRepository repository;
+
 	@RequestMapping(value = "")
-	public String availabilities() {
-		return "availabilities";
+	public ModelAndView availabilities(HttpServletRequest request) {
+
+		User user = (User) request.getSession().getAttribute("user");
+		AvailabilityModel model = repository.findByIdul(user.getIdul()).getModel();
+
+		String availabilitiesJSON;
+		ModelAndView mv = new ModelAndView("availabilities");
+		try {
+			availabilitiesJSON = mapper.writeValueAsString(model);
+
+			mv.addObject("availabilitiesJSON", availabilitiesJSON);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return mv;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
-	public String availabilities(@RequestBody String availabilityJSON) {
+	public String availabilities(@RequestBody String availabilityJSON, HttpServletRequest request) {
 
-		AvailabilityModel availability;
+		User user = (User) request.getSession().getAttribute("user");
+
+		AvailabilityModel model;
 		try {
-			availability = mapper.readValue(availabilityJSON, AvailabilityModel.class);
+			model = mapper.readValue(availabilityJSON, AvailabilityModel.class);
+			Availability availability = new Availability(model, user.getIdul());
+			repository.store(availability);
 		} catch (Exception e) {
 			return "Une erreur est survenue, veuillez réessayer.";
 		}
