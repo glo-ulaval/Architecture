@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Section;
-import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
@@ -30,7 +29,6 @@ public class SectionModelTest {
 		sectionModel.setAcronym("");
 		sectionModel.setGroup("");
 		sectionModel.setPersonInCharge("");
-		sectionModel.setSemester(Semester.Ete);
 		sectionModel.setTeachers(new ArrayList<String>());
 		sectionModel.setTeachMode("Virtual");
 		sectionModel.setHoursAtHome(2);
@@ -45,8 +43,8 @@ public class SectionModelTest {
 		sectionModel.setLabDays(A_DAY);
 
 		Section section = sectionModel.convertToSection();
-		List<TimeSlot> timeSlots = section.getLabTimeSlot();
-		Time tStartConverted = timeSlots.get(0).getStartTime();
+		TimeSlot timeSlot = section.getLabTimeSlot();
+		Time tStartConverted = timeSlot.getStartTime();
 		Time tStartExpected = new Time(START_HOURS, START_MIN);
 
 		assertTrue(tStartConverted.equals(tStartExpected));

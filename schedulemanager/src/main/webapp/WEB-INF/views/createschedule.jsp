@@ -55,11 +55,11 @@
               <tr id="${section.nrc}">
                 <td><b>${section.acronym} - ${section.nrc} - ${section.group}</b></td>
                 <c:url value="/schedule/editsection/${id}/${section.nrc}" var="url"/>
-                <td class="centered"><a class="btn btn-warning"
+                <td class="centered"><a class="btn btn-danger pull-right"
                   href="${url}"><i
-                    class="icon-edit"></i></a><a class="btn btn-danger"
+                    class="icon-trash icon-white"></i></a><a class="btn btn-warning pull-right"
                   href="${url}"><i
-                    class="icon-trash icon-white"></i></a></td>
+                    class="icon-edit"></i></a></td>
               </tr>
             </c:forEach>
           </table>

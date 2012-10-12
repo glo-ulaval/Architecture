@@ -2,7 +2,6 @@ package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,11 +30,10 @@ public class SectionTest {
 		TimeDedicated timeDedicated = new TimeDedicated();
 		TeachMode teachMode = TeachMode.InCourse;
 		List<TimeSlot> courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
-		List<TimeSlot> labTimeSlot = new ArrayList<TimeSlot>();
+		TimeSlot labTimeSlot = new TimeSlot();
 		String courseAcronym = "GLO_4002";
 
-		Section section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym,
-				courseTimeSlot, labTimeSlot);
+		Section section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot, labTimeSlot);
 
 		assertEquals(nrc, section.getNrc());
 		assertEquals(group, section.getGroup());

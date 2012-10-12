@@ -2,7 +2,6 @@ package cours.ulaval.glo4003.persistence;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,14 +24,13 @@ public class XMLScheduleRepositoryIT {
 	private static Schedule anotherSchedule;
 
 	@Before
-	public void setUp()
-			throws Exception {
+	public void setUp() throws Exception {
 		TimeSlot timeSlot = new TimeSlot(generateStartTime(), 3, DayOfWeek.MONDAY);
 		TimeDedicated timeDedicated = generatedTimeDedicated();
-		Section section = new Section("87135", "A", "Derp McDerp", Arrays.asList("Herp McCoy", "Patches O'Hoolahan"),
-				TeachMode.InCourse, timeDedicated, "GLO-4003", Arrays.asList(timeSlot), new ArrayList<TimeSlot>());
-		Section anotherSection = new Section("90659", "A", "Herp McHerpington", Arrays.asList("Tom Seleck"), TeachMode.Virtual,
-				timeDedicated, "IFT_2001", Arrays.asList(timeSlot), new ArrayList<TimeSlot>());
+		Section section = new Section("87135", "A", "Derp McDerp", Arrays.asList("Herp McCoy", "Patches O'Hoolahan"), TeachMode.InCourse,
+				timeDedicated, "GLO-4003", Arrays.asList(timeSlot), new TimeSlot());
+		Section anotherSection = new Section("90659", "A", "Herp McHerpington", Arrays.asList("Tom Seleck"), TeachMode.Virtual, timeDedicated,
+				"IFT_2001", Arrays.asList(timeSlot), new TimeSlot());
 
 		aSchedule = new Schedule("DERP");
 		aSchedule.setPersonInCharge("Nadia Tawbi");
@@ -49,14 +47,12 @@ public class XMLScheduleRepositoryIT {
 	}
 
 	@After
-	public void tearDown()
-			throws Exception {
+	public void tearDown() throws Exception {
 		repository.clearAll();
 	}
 
 	@Test
-	public void canSaveASchedule()
-			throws Exception {
+	public void canSaveASchedule() throws Exception {
 		repository.store(aSchedule);
 
 		XMLScheduleRepository anotherRepository = new XMLScheduleRepository();
@@ -69,8 +65,7 @@ public class XMLScheduleRepositoryIT {
 	}
 
 	@Test
-	public void canDeleteASchedule()
-			throws Exception {
+	public void canDeleteASchedule() throws Exception {
 		repository.store(anotherSchedule);
 
 		repository.delete("ID");
@@ -81,8 +76,7 @@ public class XMLScheduleRepositoryIT {
 	}
 
 	@Test
-	public void canFindAllSchedules()
-			throws Exception {
+	public void canFindAllSchedules() throws Exception {
 		repository.store(aSchedule);
 		repository.store(anotherSchedule);
 		XMLScheduleRepository anotherRepository = new XMLScheduleRepository();
@@ -93,8 +87,7 @@ public class XMLScheduleRepositoryIT {
 	}
 
 	@Test
-	public void canFindScheduleByYear()
-			throws Exception {
+	public void canFindScheduleByYear() throws Exception {
 		repository.store(aSchedule);
 		repository.store(anotherSchedule);
 		XMLScheduleRepository anotherRepository = new XMLScheduleRepository();

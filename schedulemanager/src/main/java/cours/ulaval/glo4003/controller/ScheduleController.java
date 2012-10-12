@@ -50,8 +50,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView scheduleById(@PathVariable String id)
-			throws Exception {
+	public ModelAndView scheduleById(@PathVariable String id) throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyid");
 
 		List<Section> sections = new ArrayList<Section>(scheduleRepository.findById(id).getSections().values());
@@ -63,8 +62,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView addSchedule()
-			throws Exception {
+	public ModelAndView addSchedule() throws Exception {
 		ModelAndView mv = new ModelAndView("addschedule");
 		mv.addObject("years", offeringRepository.findYears());
 
@@ -72,8 +70,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.GET)
-	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester)
-			throws Exception {
+	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester) throws Exception {
 		Schedule schedule = new Schedule(year + "-" + semester);
 		schedule.setYear(year);
 		schedule.setSemester(semester);
@@ -91,8 +88,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.POST)
 	public ModelAndView postSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@ModelAttribute("section") SectionModel section)
-			throws Exception {
+			@ModelAttribute("section") SectionModel section) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
 
@@ -125,8 +121,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
-	public ModelAndView deleteSchedule(@PathVariable String scheduleId)
-			throws Exception {
+	public ModelAndView deleteSchedule(@PathVariable String scheduleId) throws Exception {
 		ModelAndView mv = new ModelAndView("deleteschedule");
 
 		scheduleRepository.delete(scheduleId);

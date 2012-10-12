@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import cours.ulaval.glo4003.domain.Section;
-import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.TeachMode;
 import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
@@ -25,7 +24,6 @@ public class SectionModel {
 	private String laboTimeSlotEnd;
 	private Integer nrc;
 	private String personInCharge;
-	private Semester semester;
 	private List<String> teachers;
 	private String teachMode;
 	private List<String> timeSlotStarts;
@@ -40,7 +38,17 @@ public class SectionModel {
 	}
 
 	public SectionModel(Section section) {
+		this.nrc = Integer.valueOf(section.getNrc());
+		this.group = section.getGroup();
+		this.personInCharge = section.getPersonInCharge();
+		this.teachers = section.getTeachers();
+		this.teachMode = section.getTeachMode().toString();
+		this.acronym = section.getCourseAcronym();
 
+		TimeDedicated timeDedicated = section.getTimeDedicated();
+		this.hoursInClass = timeDedicated.getCourseHours();
+		this.hoursInLab = timeDedicated.getLabHours();
+		this.hoursAtHome = timeDedicated.getOthersHours();
 	}
 
 	public Section convertToSection() {
@@ -51,15 +59,14 @@ public class SectionModel {
 		section.setPersonInCharge(personInCharge);
 		section.setTeachers(teachers);
 		section.setTeachMode(TeachMode.valueOf(teachMode));
-		section.setLabTimeSlot(new ArrayList<TimeSlot>());
+		section.setLabTimeSlot(new TimeSlot());
 
 		TimeDedicated timeDedicated = new TimeDedicated(hoursInClass, hoursInLab, hoursAtHome);
 		section.setTimeDedicated(timeDedicated);
 
 		if (StringUtils.isNotEmpty(labDay) && StringUtils.isNotEmpty(laboTimeSlotStart) && StringUtils.isNotEmpty(laboTimeSlotEnd)) {
-			List<TimeSlot> labTimeslot = new ArrayList<TimeSlot>();
-			labTimeslot.add(convertTimeSlot(labDay, laboTimeSlotStart, laboTimeSlotEnd));
-			section.setLabTimeSlot(labTimeslot);
+			TimeSlot labTimeSlot = convertTimeSlot(labDay, laboTimeSlotStart, laboTimeSlotEnd);
+			section.setLabTimeSlot(labTimeSlot);
 		}
 
 		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
@@ -156,14 +163,6 @@ public class SectionModel {
 
 	public void setPersonInCharge(String personInCharge) {
 		this.personInCharge = personInCharge;
-	}
-
-	public Semester getSemester() {
-		return semester;
-	}
-
-	public void setSemester(Semester semester) {
-		this.semester = semester;
 	}
 
 	public List<String> getTeachers() {

@@ -12,13 +12,13 @@ public class Section {
 	private TimeDedicated timeDedicated;
 	private String courseAcronym;
 	private List<TimeSlot> courseTimeSlots;
-	private List<TimeSlot> labTimeSlot;
+	private TimeSlot labTimeSlot;
 
 	public Section() {
 	}
 
-	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode,
-			TimeDedicated timeDedicated, String courseAcronym, List<TimeSlot> courseTimeSlots, List<TimeSlot> labTimeSlot) {
+	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode, TimeDedicated timeDedicated,
+			String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
 		super();
 		this.nrc = nrc;
 		this.group = group;
@@ -95,11 +95,11 @@ public class Section {
 		this.courseTimeSlots = courseTimeSlots;
 	}
 
-	public List<TimeSlot> getLabTimeSlot() {
+	public TimeSlot getLabTimeSlot() {
 		return labTimeSlot;
 	}
 
-	public void setLabTimeSlot(List<TimeSlot> labTimeSlot) {
+	public void setLabTimeSlot(TimeSlot labTimeSlot) {
 		this.labTimeSlot = labTimeSlot;
 	}
 
