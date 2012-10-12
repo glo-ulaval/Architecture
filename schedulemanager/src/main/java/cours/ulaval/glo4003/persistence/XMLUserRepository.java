@@ -17,6 +17,9 @@ public class XMLUserRepository implements UserRepository {
 		// directement.
 		User teacher = new User("enseignant", "pass", Role.Enseignant);
 		users.put(teacher.getIdul(), teacher);
+
+		User director = new User("directeur", "pass", Role.Directeur);
+		users.put(director.getIdul(), director);
 	}
 
 	public User findByIdul(String idul) {
