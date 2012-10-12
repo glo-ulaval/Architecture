@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
@@ -85,8 +86,22 @@ public class ScheduleController {
 	public ModelAndView postSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@ModelAttribute("section") SectionModel section)
 			throws Exception {
+		Schedule schedule = scheduleRepository.findById(id);
+		schedule.add(section.convertToSection());
 
-		return addSchedule(year, semester);
+		ModelAndView mv = new ModelAndView("createschedule");
+		mv.addObject("year", year);
+		mv.addObject("semester", semester);
+		mv.addObject("id", id);
+		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester)));
+
+		List<SectionModel> sections = new ArrayList<SectionModel>();
+		for (Section sectionInSchedule : schedule.getSections().values()) {
+			sections.add(new SectionModel(sectionInSchedule));
+		}
+		mv.addObject("sections", sections);
+
+		return mv;
 	}
 
 	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.GET)

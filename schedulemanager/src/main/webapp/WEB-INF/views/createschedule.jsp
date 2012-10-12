@@ -43,6 +43,27 @@
 			</div>
 			<div class="span6">
 				<h1>Sections de cours</h1>
+        <c:if test="${not empty sections}">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Sections</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <c:forEach var="section" items="${sections}">
+              <tr id="${section.nrc}">
+                <td><b>${section.acronym} - ${section.nrc} - ${section.group}</b></td>
+                <c:url value="/schedule/editsection/${id}/${section.nrc}" var="url"/>
+                <td class="centered"><a class="btn btn-warning"
+                  href="${url}"><i
+                    class="icon-edit"></i></a><a class="btn btn-danger"
+                  href="${url}"><i
+                    class="icon-trash icon-white"></i></a></td>
+              </tr>
+            </c:forEach>
+          </table>
+        </c:if>
 			</div>
 		</div>
 		<a class="btn btn-success pull-right" href="../${year}">Générer</a>

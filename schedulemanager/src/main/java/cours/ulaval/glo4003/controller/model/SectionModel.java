@@ -178,4 +178,11 @@ public class SectionModel {
 		this.timeSlotEnds = timeSlotEnds;
 	}
 
+	public Integer getNrc() {
+		return nrc;
+	}
+
+	public void setNrc(Integer nrc) {
+		this.nrc = nrc;
+	}
 }
