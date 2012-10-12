@@ -81,7 +81,7 @@ public class ScheduleController {
 		return addSchedule(year, semester);
 	}
 
-	@RequestMapping(value = "/add/{year}/{semester}/addsection", method = RequestMethod.GET)
+	@RequestMapping(value = "/addsection/{year}/{semester}", method = RequestMethod.GET)
 	public ModelAndView addSection(@PathVariable String year, @PathVariable Semester semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 		ModelAndView mv = new ModelAndView("addsection");
