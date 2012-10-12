@@ -24,7 +24,6 @@ public class LoginController {
 	public String menu(ModelMap model, Principal principal, HttpServletRequest request) {
 
 		User user = userRepository.findByIdul(principal.getName());
-		System.out.println(principal.getName());
 		request.getSession().setAttribute("user", user);
 
 		return "menu";
@@ -40,9 +39,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public ModelAndView logout(ModelMap model) {
+	public ModelAndView logout(ModelMap model, HttpServletRequest request) {
+
+		request.getSession().invalidate();
 
 		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("logout", "Vous avez été déconnecté avec success");
 		return mv;
 
 	}

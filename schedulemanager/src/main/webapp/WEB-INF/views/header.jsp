@@ -19,7 +19,7 @@
 							<a class="btn btn-inverse" href="#">
 								<i class="icon-user icon-white"></i><b class="username">${user.idul}</b>
 							</a>
-							<a class="btn btn-inverse" href="<c:url value="/" />">
+							<a class="btn btn-inverse" href="<c:url value="/logout" />">
 								<i class="icon-remove icon-white"></i>
 							</a>
 						</div>
