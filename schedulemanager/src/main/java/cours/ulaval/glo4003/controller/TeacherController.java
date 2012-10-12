@@ -13,6 +13,8 @@ import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 @RequestMapping(value = "/availabilities")
 public class TeacherController {
 
+	private ObjectMapper mapper = new ObjectMapper();
+
 	@RequestMapping(value = "")
 	public String availabilities() {
 		return "availabilities";
@@ -22,7 +24,6 @@ public class TeacherController {
 	@ResponseBody
 	public String availabilities(@RequestBody String availabilityJSON) {
 
-		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availability;
 		try {
 			availability = mapper.readValue(availabilityJSON, AvailabilityModel.class);
