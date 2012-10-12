@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.domain.User;
-import cours.ulaval.glo4003.domain.UserRepository;
+import cours.ulaval.glo4003.domain.repository.UserRepository;
 
 @Controller
 public class LoginController {

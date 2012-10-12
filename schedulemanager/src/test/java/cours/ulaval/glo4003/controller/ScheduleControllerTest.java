@@ -14,12 +14,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.domain.Course;
-import cours.ulaval.glo4003.domain.CourseRepository;
 import cours.ulaval.glo4003.domain.Offering;
-import cours.ulaval.glo4003.domain.OfferingRepository;
 import cours.ulaval.glo4003.domain.Schedule;
-import cours.ulaval.glo4003.domain.ScheduleRepository;
 import cours.ulaval.glo4003.domain.Semester;
+import cours.ulaval.glo4003.domain.repository.CourseRepository;
+import cours.ulaval.glo4003.domain.repository.OfferingRepository;
+import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
 
 public class ScheduleControllerTest {
 

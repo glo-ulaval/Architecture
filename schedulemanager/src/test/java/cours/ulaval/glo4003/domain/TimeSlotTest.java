@@ -3,10 +3,9 @@ package cours.ulaval.glo4003.domain;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import org.junit.Test;
-
-import cours.ulaval.glo4003.domain.TimeSlot;
 
 public class TimeSlotTest {
 
@@ -46,7 +45,7 @@ public class TimeSlotTest {
 	}
 
 	private Calendar generateStartTime() {
-		Calendar startTime = Calendar.getInstance();
+		Calendar startTime = Calendar.getInstance(Locale.CANADA_FRENCH);
 		startTime.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 		startTime.set(Calendar.HOUR, A_HOUR);
 		startTime.set(Calendar.MINUTE, A_MINUTE);

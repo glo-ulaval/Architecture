@@ -1,4 +1,6 @@
-package cours.ulaval.glo4003.domain;
+package cours.ulaval.glo4003.domain.repository;
+
+import cours.ulaval.glo4003.domain.Availability;
 
 public interface AvailabilityRepository {
 

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cours.ulaval.glo4003.domain.Availability;
-import cours.ulaval.glo4003.domain.AvailabilityRepository;
+import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLAvailabilityRepository implements AvailabilityRepository {

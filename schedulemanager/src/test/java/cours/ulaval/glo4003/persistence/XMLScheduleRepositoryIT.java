@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.After;
 import org.junit.Before;
@@ -110,9 +111,9 @@ public class XMLScheduleRepositoryIT {
 	}
 
 	private static Calendar generateStartTime() {
-		Calendar startTime = Calendar.getInstance();
+		Calendar startTime = Calendar.getInstance(Locale.FRENCH);
 		startTime.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		startTime.set(Calendar.HOUR, 10);
+		startTime.set(Calendar.HOUR, 13);
 		startTime.set(Calendar.MINUTE, 30);
 		return startTime;
 	}

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import cours.ulaval.glo4003.domain.Offering;
-import cours.ulaval.glo4003.domain.OfferingRepository;
 import cours.ulaval.glo4003.domain.Semester;
+import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLOfferingRepository implements OfferingRepository {

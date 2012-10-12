@@ -1,6 +1,8 @@
-package cours.ulaval.glo4003.domain;
+package cours.ulaval.glo4003.domain.repository;
 
 import java.util.List;
+
+import cours.ulaval.glo4003.domain.Schedule;
 
 public interface ScheduleRepository {
 

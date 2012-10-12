@@ -1,6 +1,9 @@
-package cours.ulaval.glo4003.domain;
+package cours.ulaval.glo4003.domain.repository;
 
 import java.util.List;
+
+import cours.ulaval.glo4003.domain.Course;
+import cours.ulaval.glo4003.domain.Offering;
 
 public interface CourseRepository {
 

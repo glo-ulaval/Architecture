@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cours.ulaval.glo4003.domain.Schedule;
-import cours.ulaval.glo4003.domain.ScheduleRepository;
+import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLScheduleRepository implements ScheduleRepository {
