@@ -9,6 +9,21 @@ target/
 *.ear
 
 # Eclipse #
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+*.classpath
+.classpath
+.settings/
+.loadpath
 
 # External tool builders
 .externalToolBuilders/
