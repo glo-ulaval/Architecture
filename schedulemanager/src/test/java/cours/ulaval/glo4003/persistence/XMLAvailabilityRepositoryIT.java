@@ -3,7 +3,6 @@ package cours.ulaval.glo4003.persistence;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Before;
@@ -36,10 +35,10 @@ public class XMLAvailabilityRepositoryIT {
 	public void canLoadAnAvailability() {
 		Availability availability = createAvailabilities();
 
-		assertEquals(availability.getAvailabilities().get(0).getStartTime().get(Calendar.DAY_OF_WEEK),
-				repository.findByIdul(UN_IDUL).getAvailabilities().get(0).getStartTime().get(Calendar.DAY_OF_WEEK));
-		assertEquals(availability.getAvailabilities().get(0).getStartTime().get(Calendar.HOUR), repository.findByIdul(UN_IDUL)
-				.getAvailabilities().get(0).getStartTime().get(Calendar.HOUR));
+		assertEquals(availability.getAvailabilities().get(0).getDayOfWeek(), repository.findByIdul(UN_IDUL).getAvailabilities()
+				.get(0).getDayOfWeek());
+		assertEquals(availability.getAvailabilities().get(0).getStartTime().getHour(), repository.findByIdul(UN_IDUL)
+				.getAvailabilities().get(0).getStartTime().getHour());
 		assertEquals(availability.getAvailabilities().get(0).getDuration(), repository.findByIdul(UN_IDUL).getAvailabilities()
 				.get(0).getDuration());
 	}

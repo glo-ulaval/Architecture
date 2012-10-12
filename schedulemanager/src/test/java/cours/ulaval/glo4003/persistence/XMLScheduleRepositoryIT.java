@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,8 +13,10 @@ import org.junit.Test;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TeachMode;
+import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class XMLScheduleRepositoryIT {
 	private static Schedule aSchedule;
@@ -26,7 +26,7 @@ public class XMLScheduleRepositoryIT {
 	@Before
 	public void setUp()
 			throws Exception {
-		TimeSlot timeSlot = new TimeSlot(generateStartTime(), 3);
+		TimeSlot timeSlot = new TimeSlot(generateStartTime(), 3, DayOfWeek.MONDAY);
 		TimeDedicated timeDedicated = generatedTimeDedicated();
 		Section section = new Section("87135", "A", "Derp McDerp", Arrays.asList("Herp McCoy", "Patches O'Hoolahan"),
 				TeachMode.InCourse, timeDedicated, "GLO-4003", Arrays.asList(timeSlot), new ArrayList<TimeSlot>());
@@ -110,11 +110,8 @@ public class XMLScheduleRepositoryIT {
 		return timeDedicated;
 	}
 
-	private static Calendar generateStartTime() {
-		Calendar startTime = Calendar.getInstance(Locale.FRENCH);
-		startTime.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		startTime.set(Calendar.HOUR, 13);
-		startTime.set(Calendar.MINUTE, 30);
+	private static Time generateStartTime() {
+		Time startTime = new Time(13, 30);
 		return startTime;
 	}
 }

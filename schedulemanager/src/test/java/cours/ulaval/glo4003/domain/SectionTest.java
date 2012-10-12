@@ -4,15 +4,11 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.Section;
-import cours.ulaval.glo4003.domain.TeachMode;
-import cours.ulaval.glo4003.domain.TimeDedicated;
-import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class SectionTest {
 	private static final int A_HOUR = 10;
@@ -34,7 +30,7 @@ public class SectionTest {
 		List<String> teachers = Arrays.asList("teacher1", "teacher2");
 		TimeDedicated timeDedicated = new TimeDedicated();
 		TeachMode teachMode = TeachMode.InCourse;
-		List<TimeSlot> courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3));
+		List<TimeSlot> courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
 		List<TimeSlot> labTimeSlot = new ArrayList<TimeSlot>();
 		String courseAcronym = "GLO_4002";
 
@@ -52,11 +48,8 @@ public class SectionTest {
 		assertEquals(courseAcronym, section.getCourseAcronym());
 	}
 
-	private Calendar generateTimeSlotStartTime() {
-		Calendar startTime = Calendar.getInstance();
-		startTime.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		startTime.set(Calendar.HOUR, A_HOUR);
-		startTime.set(Calendar.MINUTE, A_MINUTE);
+	private Time generateTimeSlotStartTime() {
+		Time startTime = new Time(A_HOUR, A_MINUTE);
 		return startTime;
 	}
 }

@@ -1,10 +1,10 @@
 package cours.ulaval.glo4003.domain;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class Availability {
 
@@ -18,15 +18,15 @@ public class Availability {
 	}
 
 	public Availability(AvailabilityModel availability, String idul) {
-		findTimeSlots(availability.getMonday(), Calendar.MONDAY);
-		findTimeSlots(availability.getTuesday(), Calendar.TUESDAY);
-		findTimeSlots(availability.getWednesday(), Calendar.WEDNESDAY);
-		findTimeSlots(availability.getThursday(), Calendar.THURSDAY);
-		findTimeSlots(availability.getFriday(), Calendar.FRIDAY);
+		findTimeSlots(availability.getMonday(), DayOfWeek.MONDAY);
+		findTimeSlots(availability.getTuesday(), DayOfWeek.TUESDAY);
+		findTimeSlots(availability.getWednesday(), DayOfWeek.WEDNESDAY);
+		findTimeSlots(availability.getThursday(), DayOfWeek.THURSDAY);
+		findTimeSlots(availability.getFriday(), DayOfWeek.FRIDAY);
 		this.idul = idul;
 	}
 
-	private void findTimeSlots(List<Boolean> listOfBoolean, int dayOfWeek) {
+	private void findTimeSlots(List<Boolean> listOfBoolean, DayOfWeek dayOfWeek) {
 		int duration = 0;
 		listOfBoolean.add(false);
 		for (int i = 0; i < listOfBoolean.size(); i++) {
@@ -36,32 +36,19 @@ public class Availability {
 			} else if (duration != 0) {
 				int start = i - duration;
 
-				Calendar startTime = convertToTimeSlot(start, dayOfWeek);
+				TimeSlot startTime = convertToTimeSlot(start, dayOfWeek, duration);
 
-				availabilities.add(new TimeSlot(startTime, duration));
+				availabilities.add(startTime);
 
 				duration = 0;
 			}
 		}
 	}
 
-	private Calendar convertToTimeSlot(int start, int dayOfWeek) {
-		Calendar startTime = Calendar.getInstance();
-
-		if (start + STARTING_HOUR > 12) {
-			// Reformat to 12h format
-			start = (start + STARTING_HOUR) - 12;
-			startTime.set(Calendar.AM_PM, Calendar.PM);
-		} else {
-			start = (start + STARTING_HOUR);
-			startTime.set(Calendar.AM_PM, Calendar.AM);
-		}
-
-		startTime.set(Calendar.HOUR, start);
-		startTime.set(Calendar.MINUTE, THIRTY_MINUTES);
-		startTime.set(Calendar.DAY_OF_WEEK, dayOfWeek);
-
-		return startTime;
+	private TimeSlot convertToTimeSlot(int start, DayOfWeek dayOfWeek, int duration) {
+		Time startTime = new Time(start + STARTING_HOUR, THIRTY_MINUTES);
+		TimeSlot timeSlot = new TimeSlot(startTime, duration, dayOfWeek);
+		return timeSlot;
 	}
 
 	public String getIdul() {

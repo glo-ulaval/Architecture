@@ -2,12 +2,11 @@ package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class AvailabilityIT {
 
@@ -32,55 +31,26 @@ public class AvailabilityIT {
 	}
 
 	@Test
-	public void canConvertAvailabilityModelToAvailabilitiesWithPMValues()
+	public void canConvertAvailabilityModelToAvailabilities()
 			throws Exception {
-		Calendar startTime = generateStartTime(EIGHTEEN_O_CLOCK, THIRTY_MINUTES, Calendar.PM);
-		Integer duration = A_THREE_HOUR_DURATION;
-		TimeSlot timeSlot = new TimeSlot(startTime, duration);
-		ObjectMapper mapper = new ObjectMapper();
-		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
-
-		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
-
-		assertNotNull(availabilities);
-		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailabilities().get(1).getStartTime()
-				.get(Calendar.DAY_OF_WEEK));
-		assertEquals(timeSlot.getStartTime().get(Calendar.MINUTE),
-				availabilities.getAvailabilities().get(1).getStartTime().get(Calendar.MINUTE));
-		assertEquals(timeSlot.getDuration(), availabilities.getAvailabilities().get(1).getDuration());
-		assertEquals(timeSlot.getStartTime().get(Calendar.AM_PM),
-				availabilities.getAvailabilities().get(1).getStartTime().get(Calendar.AM_PM));
-
-	}
-
-	@Test
-	public void canConvertAvailabilityModelToAvailabilitiesWithAMValues()
-			throws Exception {
-		Calendar startTime = generateStartTime(EIGHT_O_CLOCK, THIRTY_MINUTES, Calendar.AM);
+		Time startTime = generateStartTime(EIGHT_O_CLOCK, THIRTY_MINUTES);
 		Integer duration = A_SEVEN_HOUR_DURATION;
-		TimeSlot timeSlot = new TimeSlot(startTime, duration);
+		TimeSlot timeSlot = new TimeSlot(startTime, duration, DayOfWeek.MONDAY);
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
 		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
 
 		assertNotNull(availabilities);
-		assertEquals(timeSlot.getStartTime().get(Calendar.DAY_OF_WEEK), availabilities.getAvailabilities().get(0).getStartTime()
-				.get(Calendar.DAY_OF_WEEK));
-		assertEquals(timeSlot.getStartTime().get(Calendar.MINUTE),
-				availabilities.getAvailabilities().get(0).getStartTime().get(Calendar.MINUTE));
+		assertEquals(timeSlot.getDayOfWeek(), availabilities.getAvailabilities().get(0).getDayOfWeek());
+		assertEquals(timeSlot.getStartTime().getMinute(), availabilities.getAvailabilities().get(0).getStartTime().getMinute());
+		assertEquals(timeSlot.getStartTime().getHour(), availabilities.getAvailabilities().get(0).getStartTime().getHour());
 		assertEquals(timeSlot.getDuration(), availabilities.getAvailabilities().get(0).getDuration());
-		assertEquals(timeSlot.getStartTime().get(Calendar.AM_PM),
-				availabilities.getAvailabilities().get(0).getStartTime().get(Calendar.AM_PM));
 
 	}
 
-	private Calendar generateStartTime(int hour, int minutes, int am_pm) {
-		Calendar startTime = Calendar.getInstance();
-		startTime.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		startTime.set(Calendar.HOUR, hour);
-		startTime.set(Calendar.MINUTE, minutes);
-		startTime.set(Calendar.AM_PM, am_pm);
+	private Time generateStartTime(int hour, int minutes) {
+		Time startTime = new Time(hour, minutes);
 		return startTime;
 	}
 }

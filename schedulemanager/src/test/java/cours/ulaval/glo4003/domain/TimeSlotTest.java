@@ -2,10 +2,9 @@ package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
-import java.util.Locale;
-
 import org.junit.Test;
+
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class TimeSlotTest {
 
@@ -15,10 +14,10 @@ public class TimeSlotTest {
 
 	@Test
 	public void canInstantiateTimeSlotWithStartTimeAndDuration() {
-		Calendar startTime = generateStartTime();
+		Time startTime = generateStartTime();
 		Integer duration = A_DURATION;
 
-		TimeSlot timeSlot = new TimeSlot(startTime, duration);
+		TimeSlot timeSlot = new TimeSlot(startTime, duration, DayOfWeek.MONDAY);
 
 		assertNotNull(timeSlot);
 		assertEquals(startTime, timeSlot.getStartTime());
@@ -27,28 +26,27 @@ public class TimeSlotTest {
 
 	@Test
 	public void shouldCalculateCorrespondingEndTimeOnInstantiation() {
-		Calendar startTime = generateStartTime();
+		Time startTime = generateStartTime();
 		Integer duration = A_DURATION;
-		Calendar endTime = generateEndTime();
+		Time endTime = generateEndTime();
 
-		TimeSlot timeSlot = new TimeSlot(startTime, duration);
+		TimeSlot timeSlot = new TimeSlot(startTime, duration, DayOfWeek.MONDAY);
 
-		assertEquals(endTime.get(Calendar.HOUR), timeSlot.getEndTime().get(Calendar.HOUR));
-		assertEquals(endTime.get(Calendar.MINUTE), timeSlot.getEndTime().get(Calendar.MINUTE));
+		assertEquals(endTime.getHour(), timeSlot.getEndTime().getHour());
+		assertEquals(endTime.getMinute(), timeSlot.getEndTime().getMinute());
 	}
 
-	private Calendar generateEndTime() {
-		Calendar endTime = Calendar.getInstance();
-		endTime.set(Calendar.HOUR, A_HOUR + A_DURATION);
-		endTime.set(Calendar.MINUTE, A_MINUTE);
+	private Time generateEndTime() {
+		Time endTime = new Time();
+		endTime.setHour(A_HOUR + A_DURATION);
+		endTime.setMinute(A_MINUTE);
 		return endTime;
 	}
 
-	private Calendar generateStartTime() {
-		Calendar startTime = Calendar.getInstance(Locale.CANADA_FRENCH);
-		startTime.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		startTime.set(Calendar.HOUR, A_HOUR);
-		startTime.set(Calendar.MINUTE, A_MINUTE);
+	private Time generateStartTime() {
+		Time startTime = new Time();
+		startTime.setHour(A_HOUR);
+		startTime.setMinute(A_MINUTE);
 		return startTime;
 	}
 

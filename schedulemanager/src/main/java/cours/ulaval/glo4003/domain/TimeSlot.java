@@ -1,26 +1,30 @@
 package cours.ulaval.glo4003.domain;
 
-import java.util.Calendar;
-
 public class TimeSlot {
-	private Calendar startTime;
-	private Calendar endTime;
+	public enum DayOfWeek {
+		SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
+	}
+
+	private Time startTime;
+	private Time endTime;
+	private DayOfWeek dayOfWeek;
 	private Integer duration;
 
 	public TimeSlot() {
 	}
 
-	public TimeSlot(Calendar startTime, Integer duration) {
+	public TimeSlot(Time startTime, Integer duration, DayOfWeek dayOfWeek) {
 		this.startTime = startTime;
 		this.duration = duration;
+		this.dayOfWeek = dayOfWeek;
 		calculateEndTime();
 	}
 
-	public Calendar getStartTime() {
+	public Time getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Calendar startTime) {
+	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
 	}
 
@@ -32,16 +36,24 @@ public class TimeSlot {
 		this.duration = duration;
 	}
 
-	public Calendar getEndTime() {
+	public Time getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Calendar endTime) {
+	public void setEndTime(Time endTime) {
 		this.endTime = endTime;
 	}
 
+	public DayOfWeek getDayOfWeek() {
+		return dayOfWeek;
+	}
+
+	public void setDayOfWeek(DayOfWeek dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
+	}
+
 	private void calculateEndTime() {
-		endTime = (Calendar) startTime.clone();
-		endTime.add(Calendar.HOUR, duration);
+		endTime = new Time(startTime.getHour(), startTime.getMinute());
+		endTime.addHours(duration);
 	}
 }
