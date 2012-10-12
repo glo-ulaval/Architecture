@@ -53,7 +53,7 @@ public class ScheduleControllerTest {
 		courses = Arrays.asList(course);
 		when(mockedOfferingRepository.findYears()).thenReturn(years);
 		when(mockedOfferingRepository.find(A_YEAR, A_SEMESTER)).thenReturn(offering);
-		when(mockedCourseRepository.findByOffering(offering)).thenReturn(courses);
+		when(mockedCourseRepository.findByOffering(offering, Semester.Automne)).thenReturn(courses);
 		when(mockedCourseRepository.findByAcronym(AN_ACRONYM)).thenReturn(course);
 		when(mockedScheduleRepository.findById(AN_ID)).thenReturn(schedule);
 	}
@@ -64,21 +64,24 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleByYearReturnsTheCorrectModelAndView() throws Exception {
+	public void scheduleByYearReturnsTheCorrectModelAndView()
+			throws Exception {
 		ModelAndView mv = controller.scheduleById(AN_ID);
 
 		assertEquals(schedule, mv.getModel().get("schedule"));
 	}
 
 	@Test
-	public void addScheduleReturnsTheCorrectModelAndView() throws Exception {
+	public void addScheduleReturnsTheCorrectModelAndView()
+			throws Exception {
 		ModelAndView mv = controller.addSchedule();
 
 		assertEquals(mockedOfferingRepository.findYears(), mv.getModel().get("years"));
 	}
 
 	@Test
-	public void addScheduleWithYearReturnsTheCorrectModelAndView() throws Exception {
+	public void addScheduleWithYearReturnsTheCorrectModelAndView()
+			throws Exception {
 		ModelAndView mv = controller.addSchedule(A_YEAR, A_SEMESTER);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
