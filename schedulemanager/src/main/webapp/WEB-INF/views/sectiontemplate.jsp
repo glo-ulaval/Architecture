@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<form action="../${year}" method=POST scope="request">
+<form action="../${semester}" method=POST scope="request" commandName="section">
 	<input type="hidden" name="teachMode" value="${param.teachmode}"
 		scope="request"> <input type="hidden" name="acronym"
 		value="${course.acronym}" scope="request">
@@ -40,7 +40,7 @@
 		<c:choose>
 			<c:when test="${!param.isdistance}">
 				<div class="span8" id="bordered">
-					<label class="span3 control-label">Répartition des cours :</label>
+					<label class="span3 control-label">Temps consacré :</label>
 					<div class="span8 controls">
 						<div id="hour_group">
 							<label class="control-label" for="hours_class">En classe</label>
@@ -77,8 +77,8 @@
 									<option>Mercredi</option>
 									<option>Jeudi</option>
 									<option>Vendredi</option></select><input type="text" placeholder="HH:MM"
-									class="input-small" name="timeSlotStart"/> &agrave; <input type="text"
-									placeholder="HH:MM" class="input-small" name="timeSlotEnd"/> <br />
+									class="input-small" name="timeSlotStarts"/> &agrave; <input type="text"
+									placeholder="HH:MM" class="input-small" name="timeSlotEnds"/> <br />
 							</div>
 						</div>
 					</div>
