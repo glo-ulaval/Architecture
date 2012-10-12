@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.TeachMode;
 import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
@@ -36,6 +37,7 @@ public class XMLScheduleRepositoryIT {
 		aSchedule = new Schedule("DERP");
 		aSchedule.setPersonInCharge("Nadia Tawbi");
 		aSchedule.setYear("2011-2012");
+		aSchedule.setSemester(Semester.Automne);
 		aSchedule.add(section);
 		aSchedule.add(anotherSection);
 
