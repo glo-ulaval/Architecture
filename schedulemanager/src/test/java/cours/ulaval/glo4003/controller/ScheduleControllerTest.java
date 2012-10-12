@@ -27,6 +27,7 @@ public class ScheduleControllerTest {
 	private final String A_YEAR = "2012";
 	private final String AN_ID = "82987";
 	private final Semester A_SEMESTER = Semester.Automne;
+	private final String A_SCHEDULE_ID = "ScheduleId";
 
 	@Mock
 	private CourseRepository mockedCourseRepository;
@@ -64,21 +65,24 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleByYearReturnsTheCorrectModelAndView() throws Exception {
+	public void scheduleByYearReturnsTheCorrectModelAndView()
+			throws Exception {
 		ModelAndView mv = controller.scheduleById(AN_ID);
 
 		assertEquals(schedule, mv.getModel().get("schedule"));
 	}
 
 	@Test
-	public void addScheduleReturnsTheCorrectModelAndView() throws Exception {
+	public void addScheduleReturnsTheCorrectModelAndView()
+			throws Exception {
 		ModelAndView mv = controller.addSchedule();
 
 		assertEquals(mockedOfferingRepository.findYears(), mv.getModel().get("years"));
 	}
 
 	@Test
-	public void addScheduleWithYearReturnsTheCorrectModelAndView() throws Exception {
+	public void addScheduleWithYearReturnsTheCorrectModelAndView()
+			throws Exception {
 		ModelAndView mv = controller.addSchedule(A_YEAR, A_SEMESTER);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
@@ -87,12 +91,13 @@ public class ScheduleControllerTest {
 
 	@Test
 	public void addSectionReturnsTheCorrectModelAndView() {
-		ModelAndView mv = controller.addSection(A_YEAR, A_SEMESTER, AN_ACRONYM);
+		ModelAndView mv = controller.addSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, AN_ACRONYM);
 
 		assertEquals(AN_ACRONYM, mv.getModel().get("acronym"));
 		assertEquals(course, mv.getModel().get("course"));
 		assertEquals(A_YEAR, mv.getModel().get("year"));
 		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
+		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
 	}
 
 }
