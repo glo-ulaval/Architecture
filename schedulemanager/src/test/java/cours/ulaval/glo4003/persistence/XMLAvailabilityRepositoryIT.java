@@ -13,7 +13,7 @@ import cours.ulaval.glo4003.domain.Availability;
 
 public class XMLAvailabilityRepositoryIT {
 
-	private static final String UN_IDUL = "un_idul";
+	private static final String UN_IDUL = "enseignant";
 	private XMLAvailabilityRepository repository;
 
 	@Before

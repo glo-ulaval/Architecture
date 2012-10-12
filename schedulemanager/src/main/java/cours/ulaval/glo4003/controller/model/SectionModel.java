@@ -206,4 +206,11 @@ public class SectionModel {
 		this.labDay = labDays;
 	}
 
+	public Integer getNrc() {
+		return nrc;
+	}
+
+	public void setNrc(Integer nrc) {
+		this.nrc = nrc;
+	}
 }

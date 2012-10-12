@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	
 	$('#submit').click(function() {
 		postTeacherAvailabilities();
 	});
@@ -7,7 +7,8 @@ $(document).ready(function() {
 	$(".selectable").bind("mousedown", function(e) {
 		e.metaKey = true;
 	}).selectable();
-
+	
+	loadAvailibilitiesFromJSON(json);
 });
 
 function postTeacherAvailabilities() {
@@ -96,4 +97,29 @@ function generateAvailibilitiesJSON() {
 				$('#fri19').hasClass('ui-selected'),
 				$('#fri20').hasClass('ui-selected') ]
 	};
+}
+
+function loadAvailibilitiesFromJSON(json) {
+	for(var i = 0; i < 13; i++){
+		if(json.monday[i]){
+			var day = i+8;
+			$('#mon'+day).addClass('ui-selected');
+		}
+		if(json.tuesday[i]){
+			var day = i+8;
+			$('#tue'+day).addClass('ui-selected');
+		}
+		if(json.wednesday[i]){
+			var day = i+8;
+			$('#wed'+day).addClass('ui-selected');
+		}
+		if(json.thursday[i]){
+			var day = i+8;
+			$('#thu'+day).addClass('ui-selected');
+		}
+		if(json.friday[i]){
+			var day = i+8;
+			$('#fri'+day).addClass('ui-selected');
+		}
+	}
 }

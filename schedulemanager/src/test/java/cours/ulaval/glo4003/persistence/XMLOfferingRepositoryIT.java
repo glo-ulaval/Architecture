@@ -12,6 +12,7 @@ import org.junit.Test;
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.Semester;
 
+//FIXME je suis complètement couplé avec le fichier xml et je suis complètement broken
 public class XMLOfferingRepositoryIT {
 
 	private static final String STORED_OFFERING_YEAR = "2011-2012";
@@ -33,23 +34,20 @@ public class XMLOfferingRepositoryIT {
 		assertTrue(years.contains(STORED_OFFERING_YEAR));
 		assertNotNull(offering);
 		assertEquals(STORED_OFFERING_YEAR, offering.getYear());
-		assertEquals(5, offering.getAcronyms().size());
-		assertTrue(offering.getAcronyms().contains("GLO-2003"));
+		assertEquals(5, offering.getBySemester(A_SEMESTER).size());
+		assertTrue(offering.getBySemester(A_SEMESTER).contains("GLO-2003"));
 	}
 
 	@Test
 	public void canSaveAnOffering()
 			throws Exception {
 		Offering offering = new Offering();
-		ArrayList<String> acronyms = new ArrayList<String>();
-		acronyms.add("IFT-1001");
-		acronyms.add("IFT-1002");
-		acronyms.add("IFT-1003");
-		acronyms.add("IFT-1004");
-		acronyms.add("IFT-1005");
-		offering.setOffering(acronyms);
+		offering.addCourse("IFT-1001", Semester.Automne);
+		offering.addCourse("IFT-1002", Semester.Automne);
+		offering.addCourse("IFT-1003", Semester.Automne);
+		offering.addCourse("IFT-1004", Semester.Automne);
+		offering.addCourse("IFT-1005", Semester.Automne);
 		offering.setYear(NEW_OFFERING_YEAR);
-		offering.setSemester(A_SEMESTER);
 
 		repository.store(offering);
 
@@ -58,9 +56,8 @@ public class XMLOfferingRepositoryIT {
 		List<String> storedOfferingYears = refreshedRepository.findYears();
 		Offering storedOffering = refreshedRepository.find(NEW_OFFERING_YEAR, A_SEMESTER);
 
-		assertEquals(storedOffering.getSemester(), A_SEMESTER);
 		assertTrue(storedOfferingYears.contains(NEW_OFFERING_YEAR));
-		assertTrue(storedOffering.getAcronyms().contains("IFT-1001"));
+		assertTrue(storedOffering.getBySemester(A_SEMESTER).contains("IFT-1001"));
 	}
 
 	@Test
@@ -71,9 +68,8 @@ public class XMLOfferingRepositoryIT {
 		acronyms.add("IFT-2001");
 		acronyms.add("IFT-2002");
 		acronyms.add("IFT-2003");
-		offering.setOffering(acronyms);
+		offering.setBySemester(A_SEMESTER, acronyms);
 		offering.setYear("2007-2008");
-		offering.setSemester(A_SEMESTER);
 		repository.store(offering);
 
 		repository.delete("2007-2008", A_SEMESTER);

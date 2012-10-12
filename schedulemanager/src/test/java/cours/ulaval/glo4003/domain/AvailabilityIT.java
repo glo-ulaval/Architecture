@@ -10,7 +10,7 @@ import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class AvailabilityIT {
 
-	private static final String UN_IDUL = "UN_IDUL";
+	private static final String UN_IDUL = "enseignant";
 	private static final String JSON_STRING = "{\"monday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"tuesday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"wednesday\":[true,true,true,true,true,true,true,true,true,true,false,false,false],\"thursday\":[false,false,false,false,false,true,true,true,true,true,true,true,true],\"friday\":[true,true,true,true,true,true,true,true,true,true,false,false,false]}";
 	private static final int EIGHT_O_CLOCK = 8;
 	private static final int THIRTY_MINUTES = 30;

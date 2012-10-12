@@ -1,15 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/schedule/addsection/${id}/${year}/${semester}" var="url"/>
+<c:url value="/schedule/addsection/${id}/${year}/${semester}" var="url" />
 <form action="${url}" method=POST scope="request" commandName="section">
 	<input type="hidden" name="teachMode" value="${param.teachmode}"
 		scope="request"> <input type="hidden" name="acronym"
 		value="${course.acronym}" scope="request">
 	<div class="row-fluid section_details">
 		<div class="span3 pull-right group">
-		    <b>Groupe :   </b><input class="groupInput" type="text" name="group"
-    value="A" scope="request">
-			<b>Crédits &raquo;</b> ${course.credits}
-		</div>  
+			<b>Groupe : </b><input class="groupInput" type="text" name="group"
+				value="A" scope="request"> <b>Crédits &raquo;</b>
+			${course.credits}
+		</div>
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Titulaire :</label>
 			<div class="span8 controls">
@@ -78,8 +78,9 @@
 									<option>Mercredi</option>
 									<option>Jeudi</option>
 									<option>Vendredi</option></select><input type="text" placeholder="HH:MM"
-									class="input-small" name="timeSlotStarts"/> &agrave; <input type="text"
-									placeholder="HH:MM" class="input-small" name="timeSlotEnds"/> <br />
+									class="input-small" name="timeSlotStarts" /> &agrave; <input
+									type="text" placeholder="HH:MM" class="input-small"
+									name="timeSlotEnds" /> <br />
 							</div>
 						</div>
 					</div>
@@ -90,8 +91,14 @@
 							dirigé :</label>
 						<div class="span8 controls">
 							<div class="hours">
-								<input type="text" placeholder="HH:MM" class="input-small" name="laboTimeSlotStart">
-								à <input type="text" placeholder="HH:MM" class="input-small" name="laboTimeSlotEnd">
+								<select class="input-medium labDay" name="labDay"><option>Lundi</option>
+									<option>Mardi</option>
+									<option>Mercredi</option>
+									<option>Jeudi</option>
+									<option>Vendredi</option></select> <input type="text"
+									placeholder="HH:MM" class="input-small"
+									name="laboTimeSlotStart"> à <input type="text"
+									placeholder="HH:MM" class="input-small" name="laboTimeSlotEnd">
 							</div>
 						</div>
 					</div>
