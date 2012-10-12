@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -18,14 +17,16 @@ public class XMLOfferingRepositoryTest {
 
 	@Mock
 	private Offering offering;
-	@InjectMocks
+	@Mock
+	private XMLSerializer<OfferingXMLWrapper> mockedSerializer;
 	private XMLOfferingRepository repository;
 
 	@Before
-	public void setUp() {
+	public void setUp()
+			throws Exception {
 		MockitoAnnotations.initMocks(this);
 		when(offering.getYear()).thenReturn(VALID_YEAR);
-		when(offering.getSemester()).thenReturn(A_SEMESTER);
+		repository = new XMLOfferingRepository(mockedSerializer);
 	}
 
 	@Test
@@ -82,22 +83,6 @@ public class XMLOfferingRepositoryTest {
 			throws Exception {
 		repository.store(offering);
 
-		assertTrue(repository.containsOfferingFor(VALID_YEAR, A_SEMESTER));
-	}
-
-	@Test
-	public void canCheckIfContainsOfferingWhenYearDoesntExist()
-			throws Exception {
-		repository.store(offering);
-
-		assertFalse(repository.containsOfferingFor("AN_INVALID_YEAR", Semester.Ete));
-	}
-
-	@Test
-	public void canCheckIfContainsOfferingWhenSemesterDoesntExist()
-			throws Exception {
-		repository.store(offering);
-
-		assertFalse(repository.containsOfferingFor(VALID_YEAR, Semester.Automne));
+		assertTrue(repository.containsOfferingFor(VALID_YEAR));
 	}
 }

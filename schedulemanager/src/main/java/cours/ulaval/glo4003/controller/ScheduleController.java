@@ -84,7 +84,7 @@ public class ScheduleController {
 		mv.addObject("year", year);
 		mv.addObject("semester", semester);
 		mv.addObject("id", schedule.getId());
-		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester)));
+		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
 
 		return mv;
 	}
@@ -93,6 +93,8 @@ public class ScheduleController {
 	public ModelAndView postSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@ModelAttribute("section") SectionModel section)
 			throws Exception {
+
+		addSchedule(year, semester);
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
 
@@ -100,7 +102,7 @@ public class ScheduleController {
 		mv.addObject("year", year);
 		mv.addObject("semester", semester);
 		mv.addObject("id", id);
-		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester)));
+		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
 
 		List<SectionModel> sections = new ArrayList<SectionModel>();
 		for (Section sectionInSchedule : schedule.getSections().values()) {

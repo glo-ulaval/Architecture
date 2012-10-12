@@ -7,7 +7,7 @@ import cours.ulaval.glo4003.domain.Semester;
 
 public interface OfferingRepository {
 
-	public Boolean containsOfferingFor(String year, Semester semester);
+	public Boolean containsOfferingFor(String year);
 
 	public List<String> findYears();
 

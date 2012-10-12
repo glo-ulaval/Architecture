@@ -13,7 +13,7 @@ import cours.ulaval.glo4003.utils.ConfigManager;
 public class XMLOfferingRepository implements OfferingRepository {
 
 	private XMLSerializer<OfferingXMLWrapper> serializer;
-	private Map<String, Map<Semester, Offering>> offerings = new HashMap<String, Map<Semester, Offering>>();
+	private Map<String, Offering> offerings = new HashMap<String, Offering>();
 
 	public XMLOfferingRepository()
 			throws Exception {
@@ -34,31 +34,25 @@ public class XMLOfferingRepository implements OfferingRepository {
 
 	@Override
 	public Offering find(String year, Semester semester) {
-		return offerings.get(year).get(semester);
+		return offerings.get(year);
 	}
 
 	@Override
-	public Boolean containsOfferingFor(String year, Semester semester) {
-		if (!offerings.containsKey(year) || !offerings.get(year).containsKey(semester)) {
-			return false;
-		}
-		return true;
+	public Boolean containsOfferingFor(String year) {
+		return offerings.containsKey(year);
 	}
 
 	@Override
 	public void store(Offering offering)
 			throws Exception {
-		if (!offerings.containsKey(offering.getYear())) {
-			offerings.put(offering.getYear(), new HashMap<Semester, Offering>());
-		}
-		offerings.get(offering.getYear()).put(offering.getSemester(), offering);
+		offerings.put(offering.getYear(), offering);
 		saveXML();
 	}
 
 	@Override
 	public void delete(String year, Semester semester)
 			throws Exception {
-		offerings.get(year).remove(semester);
+		offerings.remove(year);
 		saveXML();
 	}
 
@@ -74,10 +68,7 @@ public class XMLOfferingRepository implements OfferingRepository {
 		List<Offering> deserializedOfferings = serializer.deserialize(ConfigManager.getConfigManager().getOfferingsFilePath())
 				.getOfferings();
 		for (Offering offering : deserializedOfferings) {
-			if (!offerings.containsKey(offering.getYear())) {
-				offerings.put(offering.getYear(), new HashMap<Semester, Offering>());
-			}
-			offerings.get(offering.getYear()).put(offering.getSemester(), offering);
+			offerings.put(offering.getYear(), offering);
 		}
 	}
 
@@ -85,10 +76,16 @@ public class XMLOfferingRepository implements OfferingRepository {
 			throws Exception {
 		OfferingXMLWrapper offeringDTO = new OfferingXMLWrapper();
 		List<Offering> offeringList = new ArrayList<Offering>();
-		for (Map<Semester, Offering> map : offerings.values()) {
-			offeringList.addAll(map.values());
+		for (Offering offering : offerings.values()) {
+			offeringList.add(offering);
 		}
 		offeringDTO.setOfferings(offeringList);
 		serializer.serialize(offeringDTO, ConfigManager.getConfigManager().getOfferingsFilePath());
+	}
+
+	// DO NOT USE -- for test purpose only
+	protected XMLOfferingRepository(XMLSerializer<OfferingXMLWrapper> mockedSerializer)
+			throws Exception {
+		serializer = mockedSerializer;
 	}
 }

@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <courseOfferings>
 	<offerings>
-		<acronyms>IFT-2002</acronyms>
-		<acronyms>GLO-4002</acronyms>
-    <semester>Ete</semester>
-		<year>2010-2011</year>
+		<fallOffering>GLO-1010</fallOffering>
+		<fallOffering>GLO-1901</fallOffering>
+		<fallOffering>GLO-2003</fallOffering>
+		<fallOffering>GLO-2100</fallOffering>
+		<fallOffering>GLO-4002</fallOffering>
+		<year>2011-2012</year>
 	</offerings>
 	<offerings>
-		<acronyms>GLO-1010</acronyms>
-		<acronyms>GLO-1901</acronyms>
-		<acronyms>GLO-2003</acronyms>
-		<acronyms>GLO-2100</acronyms>
-		<acronyms>GLO-4002</acronyms>
-    <semester>Automne</semester>
-		<year>2011-2012</year>
+		<fallOffering>IFT-2002</fallOffering>
+		<fallOffering>GLO-4002</fallOffering>
+		<year>2010-2011</year>
 	</offerings>
 </courseOfferings>

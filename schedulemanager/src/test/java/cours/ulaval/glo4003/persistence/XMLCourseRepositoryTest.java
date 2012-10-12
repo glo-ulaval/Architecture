@@ -13,11 +13,13 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
+import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLCourseRepositoryTest {
 
 	private static final String AN_ACRONYM = "GLO-4003";
+	private static final Semester A_SEMESTER = Semester.Automne;
 
 	private XMLCourseRepository repository;
 	private XMLSerializer<CoursesXMLWrapper> mockedSerializer;
@@ -59,9 +61,9 @@ public class XMLCourseRepositoryTest {
 	public void canFindCoursesByOffering()
 			throws Exception {
 		Offering offering = mock(Offering.class);
-		when(offering.getAcronyms()).thenReturn(Arrays.asList(AN_ACRONYM));
+		when(offering.getBySemester(A_SEMESTER)).thenReturn(Arrays.asList(AN_ACRONYM));
 
-		List<Course> courses = repository.findByOffering(offering);
+		List<Course> courses = repository.findByOffering(offering, A_SEMESTER);
 
 		assertEquals(1, courses.size());
 		assertEquals(AN_ACRONYM, courses.get(0).getAcronym());

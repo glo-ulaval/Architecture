@@ -43,7 +43,7 @@ public class OfferingController {
 
 		Offering offering = offeringRepository.find(year, semester);
 
-		List<Course> courses = courseRepository.findByOffering(offering);
+		List<Course> courses = courseRepository.findByOffering(offering, semester);
 
 		ModelAndView mv = new ModelAndView("offeringbysemester");
 		mv.addObject("year", year);
@@ -62,9 +62,9 @@ public class OfferingController {
 
 		try {
 			Offering offering = offeringRepository.find(year, Semester.valueOf(semester));
-			offering.removeCourse(acronym);
+			offering.removeCourse(acronym, Semester.valueOf(semester));
 
-			List<Course> courses = courseRepository.findByOffering(offering);
+			List<Course> courses = courseRepository.findByOffering(offering, Semester.valueOf(semester));
 
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
@@ -99,13 +99,13 @@ public class OfferingController {
 
 		try {
 			Semester semesterValue = Semester.valueOf(semester);
-			if (!offeringRepository.containsOfferingFor(year, semesterValue)) {
-				offeringRepository.store(new Offering(year, semesterValue));
+			if (!offeringRepository.containsOfferingFor(year)) {
+				offeringRepository.store(new Offering(year));
 			}
 			Offering offering = offeringRepository.find(year, semesterValue);
-			offering.addCourse(acronym);
+			offering.addCourse(acronym, semesterValue);
 
-			List<Course> courses = courseRepository.findByOffering(offering);
+			List<Course> courses = courseRepository.findByOffering(offering, semesterValue);
 
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
