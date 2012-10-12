@@ -16,36 +16,21 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<h1>[ ${schedule.year} ] Horaire ${schedule.id}</h1>
-				<c:choose>
-					<c:when test="${ empty error }"></c:when>
-					<c:when test="${error != 'success'}">
-						<div class="alert alert-error">
-							<button type="button" class="close" data-dismiss="alert">×</button>
-							<strong>Erreur!</strong> Une erreur est survenue, veuillez
-							réessayer - ${error}.
-						</div>
-					</c:when>
-					<c:when test="${ error == 'success'}">
-						<div class="alert alert-success">
-							<button type="button" class="close" data-dismiss="alert">×</button>
-							<strong>Succès!</strong>La requête s'est effectuée avec succès.
-						</div>
-					</c:when>
-				</c:choose>
+				<h1>[${schedule.semester} ${schedule.year}] ${schedule.id}</h1>
 			</div>
 		</div>
-		<ul class="nav nav-tabs">
-		  <li class = "active"><a href="#fall" data-toggle="tab">Automne</a></li>
-		  <li><a href="#winter" data-toggle="tab">Hiver</a></li>
-		  <li><a href="#summer" data-toggle="tab">Été</a></li>
-		</ul>
-		<div class="tab-content">
-		  <div class="tab-pane active" id="fall">
-		  <c:import url="scheduledetails.jsp"/>
-		  </div>
-		  <div class="tab-pane" id="winter"><c:import url="scheduledetails.jsp" /></div>
-		  <div class="tab-pane" id="summer"><c:import url="scheduledetails.jsp" /></div>
+		<br/>
+		<div class="schedule_details">
+			<table class="table table-striped">
+				<c:forEach var="section" items="${sections}">
+					<tr>
+						<td class="span12">${section.nrc}</td>
+						<td class="centered">
+							<a class="btn btn-success" href=""><i class="icon-search"></i></a>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 	</div>
 	<c:import url="footer.jsp" />

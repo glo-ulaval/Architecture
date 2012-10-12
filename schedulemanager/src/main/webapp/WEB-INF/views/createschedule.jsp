@@ -32,7 +32,7 @@
 						<c:forEach var="course" items="${courses}">
 							<tr id="${course.acronym}">
 								<td><b>${course.acronym} - ${course.title}</b></td>
-								<c:url value="/schedule/addsection/${year}/${semester}" var="url"/>
+								<c:url value="/schedule/addsection/${id}/${year}/${semester}" var="url"/>
 								<td class="centered"><a class="btn btn-success"
 									href="${url}?acronym=${course.acronym}"><i
 										class="icon-plus-sign icon-white"></i></a></td>
@@ -42,7 +42,7 @@
 				</c:if>
 			</div>
 			<div class="span6">
-				<h1>Section de cours</h1>
+				<h1>Sections de cours</h1>
 			</div>
 		</div>
 		<a class="btn btn-success pull-right" href="../${year}">Générer</a>

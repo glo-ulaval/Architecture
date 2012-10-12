@@ -80,6 +80,7 @@ public class ScheduleController {
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
 		mv.addObject("semester", semester);
+		mv.addObject("id", schedule.getId());
 		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester)));
 
 		return mv;
@@ -87,18 +88,18 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.POST)
 	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester, @ModelAttribute("section") SectionModel section) throws Exception {
-
 		return addSchedule(year, semester);
 	}
 
-	@RequestMapping(value = "/addsection/{year}/{semester}", method = RequestMethod.GET)
-	public ModelAndView addSection(@PathVariable String year, @PathVariable Semester semester,
+	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.GET)
+	public ModelAndView addSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 		ModelAndView mv = new ModelAndView("addsection");
 		mv.addObject("acronym", acronym);
 		mv.addObject("course", courseRepository.findByAcronym(acronym));
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
+		mv.addObject("id", id);
 
 		return mv;
 	}
