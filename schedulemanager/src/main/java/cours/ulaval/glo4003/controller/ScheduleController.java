@@ -93,8 +93,6 @@ public class ScheduleController {
 	public ModelAndView postSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@ModelAttribute("section") SectionModel section)
 			throws Exception {
-
-		addSchedule(year, semester);
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
 
