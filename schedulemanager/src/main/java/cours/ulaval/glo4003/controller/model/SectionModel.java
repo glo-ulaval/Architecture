@@ -3,18 +3,20 @@ package cours.ulaval.glo4003.controller.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.TeachMode;
 import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
-import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class SectionModel {
 
 	private String acronym;
 	private List<String> days;
+	private String labDay;
 	private String group;
 	private Integer hoursInClass;
 	private Integer hoursAtHome;
@@ -31,6 +33,10 @@ public class SectionModel {
 
 	public SectionModel() {
 		this.nrc = NRCGenerator.generate();
+		this.timeSlotStarts = new ArrayList<String>();
+		this.timeSlotEnds = new ArrayList<String>();
+		this.laboTimeSlotStart = "";
+		this.laboTimeSlotEnd = "";
 	}
 
 	public SectionModel(Section section) {
@@ -45,25 +51,39 @@ public class SectionModel {
 		section.setPersonInCharge(personInCharge);
 		section.setTeachers(teachers);
 		section.setTeachMode(TeachMode.valueOf(teachMode));
+		section.setLabTimeSlot(new ArrayList<TimeSlot>());
 
 		TimeDedicated timeDedicated = new TimeDedicated(hoursInClass, hoursInLab, hoursAtHome);
 		section.setTimeDedicated(timeDedicated);
 
-		// Temporaire
-		TimeSlot timeSlot = new TimeSlot();
-		timeSlot.setDayOfWeek(DayOfWeek.FRIDAY);
-		timeSlot.setDuration(3);
-		timeSlot.setStartTime(new Time(8, 30));
-		timeSlot.setEndTime(new Time(11, 30));
+		if (StringUtils.isNotEmpty(labDay) && StringUtils.isNotEmpty(laboTimeSlotStart) && StringUtils.isNotEmpty(laboTimeSlotEnd)) {
+			List<TimeSlot> labTimeslot = new ArrayList<TimeSlot>();
+			labTimeslot.add(convertTimeSlot(labDay, laboTimeSlotStart, laboTimeSlotEnd));
+			section.setLabTimeSlot(labTimeslot);
+		}
 
 		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
-		timeSlots.add(timeSlot);
-
+		for (int i = 0; i < timeSlotStarts.size(); i++) {
+			timeSlots.add(convertTimeSlot(days.get(i), timeSlotStarts.get(i), timeSlotEnds.get(i)));
+		}
 		section.setCourseTimeSlots(timeSlots);
-		section.setLabTimeSlot(timeSlots);
-		// Temporaire
 
 		return section;
+	}
+
+	private TimeSlot convertTimeSlot(String day, String start, String end) {
+		TimeSlot timeSlots = new TimeSlot();
+
+		String[] hoursMinStart = start.split(":");
+		Time startTime = new Time(new Integer(hoursMinStart[0]), new Integer(hoursMinStart[1]));
+
+		String[] hoursMinEnd = end.split(":");
+		Time endTime = new Time(new Integer(hoursMinEnd[0]), new Integer(hoursMinEnd[1]));
+
+		timeSlots.setStartTime(startTime);
+		timeSlots.setEndTime(endTime);
+
+		return timeSlots;
 	}
 
 	public String getAcronym() {
@@ -176,6 +196,14 @@ public class SectionModel {
 
 	public void setTimeSlotEnds(List<String> timeSlotEnds) {
 		this.timeSlotEnds = timeSlotEnds;
+	}
+
+	public String getLabDays() {
+		return labDay;
+	}
+
+	public void setLabDays(String labDays) {
+		this.labDay = labDays;
 	}
 
 }

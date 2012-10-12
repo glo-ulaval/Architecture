@@ -1,5 +1,8 @@
 package cours.ulaval.glo4003.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public class Time {
 
 	private Integer hour;
@@ -60,6 +63,21 @@ public class Time {
 
 	public void setMinute(Integer minute) {
 		this.minute = minute;
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(hour).append(minute).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Time) {
+			final Time other = (Time) obj;
+			return new EqualsBuilder().append(this.hour, other.getHour()).append(this.minute, other.getMinute()).isEquals();
+		} else {
+			return false;
+		}
 	}
 
 }
