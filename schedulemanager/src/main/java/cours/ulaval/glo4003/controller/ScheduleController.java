@@ -78,10 +78,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.POST)
-	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester,
-			@ModelAttribute("section") SectionModel section)
-			throws Exception {
-			
+	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester, @ModelAttribute("section") SectionModel section) throws Exception {
 		return addSchedule(year, semester);
 	}
 

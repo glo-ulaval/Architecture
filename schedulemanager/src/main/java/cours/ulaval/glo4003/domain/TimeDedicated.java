@@ -6,6 +6,16 @@ public class TimeDedicated {
 	private int labsHours = 0;
 	private int otherHours = 0;
 
+	public TimeDedicated() {
+
+	}
+
+	public TimeDedicated(int courseHours, int labsHours, int otherHours) {
+		this.courseHours = courseHours;
+		this.labsHours = labsHours;
+		this.otherHours = otherHours;
+	}
+
 	public int getCourseHours() {
 		return courseHours;
 	}

@@ -1,8 +1,15 @@
 package cours.ulaval.glo4003.controller.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
+import cours.ulaval.glo4003.domain.TeachMode;
+import cours.ulaval.glo4003.domain.Time;
+import cours.ulaval.glo4003.domain.TimeDedicated;
+import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class SectionModel {
 
@@ -23,7 +30,40 @@ public class SectionModel {
 	private List<String> timeSlotEnds;
 
 	public SectionModel() {
-		this.nrc = 00000;
+		this.nrc = NRCGenerator.generate();
+	}
+
+	public SectionModel(Section section) {
+
+	}
+
+	public Section convertToSection() {
+		Section section = new Section();
+		section.setCourseAcronym(acronym);
+		section.setGroup(group);
+		section.setNrc(nrc.toString());
+		section.setPersonInCharge(personInCharge);
+		section.setTeachers(teachers);
+		section.setTeachMode(TeachMode.valueOf(teachMode));
+
+		TimeDedicated timeDedicated = new TimeDedicated(hoursInClass, hoursInLab, hoursAtHome);
+		section.setTimeDedicated(timeDedicated);
+
+		// Temporaire
+		TimeSlot timeSlot = new TimeSlot();
+		timeSlot.setDayOfWeek(DayOfWeek.FRIDAY);
+		timeSlot.setDuration(3);
+		timeSlot.setStartTime(new Time(8, 30));
+		timeSlot.setEndTime(new Time(11, 30));
+
+		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+		timeSlots.add(timeSlot);
+
+		section.setCourseTimeSlots(timeSlots);
+		section.setLabTimeSlot(timeSlots);
+		// Temporaire
+
+		return section;
 	}
 
 	public String getAcronym() {
