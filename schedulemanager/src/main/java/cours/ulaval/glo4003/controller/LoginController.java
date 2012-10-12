@@ -24,6 +24,7 @@ public class LoginController {
 	public String menu(ModelMap model, Principal principal, HttpServletRequest request) {
 
 		User user = userRepository.findByIdul(principal.getName());
+		System.out.println(principal.getName());
 		request.getSession().setAttribute("user", user);
 
 		return "menu";

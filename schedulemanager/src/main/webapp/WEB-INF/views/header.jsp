@@ -14,10 +14,10 @@
 						<li><a href="#">À propos</a></li>
 						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
 					</ul>
-					<c:if test="${not empty username}">
+					<c:if test="${not empty user.idul}">
 						<div class="btn-group floatRight">
 							<a class="btn btn-inverse" href="#">
-								<i class="icon-user icon-white"></i><b class="username">${username}</b>
+								<i class="icon-user icon-white"></i><b class="username">${user.idul}</b>
 							</a>
 							<a class="btn btn-inverse" href="<c:url value="/" />">
 								<i class="icon-remove icon-white"></i>
