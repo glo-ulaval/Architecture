@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
@@ -35,20 +37,26 @@ public class ScheduleController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
-		List<Schedule> schedules = new ArrayList<Schedule>();
-		Schedule schedule = new Schedule("unID");
-		schedule.setYear("2011-2012");
-		schedules.add(schedule);
-
 		ModelAndView mv = new ModelAndView("schedule");
-		mv.addObject("schedules", schedules);
+
+		List<ScheduleModel> scheduleModels = new ArrayList<ScheduleModel>();
+
+		for (Schedule schedule : scheduleRepository.findAll()) {
+			scheduleModels.add(new ScheduleModel(schedule));
+		}
+
+		mv.addObject("schedules", scheduleModels);
 		return mv;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView scheduleById(@PathVariable String id) throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyid");
+
+		List<Section> sections = new ArrayList<Section>(scheduleRepository.findById(id).getSections().values());
+
 		mv.addObject("schedule", scheduleRepository.findById(id));
+		mv.addObject("sections", sections);
 
 		return mv;
 	}
@@ -78,10 +86,8 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.POST)
-	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester,
-			@ModelAttribute("section") SectionModel section)
-			throws Exception {
-			
+	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester, @ModelAttribute("section") SectionModel section) throws Exception {
+
 		return addSchedule(year, semester);
 	}
 
