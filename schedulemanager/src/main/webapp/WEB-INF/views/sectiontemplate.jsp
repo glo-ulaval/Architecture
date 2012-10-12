@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:url value="/schedule/add/${year}/${semester}" var="url"/>
+<c:url value="/schedule/addsection/${id}/${year}/${semester}" var="url"/>
 <form action="${url}" method=POST scope="request" commandName="section">
 	<input type="hidden" name="teachMode" value="${param.teachmode}"
 		scope="request"> <input type="hidden" name="acronym"

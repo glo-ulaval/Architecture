@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
@@ -35,13 +37,15 @@ public class ScheduleController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
-		List<Schedule> schedules = new ArrayList<Schedule>();
-		Schedule schedule = new Schedule("unID");
-		schedule.setYear("2011-2012");
-		schedules.add(schedule);
-
 		ModelAndView mv = new ModelAndView("schedule");
-		mv.addObject("schedules", schedules);
+
+		List<ScheduleModel> scheduleModels = new ArrayList<ScheduleModel>();
+
+		for (Schedule schedule : scheduleRepository.findAll()) {
+			scheduleModels.add(new ScheduleModel(schedule));
+		}
+
+		mv.addObject("schedules", scheduleModels);
 		return mv;
 	}
 
@@ -49,7 +53,11 @@ public class ScheduleController {
 	public ModelAndView scheduleById(@PathVariable String id)
 			throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyid");
+
+		List<Section> sections = new ArrayList<Section>(scheduleRepository.findById(id).getSections().values());
+
 		mv.addObject("schedule", scheduleRepository.findById(id));
+		mv.addObject("sections", sections);
 
 		return mv;
 	}
@@ -75,27 +83,45 @@ public class ScheduleController {
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
 		mv.addObject("semester", semester);
+		mv.addObject("id", schedule.getId());
 		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
 
 		return mv;
 	}
 
-	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.POST)
-	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester,
+	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.POST)
+	public ModelAndView postSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@ModelAttribute("section") SectionModel section)
 			throws Exception {
 
-		return addSchedule(year, semester);
+		addSchedule(year, semester);
+		Schedule schedule = scheduleRepository.findById(id);
+		schedule.add(section.convertToSection());
+
+		ModelAndView mv = new ModelAndView("createschedule");
+		mv.addObject("year", year);
+		mv.addObject("semester", semester);
+		mv.addObject("id", id);
+		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
+
+		List<SectionModel> sections = new ArrayList<SectionModel>();
+		for (Section sectionInSchedule : schedule.getSections().values()) {
+			sections.add(new SectionModel(sectionInSchedule));
+		}
+		mv.addObject("sections", sections);
+
+		return mv;
 	}
 
-	@RequestMapping(value = "/addsection/{year}/{semester}", method = RequestMethod.GET)
-	public ModelAndView addSection(@PathVariable String year, @PathVariable Semester semester,
+	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.GET)
+	public ModelAndView addSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 		ModelAndView mv = new ModelAndView("addsection");
 		mv.addObject("acronym", acronym);
 		mv.addObject("course", courseRepository.findByAcronym(acronym));
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
+		mv.addObject("id", id);
 
 		return mv;
 	}
