@@ -1,3 +1,174 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schedules>
+    <schedule>
+        <id>aut2012-01</id>
+        <personInCharge>Nadia Tawbi</personInCharge>
+        <sections>
+            <entry>
+                <key>90659</key>
+                <value>
+                    <courseAcronym>IFT-2007</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>MONDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>16</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>13</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>A</group>
+                    <nrc>90659</nrc>
+                    <personInCharge>Thiery Eude</personInCharge>
+                    <teachMode>Virtual</teachMode>
+                    <teachers>Thiery Eude</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>0</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+            <entry>
+                <key>87135</key>
+                <value>
+                    <courseAcronym>GLO-4002</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>MONDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>12</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>9</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>A</group>
+                    <nrc>87135</nrc>
+                    <personInCharge>Luc Lamontagne</personInCharge>
+                    <teachMode>InCourse</teachMode>
+                    <teachers>Luc Lamontagne</teachers>
+                    <teachers>Jean-Nicolas Viens</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>2</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+			<entry>
+                <key>86453</key>
+                <value>
+                    <courseAcronym>GLO-1901</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>TUESDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>13</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>10</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>A</group>
+                    <nrc>86453</nrc>
+                    <personInCharge>Nadia Tawbi</personInCharge>
+                    <teachMode>InCourse</teachMode>
+                    <teachers>Marc-Philippe Parent</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>0</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+			<entry>
+                <key>83014</key>
+                <value>
+                    <courseAcronym>GLO-2100</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>FRIDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>21</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>18</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>A</group>
+                    <nrc>83014</nrc>
+                    <personInCharge>Robert Beaubrun</personInCharge>
+                    <teachMode>InCourse</teachMode>
+                    <teachers>Robert Beaubrun</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>2</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+			<entry>
+                <key>84789</key>
+                <value>
+                    <courseAcronym>GLO-2003</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>WEDNESDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>11</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>8</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>A</group>
+                    <nrc>84789</nrc>
+                    <personInCharge>Philippe Giguère</personInCharge>
+                    <teachMode>InCourse</teachMode>
+                    <teachers>Philippe Giguère</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>0</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+			<entry>
+                <key>89782</key>
+                <value>
+                    <courseAcronym>GLO-1010</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>THURSDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>11</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>10</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>A</group>
+                    <nrc>89782</nrc>
+                    <personInCharge>Nadir Belkiter</personInCharge>
+                    <teachMode>InCourse</teachMode>
+                    <teachers>Nadir Belkiter</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>0</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+        </sections>
+		<semester>Automne</semester>
+        <year>2011-2012</year>
+    </schedule>
 </schedules>
