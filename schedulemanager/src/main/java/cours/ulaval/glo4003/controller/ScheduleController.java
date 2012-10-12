@@ -44,8 +44,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView scheduleById(@PathVariable String id)
-			throws Exception {
+	public ModelAndView scheduleById(@PathVariable String id) throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyid");
 		mv.addObject("schedule", scheduleRepository.findById(id));
 
@@ -53,8 +52,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView addSchedule()
-			throws Exception {
+	public ModelAndView addSchedule() throws Exception {
 		ModelAndView mv = new ModelAndView("addschedule");
 		mv.addObject("years", offeringRepository.findYears());
 
@@ -62,8 +60,13 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.GET)
-	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester)
-			throws Exception {
+	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester) throws Exception {
+		Schedule schedule = new Schedule(year + "-" + semester);
+		schedule.setYear(year);
+		schedule.setSemester(semester);
+
+		scheduleRepository.store(schedule);
+
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
 		mv.addObject("semester", semester);
@@ -73,11 +76,10 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.POST)
-	public ModelAndView postSchedule(@PathVariable String year, @PathVariable Semester semester,
+	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester,
 			@RequestParam(required = true, value = "personInCharge") String personInCharge,
 			@RequestParam(required = true, value = "teachers") List<String> teachers,
-			@RequestParam(required = true, value = "teachMode") String teachMode,
-			@RequestParam(required = true, value = "acronym") String acronym,
+			@RequestParam(required = true, value = "teachMode") String teachMode, @RequestParam(required = true, value = "acronym") String acronym,
 			@RequestParam(required = true, value = "group") String group,
 			@RequestParam(required = false, value = "hoursInClass") Integer hoursInClass,
 			@RequestParam(required = false, value = "hoursInLab") Integer hoursInLab,
@@ -86,8 +88,7 @@ public class ScheduleController {
 			@RequestParam(required = false, value = "timeSlotStart") List<String> timeSlotsStarts,
 			@RequestParam(required = false, value = "timeSlotEnd") List<String> timeSlotsEnds,
 			@RequestParam(required = false, value = "laboTimeSlotStart") String laboTimeSlotStart,
-			@RequestParam(required = false, value = "laboTimeSlotEnd") String laboTimeSlotEnd)
-			throws Exception {
+			@RequestParam(required = false, value = "laboTimeSlotEnd") String laboTimeSlotEnd) throws Exception {
 		return addSchedule(year, semester);
 	}
 
@@ -104,9 +105,8 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
-	public ModelAndView deleteSchedule(@PathVariable String scheduleId)
-			throws Exception {
-		ModelAndView mv = new ModelAndView("delete");
+	public ModelAndView deleteSchedule(@PathVariable String scheduleId) throws Exception {
+		ModelAndView mv = new ModelAndView("deleteschedule");
 
 		scheduleRepository.delete(scheduleId);
 
@@ -115,7 +115,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/delete/{scheduleId}/{sectionNrc}", method = RequestMethod.GET)
 	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc) {
-		ModelAndView mv = new ModelAndView("delete");
+		ModelAndView mv = new ModelAndView("deletesection");
 
 		Schedule schedule = scheduleRepository.findById(scheduleId);
 		schedule.delete(sectionNrc);

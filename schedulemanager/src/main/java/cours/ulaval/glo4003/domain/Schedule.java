@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Schedule {
+
 	private String id;
 	private String year;
-	private String season;
+	private Semester semester;
 	private Map<String, Section> sections;
 	private String personInCharge;
 
@@ -48,12 +49,12 @@ public class Schedule {
 		this.year = year;
 	}
 
-	public String getSeason() {
-		return season;
+	public Semester getSemester() {
+		return semester;
 	}
 
-	public void setSeason(String season) {
-		this.season = season;
+	public void setSemester(Semester semester) {
+		this.semester = semester;
 	}
 
 	public Map<String, Section> getSections() {
