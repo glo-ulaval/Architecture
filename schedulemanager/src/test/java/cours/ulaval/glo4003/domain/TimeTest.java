@@ -69,4 +69,11 @@ public class TimeTest {
 		assertFalse(time.before(aEarlierTime));
 		assertFalse(time.before(anotherEarlierTime));
 	}
+
+	@Test
+	public void canConvertTimeToString() {
+		Time time = new Time(A_HOUR, A_MINUTE);
+
+		assertEquals(A_HOUR + ":" + A_MINUTE, time.toString());
+	}
 }
