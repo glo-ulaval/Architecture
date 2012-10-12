@@ -11,6 +11,8 @@ public class TimeSlot {
 	private Integer duration;
 
 	public TimeSlot() {
+		this.startTime = new Time();
+		this.endTime = new Time();
 	}
 
 	public TimeSlot(Time startTime, Integer duration, DayOfWeek dayOfWeek) {
