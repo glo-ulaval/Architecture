@@ -6,12 +6,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
@@ -77,22 +79,13 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.POST)
 	public ModelAndView postSection(@PathVariable String year, @PathVariable Semester semester,
-			@RequestParam(required = true, value = "personInCharge") String personInCharge,
-			@RequestParam(required = true, value = "teachers") List<String> teachers,
-			@RequestParam(required = true, value = "teachMode") String teachMode, @RequestParam(required = true, value = "acronym") String acronym,
-			@RequestParam(required = true, value = "group") String group,
-			@RequestParam(required = false, value = "hoursInClass") Integer hoursInClass,
-			@RequestParam(required = false, value = "hoursInLab") Integer hoursInLab,
-			@RequestParam(required = true, value = "hoursAtHome") Integer hoursAtHome,
-			@RequestParam(required = false, value = "days") List<String> days,
-			@RequestParam(required = false, value = "timeSlotStart") List<String> timeSlotsStarts,
-			@RequestParam(required = false, value = "timeSlotEnd") List<String> timeSlotsEnds,
-			@RequestParam(required = false, value = "laboTimeSlotStart") String laboTimeSlotStart,
-			@RequestParam(required = false, value = "laboTimeSlotEnd") String laboTimeSlotEnd) throws Exception {
+			@ModelAttribute("section") SectionModel section)
+			throws Exception {
+			
 		return addSchedule(year, semester);
 	}
 
-	@RequestMapping(value = "/add/{year}/{semester}/addsection", method = RequestMethod.GET)
+	@RequestMapping(value = "/addsection/{year}/{semester}", method = RequestMethod.GET)
 	public ModelAndView addSection(@PathVariable String year, @PathVariable Semester semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 		ModelAndView mv = new ModelAndView("addsection");
