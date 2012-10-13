@@ -8,6 +8,7 @@
 <link href="<c:url value="/resources/css/bootstrap.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/addsection.css" />" rel="stylesheet">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript"
@@ -48,16 +49,16 @@
             <thead>
               <tr>
                 <th>Sections</th>
-                <th class = "centered">Actions</th>
+                <th class = "pull-right">Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
               </tr>
             </thead>
             <c:forEach var="section" items="${sections}">
               <tr id="${section.nrc}">
                 <td><b>${section.acronym} - ${section.nrc} - ${section.group}</b></td>
                 <c:url value="/schedule/editsection/${id}/${section.nrc}" var="url"/>
-                <td class="centered"><a class="btn btn-danger pull-right"
+                <td class="centered"><a class="btn btn-danger pull-right actionbutton"
                   href="${url}"><i
-                    class="icon-trash icon-white"></i></a><a class="btn btn-warning pull-right"
+                    class="icon-trash icon-white"></i></a><a class="btn btn-warning pull-right actionbutton"
                   href="${url}"><i
                     class="icon-edit"></i></a></td>
               </tr>
