@@ -3,13 +3,16 @@ package cours.ulaval.glo4003.controller.model;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.TeachMode;
 import cours.ulaval.glo4003.domain.Time;
+import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
@@ -40,7 +43,7 @@ public class SectionModelTest {
 	public void canConvertLabTimeSlot() {
 		sectionModel.setLaboTimeSlotStart(START_HOURS + ":" + START_MIN);
 		sectionModel.setLaboTimeSlotEnd(END_HOURS + ":" + END_MIN);
-		sectionModel.setLabDays(A_DAY);
+		sectionModel.setLabDay(A_DAY);
 
 		Section section = sectionModel.convertToSection();
 		TimeSlot timeSlot = section.getLabTimeSlot();
@@ -70,5 +73,45 @@ public class SectionModelTest {
 		Time tStartExpected = new Time(START_HOURS, START_MIN);
 
 		assertTrue(tStartConverted.equals(tStartExpected));
+	}
+
+	@Test
+	public void canInstantiateSectionModelFromSection() {
+		Section section = createSection();
+		SectionModel model = new SectionModel(section);
+
+		assertEquals(section.getNrc(), model.getNrc());
+		assertEquals(section.getGroup(), model.getGroup());
+		assertEquals(section.getPersonInCharge(), model.getPersonInCharge());
+		assertEquals(section.getTeachers(), model.getTeachers());
+		assertEquals(section.getTeachMode().toString(), model.getTeachMode());
+		assertEquals(section.getCourseAcronym(), model.getAcronym());
+
+		TimeDedicated timeDedicated = section.getTimeDedicated();
+		assertEquals(timeDedicated.getCourseHours(), (int) model.getHoursInClass());
+		assertEquals(timeDedicated.getLabHours(), (int) model.getHoursInLab());
+		assertEquals(timeDedicated.getOthersHours(), (int) model.getHoursAtHome());
+
+		TimeSlot labTimeSlot = section.getLabTimeSlot();
+		assertEquals(labTimeSlot.getStartTime().toString(), model.getLaboTimeSlotStart());
+		assertEquals(labTimeSlot.getEndTime().toString(), model.getLaboTimeSlotEnd());
+		assertEquals("Vendredi", model.getLabDay());
+
+		assertEquals(1, model.getTimeSlotStarts().size());
+		assertEquals(1, model.getTimeSlotEnds().size());
+		assertEquals(1, model.getDays().size());
+	}
+
+	private Section createSection() {
+		Section section = new Section();
+		section.setNrc("00000");
+		section.setTimeDedicated(new TimeDedicated(2, 3, 4));
+		section.setTeachMode(TeachMode.InCourse);
+		Time time = new Time(8, 0);
+		TimeSlot slot = new TimeSlot(time, 2, DayOfWeek.FRIDAY);
+		section.setLabTimeSlot(slot);
+		section.setCourseTimeSlots(Arrays.asList(slot));
+
+		return section;
 	}
 }

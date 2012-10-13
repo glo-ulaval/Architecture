@@ -1,7 +1,10 @@
 package cours.ulaval.glo4003.controller.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -10,8 +13,33 @@ import cours.ulaval.glo4003.domain.TeachMode;
 import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class SectionModel {
+
+	private static final String VENDREDI = "Vendredi";
+	private static final String JEUDI = "Jeudi";
+	private static final String MERCREDI = "Mercredi";
+	private static final String MARDI = "Mardi";
+	private static final String LUNDI = "Lundi";
+	private static final Map<String, DayOfWeek> daysAssociations;
+	private static final Map<DayOfWeek, String> inverseDaysAssociations;
+	static {
+		Map<String, DayOfWeek> days = new HashMap<String, DayOfWeek>();
+		days.put(LUNDI, DayOfWeek.MONDAY);
+		days.put(MARDI, DayOfWeek.TUESDAY);
+		days.put(MERCREDI, DayOfWeek.WEDNESDAY);
+		days.put(JEUDI, DayOfWeek.THURSDAY);
+		days.put(VENDREDI, DayOfWeek.FRIDAY);
+		daysAssociations = Collections.unmodifiableMap(days);
+		Map<DayOfWeek, String> inverseDays = new HashMap<DayOfWeek, String>();
+		inverseDays.put(DayOfWeek.MONDAY, LUNDI);
+		inverseDays.put(DayOfWeek.TUESDAY, MARDI);
+		inverseDays.put(DayOfWeek.WEDNESDAY, MERCREDI);
+		inverseDays.put(DayOfWeek.THURSDAY, JEUDI);
+		inverseDays.put(DayOfWeek.FRIDAY, VENDREDI);
+		inverseDaysAssociations = Collections.unmodifiableMap(inverseDays);
+	}
 
 	private String acronym;
 	private List<String> days;
@@ -22,7 +50,7 @@ public class SectionModel {
 	private Integer hoursInLab;
 	private String laboTimeSlotStart;
 	private String laboTimeSlotEnd;
-	private Integer nrc;
+	private String nrc;
 	private String personInCharge;
 	private List<String> teachers;
 	private String teachMode;
@@ -30,15 +58,13 @@ public class SectionModel {
 	private List<String> timeSlotEnds;
 
 	public SectionModel() {
+		initialize();
 		this.nrc = NRCGenerator.generate();
-		this.timeSlotStarts = new ArrayList<String>();
-		this.timeSlotEnds = new ArrayList<String>();
-		this.laboTimeSlotStart = "";
-		this.laboTimeSlotEnd = "";
 	}
 
 	public SectionModel(Section section) {
-		this.nrc = Integer.valueOf(section.getNrc());
+		initialize();
+		this.nrc = section.getNrc();
 		this.group = section.getGroup();
 		this.personInCharge = section.getPersonInCharge();
 		this.teachers = section.getTeachers();
@@ -49,6 +75,18 @@ public class SectionModel {
 		this.hoursInClass = timeDedicated.getCourseHours();
 		this.hoursInLab = timeDedicated.getLabHours();
 		this.hoursAtHome = timeDedicated.getOthersHours();
+
+		TimeSlot timeSlot = section.getLabTimeSlot();
+		this.laboTimeSlotStart = timeSlot.getStartTime().toString();
+		this.laboTimeSlotEnd = timeSlot.getEndTime().toString();
+		this.labDay = inverseDaysAssociations.get(timeSlot.getDayOfWeek());
+
+		for (TimeSlot slot : section.getCourseTimeSlots()) {
+			this.days.add(inverseDaysAssociations.get(slot.getDayOfWeek()));
+			this.timeSlotStarts.add(timeSlot.getStartTime().toString());
+			this.timeSlotEnds.add(timeSlot.getEndTime().toString());
+		}
+
 	}
 
 	public Section convertToSection() {
@@ -79,7 +117,7 @@ public class SectionModel {
 	}
 
 	private TimeSlot convertTimeSlot(String day, String start, String end) {
-		TimeSlot timeSlots = new TimeSlot();
+		TimeSlot timeSlot = new TimeSlot();
 
 		String[] hoursMinStart = start.split(":");
 		Time startTime = new Time(new Integer(hoursMinStart[0]), new Integer(hoursMinStart[1]));
@@ -87,10 +125,11 @@ public class SectionModel {
 		String[] hoursMinEnd = end.split(":");
 		Time endTime = new Time(new Integer(hoursMinEnd[0]), new Integer(hoursMinEnd[1]));
 
-		timeSlots.setStartTime(startTime);
-		timeSlots.setEndTime(endTime);
+		timeSlot.setStartTime(startTime);
+		timeSlot.setEndTime(endTime);
+		timeSlot.setDayOfWeek(daysAssociations.get(day));
 
-		return timeSlots;
+		return timeSlot;
 	}
 
 	public String getAcronym() {
@@ -197,19 +236,25 @@ public class SectionModel {
 		this.timeSlotEnds = timeSlotEnds;
 	}
 
-	public String getLabDays() {
+	public String getLabDay() {
 		return labDay;
 	}
 
-	public void setLabDays(String labDays) {
+	public void setLabDay(String labDays) {
 		this.labDay = labDays;
 	}
 
-	public Integer getNrc() {
+	public String getNrc() {
 		return nrc;
 	}
 
-	public void setNrc(Integer nrc) {
+	public void setNrc(String nrc) {
 		this.nrc = nrc;
+	}
+
+	private void initialize() {
+		this.days = new ArrayList<String>();
+		this.timeSlotStarts = new ArrayList<String>();
+		this.timeSlotEnds = new ArrayList<String>();
 	}
 }

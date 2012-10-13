@@ -8,9 +8,9 @@ public class NRCGeneratorTest {
 
 	@Test
 	public void canGenerate() {
-		Integer generatedNrc = NRCGenerator.generate();
+		String generatedNrc = NRCGenerator.generate();
 
-		assertEquals(5, String.valueOf(generatedNrc).length());
+		assertEquals(5, generatedNrc.length());
 	}
 
 }

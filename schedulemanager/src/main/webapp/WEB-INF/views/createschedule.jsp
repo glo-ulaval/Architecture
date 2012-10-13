@@ -48,7 +48,7 @@
             <thead>
               <tr>
                 <th>Sections</th>
-                <th>Actions</th>
+                <th class = "centered">Actions</th>
               </tr>
             </thead>
             <c:forEach var="section" items="${sections}">

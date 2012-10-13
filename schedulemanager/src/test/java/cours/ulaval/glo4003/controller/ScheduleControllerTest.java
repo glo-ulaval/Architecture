@@ -3,6 +3,7 @@ package cours.ulaval.glo4003.controller;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,8 @@ import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.TeachMode;
 import cours.ulaval.glo4003.domain.TimeDedicated;
+import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
@@ -127,6 +130,10 @@ public class ScheduleControllerTest {
 		section.setNrc("00000");
 		section.setTimeDedicated(new TimeDedicated(2, 3, 4));
 		section.setTeachMode(TeachMode.InCourse);
+		TimeSlot slot = new TimeSlot();
+		slot.setDayOfWeek(DayOfWeek.FRIDAY);
+		section.setLabTimeSlot(slot);
+		section.setCourseTimeSlots(new ArrayList<TimeSlot>());
 
 		return section;
 	}
