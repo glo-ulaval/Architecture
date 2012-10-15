@@ -27,27 +27,27 @@
 			</div>
 		</div>
 		<div class="btn-group" id="myTab" data-toggle="buttons-radio">
-			<button class="active btn btn-info btn-large" onClick=changeGroup("incourse","A")><a class="tab_a" href="#incourse" data-toggle="tab">En
+			<button class="active btn btn-info btn-large" onClick=changeGroup("incourse","A")><a class="tab_a" href="InCourse" data-toggle="tab">En
 					classe</a></button>
-			<button class = "btn btn-info btn-large" onClick=changeGroup("virtual","Z3")><a class="tab_a" href="#virtual" data-toggle="tab">Virtuel</a></button>
-			<button class = "btn btn-info btn-large" onClick=changeGroup("remotly","Z1")><a class="tab_a" href="#remotly" data-toggle="tab">À distance</a></button>
+			<button class = "btn btn-info btn-large" onClick=changeGroup("virtual","Z3")><a class="tab_a" href="#Virtual" data-toggle="tab">Virtuel</a></button>
+			<button class = "btn btn-info btn-large" onClick=changeGroup("remotly","Z1")><a class="tab_a" href="#Remotly" data-toggle="tab">À distance</a></button>
 		</div>
 		<div class="tab-content">
-			<div class="tab-pane active" id="incourse">
+			<div class="tab-pane active" id="InCourse">
 				<c:import url="sectiontemplate.jsp">
 					<c:param name="credits" value="${course.credits}"></c:param>
 					<c:param name="teachmode" value="InCourse"></c:param>
 					<c:param name="isdistance" value="false"></c:param>
 				</c:import>
 			</div>
-			<div class="tab-pane" id="virtual">
+			<div class="tab-pane" id="Virtual">
 				<c:import url="sectiontemplate.jsp">
 					<c:param name="credits" value="${course.credits}"></c:param>
 					<c:param name="teachmode" value="Virtual"></c:param>
 					<c:param name="isdistance" value="false"></c:param>
 				</c:import>
 			</div>
-			<div class="tab-pane" id="remotly">
+			<div class="tab-pane" id="Remotly">
         <c:import url="sectiontemplate.jsp">
           <c:param name="credits" value="${course.credits}"></c:param>
           <c:param name="teachmode" value="Remotly"></c:param>
