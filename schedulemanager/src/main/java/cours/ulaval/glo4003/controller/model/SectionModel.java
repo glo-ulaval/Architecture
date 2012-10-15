@@ -45,9 +45,9 @@ public class SectionModel {
 	private List<String> days;
 	private String labDay;
 	private String group;
-	private Integer hoursInClass;
-	private Integer hoursAtHome;
-	private Integer hoursInLab;
+	private Integer hoursInClass = 0;
+	private Integer hoursAtHome = 0;
+	private Integer hoursInLab = 0;
 	private String laboTimeSlotStart;
 	private String laboTimeSlotEnd;
 	private String nrc;
