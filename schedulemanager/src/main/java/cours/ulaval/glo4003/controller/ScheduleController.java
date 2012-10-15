@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.SortedSectionsModel;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
@@ -53,10 +54,8 @@ public class ScheduleController {
 	public ModelAndView scheduleById(@PathVariable String id) throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyid");
 
-		List<Section> sections = new ArrayList<Section>(scheduleRepository.findById(id).getSections().values());
-
-		mv.addObject("schedule", scheduleRepository.findById(id));
-		mv.addObject("sections", sections);
+		mv.addObject("schedule", new ScheduleModel(scheduleRepository.findById(id)));
+		mv.addObject("sections", new SortedSectionsModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections().values())));
 
 		return mv;
 	}
