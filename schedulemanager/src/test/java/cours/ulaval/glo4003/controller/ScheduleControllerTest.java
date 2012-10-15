@@ -36,6 +36,7 @@ public class ScheduleControllerTest {
 	private final String A_YEAR = "2012";
 	private final Semester A_SEMESTER = Semester.Automne;
 	private final String A_SCHEDULE_ID = "ScheduleId";
+	private final String A_SECTION_NRC = "86758";
 
 	@Mock
 	private CourseRepository mockedCourseRepository;
@@ -57,6 +58,7 @@ public class ScheduleControllerTest {
 
 		course = mock(Course.class);
 		schedule = mock(Schedule.class);
+		when(schedule.getSemester()).thenReturn(Semester.Automne);
 		Offering offering = mock(Offering.class);
 		List<String> years = Arrays.asList(A_YEAR);
 		courses = Arrays.asList(course);
@@ -65,11 +67,19 @@ public class ScheduleControllerTest {
 		when(mockedCourseRepository.findByOffering(offering, Semester.Automne)).thenReturn(courses);
 		when(mockedCourseRepository.findByAcronym(AN_ACRONYM)).thenReturn(course);
 		when(mockedScheduleRepository.findById(A_SCHEDULE_ID)).thenReturn(schedule);
+		when(mockedScheduleRepository.findAll()).thenReturn(Arrays.asList(schedule));
 	}
 
 	@Test
 	public void canInstantiateController() {
 		assertNotNull(controller);
+	}
+
+	@Test
+	public void canGetAllSchedules() {
+		ModelAndView mv = controller.schedule();
+
+		assertTrue(mv.getModel().containsKey("schedules"));
 	}
 
 	@Test
@@ -123,6 +133,21 @@ public class ScheduleControllerTest {
 		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
 		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
 		assertTrue(mv.getModel().containsKey("sections"));
+	}
+
+	@Test
+	public void canDeleteASection() {
+		ModelAndView mv = controller.deleteSection(A_SCHEDULE_ID, A_SECTION_NRC, A_YEAR, A_SEMESTER);
+
+		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
+		verify(schedule).delete(A_SECTION_NRC);
+
+		assertEquals(A_YEAR, mv.getModel().get("year"));
+		assertEquals(courses, mv.getModel().get("courses"));
+		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
+		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
+		assertTrue(mv.getModel().containsKey("sections"));
+		assertTrue(mv.getModel().containsKey("courses"));
 	}
 
 	private Section createSection() {

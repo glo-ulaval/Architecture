@@ -21,8 +21,6 @@ import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 @RequestMapping(value = "/offering")
 public class OfferingController {
 
-	private static final String SUCCESS = "success";
-
 	@Inject
 	CourseRepository courseRepository;
 
@@ -30,16 +28,14 @@ public class OfferingController {
 	OfferingRepository offeringRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView offering()
-			throws Exception {
+	public ModelAndView offering() throws Exception {
 		ModelAndView mv = new ModelAndView("offering");
 		mv.addObject("years", offeringRepository.findYears());
 		return mv;
 	}
 
 	@RequestMapping(value = "/{year}/{semester}", method = RequestMethod.GET)
-	public ModelAndView offeringBySemester(@PathVariable String year, @PathVariable Semester semester)
-			throws Exception {
+	public ModelAndView offeringBySemester(@PathVariable String year, @PathVariable Semester semester) throws Exception {
 
 		Offering offering = offeringRepository.find(year, semester);
 
@@ -54,8 +50,7 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/{year}/deletecourse")
-	public ModelAndView deleteCourse(@PathVariable String year,
-			@RequestParam(required = true, value = "semester") String semester,
+	public ModelAndView deleteCourse(@PathVariable String year, @RequestParam(required = true, value = "semester") String semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 
 		ModelAndView mv = new ModelAndView("offeringbysemester");
@@ -69,7 +64,7 @@ public class OfferingController {
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
 			mv.addObject("courses", courses);
-			mv.addObject("error", SUCCESS);
+			mv.addObject("error", ControllerMessages.SUCCESS);
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}
@@ -78,9 +73,7 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/{year}/availablecourses")
-	public ModelAndView availableCourses(@PathVariable String year,
-			@RequestParam(required = true, value = "semester") String semester)
-			throws Exception {
+	public ModelAndView availableCourses(@PathVariable String year, @RequestParam(required = true, value = "semester") String semester) throws Exception {
 
 		ModelAndView mv = new ModelAndView("availablecourses");
 		mv.addObject("year", year);
@@ -91,8 +84,7 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/{year}/addcourse")
-	public ModelAndView addCourseFromAvailableCourses(@PathVariable String year,
-			@RequestParam(required = true, value = "semester") String semester,
+	public ModelAndView addCourseFromAvailableCourses(@PathVariable String year, @RequestParam(required = true, value = "semester") String semester,
 			@RequestParam(required = true, value = "acronym") String acronym) {
 
 		ModelAndView mv = new ModelAndView("offeringbysemester");
@@ -110,7 +102,7 @@ public class OfferingController {
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
 			mv.addObject("courses", courses);
-			mv.addObject("error", SUCCESS);
+			mv.addObject("error", ControllerMessages.SUCCESS);
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}

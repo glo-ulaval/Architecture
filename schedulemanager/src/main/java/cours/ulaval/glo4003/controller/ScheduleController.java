@@ -97,10 +97,7 @@ public class ScheduleController {
 		mv.addObject("id", id);
 		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
 
-		List<SectionModel> sections = new ArrayList<SectionModel>();
-		for (Section sectionInSchedule : schedule.getSections().values()) {
-			sections.add(new SectionModel(sectionInSchedule));
-		}
+		List<SectionModel> sections = getSections(schedule);
 		mv.addObject("sections", sections);
 
 		return mv;
@@ -119,6 +116,21 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.GET)
+	public ModelAndView editSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@PathVariable String sectionNrc) {
+		ModelAndView mv = new ModelAndView("editsection");
+		mv.addObject("semester", semester);
+		mv.addObject("year", year);
+		mv.addObject("id", id);
+
+		Schedule schedule = scheduleRepository.findById(id);
+		Section section = schedule.getSections().get(sectionNrc);
+		mv.addObject("section", new SectionModel(section));
+
+		return mv;
+	}
+
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
 	public ModelAndView deleteSchedule(@PathVariable String scheduleId) throws Exception {
 		ModelAndView mv = new ModelAndView("deleteschedule");
@@ -128,14 +140,33 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/delete/{scheduleId}/{sectionNrc}", method = RequestMethod.GET)
-	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc) {
-		ModelAndView mv = new ModelAndView("deletesection");
+	@RequestMapping(value = "/deletesection/{scheduleId}/{year}/{semester}/{sectionNrc}", method = RequestMethod.GET)
+	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc, @PathVariable String year,
+			@PathVariable Semester semester) {
+		ModelAndView mv = new ModelAndView("createschedule");
 
-		Schedule schedule = scheduleRepository.findById(scheduleId);
-		schedule.delete(sectionNrc);
+		try {
+			Schedule schedule = scheduleRepository.findById(scheduleId);
+			schedule.delete(sectionNrc);
+			mv.addObject("error", ControllerMessages.SUCCESS);
+			mv.addObject("year", year);
+			mv.addObject("semester", semester);
+			mv.addObject("id", scheduleId);
+			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
+			mv.addObject("sections", getSections(schedule));
+
+		} catch (Exception e) {
+			mv.addObject("error", e.getMessage());
+		}
 
 		return mv;
 	}
 
+	private List<SectionModel> getSections(Schedule schedule) {
+		List<SectionModel> sections = new ArrayList<SectionModel>();
+		for (Section sectionInSchedule : schedule.getSections().values()) {
+			sections.add(new SectionModel(sectionInSchedule));
+		}
+		return sections;
+	}
 }
