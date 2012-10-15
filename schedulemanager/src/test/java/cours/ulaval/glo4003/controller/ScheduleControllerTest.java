@@ -57,6 +57,7 @@ public class ScheduleControllerTest {
 
 		course = mock(Course.class);
 		schedule = mock(Schedule.class);
+		when(schedule.getSemester()).thenReturn(Semester.Automne);
 		Offering offering = mock(Offering.class);
 		List<String> years = Arrays.asList(A_YEAR);
 		courses = Arrays.asList(course);
@@ -65,11 +66,19 @@ public class ScheduleControllerTest {
 		when(mockedCourseRepository.findByOffering(offering, Semester.Automne)).thenReturn(courses);
 		when(mockedCourseRepository.findByAcronym(AN_ACRONYM)).thenReturn(course);
 		when(mockedScheduleRepository.findById(A_SCHEDULE_ID)).thenReturn(schedule);
+		when(mockedScheduleRepository.findAll()).thenReturn(Arrays.asList(schedule));
 	}
 
 	@Test
 	public void canInstantiateController() {
 		assertNotNull(controller);
+	}
+
+	@Test
+	public void canGetAllSchedules() {
+		ModelAndView mv = controller.schedule();
+
+		assertTrue(mv.getModel().containsKey("schedules"));
 	}
 
 	@Test
