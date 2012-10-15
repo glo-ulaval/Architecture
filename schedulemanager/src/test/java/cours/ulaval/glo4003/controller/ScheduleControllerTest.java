@@ -36,6 +36,7 @@ public class ScheduleControllerTest {
 	private final String A_YEAR = "2012";
 	private final Semester A_SEMESTER = Semester.Automne;
 	private final String A_SCHEDULE_ID = "ScheduleId";
+	private final String A_SECTION_NRC = "86758";
 
 	@Mock
 	private CourseRepository mockedCourseRepository;
@@ -132,6 +133,21 @@ public class ScheduleControllerTest {
 		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
 		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
 		assertTrue(mv.getModel().containsKey("sections"));
+	}
+
+	@Test
+	public void canDeleteASection() {
+		ModelAndView mv = controller.deleteSection(A_SCHEDULE_ID, A_SECTION_NRC, A_YEAR, A_SEMESTER);
+
+		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
+		verify(schedule).delete(A_SECTION_NRC);
+
+		assertEquals(A_YEAR, mv.getModel().get("year"));
+		assertEquals(courses, mv.getModel().get("courses"));
+		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
+		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
+		assertTrue(mv.getModel().containsKey("sections"));
+		assertTrue(mv.getModel().containsKey("courses"));
 	}
 
 	private Section createSection() {
