@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-	$(".hours_class_div").hide();
-	$(".hours_labo_div").hide();
-	$(".hours_other_div").hide();
-
 	$('.hours_class').bind('input', function() {
 		if ($(this).val() <= 0) {
 			$(".hours_class_div").hide();
@@ -35,11 +31,12 @@ $(document).ready(function() {
 	});
 });
 
-function addHours(hours) {
-	var element = document.getElementById("hours");
+function addHours(teachmode, hours) {
+	var pane = document.getElementById(teachmode);
+	var element = pane.getElementsByClassName("hours")[0];
 	var html = '';
 	for (i = 0; i < hours; i++) {
-		html += '<select class="input-medium days" name="days"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option></select><input type="text" placeholder="HH:MM" class="input-small" name="timeSlotStart"/> &agrave; <input type="text" placeholder="HH:MM" class="input-small" name="timeSlotEnd"/> <br/>';
+		html += '<select class="input-medium days" name="days"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option></select><input type="text" placeholder="HH:MM"class="input-small" name="timeSlotStarts" /> &agrave; <input type="text" placeholder="HH:MM" class="input-small"name="timeSlotEnds" /> <br />';
 	}
 	element.innerHTML = html;
 }

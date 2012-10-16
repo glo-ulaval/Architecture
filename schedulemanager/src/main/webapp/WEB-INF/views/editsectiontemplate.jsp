@@ -49,49 +49,55 @@
 						</div>
 					</div>
 				</div>
+				<c:if test="${not empty section.days}">
 				<div class="hours_class_div">
 					<div class="span8" id="bordered">
 						<label class="span3 control-label">Heures en classe :</label>
 						<div class="span9 controls">
 							<div class="btn-group" data-toggle="buttons-radio">
 								<button type="button" class="btn btn-info active"
-									onClick=addHours(1)>1 séance</button>
-								<button type="button" class="btn btn-info" onClick=addHours(2)>2
+									onClick=addHours("${section.teachMode}", 1)>1 séance</button>
+								<button type="button" class="btn btn-info" onClick=addHours("${section.teachMode}", 2)>2
 									séances</button>
-								<button type="button" class="btn btn-info" onClick=addHours(3)>3
+								<button type="button" class="btn btn-info" onClick=addHours("${section.teachMode}", 3)>3
 									séances</button>
 							</div>
-							<div id="hours">
-								<select class="input-medium days" name="days"><option>Lundi</option>
+							<c:forEach var="day" items="${section.days}" varStatus="status">
+							<div class="hours">
+								<select class="input-medium days" name="days" value='${day}'><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>
 									<option>Jeudi</option>
 									<option>Vendredi</option></select><input type="text" placeholder="HH:MM"
-									class="input-small" name="timeSlotStarts" /> &agrave; <input
+									class="input-small" name="timeSlotStarts" value="${section.timeSlotStarts[0]}0"/> &agrave; <input
 									type="text" placeholder="HH:MM" class="input-small"
-									name="timeSlotEnds" /> <br />
+									name="timeSlotEnds" value="${section.timeSlotEnds[0]}0"/> <br />
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
+				</c:if>
+				<c:if test="${not empty section.labDay}">
 				<div class="hours_labo_div">
 					<div class="span8" id="bordered">
 						<label class="span3 control-label">Heures en labo/travail
 							dirigé :</label>
 						<div class="span8 controls">
-							<div class="hours">
-								<select class="input-medium labDay" name="labDay"><option>Lundi</option>
+							<div class="hoursLab">
+								<select class="input-medium labDay" name="labDay" value="${section.labDay}" selected><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>
 									<option>Jeudi</option>
 									<option>Vendredi</option></select> <input type="text"
 									placeholder="HH:MM" class="input-small"
-									name="laboTimeSlotStart"> à <input type="text"
-									placeholder="HH:MM" class="input-small" name="laboTimeSlotEnd">
+									name="laboTimeSlotStart" value="${section.laboTimeSlotStart}0"> à <input type="text"
+									placeholder="HH:MM" class="input-small" name="laboTimeSlotEnd" value="${section.laboTimeSlotEnd}0">
 							</div>
 						</div>
 					</div>
 				</div>
+				</c:if>
 			</c:when>
 		</c:choose>
 	</div>

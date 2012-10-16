@@ -66,13 +66,13 @@
 						<div class="span9 controls">
 							<div class="btn-group" data-toggle="buttons-radio">
 								<button type="button" class="btn btn-info active"
-									onClick=addHours(1)>1 séance</button>
-								<button type="button" class="btn btn-info" onClick=addHours(2)>2
+									onClick=addHours("${param.teachmode}",1)>1 séance</button>
+								<button type="button" class="btn btn-info" onClick=addHours("${param.teachmode}",2)>2
 									séances</button>
-								<button type="button" class="btn btn-info" onClick=addHours(3)>3
+								<button type="button" class="btn btn-info" onClick=addHours("${param.teachmode}",3)>3
 									séances</button>
 							</div>
-							<div id="hours">
+							<div class="hours">
 								<select class="input-medium days" name="days"><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>
@@ -90,7 +90,7 @@
 						<label class="span3 control-label">Heures en labo/travail
 							dirigé :</label>
 						<div class="span8 controls">
-							<div class="hours">
+							<div class="hoursLab">
 								<select class="input-medium labDay" name="labDay"><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>
