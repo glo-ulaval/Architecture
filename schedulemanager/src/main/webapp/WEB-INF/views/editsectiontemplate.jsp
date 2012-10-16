@@ -1,20 +1,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url
 	value="/schedule/editsection/${id}/${year}/${semester}/${section.nrc}"
 	var="url" />
 <form action="${url}" method=POST scope="request" commandName="section">
 	<input type="hidden" name="teachMode" value="${section.teachMode}"
 		scope="request"> <input type="hidden" name="acronym"
-		value="${section.acronym}" scope="request">
-  <input type="hidden" name="group" value="${section.group}"
-    scope="request"> <input type="hidden" name="personInCharge" value="${section.personInCharge}"
-    scope="request"> <input type="hidden" name="teachers" value="${section.teachers}"
-    scope="request"> 
+		value="${section.acronym}" scope="request"> <input
+		type="hidden" name="group" value="${section.group}" scope="request">
+	<input type="hidden" name="personInCharge"
+		value="${section.personInCharge}" scope="request">
+	<c:forEach var="teacher" items="${section.teachers}">
+		<input type="hidden" type="text" name="teachers" value="${teacher}"
+			scope="request">
+	</c:forEach>
 	<div class="row-fluid section_details">
 		<div class="span3 pull-right group">
-			<b>Groupe : </b><input class="groupInput"
-				type="text" value="${section.group}" disabled="disabled"}">
+			<b>Groupe : </b><input class="groupInput" type="text"
+				value="${section.group}" disabled="disabled"}">
 		</div>
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Titulaire :</label>
@@ -28,8 +31,8 @@
 			<div class="span8 controls">
 				<div class="teachers">
 					<c:forEach var="teacher" items="${section.teachers}">
-						<input disabled="disabled" type="text"
-							value="${teacher}" scope="request">
+						<input disabled="disabled" type="text" value="${teacher}"
+							scope="request">
 					</c:forEach>
 				</div>
 			</div>
@@ -65,17 +68,32 @@
 							<label class="span3 control-label">Heures en classe :</label>
 							<div class="span9 controls">
 								<div class="btn-group" data-toggle="buttons-radio">
-								<c:choose>
-								<c:when test="${fn:length(section.days) == 1}"><c:set value="btn btn-info active" var="cssClass1"></c:set></c:when><c:otherwise><c:set value="btn btn-info" var="cssClass1"></c:set></c:otherwise>
-								</c:choose>
-                <c:choose>
-                <c:when test="${fn:length(section.days) == 2}"><c:set value="btn btn-info active" var="cssClass2"></c:set></c:when><c:otherwise><c:set value="btn btn-info" var="cssClass2"></c:set></c:otherwise>
-                </c:choose>
-                <c:choose>
-                <c:when test="${fn:length(section.days) == 3}"><c:set value="btn btn-info active" var="cssClass3"></c:set></c:when><c:otherwise><c:set value="btn btn-info" var="cssClass3"></c:set></c:otherwise>
-                </c:choose>
-									<button type="button" class="${cssClass1}"
-										onClick=addHours("${section.teachMode}",1)>1 séance</button>
+									<c:choose>
+										<c:when test="${fn:length(section.days) == 1}">
+											<c:set value="btn btn-info active" var="cssClass1"></c:set>
+										</c:when>
+										<c:otherwise>
+											<c:set value="btn btn-info" var="cssClass1"></c:set>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${fn:length(section.days) == 2}">
+											<c:set value="btn btn-info active" var="cssClass2"></c:set>
+										</c:when>
+										<c:otherwise>
+											<c:set value="btn btn-info" var="cssClass2"></c:set>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${fn:length(section.days) == 3}">
+											<c:set value="btn btn-info active" var="cssClass3"></c:set>
+										</c:when>
+										<c:otherwise>
+											<c:set value="btn btn-info" var="cssClass3"></c:set>
+										</c:otherwise>
+									</c:choose>
+									<button type="button" class="${cssClass1}" onClick=addHours("${section.teachMode}",1)>1
+										séance</button>
 									<button type="button" class="${cssClass2}" onClick=addHours("${section.teachMode}",2)>2
 										séances</button>
 									<button type="button" class="${cssClass3}" onClick=addHours("${section.teachMode}",3)>3
@@ -90,7 +108,8 @@
 											<option <c:if test="${day == 'Jeudi'}">selected</c:if>>Jeudi</option>
 											<option <c:if test="${day == 'Vendredi'}">selected</c:if>>Vendredi</option></select>
 										<input type="text" placeholder="HH:MM" class="input-small"
-											name="timeSlotStarts" value="${section.timeSlotStarts[status.index]}0" />
+											name="timeSlotStarts"
+											value="${section.timeSlotStarts[status.index]}0" />
 										&agrave; <input type="text" placeholder="HH:MM"
 											class="input-small" name="timeSlotEnds"
 											value="${section.timeSlotEnds[status.index]}0" />
