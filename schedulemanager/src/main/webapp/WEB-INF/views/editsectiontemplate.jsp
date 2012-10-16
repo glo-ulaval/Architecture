@@ -124,38 +124,39 @@
 						</div>
 					</div>
 				</div>
-	</div>
-	<div class="hours_labo_div" style="display: block;">
-		<div class="span8" id="bordered">
-			<label class="span3 control-label">Heures en labo/travail
-				dirigé :</label>
-			<div class="span8 controls">
-				<div class="hoursLab">
-					<c:choose>
-						<c:when test="${not empty section.labDay}">
-							<select class="input-medium labDay" name="labDay"><option
-									<c:if test="${section.labDay == 'Lundi'}">selected</c:if>>Lundi</option>
-								<option
-									<c:if test="${section.labDay == 'Mardi'}">selected</c:if>>Mardi</option>
-								<option
-									<c:if test="${section.labDay == 'Mercredi'}">selected</c:if>>Mercredi</option>
-								<option
-									<c:if test="${section.labDay == 'Jeudi'}">selected</c:if>>Jeudi</option>
-								<option
-									<c:if test="${section.labDay == 'Vendredi'}">selected</c:if>>Vendredi</option></select>
-							<input type="text" placeholder="HH:MM" class="input-small"
-								name="laboTimeSlotStart" value="${section.laboTimeSlotStart}0"> à <input
-								type="text" placeholder="HH:MM" class="input-small"
-								name="laboTimeSlotEnd" value="${section.laboTimeSlotEnd}0">
-						</c:when>
-						<c:otherwise> Pas d'heures de laboratoire.</c:otherwise>
-					</c:choose>
+				<div class="hours_labo_div" style="display: block;">
+					<div class="span8" id="bordered">
+						<label class="span3 control-label">Heures en labo/travail
+							dirigé :</label>
+						<div class="span8 controls">
+							<div class="hoursLab">
+								<c:choose>
+									<c:when test="${not empty section.labDay}">
+										<select class="input-medium labDay" name="labDay"><option
+												<c:if test="${section.labDay == 'Lundi'}">selected</c:if>>Lundi</option>
+											<option
+												<c:if test="${section.labDay == 'Mardi'}">selected</c:if>>Mardi</option>
+											<option
+												<c:if test="${section.labDay == 'Mercredi'}">selected</c:if>>Mercredi</option>
+											<option
+												<c:if test="${section.labDay == 'Jeudi'}">selected</c:if>>Jeudi</option>
+											<option
+												<c:if test="${section.labDay == 'Vendredi'}">selected</c:if>>Vendredi</option></select>
+										<input type="text" placeholder="HH:MM" class="input-small"
+											name="laboTimeSlotStart"
+											value="${section.laboTimeSlotStart}0"> à <input
+											type="text" placeholder="HH:MM" class="input-small"
+											name="laboTimeSlotEnd" value="${section.laboTimeSlotEnd}0">
+									</c:when>
+									<c:otherwise>Pas d'heures de laboratoire.</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
+			</c:when>
+		</c:choose>
 	</div>
-	</c:when>
-	</c:choose>
 	</div>
 	<input type="submit" class="btn btn-success pull-right"
 		value="Sauvegarder">
