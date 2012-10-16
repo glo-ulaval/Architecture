@@ -61,11 +61,20 @@
 							<label class="span3 control-label">Heures en classe :</label>
 							<div class="span9 controls">
 								<div class="btn-group" data-toggle="buttons-radio">
-									<button type="button" class="btn btn-info active"
+								<c:choose>
+								<c:when test="${fn:length(section.days) == 1}"><c:set value="btn btn-info active" var="cssClass1"></c:set></c:when><c:otherwise><c:set value="btn btn-info" var="cssClass1"></c:set></c:otherwise>
+								</c:choose>
+                <c:choose>
+                <c:when test="${fn:length(section.days) == 2}"><c:set value="btn btn-info active" var="cssClass2"></c:set></c:when><c:otherwise><c:set value="btn btn-info" var="cssClass2"></c:set></c:otherwise>
+                </c:choose>
+                <c:choose>
+                <c:when test="${fn:length(section.days) == 3}"><c:set value="btn btn-info active" var="cssClass3"></c:set></c:when><c:otherwise><c:set value="btn btn-info" var="cssClass3"></c:set></c:otherwise>
+                </c:choose>
+									<button type="button" class="${cssClass1}"
 										onClick=addHours("${section.teachMode}",1)>1 séance</button>
-									<button type="button" class="btn btn-info" onClick=addHours("${section.teachMode}",2)>2
+									<button type="button" class="${cssClass2}" onClick=addHours("${section.teachMode}",2)>2
 										séances</button>
-									<button type="button" class="btn btn-info" onClick=addHours("${section.teachMode}",3)>3
+									<button type="button" class="${cssClass3}" onClick=addHours("${section.teachMode}",3)>3
 										séances</button>
 								</div>
 								<div class="hours">
