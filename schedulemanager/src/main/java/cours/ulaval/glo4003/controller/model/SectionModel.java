@@ -83,8 +83,8 @@ public class SectionModel {
 
 		for (TimeSlot slot : section.getCourseTimeSlots()) {
 			this.days.add(inverseDaysAssociations.get(slot.getDayOfWeek()));
-			this.timeSlotStarts.add(timeSlot.getStartTime().toString());
-			this.timeSlotEnds.add(timeSlot.getEndTime().toString());
+			this.timeSlotStarts.add(slot.getStartTime().toString());
+			this.timeSlotEnds.add(slot.getEndTime().toString());
 		}
 
 	}

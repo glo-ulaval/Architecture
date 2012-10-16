@@ -32,8 +32,13 @@ $(document).ready(function() {
 });
 
 function addHours(teachmode, hours) {
+	var element;
 	var pane = document.getElementById(teachmode);
-	var element = pane.getElementsByClassName("hours")[0];
+	if (pane == null) {
+		element = document.getElementsByClassName("hours")[0];
+	} else {
+		element = pane.getElementsByClassName("hours")[0];
+	}
 	var html = '';
 	for (i = 0; i < hours; i++) {
 		html += '<select class="input-medium days" name="days"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option></select><input type="text" placeholder="HH:MM"class="input-small" name="timeSlotStarts" /> &agrave; <input type="text" placeholder="HH:MM" class="input-small"name="timeSlotEnds" /> <br />';
