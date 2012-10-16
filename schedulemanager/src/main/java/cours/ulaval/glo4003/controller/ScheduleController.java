@@ -132,6 +132,23 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
+	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section) {
+		ModelAndView mv = new ModelAndView("createschedule");
+		mv.addObject("semester", semester);
+		mv.addObject("year", year);
+		mv.addObject("id", id);
+
+		Schedule schedule = scheduleRepository.findById(id);
+		schedule.delete(sectionNrc);
+		schedule.add(section.convertToSection());
+		mv.addObject("sections", getSections(schedule));
+		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
+
+		return mv;
+	}
+
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
 	public ModelAndView deleteSchedule(@PathVariable String scheduleId) throws Exception {
 		ModelAndView mv = new ModelAndView("deleteschedule");

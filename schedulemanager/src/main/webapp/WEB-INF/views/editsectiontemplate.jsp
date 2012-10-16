@@ -7,15 +7,19 @@
 	<input type="hidden" name="teachMode" value="${section.teachMode}"
 		scope="request"> <input type="hidden" name="acronym"
 		value="${section.acronym}" scope="request">
+  <input type="hidden" name="group" value="${section.group}"
+    scope="request"> <input type="hidden" name="personInCharge" value="${section.personInCharge}"
+    scope="request"> <input type="hidden" name="teachers" value="${section.teachers}"
+    scope="request"> 
 	<div class="row-fluid section_details">
 		<div class="span3 pull-right group">
-			<b>Groupe : </b><input class="groupInput" disabled="disabled"
-				type="text" name="group" value="${section.group}" scope="request">
+			<b>Groupe : </b><input class="groupInput"
+				type="text" value="${section.group}" disabled="disabled"}">
 		</div>
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Titulaire :</label>
 			<div class="span8 controls">
-				<input disabled="disabled" type="text" name="personInCharge"
+				<input disabled="disabled" type="text"
 					value="${section.personInCharge}" scope="request">
 			</div>
 		</div>
@@ -24,7 +28,7 @@
 			<div class="span8 controls">
 				<div class="teachers">
 					<c:forEach var="teacher" items="${section.teachers}">
-						<input disabled="disabled" type="text" name="teachers"
+						<input disabled="disabled" type="text"
 							value="${teacher}" scope="request">
 					</c:forEach>
 				</div>
