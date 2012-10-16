@@ -148,7 +148,7 @@
 											type="text" placeholder="HH:MM" class="input-small"
 											name="laboTimeSlotEnd" value="${section.laboTimeSlotEnd}0">
 									</c:when>
-									<c:otherwise>Pas d'heures de laboratoire.</c:otherwise>
+									<c:otherwise><div class="hoursLabInverse">Pas d'heures de laboratoire.</div></c:otherwise>
 								</c:choose>
 							</div>
 						</div>

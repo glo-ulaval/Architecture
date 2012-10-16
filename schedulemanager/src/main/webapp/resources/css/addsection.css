@@ -19,6 +19,11 @@
 	margin-left: 28px;
 }
 
+.hoursLabInverse {
+  margin-left: -28px;
+}
+
+
 #teachers {
 	margin-top: 9px;
 }
