@@ -44,7 +44,7 @@ public class LoginController {
 		request.getSession().invalidate();
 
 		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("logout", "Vous avez été déconnecté avec success");
+		mv.addObject("logout", "Vous avez été déconnecté avec succès");
 		return mv;
 
 	}
