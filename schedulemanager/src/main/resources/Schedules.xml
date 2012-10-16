@@ -32,6 +32,60 @@
                 </value>
             </entry>
             <entry>
+                <key>90111</key>
+                <value>
+                    <courseAcronym>IFT-2000</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>MONDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>11</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>8</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>B</group>
+                    <nrc>90111</nrc>
+                    <personInCharge>Thiery Dude</personInCharge>
+                    <teachMode>Virtual</teachMode>
+                    <teachers>Thiery Eude</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>0</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+            <entry>
+                <key>90623</key>
+                <value>
+                    <courseAcronym>IFT-2007</courseAcronym>
+                    <courseTimeSlots>
+                        <dayOfWeek>MONDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>14</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>11</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </courseTimeSlots>
+                    <group>A</group>
+                    <nrc>90623</nrc>
+                    <personInCharge>Thiery Eude</personInCharge>
+                    <teachMode>Virtual</teachMode>
+                    <teachers>Thiery Eude</teachers>
+                    <timeDedicated>
+                        <courseHours>3</courseHours>
+                        <labHours>0</labHours>
+                    </timeDedicated>
+                </value>
+            </entry>
+            <entry>
                 <key>87135</key>
                 <value>
                     <courseAcronym>GLO-4002</courseAcronym>

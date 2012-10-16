@@ -30,7 +30,7 @@
 					<tr id="${schedule.id}">
 						<td class="span12">[${schedule.semester} ${schedule.year}] ${schedule.id}</td>
 						<td class="centered">
-							<a class="btn btn-success" href="schedule/${schedule.id}"><i class="icon-search"></i></a>
+							<a class="btn" href="schedule/${schedule.id}"><i class="icon-search"></i></a>
 						</td>
 					</tr>
 				</c:forEach>

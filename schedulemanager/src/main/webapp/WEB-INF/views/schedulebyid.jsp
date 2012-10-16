@@ -22,11 +22,63 @@
 		<br/>
 		<div class="schedule_details">
 			<table class="table table-striped">
-				<c:forEach var="section" items="${sections}">
+				<tr><td><h4>Lundi</h4></td></tr>
+				<c:forEach var="mondaysection" items="${sections.monday}">
 					<tr>
-						<td class="span12">${section.nrc}</td>
+						<td class="span12"><b>${mondaysection.timeSlotStart} - ${mondaysection.timeSlotEnd}</b> (${mondaysection.nrc}) ${mondaysection.acronym}</td>
 						<td class="centered">
-							<a class="btn btn-success" href=""><i class="icon-search"></i></a>
+							<a class="btn btn-warning" href="/editsection/${schedule.id}/${schedule.year}/${schedule.semester}/${mondaysection.nrc}"><i class="icon-edit"></i></a>
+						</td>
+						<td class="centered">
+							<a class="btn btn-danger" href="/deletesection/${schedule.id}/${schedule.year}/${schedule.semester}/${mondaysection.nrc}"><i class="icon-trash icon-white"></i></a>
+						</td>
+					</tr>
+				</c:forEach>
+				<tr><td><h4>Mardi</h4></td></tr>
+				<c:forEach var="tuesdaysection" items="${sections.tuesday}">
+					<tr>
+						<td class="span12"><b>${tuesdaysection.timeSlotStart} - ${tuesdaysection.timeSlotEnd}</b> (${tuesdaysection.nrc}) ${tuesdaysection.acronym}</td>
+						<td class="centered">
+							<a class="btn btn-warning" href=""><i class="icon-edit"></i></a>
+						</td>
+						<td class="centered">
+							<a class="btn btn-danger" href=""><i class="icon-trash icon-white"></i></a>
+						</td>
+					</tr>
+				</c:forEach>
+				<tr><td><h4>Mercredi</h4></td></tr>
+				<c:forEach var="wednesdaysection" items="${sections.wednesday}">
+					<tr>
+						<td class="span12"><b>${wednesdaysection.timeSlotStart} - ${wednesdaysection.timeSlotEnd}</b> (${wednesdaysection.nrc}) ${wednesdaysection.acronym}</td>
+						<td class="centered">
+							<a class="btn btn-warning" href=""><i class="icon-edit"></i></a>
+						</td>
+						<td class="centered">
+							<a class="btn btn-danger" href=""><i class="icon-trash icon-white"></i></a>
+						</td>
+					</tr>
+				</c:forEach>
+				<tr><td><h4>Jeudi</h4></td></tr>
+				<c:forEach var="thursdaysection" items="${sections.thursday}">
+					<tr>
+						<td class="span12"><b>${thursdaysection.timeSlotStart} - ${thursdaysection.timeSlotEnd}</b> (${thursdaysection.nrc}) ${thursdaysection.acronym}</td>
+						<td class="centered">
+							<a class="btn btn-warning" href=""><i class="icon-edit"></i></a>
+						</td>
+						<td class="centered">
+							<a class="btn btn-danger" href=""><i class="icon-trash icon-white"></i></a>
+						</td>
+					</tr>
+				</c:forEach>
+				<tr><td><h4>Vendredi</h4></td></tr>
+				<c:forEach var="fridaysection" items="${sections.friday}">
+					<tr>
+						<td class="span12"><b>${fridaysection.timeSlotStart} - ${fridaysection.timeSlotEnd}</b> (${fridaysection.nrc}) ${fridaysection.acronym}</td>
+						<td class="centered">
+							<a class="btn btn-warning" href=""><i class="icon-edit"></i></a>
+						</td>
+						<td class="centered">
+							<a class="btn btn-danger" href=""><i class="icon-trash icon-white"></i></a>
 						</td>
 					</tr>
 				</c:forEach>
