@@ -1,6 +1,7 @@
 package cours.ulaval.glo4003.controller;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -132,8 +133,19 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canEditASection() {
+	public void canEditASection() throws Exception {
+		SectionModel model = mock(SectionModel.class);
+		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model);
 
+		assertEquals(A_YEAR, mv.getModel().get("year"));
+		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
+		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
+		assertTrue(mv.getModel().containsKey("courses"));
+		assertTrue(mv.getModel().containsKey("sections"));
+		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
+		verify(schedule).delete(A_SECTION_NRC);
+		verify(schedule).add(any(Section.class));
+		verify(mockedScheduleRepository).store(schedule);
 	}
 
 	@Test
