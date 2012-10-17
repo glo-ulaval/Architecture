@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:url value="/menu" var="menu"/>
+<c:url value="/" var="home"/>
 <header>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
@@ -9,10 +11,12 @@
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="/schedulemanager">Accueil</a></li>
-						<li><a href="/schedulemanager">Menu</a></li>
-						<li><a href="#">À propos</a></li>
+						<li><a href="${home}">Accueil</a></li>
+						<c:if test="${not empty user.idul}">
+							<li><a href="${menu}">Menu</a></li>
+						</c:if>
 						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
+						<li><a href="#">À propos</a></li>
 					</ul>
 					<c:if test="${not empty user.idul}">
 						<div class="btn-group floatRight">
