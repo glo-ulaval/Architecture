@@ -149,10 +149,22 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
-	public ModelAndView deleteSchedule(@PathVariable String scheduleId) throws Exception {
-		ModelAndView mv = new ModelAndView("deleteschedule");
+	public ModelAndView deleteSchedule(@PathVariable String scheduleId) {
+		Boolean error = false;
+		String errorMessage = "";
+		try {
+			scheduleRepository.delete(scheduleId);
+		} catch (Exception e) {
+			error = true;
+			errorMessage = e.getMessage();
+		}
 
-		scheduleRepository.delete(scheduleId);
+		ModelAndView mv = schedule();
+		if (error) {
+			mv.addObject("error", errorMessage);
+		} else {
+			mv.addObject("error", ControllerMessages.SUCCESS);
+		}
 
 		return mv;
 	}
