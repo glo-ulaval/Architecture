@@ -23,11 +23,11 @@
 		<div class="schedule_details">
 		<c:url var="editsection" value="/schedule/editsection/${schedule.id}/${schedule.year}/${schedule.semester}"></c:url>
 		<c:url var="deletesection" value="/schedule/deletesection/${schedule.id}/${schedule.year}/${schedule.semester}"></c:url>
-			<table class="table table-striped">
-				<tr><td><h4>Lundi</h4></td></tr>
+			<table class="table">
+				<tr class="well"><td colspan="3"><h4>Lundi</h4></td></tr>
 				<c:forEach var="mondaysection" items="${sections.monday}">
 					<tr>
-						<td class="span12"><b>${mondaysection.timeSlotStart} - ${mondaysection.timeSlotEnd}</b> (${mondaysection.nrc}) ${mondaysection.acronym}</td>
+						<td class="span12"><b>${mondaysection.timeSlotStart} - ${mondaysection.timeSlotEnd}</b> || ${mondaysection.acronym} (${mondaysection.nrc} - ${mondaysection.group})</td>
 						<td class="centered">
 							<a class="btn btn-warning" href="${editsection}/${mondaysection.nrc}"><i class="icon-edit"></i></a>
 						</td>
@@ -36,10 +36,10 @@
 						</td>
 					</tr>
 				</c:forEach>
-				<tr><td><h4>Mardi</h4></td></tr>
+				<tr class="well"><td colspan="3"><h4>Mardi</h4></td></tr>
 				<c:forEach var="tuesdaysection" items="${sections.tuesday}">
 					<tr>
-						<td class="span12"><b>${tuesdaysection.timeSlotStart} - ${tuesdaysection.timeSlotEnd}</b> (${tuesdaysection.nrc}) ${tuesdaysection.acronym}</td>
+						<td class="span12"><b>${tuesdaysection.timeSlotStart} - ${tuesdaysection.timeSlotEnd}</b> || ${tuesdaysection.acronym} (${tuesdaysection.nrc} - ${tuesdaysection.group})</td>
 						<td class="centered">
 							<a class="btn btn-warning" href="${editsection}/${tuesdaysection.nrc}"><i class="icon-edit"></i></a>
 						</td>
@@ -48,10 +48,10 @@
 						</td>
 					</tr>
 				</c:forEach>
-				<tr><td><h4>Mercredi</h4></td></tr>
+				<tr class="well"><td colspan="3"><h4>Mercredi</h4></td></tr>
 				<c:forEach var="wednesdaysection" items="${sections.wednesday}">
 					<tr>
-						<td class="span12"><b>${wednesdaysection.timeSlotStart} - ${wednesdaysection.timeSlotEnd}</b> (${wednesdaysection.nrc}) ${wednesdaysection.acronym}</td>
+						<td class="span12"><b>${wednesdaysection.timeSlotStart} - ${wednesdaysection.timeSlotEnd}</b> || ${wednesdaysection.acronym} (${wednesdaysection.nrc} - ${wednesdaysection.group})</td>
 						<td class="centered">
 							<a class="btn btn-warning" href="${editsection}/${wednesdaysection.nrc}"><i class="icon-edit"></i></a>
 						</td>
@@ -60,10 +60,10 @@
 						</td>
 					</tr>
 				</c:forEach>
-				<tr><td><h4>Jeudi</h4></td></tr>
+				<tr class="well"><td colspan="3"><h4>Jeudi</h4></td></tr>
 				<c:forEach var="thursdaysection" items="${sections.thursday}">
 					<tr>
-						<td class="span12"><b>${thursdaysection.timeSlotStart} - ${thursdaysection.timeSlotEnd}</b> (${thursdaysection.nrc}) ${thursdaysection.acronym}</td>
+						<td class="span12"><b>${thursdaysection.timeSlotStart} - ${thursdaysection.timeSlotEnd}</b> || ${thursdaysection.acronym} (${thursdaysection.nrc} - ${thursdaysection.group})</td>
 						<td class="centered">
 							<a class="btn btn-warning" href="${editsection}/${thursdaysection.nrc}"><i class="icon-edit"></i></a>
 						</td>
@@ -72,10 +72,10 @@
 						</td>
 					</tr>
 				</c:forEach>
-				<tr><td><h4>Vendredi</h4></td></tr>
+				<tr class="well"><td colspan="3"><h4>Vendredi</h4></td></tr>
 				<c:forEach var="fridaysection" items="${sections.friday}">
 					<tr>
-						<td class="span12"><b>${fridaysection.timeSlotStart} - ${fridaysection.timeSlotEnd}</b> (${fridaysection.nrc}) ${fridaysection.acronym}</td>
+						<td class="span12"><b>${fridaysection.timeSlotStart} - ${fridaysection.timeSlotEnd}</b> || ${fridaysection.acronym} (${fridaysection.nrc} - ${fridaysection.group})</td>
 						<td class="centered">
 							<a class="btn btn-warning" href="${editsection}/${fridaysection.nrc}"><i class="icon-edit"></i></a>
 						</td>
