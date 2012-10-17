@@ -82,6 +82,6 @@ public class Time {
 
 	@Override
 	public String toString() {
-		return this.hour + ":" + this.minute + "0";
+		return this.hour + ":" + this.minute;
 	}
 }

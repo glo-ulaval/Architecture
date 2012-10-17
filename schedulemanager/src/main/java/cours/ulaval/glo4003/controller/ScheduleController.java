@@ -90,6 +90,7 @@ public class ScheduleController {
 			@ModelAttribute("section") SectionModel section) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
+		scheduleRepository.store(schedule);
 
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
@@ -135,15 +136,20 @@ public class ScheduleController {
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section) {
 		ModelAndView mv = new ModelAndView("createschedule");
-		mv.addObject("semester", semester);
-		mv.addObject("year", year);
-		mv.addObject("id", id);
-
-		Schedule schedule = scheduleRepository.findById(id);
-		schedule.delete(sectionNrc);
-		schedule.add(section.convertToSection());
-		mv.addObject("sections", getSections(schedule));
-		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
+		try {
+			Schedule schedule = scheduleRepository.findById(id);
+			schedule.delete(sectionNrc);
+			schedule.add(section.convertToSection());
+			scheduleRepository.store(schedule);
+			mv.addObject("error", ControllerMessages.SUCCESS);
+			mv.addObject("year", year);
+			mv.addObject("semester", semester);
+			mv.addObject("id", id);
+			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
+			mv.addObject("sections", getSections(schedule));
+		} catch (Exception e) {
+			mv.addObject("error", e.getMessage());
+		}
 
 		return mv;
 	}
@@ -177,6 +183,7 @@ public class ScheduleController {
 		try {
 			Schedule schedule = scheduleRepository.findById(scheduleId);
 			schedule.delete(sectionNrc);
+			scheduleRepository.store(schedule);
 			mv.addObject("error", ControllerMessages.SUCCESS);
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);

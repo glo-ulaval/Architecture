@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schedules>
     <schedule>
-        <id>aut2012-01</id>
+        <id>2011-2012-Automne-1</id>
         <personInCharge>Nadia Tawbi</personInCharge>
         <sections>
             <entry>
@@ -22,9 +22,9 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>90659</nrc>
-                    <personInCharge>Thiery Eude</personInCharge>
+                    <personInCharge>Thierry Eude</personInCharge>
                     <teachMode>Virtual</teachMode>
-                    <teachers>Thiery Eude</teachers>
+                    <teachers>Thierry Eude</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
@@ -49,9 +49,9 @@
                     </courseTimeSlots>
                     <group>B</group>
                     <nrc>90111</nrc>
-                    <personInCharge>Thiery Dude</personInCharge>
+                    <personInCharge>Thierry Eude</personInCharge>
                     <teachMode>Virtual</teachMode>
-                    <teachers>Thiery Eude</teachers>
+                    <teachers>Thierry Eude</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
@@ -76,7 +76,7 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>90623</nrc>
-                    <personInCharge>Thiery Eude</personInCharge>
+                    <personInCharge>Thierry Eude</personInCharge>
                     <teachMode>Virtual</teachMode>
                     <teachers>Thiery Eude</teachers>
                     <timeDedicated>
@@ -212,9 +212,9 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>89782</nrc>
-                    <personInCharge>Nadir Belkiter</personInCharge>
+                    <personInCharge>Nadir Belkhiter</personInCharge>
                     <teachMode>InCourse</teachMode>
-                    <teachers>Nadir Belkiter</teachers>
+                    <teachers>Nadir Belkhiter</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
