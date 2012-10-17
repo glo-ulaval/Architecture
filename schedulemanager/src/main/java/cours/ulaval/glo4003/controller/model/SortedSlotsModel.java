@@ -41,6 +41,30 @@ public class SortedSlotsModel {
 				}
 			}
 		}
+		for (Section section : sections) {
+			TimeSlot timeSlot = section.getLabTimeSlot();
+			if (timeSlot != null) {
+				switch (timeSlot.getDayOfWeek()) {
+				case MONDAY:
+					monday.add(new CourseSlotModel(section, timeSlot));
+					break;
+				case TUESDAY:
+					tuesday.add(new CourseSlotModel(section, timeSlot));
+					break;
+				case WEDNESDAY:
+					wednesday.add(new CourseSlotModel(section, timeSlot));
+					break;
+				case THURSDAY:
+					thursday.add(new CourseSlotModel(section, timeSlot));
+					break;
+				case FRIDAY:
+					friday.add(new CourseSlotModel(section, timeSlot));
+					break;
+				default:
+					break;
+				}
+			}
+		}
 		sort();
 	}
 
