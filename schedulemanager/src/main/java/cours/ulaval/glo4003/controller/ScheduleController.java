@@ -91,6 +91,7 @@ public class ScheduleController {
 			@ModelAttribute("section") SectionModel section) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
+		scheduleRepository.store(schedule);
 
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
@@ -132,6 +133,29 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
+	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section) {
+		ModelAndView mv = new ModelAndView("createschedule");
+		mv.addObject("semester", semester);
+		mv.addObject("year", year);
+		mv.addObject("id", id);
+
+		try {
+			Schedule schedule = scheduleRepository.findById(id);
+			schedule.delete(sectionNrc);
+			schedule.add(section.convertToSection());
+			scheduleRepository.store(schedule);
+			mv.addObject("sections", getSections(schedule));
+			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year, semester), semester));
+			mv.addObject("error", ControllerMessages.SUCCESS);
+		} catch (Exception e) {
+			mv.addObject("error", e.getMessage());
+		}
+
+		return mv;
+	}
+
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
 	public ModelAndView deleteSchedule(@PathVariable String scheduleId) throws Exception {
 		ModelAndView mv = new ModelAndView("deleteschedule");
@@ -149,6 +173,7 @@ public class ScheduleController {
 		try {
 			Schedule schedule = scheduleRepository.findById(scheduleId);
 			schedule.delete(sectionNrc);
+			scheduleRepository.store(schedule);
 			mv.addObject("error", ControllerMessages.SUCCESS);
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
