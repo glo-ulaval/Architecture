@@ -16,7 +16,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.Schedule;
@@ -59,6 +61,7 @@ public class ScheduleControllerTest {
 		course = mock(Course.class);
 		schedule = mock(Schedule.class);
 		when(schedule.getSemester()).thenReturn(Semester.Automne);
+		when(schedule.getId()).thenReturn(A_SCHEDULE_ID);
 		Offering offering = mock(Offering.class);
 		List<String> years = Arrays.asList(A_YEAR);
 		courses = Arrays.asList(course);
@@ -86,7 +89,10 @@ public class ScheduleControllerTest {
 	public void scheduleByYearReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID);
 
-		assertEquals(schedule, mv.getModel().get("schedule"));
+		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
+		assertEquals(A_SCHEDULE_ID, ((ScheduleModel) mv.getModel().get("schedule")).getId());
+
+		assertTrue(mv.getModel().get("sections") instanceof SortedSlotsModel);
 	}
 
 	@Test
