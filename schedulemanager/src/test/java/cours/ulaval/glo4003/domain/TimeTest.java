@@ -74,6 +74,6 @@ public class TimeTest {
 	public void canConvertTimeToString() {
 		Time time = new Time(A_HOUR, A_MINUTE);
 
-		assertEquals(A_HOUR + ":" + A_MINUTE, time.toString());
+		assertEquals(A_HOUR + ":" + A_MINUTE + "0", time.toString());
 	}
 }
