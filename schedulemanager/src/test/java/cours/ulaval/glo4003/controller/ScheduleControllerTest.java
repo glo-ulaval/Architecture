@@ -188,6 +188,13 @@ public class ScheduleControllerTest {
 		assertTrue(mv.getModel().containsKey("courses"));
 	}
 
+	@Test
+	public void canDeleteASchedule() throws Exception {
+		controller.deleteSchedule(A_SCHEDULE_ID);
+
+		verify(mockedScheduleRepository).delete(A_SCHEDULE_ID);
+	}
+
 	private Section createSection() {
 		Section section = new Section();
 		section.setNrc("00000");

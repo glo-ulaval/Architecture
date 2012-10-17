@@ -82,6 +82,14 @@ public class Time {
 
 	@Override
 	public String toString() {
-		return this.hour + ":" + this.minute;
+		return adjustTime(this.hour + ":" + this.minute);
+	}
+
+	private String adjustTime(String time) {
+		if (time.matches("\\d+:0$")) {
+			time += "0";
+		}
+
+		return time;
 	}
 }

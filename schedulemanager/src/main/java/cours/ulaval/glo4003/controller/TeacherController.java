@@ -59,7 +59,7 @@ public class TeacherController {
 			return "Une erreur est survenue, veuillez réessayer.";
 		}
 
-		return "Vos disponibilités ont été enregistrés avec succès";
+		return "Vos disponibilités ont été enregistrées avec succès";
 	}
 
 }

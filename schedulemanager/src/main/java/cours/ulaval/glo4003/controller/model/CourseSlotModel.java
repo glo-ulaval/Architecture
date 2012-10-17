@@ -16,7 +16,6 @@ public class CourseSlotModel {
 		this.acronym = section.getCourseAcronym();
 		this.timeStart = timeSlot.getStartTime().toString();
 		this.timeEnd = timeSlot.getEndTime().toString();
-
 	}
 
 	public String getTimeSlotStart() {
@@ -58,5 +57,4 @@ public class CourseSlotModel {
 	public void setGroup(String group) {
 		this.group = group;
 	}
-
 }
