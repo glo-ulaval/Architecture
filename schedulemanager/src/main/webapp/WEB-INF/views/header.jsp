@@ -12,7 +12,7 @@
 						<li><a href="/schedulemanager">Accueil</a></li>
 						<c:if test="${not empty user.idul}">
 							<li><a href="${menu}">Menu</a></li>
-						</c:if
+						</c:if>
 						<li><a href="#">À propos</a></li>
 						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
 					</ul>
