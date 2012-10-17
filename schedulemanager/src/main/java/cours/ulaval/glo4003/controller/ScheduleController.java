@@ -70,7 +70,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.GET)
 	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester) throws Exception {
-		Schedule schedule = new Schedule(year + "-" + semester);
+		Schedule schedule = new Schedule(scheduleRepository.getId(year, semester));
 		schedule.setYear(year);
 		schedule.setSemester(semester);
 

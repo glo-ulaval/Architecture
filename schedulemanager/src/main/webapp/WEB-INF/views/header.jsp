@@ -10,16 +10,17 @@
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="/schedulemanager">Accueil</a></li>
-						<li><a href="/schedulemanager">Menu</a></li>
+						<c:if test="${not empty user.idul}">
+							<li><a href="${menu}">Menu</a></li>
+						</c:if
 						<li><a href="#">À propos</a></li>
 						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
 					</ul>
 					<c:if test="${not empty user.idul}">
 						<div class="btn-group floatRight">
-							<a class="btn btn-inverse" href="#">
-								<i class="icon-user icon-white"></i><b class="username">${user.idul}</b>
-							</a>
-							<a class="btn btn-inverse" href="<c:url value="/logout" />">
+							<a class="btn btn-inverse" href="#"> <i
+								class="icon-user icon-white"></i><b class="username">${user.idul}</b>
+							</a> <a class="btn btn-inverse" href="<c:url value="/logout" />">
 								<i class="icon-remove icon-white"></i>
 							</a>
 						</div>
