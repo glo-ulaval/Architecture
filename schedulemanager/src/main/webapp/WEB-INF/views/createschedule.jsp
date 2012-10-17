@@ -89,7 +89,8 @@
 				</c:if>
 			</div>
 		</div>
-		<a class="btn btn-success pull-right" href="../${year}">Générer</a>
+		<c:url value="/schedule/${id}" var="generateUrl"/>
+		<a class="btn btn-success pull-right" href="${generateUrl}">Générer</a>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
