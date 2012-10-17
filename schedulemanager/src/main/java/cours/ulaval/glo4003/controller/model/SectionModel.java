@@ -92,14 +92,6 @@ public class SectionModel {
 					this.timeSlotEnds.add(slot.getEndTime().toString());
 				}
 			}
-
-			for (TimeSlot slot : section.getCourseTimeSlots()) {
-				if (timeSlot != null) {
-					this.days.add(inverseDaysAssociations.get(slot.getDayOfWeek()));
-					this.timeSlotStarts.add(timeSlot.getStartTime().toString());
-					this.timeSlotEnds.add(timeSlot.getEndTime().toString());
-				}
-			}
 		}
 	}
 
