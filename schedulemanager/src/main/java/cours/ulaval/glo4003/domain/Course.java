@@ -12,13 +12,15 @@ public class Course {
 	private int credits;
 	private String description;
 	private Cycle cycle;
+	private TimeDedicated timeDedicated;
 	private List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
 
 	public Course() {
 		super();
 	}
 
-	public Course(String acronym, String title, int credits, String description, Cycle cycle, List<Prerequisite> prerequisites) {
+	public Course(String acronym, String title, int credits, String description, Cycle cycle, List<Prerequisite> prerequisites,
+			TimeDedicated timeDedicated) {
 		super();
 		this.acronym = acronym;
 		this.title = title;
@@ -26,6 +28,7 @@ public class Course {
 		this.description = description;
 		this.cycle = cycle;
 		this.prerequisites = prerequisites;
+		this.timeDedicated = timeDedicated;
 	}
 
 	public String getAcronym() {
@@ -58,6 +61,14 @@ public class Course {
 
 	public int getCredits() {
 		return credits;
+	}
+
+	public void setTimeDedicated(TimeDedicated timeDedicated) {
+		this.timeDedicated = timeDedicated;
+	}
+
+	public TimeDedicated getTimeDedicated() {
+		return timeDedicated;
 	}
 
 	public String getTitle() {

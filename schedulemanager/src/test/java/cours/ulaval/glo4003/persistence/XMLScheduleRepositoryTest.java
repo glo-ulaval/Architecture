@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.Semester;
 
 public class XMLScheduleRepositoryTest {
 
@@ -32,16 +33,14 @@ public class XMLScheduleRepositoryTest {
 	}
 
 	@Test
-	public void canFindAll()
-			throws Exception {
+	public void canFindAll() throws Exception {
 		addAFewSchedule();
 
 		assertEquals(NB_OF_SCHEDULE, scheduleRepo.findAll().size());
 	}
 
 	@Test
-	public void canFindByYear()
-			throws Exception {
+	public void canFindByYear() throws Exception {
 		addTwoScheduleWithTwoDifferentYear();
 
 		assertEquals(1, scheduleRepo.findBy("2012").size());
@@ -57,16 +56,21 @@ public class XMLScheduleRepositoryTest {
 	}
 
 	@Test
-	public void canStoreASchedule()
-			throws Exception {
+	public void canGetId() throws Exception {
+		String id = scheduleRepo.getId("2012", Semester.Automne);
+
+		assertEquals("2012-Automne-1", id);
+	}
+
+	@Test
+	public void canStoreASchedule() throws Exception {
 		scheduleRepo.store(mockedSchedule);
 
 		assertEquals(mockedSchedule, scheduleRepo.findAll().get(0));
 	}
 
 	@Test
-	public void cannotStoreADuplicateSchedule()
-			throws Exception {
+	public void cannotStoreADuplicateSchedule() throws Exception {
 		when(mockedSchedule.getId()).thenReturn(AN_ID);
 
 		scheduleRepo.store(mockedSchedule);
@@ -76,8 +80,7 @@ public class XMLScheduleRepositoryTest {
 	}
 
 	@Test
-	public void canDeleteASchedule()
-			throws Exception {
+	public void canDeleteASchedule() throws Exception {
 		when(mockedSchedule.getId()).thenReturn(AN_ID);
 
 		scheduleRepo.store(mockedSchedule);
@@ -87,8 +90,7 @@ public class XMLScheduleRepositoryTest {
 	}
 
 	@Test
-	public void doesntDeleteAnythingIfTheScheduleDoesntExist()
-			throws Exception {
+	public void doesntDeleteAnythingIfTheScheduleDoesntExist() throws Exception {
 		Map<String, Schedule> schedules = mock(Map.class);
 		when(schedules.containsKey(anyString())).thenReturn(false);
 
@@ -97,8 +99,7 @@ public class XMLScheduleRepositoryTest {
 		verify(schedules, never()).remove(anyString());
 	}
 
-	private void addAFewSchedule()
-			throws Exception {
+	private void addAFewSchedule() throws Exception {
 		for (Integer i = 0; i < NB_OF_SCHEDULE; i++) {
 			Schedule schedule = mock(Schedule.class);
 			when(schedule.getId()).thenReturn(AN_ID + i.toString());
@@ -106,8 +107,7 @@ public class XMLScheduleRepositoryTest {
 		}
 	}
 
-	private void addTwoScheduleWithTwoDifferentYear()
-			throws Exception {
+	private void addTwoScheduleWithTwoDifferentYear() throws Exception {
 		Schedule schedule2011 = mock(Schedule.class);
 		Schedule schedule2012 = mock(Schedule.class);
 		when(schedule2011.getId()).thenReturn(AN_ID + "2011");

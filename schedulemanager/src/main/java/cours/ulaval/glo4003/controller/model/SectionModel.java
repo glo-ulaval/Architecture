@@ -74,19 +74,22 @@ public class SectionModel {
 		TimeDedicated timeDedicated = section.getTimeDedicated();
 		this.hoursInClass = timeDedicated.getCourseHours();
 		this.hoursInLab = timeDedicated.getLabHours();
-		this.hoursAtHome = timeDedicated.getOthersHours();
+		this.hoursAtHome = timeDedicated.getOtherHours();
 
 		TimeSlot timeSlot = section.getLabTimeSlot();
-		this.laboTimeSlotStart = timeSlot.getStartTime().toString();
-		this.laboTimeSlotEnd = timeSlot.getEndTime().toString();
-		this.labDay = inverseDaysAssociations.get(timeSlot.getDayOfWeek());
-
-		for (TimeSlot slot : section.getCourseTimeSlots()) {
-			this.days.add(inverseDaysAssociations.get(slot.getDayOfWeek()));
-			this.timeSlotStarts.add(timeSlot.getStartTime().toString());
-			this.timeSlotEnds.add(timeSlot.getEndTime().toString());
+		if (timeSlot != null) {
+			this.laboTimeSlotStart = timeSlot.getStartTime().toString();
+			this.laboTimeSlotEnd = timeSlot.getEndTime().toString();
+			this.labDay = inverseDaysAssociations.get(timeSlot.getDayOfWeek());
 		}
 
+		for (TimeSlot slot : section.getCourseTimeSlots()) {
+			if (slot != null) {
+				this.days.add(inverseDaysAssociations.get(slot.getDayOfWeek()));
+				this.timeSlotStarts.add(slot.getStartTime().toString());
+				this.timeSlotEnds.add(slot.getEndTime().toString());
+			}
+		}
 	}
 
 	public Section convertToSection() {
@@ -97,7 +100,6 @@ public class SectionModel {
 		section.setPersonInCharge(personInCharge);
 		section.setTeachers(teachers);
 		section.setTeachMode(TeachMode.valueOf(teachMode));
-		section.setLabTimeSlot(new TimeSlot());
 
 		TimeDedicated timeDedicated = new TimeDedicated(hoursInClass, hoursInLab, hoursAtHome);
 		section.setTimeDedicated(timeDedicated);

@@ -1,4 +1,4 @@
-#hours {
+.hours {
 	margin-top: 9px;
 	margin-left: 28px;
 }
@@ -11,12 +11,16 @@
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	margin: 5px;
-	margin-top:20px;
+	margin-top: 20px;
 	padding: 10px;
 }
 
-.hours {
+.hoursLab {
 	margin-left: 28px;
+}
+
+.hoursLabInverse {
+	margin-left: -28px;
 }
 
 #teachers {
@@ -31,33 +35,47 @@
 
 .tab_a {
 	color: white;
-	margin:10px;
+	margin: 10px;
 }
 
 .tab_a:hover {
 	color: white;
 }
+
 .acronym {
-	display:hidden;
+	display: hidden;
 }
+
 .removeTeacher {
-	margin-bottom:8px;
-  margin-left:10px;	
+	margin-bottom: 8px;
+	margin-left: 10px;
 }
+
 .days {
-	margin-left:-80px;
-  margin-right:20px;
-  margin-bottom:10px;
+	margin-left: -80px;
+	margin-right: 20px;
+	margin-bottom: 10px;
 }
+
 .labDay {
-  margin-left:-30px;
-  margin-right:10px;
+	margin-left: -30px;
+	margin-right: 10px;
 }
+
 .group input {
-	width:30px;
-	text-align:center;
-	margin:1px;
+	width: 30px;
+	text-align: center;
+	margin: 1px;
 }
+
 .actionbutton {
-	margin:0px 5px;
+	margin: 0px 5px;
+}
+
+.hours_class_div {
+	display: none;
+}
+
+.hours_labo_div {
+	display: none;
 }

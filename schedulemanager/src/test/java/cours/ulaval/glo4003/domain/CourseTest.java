@@ -13,10 +13,12 @@ import org.junit.Test;
 public class CourseTest {
 
 	private Course course;
+	private TimeDedicated timeDedicated;
 
 	@Before
 	public void setUp() {
 		course = new Course();
+		timeDedicated = mock(TimeDedicated.class);
 	}
 
 	@Test
@@ -27,7 +29,7 @@ public class CourseTest {
 		String aDescription = "description";
 		Cycle aCycle = Cycle.Premier;
 		List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
-		course = new Course(anAcronym, aTitle, credits, aDescription, aCycle, prerequisites);
+		course = new Course(anAcronym, aTitle, credits, aDescription, aCycle, prerequisites, timeDedicated);
 
 		assertNotNull(course);
 		assertEquals(anAcronym, course.getAcronym());
@@ -36,6 +38,7 @@ public class CourseTest {
 		assertEquals(aDescription, course.getDescription());
 		assertEquals(aCycle, course.getCycle());
 		assertEquals(prerequisites, course.getPrerequisites());
+		assertEquals(timeDedicated, course.getTimeDedicated());
 	}
 
 	@Test
@@ -91,5 +94,12 @@ public class CourseTest {
 		course.setDescription(aDescription);
 
 		assertEquals(aDescription, course.getDescription());
+	}
+
+	@Test
+	public void canGetTimeDedicated() {
+		course.setTimeDedicated(timeDedicated);
+
+		assertEquals(timeDedicated, course.getTimeDedicated());
 	}
 }

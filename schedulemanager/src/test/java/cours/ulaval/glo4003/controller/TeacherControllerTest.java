@@ -48,8 +48,7 @@ public class TeacherControllerTest {
 	private TeacherController controller;
 
 	@Before
-	public void setUp()
-			throws Exception {
+	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 
 		when(mapper.readValue(JSON_STRING, AvailabilityModel.class)).thenReturn(availabilityModel);
@@ -73,8 +72,7 @@ public class TeacherControllerTest {
 	}
 
 	@Test
-	public void canGetAvailibilitiesEditView()
-			throws Exception {
-		assertEquals("Vos disponibilités ont été enregistrés avec succès", controller.availabilities(JSON_STRING, request));
+	public void canGetAvailibilitiesEditView() throws Exception {
+		assertEquals("Vos disponibilités ont été enregistrées avec succès", controller.availabilities(JSON_STRING, request));
 	}
 }

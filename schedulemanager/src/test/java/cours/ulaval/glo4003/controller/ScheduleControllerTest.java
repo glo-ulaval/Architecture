@@ -1,6 +1,7 @@
 package cours.ulaval.glo4003.controller;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -16,7 +17,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.Schedule;
@@ -56,12 +59,15 @@ public class ScheduleControllerTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
+		Map<String, Section> sections = new HashMap<String, Section>();
 		course = mock(Course.class);
 		schedule = mock(Schedule.class);
 		when(schedule.getSemester()).thenReturn(Semester.Automne);
 		Offering offering = mock(Offering.class);
 		List<String> years = Arrays.asList(A_YEAR);
 		courses = Arrays.asList(course);
+		sections.put(A_SECTION_NRC, createSection());
+		when(schedule.getSections()).thenReturn(sections);
 		when(mockedOfferingRepository.findYears()).thenReturn(years);
 		when(mockedOfferingRepository.find(A_YEAR)).thenReturn(offering);
 		when(mockedCourseRepository.findByOffering(offering)).thenReturn(courses);
@@ -87,7 +93,8 @@ public class ScheduleControllerTest {
 			throws Exception {
 		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID);
 
-		assertEquals(schedule, mv.getModel().get("schedule"));
+		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
+		assertTrue(mv.getModel().get("sections") instanceof SortedSlotsModel);
 	}
 
 	@Test
@@ -119,6 +126,35 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
+	public void editSectionReturnsTheCorrectModelAndView() {
+		ModelAndView mv = controller.editSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC);
+
+		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
+		verify(schedule).getSections();
+
+		assertEquals(A_YEAR, mv.getModel().get("year"));
+		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
+		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
+		assertTrue(mv.getModel().containsKey("section"));
+	}
+
+	@Test
+	public void canEditASection() throws Exception {
+		SectionModel model = mock(SectionModel.class);
+		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model);
+
+		assertEquals(A_YEAR, mv.getModel().get("year"));
+		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
+		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
+		assertTrue(mv.getModel().containsKey("courses"));
+		assertTrue(mv.getModel().containsKey("sections"));
+		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
+		verify(schedule).delete(A_SECTION_NRC);
+		verify(schedule).add(any(Section.class));
+		verify(mockedScheduleRepository).store(schedule);
+	}
+
+	@Test
 	public void canPostASection()
 			throws Exception {
 		SectionModel model = mock(SectionModel.class);
@@ -131,6 +167,7 @@ public class ScheduleControllerTest {
 
 		ModelAndView mv = controller.postSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, model);
 		verify(schedule).add(section);
+		verify(mockedScheduleRepository).store(schedule);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
 		assertEquals(courses, mv.getModel().get("courses"));
@@ -140,11 +177,12 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canDeleteASection() {
+	public void canDeleteASection() throws Exception {
 		ModelAndView mv = controller.deleteSection(A_SCHEDULE_ID, A_SECTION_NRC, A_YEAR, A_SEMESTER);
 
 		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
 		verify(schedule).delete(A_SECTION_NRC);
+		verify(mockedScheduleRepository).store(schedule);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
 		assertEquals(courses, mv.getModel().get("courses"));
@@ -152,6 +190,13 @@ public class ScheduleControllerTest {
 		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
 		assertTrue(mv.getModel().containsKey("sections"));
 		assertTrue(mv.getModel().containsKey("courses"));
+	}
+
+	@Test
+	public void canDeleteASchedule() throws Exception {
+		controller.deleteSchedule(A_SCHEDULE_ID);
+
+		verify(mockedScheduleRepository).delete(A_SCHEDULE_ID);
 	}
 
 	private Section createSection() {

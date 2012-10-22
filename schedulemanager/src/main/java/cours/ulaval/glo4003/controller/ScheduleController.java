@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
@@ -54,10 +55,9 @@ public class ScheduleController {
 			throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyid");
 
-		List<Section> sections = new ArrayList<Section>(scheduleRepository.findById(id).getSections().values());
-
-		mv.addObject("schedule", scheduleRepository.findById(id));
-		mv.addObject("sections", sections);
+		mv.addObject("schedule", new ScheduleModel(scheduleRepository.findById(id)));
+		mv.addObject("sections", new SortedSlotsModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections()
+				.values())));
 
 		return mv;
 	}
@@ -74,7 +74,7 @@ public class ScheduleController {
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.GET)
 	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester)
 			throws Exception {
-		Schedule schedule = new Schedule(year + "-" + semester);
+		Schedule schedule = new Schedule(scheduleRepository.getId(year, semester));
 		schedule.setYear(year);
 		schedule.setSemester(semester);
 
@@ -95,6 +95,7 @@ public class ScheduleController {
 			throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
+		scheduleRepository.store(schedule);
 
 		ModelAndView mv = new ModelAndView("createschedule");
 		mv.addObject("year", year);
@@ -136,12 +137,44 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
-	public ModelAndView deleteSchedule(@PathVariable String scheduleId)
-			throws Exception {
-		ModelAndView mv = new ModelAndView("deleteschedule");
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
+	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section) {
+		ModelAndView mv = new ModelAndView("createschedule");
+		try {
+			Schedule schedule = scheduleRepository.findById(id);
+			schedule.delete(sectionNrc);
+			schedule.add(section.convertToSection());
+			scheduleRepository.store(schedule);
+			mv.addObject("error", ControllerMessages.SUCCESS);
+			mv.addObject("year", year);
+			mv.addObject("semester", semester);
+			mv.addObject("id", id);
+			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
+			mv.addObject("sections", getSections(schedule));
+		} catch (Exception e) {
+			mv.addObject("error", e.getMessage());
+		}
+		return mv;
+	}
 
-		scheduleRepository.delete(scheduleId);
+	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
+	public ModelAndView deleteSchedule(@PathVariable String scheduleId) {
+		Boolean error = false;
+		String errorMessage = "";
+		try {
+			scheduleRepository.delete(scheduleId);
+		} catch (Exception e) {
+			error = true;
+			errorMessage = e.getMessage();
+		}
+
+		ModelAndView mv = schedule();
+		if (error) {
+			mv.addObject("error", errorMessage);
+		} else {
+			mv.addObject("error", ControllerMessages.SUCCESS);
+		}
 
 		return mv;
 	}
@@ -154,6 +187,7 @@ public class ScheduleController {
 		try {
 			Schedule schedule = scheduleRepository.findById(scheduleId);
 			schedule.delete(sectionNrc);
+			scheduleRepository.store(schedule);
 			mv.addObject("error", ControllerMessages.SUCCESS);
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);

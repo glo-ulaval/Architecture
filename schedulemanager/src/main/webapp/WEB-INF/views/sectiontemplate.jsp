@@ -46,17 +46,17 @@
 						<div id="hour_group">
 							<label class="control-label" for="hours_class">En classe</label>
 							<input type="text" placeholder="H"
-								class="input-small hours_class" name="hoursInClass" value="0">
+								class="input-small hours_class" name="hoursInClass" value="${course.timeDedicated.courseHours}">
 						</div>
 						<div id="hour_group">
 							<label class="control-label" for="hours_labo">Labo/Travail
 								dirigé</label> <input type="text" placeholder="H"
-								class="input-small hours_labo" name="hoursInLab" value="0">
+								class="input-small hours_labo" name="hoursInLab" value="${course.timeDedicated.labHours}">
 						</div>
 						<div id="hour_group">
 							<label class="control-label" for="hours_home">Travail
 								personnel</label> <input type="text" placeholder="H"
-								class="input-small hours_home" name="hoursAtHome" value="0">
+								class="input-small hours_home" name="hoursAtHome" value="${course.timeDedicated.otherHours}">
 						</div>
 					</div>
 				</div>
@@ -66,13 +66,13 @@
 						<div class="span9 controls">
 							<div class="btn-group" data-toggle="buttons-radio">
 								<button type="button" class="btn btn-info active"
-									onClick=addHours(1)>1 séance</button>
-								<button type="button" class="btn btn-info" onClick=addHours(2)>2
+									onClick=addHours("${param.teachmode}",1)>1 séance</button>
+								<button type="button" class="btn btn-info" onClick=addHours("${param.teachmode}",2)>2
 									séances</button>
-								<button type="button" class="btn btn-info" onClick=addHours(3)>3
+								<button type="button" class="btn btn-info" onClick=addHours("${param.teachmode}",3)>3
 									séances</button>
 							</div>
-							<div id="hours">
+							<div class="hours">
 								<select class="input-medium days" name="days"><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>
@@ -90,7 +90,7 @@
 						<label class="span3 control-label">Heures en labo/travail
 							dirigé :</label>
 						<div class="span8 controls">
-							<div class="hours">
+							<div class="hoursLab">
 								<select class="input-medium labDay" name="labDay"><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>

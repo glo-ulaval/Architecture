@@ -32,7 +32,7 @@ public class TimeDedicated {
 		this.labsHours = labHours;
 	}
 
-	public int getOthersHours() {
+	public int getOtherHours() {
 		return otherHours;
 	}
 

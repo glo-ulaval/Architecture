@@ -90,7 +90,7 @@ public class SectionModelTest {
 		TimeDedicated timeDedicated = section.getTimeDedicated();
 		assertEquals(timeDedicated.getCourseHours(), (int) model.getHoursInClass());
 		assertEquals(timeDedicated.getLabHours(), (int) model.getHoursInLab());
-		assertEquals(timeDedicated.getOthersHours(), (int) model.getHoursAtHome());
+		assertEquals(timeDedicated.getOtherHours(), (int) model.getHoursAtHome());
 
 		TimeSlot labTimeSlot = section.getLabTimeSlot();
 		assertEquals(labTimeSlot.getStartTime().toString(), model.getLaboTimeSlotStart());
