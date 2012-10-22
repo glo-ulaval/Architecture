@@ -39,7 +39,7 @@ public class XMLOfferingRepositoryTest {
 			throws Exception {
 		repository.store(offering);
 
-		assertEquals(offering, repository.find(VALID_YEAR, A_SEMESTER));
+		assertEquals(offering, repository.find(VALID_YEAR));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class XMLOfferingRepositoryTest {
 		repository.store(offering);
 
 		repository.store(offering);
-		assertEquals(offering, repository.find(VALID_YEAR, A_SEMESTER));
+		assertEquals(offering, repository.find(VALID_YEAR));
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class XMLOfferingRepositoryTest {
 			throws Exception {
 		repository.store(offering);
 
-		assertEquals(offering, repository.find(VALID_YEAR, A_SEMESTER));
+		assertEquals(offering, repository.find(VALID_YEAR));
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class XMLOfferingRepositoryTest {
 
 		repository.delete(VALID_YEAR, A_SEMESTER);
 
-		assertNull(repository.find(VALID_YEAR, A_SEMESTER));
+		assertNull(repository.find(VALID_YEAR));
 	}
 
 	@Test

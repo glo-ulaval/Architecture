@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <courseOfferings>
 	<offerings>
-		<fallOffering>GLO-1010</fallOffering>
-		<fallOffering>GLO-1901</fallOffering>
-		<fallOffering>GLO-2003</fallOffering>
-		<fallOffering>GLO-2100</fallOffering>
-		<fallOffering>GLO-4002</fallOffering>
+		<offering>GLO-1010</offering>
+		<offering>GLO-1901</offering>
+		<offering>GLO-2003</offering>
+		<offering>GLO-2100</offering>
+		<offering>GLO-4002</offering>
 		<year>2011-2012</year>
 	</offerings>
 	<offerings>
-		<fallOffering>IFT-2002</fallOffering>
-		<fallOffering>GLO-4002</fallOffering>
+		<offering>IFT-2002</offering>
+		<offering>GLO-4002</offering>
 		<year>2010-2011</year>
 	</offerings>
 </courseOfferings>

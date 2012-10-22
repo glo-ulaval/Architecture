@@ -29,13 +29,13 @@ public class XMLOfferingRepositoryIT {
 	@Test
 	public void canGetOfferings() {
 		List<String> years = repository.findYears();
-		Offering offering = repository.find(years.get(years.indexOf(STORED_OFFERING_YEAR)), A_SEMESTER);
+		Offering offering = repository.find(years.get(years.indexOf(STORED_OFFERING_YEAR)));
 
 		assertTrue(years.contains(STORED_OFFERING_YEAR));
 		assertNotNull(offering);
 		assertEquals(STORED_OFFERING_YEAR, offering.getYear());
-		assertEquals(5, offering.getBySemester(A_SEMESTER).size());
-		assertTrue(offering.getBySemester(A_SEMESTER).contains("GLO-2003"));
+		assertEquals(5, offering.getOffering().size());
+		assertTrue(offering.getOffering().contains("GLO-2003"));
 	}
 
 	@Test
@@ -54,10 +54,10 @@ public class XMLOfferingRepositoryIT {
 		XMLOfferingRepository refreshedRepository = new XMLOfferingRepository();
 
 		List<String> storedOfferingYears = refreshedRepository.findYears();
-		Offering storedOffering = refreshedRepository.find(NEW_OFFERING_YEAR, A_SEMESTER);
+		Offering storedOffering = refreshedRepository.find(NEW_OFFERING_YEAR);
 
 		assertTrue(storedOfferingYears.contains(NEW_OFFERING_YEAR));
-		assertTrue(storedOffering.getBySemester(A_SEMESTER).contains("IFT-1001"));
+		assertTrue(storedOffering.getOffering().contains("IFT-1001"));
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class XMLOfferingRepositoryIT {
 		acronyms.add("IFT-2001");
 		acronyms.add("IFT-2002");
 		acronyms.add("IFT-2003");
-		offering.setBySemester(A_SEMESTER, acronyms);
+		offering.setOffering(acronyms);
 		offering.setYear("2007-2008");
 		repository.store(offering);
 

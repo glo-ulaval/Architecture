@@ -33,7 +33,7 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	@Override
-	public Offering find(String year, Semester semester) {
+	public Offering find(String year) {
 		return offerings.get(year);
 	}
 

@@ -38,7 +38,7 @@ public class OfferingTest {
 			throws Exception {
 		courseOffering.addCourse(VALID_ACRONYM, A_SEMESTER);
 
-		assertTrue(courseOffering.getBySemester(A_SEMESTER).contains(VALID_ACRONYM));
+		assertTrue(courseOffering.getOffering().contains(VALID_ACRONYM));
 	}
 
 	@Test(expected = InvalidOfferingOperation.class)
@@ -55,7 +55,7 @@ public class OfferingTest {
 
 		courseOffering.removeCourse(VALID_ACRONYM, A_SEMESTER);
 
-		assertFalse(courseOffering.getBySemester(A_SEMESTER).contains(VALID_ACRONYM));
+		assertFalse(courseOffering.getOffering().contains(VALID_ACRONYM));
 	}
 
 	@Test(expected = InvalidOfferingOperation.class)

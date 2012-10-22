@@ -61,9 +61,9 @@ public class XMLCourseRepositoryTest {
 	public void canFindCoursesByOffering()
 			throws Exception {
 		Offering offering = mock(Offering.class);
-		when(offering.getBySemester(A_SEMESTER)).thenReturn(Arrays.asList(AN_ACRONYM));
+		when(offering.getOffering()).thenReturn(Arrays.asList(AN_ACRONYM));
 
-		List<Course> courses = repository.findByOffering(offering, A_SEMESTER);
+		List<Course> courses = repository.findByOffering(offering);
 
 		assertEquals(1, courses.size());
 		assertEquals(AN_ACRONYM, courses.get(0).getAcronym());

@@ -41,8 +41,7 @@ public class OfferingControllerTest {
 
 		List<String> acronyms = new ArrayList<String>();
 		acronyms.add("GLO-4003");
-		when(mockedOfferingRepository.find(anyString(), any(Semester.class))).thenReturn(mockedOffering);
-		when(mockedOffering.getBySemester(any(Semester.class))).thenReturn(acronyms);
+		when(mockedOfferingRepository.find(anyString())).thenReturn(mockedOffering);
 		when(mockedCourseRepository.findByAcronym(anyString())).thenReturn(mockedCourse);
 	}
 
@@ -67,8 +66,8 @@ public class OfferingControllerTest {
 
 		ModelAndView mv = controller.offeringBySemester("2012", A_SEMESTER);
 
-		verify(mockedOfferingRepository).find("2012", A_SEMESTER);
-		verify(mockedCourseRepository).findByOffering(any(Offering.class), any(Semester.class));
+		verify(mockedOfferingRepository).find("2012");
+		verify(mockedCourseRepository).findByOffering(any(Offering.class));
 		assertEquals("offeringbysemester", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
 		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
@@ -81,9 +80,9 @@ public class OfferingControllerTest {
 
 		ModelAndView mv = controller.deleteCourse("2012", "Automne", "GLO-4003");
 
-		verify(mockedOfferingRepository).find("2012", A_SEMESTER);
+		verify(mockedOfferingRepository).find("2012");
 		verify(mockedOffering).removeCourse("GLO-4003", Semester.Automne);
-		verify(mockedCourseRepository).findByOffering(any(Offering.class), any(Semester.class));
+		verify(mockedCourseRepository).findByOffering(any(Offering.class));
 		assertEquals("offeringbysemester", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
 		assertTrue(mv.getModel().containsKey("semester"));
@@ -109,9 +108,9 @@ public class OfferingControllerTest {
 		ModelAndView mv = controller.addCourseFromAvailableCourses("2012", "Automne", "GLO-4003");
 
 		verify(mockedOfferingRepository).store(any(Offering.class));
-		verify(mockedOfferingRepository).find("2012", A_SEMESTER);
+		verify(mockedOfferingRepository).find("2012");
 		verify(mockedOffering).addCourse("GLO-4003", Semester.Automne);
-		verify(mockedCourseRepository).findByOffering(any(Offering.class), any(Semester.class));
+		verify(mockedCourseRepository).findByOffering(any(Offering.class));
 		assertEquals("offeringbysemester", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
 		assertTrue(mv.getModel().containsKey("semester"));
@@ -124,8 +123,8 @@ public class OfferingControllerTest {
 		controller.addCourseFromAvailableCourses("2012", "Automne", "GLO-4003");
 		controller.addCourseFromAvailableCourses("2012", "Automne", "GLO-4003");
 
-		verify(mockedOfferingRepository, times(2)).find("2012", A_SEMESTER);
+		verify(mockedOfferingRepository, times(2)).find("2012");
 		verify(mockedOffering, times(2)).addCourse("GLO-4003", Semester.Automne);
-		verify(mockedCourseRepository, times(2)).findByOffering(any(Offering.class), any(Semester.class));
+		verify(mockedCourseRepository, times(2)).findByOffering(any(Offering.class));
 	}
 }

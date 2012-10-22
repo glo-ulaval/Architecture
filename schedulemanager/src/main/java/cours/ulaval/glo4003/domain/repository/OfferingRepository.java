@@ -11,7 +11,7 @@ public interface OfferingRepository {
 
 	public List<String> findYears();
 
-	public Offering find(String year, Semester semester);
+	public Offering find(String year);
 
 	public void store(Offering offering)
 			throws Exception;

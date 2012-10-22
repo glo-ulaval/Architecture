@@ -7,7 +7,6 @@ import java.util.Map;
 
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
-import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.utils.ConfigManager;
 
@@ -41,9 +40,9 @@ public class XMLCourseRepository implements CourseRepository {
 	}
 
 	@Override
-	public List<Course> findByOffering(Offering offering, Semester semester) {
+	public List<Course> findByOffering(Offering offering) {
 		List<Course> courses = new ArrayList<Course>();
-		for (String acronym : offering.getBySemester(semester)) {
+		for (String acronym : offering.getOffering()) {
 			courses.add(findByAcronym(acronym));
 		}
 		return courses;
