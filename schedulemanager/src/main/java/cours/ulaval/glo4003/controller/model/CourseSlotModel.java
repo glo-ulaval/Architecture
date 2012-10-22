@@ -9,13 +9,15 @@ public class CourseSlotModel {
 	private String nrc;
 	private String acronym;
 	private String group;
+	private Boolean isLab;
 
-	public CourseSlotModel(Section section, TimeSlot timeSlot) {
+	public CourseSlotModel(Section section, TimeSlot timeSlot, Boolean isLab) {
 		this.nrc = section.getNrc();
 		this.group = section.getGroup();
 		this.acronym = section.getCourseAcronym();
 		this.timeStart = timeSlot.getStartTime().toString();
 		this.timeEnd = timeSlot.getEndTime().toString();
+		this.isLab = isLab;
 	}
 
 	public String getTimeSlotStart() {
@@ -56,5 +58,13 @@ public class CourseSlotModel {
 
 	public void setGroup(String group) {
 		this.group = group;
+	}
+
+	public Boolean getIsLab() {
+		return isLab;
+	}
+
+	public void setIsLab(Boolean isLab) {
+		this.isLab = isLab;
 	}
 }

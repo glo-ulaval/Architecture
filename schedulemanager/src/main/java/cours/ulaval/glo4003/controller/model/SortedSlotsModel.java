@@ -22,19 +22,19 @@ public class SortedSlotsModel {
 			for (TimeSlot timeSlot : section.getCourseTimeSlots()) {
 				switch (timeSlot.getDayOfWeek()) {
 				case MONDAY:
-					monday.add(new CourseSlotModel(section, timeSlot));
+					monday.add(new CourseSlotModel(section, timeSlot, false));
 					break;
 				case TUESDAY:
-					tuesday.add(new CourseSlotModel(section, timeSlot));
+					tuesday.add(new CourseSlotModel(section, timeSlot, false));
 					break;
 				case WEDNESDAY:
-					wednesday.add(new CourseSlotModel(section, timeSlot));
+					wednesday.add(new CourseSlotModel(section, timeSlot, false));
 					break;
 				case THURSDAY:
-					thursday.add(new CourseSlotModel(section, timeSlot));
+					thursday.add(new CourseSlotModel(section, timeSlot, false));
 					break;
 				case FRIDAY:
-					friday.add(new CourseSlotModel(section, timeSlot));
+					friday.add(new CourseSlotModel(section, timeSlot, false));
 					break;
 				default:
 					break;
@@ -46,19 +46,19 @@ public class SortedSlotsModel {
 			if (timeSlot != null) {
 				switch (timeSlot.getDayOfWeek()) {
 				case MONDAY:
-					monday.add(new CourseSlotModel(section, timeSlot));
+					monday.add(new CourseSlotModel(section, timeSlot, true));
 					break;
 				case TUESDAY:
-					tuesday.add(new CourseSlotModel(section, timeSlot));
+					tuesday.add(new CourseSlotModel(section, timeSlot, true));
 					break;
 				case WEDNESDAY:
-					wednesday.add(new CourseSlotModel(section, timeSlot));
+					wednesday.add(new CourseSlotModel(section, timeSlot, true));
 					break;
 				case THURSDAY:
-					thursday.add(new CourseSlotModel(section, timeSlot));
+					thursday.add(new CourseSlotModel(section, timeSlot, true));
 					break;
 				case FRIDAY:
-					friday.add(new CourseSlotModel(section, timeSlot));
+					friday.add(new CourseSlotModel(section, timeSlot, true));
 					break;
 				default:
 					break;

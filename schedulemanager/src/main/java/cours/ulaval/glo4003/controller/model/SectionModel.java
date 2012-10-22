@@ -100,7 +100,6 @@ public class SectionModel {
 		section.setPersonInCharge(personInCharge);
 		section.setTeachers(teachers);
 		section.setTeachMode(TeachMode.valueOf(teachMode));
-		section.setLabTimeSlot(new TimeSlot());
 
 		TimeDedicated timeDedicated = new TimeDedicated(hoursInClass, hoursInLab, hoursAtHome);
 		section.setTimeDedicated(timeDedicated);

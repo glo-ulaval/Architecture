@@ -28,14 +28,18 @@ body {
 	text-align: center !important;
 }
 
-.floatLeft{
+.floatLeft {
 	float: left;
 }
 
-.floatRight{
+.floatRight {
 	float: right;
 }
 
-.username{
-	text-transform:capitalize;
+.username {
+	text-transform: capitalize;
+}
+
+.yellow {
+	background-color : #FFD078;
 }
