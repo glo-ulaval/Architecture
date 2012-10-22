@@ -23,7 +23,13 @@ Légende des symboles de commits :
 
 Mot de passe temporaire pour l'utilisation de l'application
 ===========================================================
-**User :** user
+
+ROLE DE DIRECTEUR
+**User :** directeur
+**Password :** pass
+
+ROLE D'ENSEIGNANT
+**User :** enseignant
 **Password :** pass
 
 Lancer les tests d'intégration à partir de Maven en CLI 
