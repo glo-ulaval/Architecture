@@ -16,8 +16,7 @@ public class Offering {
 		this.year = year;
 	}
 
-	public void addCourse(String acronym, Semester semester)
-			throws InvalidOfferingOperation {
+	public void addCourse(String acronym) throws InvalidOfferingOperation {
 		if (!offering.contains(acronym)) {
 			offering.add(acronym);
 		} else {
@@ -25,11 +24,9 @@ public class Offering {
 		}
 	}
 
-	public void removeCourse(String acronym, Semester semester)
-			throws InvalidOfferingOperation {
+	public void removeCourse(String acronym) throws InvalidOfferingOperation {
 		if (!offering.remove(acronym)) {
-			throw new InvalidOfferingOperation("Impossible de retirer le cours " + acronym + " de l'offre de cours de l'année "
-					+ year);
+			throw new InvalidOfferingOperation("Impossible de retirer le cours " + acronym + " de l'offre de cours de l'année " + year);
 		}
 	}
 

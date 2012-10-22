@@ -21,8 +21,7 @@ public class XMLOfferingRepositoryIT {
 	XMLOfferingRepository repository;
 
 	@Before
-	public void setUp()
-			throws Exception {
+	public void setUp() throws Exception {
 		repository = new XMLOfferingRepository();
 	}
 
@@ -39,14 +38,13 @@ public class XMLOfferingRepositoryIT {
 	}
 
 	@Test
-	public void canSaveAnOffering()
-			throws Exception {
+	public void canSaveAnOffering() throws Exception {
 		Offering offering = new Offering();
-		offering.addCourse("IFT-1001", Semester.Automne);
-		offering.addCourse("IFT-1002", Semester.Automne);
-		offering.addCourse("IFT-1003", Semester.Automne);
-		offering.addCourse("IFT-1004", Semester.Automne);
-		offering.addCourse("IFT-1005", Semester.Automne);
+		offering.addCourse("IFT-1001");
+		offering.addCourse("IFT-1002");
+		offering.addCourse("IFT-1003");
+		offering.addCourse("IFT-1004");
+		offering.addCourse("IFT-1005");
 		offering.setYear(NEW_OFFERING_YEAR);
 
 		repository.store(offering);
@@ -61,8 +59,7 @@ public class XMLOfferingRepositoryIT {
 	}
 
 	@Test
-	public void canDeleteAnOffering()
-			throws Exception {
+	public void canDeleteAnOffering() throws Exception {
 		Offering offering = new Offering();
 		ArrayList<String> acronyms = new ArrayList<String>();
 		acronyms.add("IFT-2001");
@@ -80,8 +77,7 @@ public class XMLOfferingRepositoryIT {
 	}
 
 	@AfterClass
-	public static void reset()
-			throws Exception {
+	public static void reset() throws Exception {
 		XMLOfferingRepository repo = new XMLOfferingRepository();
 		repo.delete(NEW_OFFERING_YEAR, A_SEMESTER);
 		repo.delete(NEW_OFFERING_YEAR);

@@ -16,13 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
-import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 
 public class OfferingControllerTest {
-	private final Semester A_SEMESTER = Semester.Automne;
-
 	@Mock
 	CourseRepository mockedCourseRepository;
 	@Mock
@@ -51,8 +48,7 @@ public class OfferingControllerTest {
 	}
 
 	@Test
-	public void offeringReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void offeringReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.offering();
 
 		verify(mockedOfferingRepository).findYears();
@@ -61,70 +57,61 @@ public class OfferingControllerTest {
 	}
 
 	@Test
-	public void offeringBySemesterReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void offeringByYearReturnsTheCorrectModelAndView() throws Exception {
 
-		ModelAndView mv = controller.offeringBySemester("2012", A_SEMESTER);
+		ModelAndView mv = controller.offeringByYear("2012");
 
 		verify(mockedOfferingRepository).find("2012");
 		verify(mockedCourseRepository).findByOffering(any(Offering.class));
-		assertEquals("offeringbysemester", mv.getViewName());
+		assertEquals("offeringbyyear", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
-		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
 		assertTrue(mv.getModel().containsKey("courses"));
 	}
 
 	@Test
-	public void deleteCourseReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void deleteCourseReturnsTheCorrectModelAndView() throws Exception {
 
-		ModelAndView mv = controller.deleteCourse("2012", "Automne", "GLO-4003");
+		ModelAndView mv = controller.deleteCourse("2012", "GLO-4003");
 
 		verify(mockedOfferingRepository).find("2012");
-		verify(mockedOffering).removeCourse("GLO-4003", Semester.Automne);
+		verify(mockedOffering).removeCourse("GLO-4003");
 		verify(mockedCourseRepository).findByOffering(any(Offering.class));
-		assertEquals("offeringbysemester", mv.getViewName());
+		assertEquals("offeringbyyear", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
-		assertTrue(mv.getModel().containsKey("semester"));
 		assertTrue(mv.getModel().containsKey("courses"));
 	}
 
 	@Test
-	public void availableCoursesReturnsTheCorrectModelAndView()
-			throws Exception {
-		ModelAndView mv = controller.availableCourses("2012", "Automne");
+	public void availableCoursesReturnsTheCorrectModelAndView() throws Exception {
+		ModelAndView mv = controller.availableCourses("2012");
 
 		verify(mockedCourseRepository).findAll();
 		assertEquals("availablecourses", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
-		assertTrue(mv.getModel().containsKey("semester"));
 		assertTrue(mv.getModel().containsKey("courses"));
 	}
 
 	@Test
-	public void addCourseFromAvailableCoursesReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void addCourseFromAvailableCoursesReturnsTheCorrectModelAndView() throws Exception {
 
-		ModelAndView mv = controller.addCourseFromAvailableCourses("2012", "Automne", "GLO-4003");
+		ModelAndView mv = controller.addCourseFromAvailableCourses("2012", "GLO-4003");
 
 		verify(mockedOfferingRepository).store(any(Offering.class));
 		verify(mockedOfferingRepository).find("2012");
-		verify(mockedOffering).addCourse("GLO-4003", Semester.Automne);
+		verify(mockedOffering).addCourse("GLO-4003");
 		verify(mockedCourseRepository).findByOffering(any(Offering.class));
-		assertEquals("offeringbysemester", mv.getViewName());
+		assertEquals("offeringbyyear", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
-		assertTrue(mv.getModel().containsKey("semester"));
 		assertTrue(mv.getModel().containsKey("courses"));
 	}
 
 	@Test
-	public void canAddCourseFromAvailableCoursesMultipleTimes()
-			throws Exception {
-		controller.addCourseFromAvailableCourses("2012", "Automne", "GLO-4003");
-		controller.addCourseFromAvailableCourses("2012", "Automne", "GLO-4003");
+	public void canAddCourseFromAvailableCoursesMultipleTimes() throws Exception {
+		controller.addCourseFromAvailableCourses("2012", "GLO-4003");
+		controller.addCourseFromAvailableCourses("2012", "GLO-4003");
 
 		verify(mockedOfferingRepository, times(2)).find("2012");
-		verify(mockedOffering, times(2)).addCourse("GLO-4003", Semester.Automne);
+		verify(mockedOffering, times(2)).addCourse("GLO-4003");
 		verify(mockedCourseRepository, times(2)).findByOffering(any(Offering.class));
 	}
 }

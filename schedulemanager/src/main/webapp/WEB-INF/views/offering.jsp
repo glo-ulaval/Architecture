@@ -23,7 +23,7 @@
 			<p>Choisissez l'année à visualiser/éditer.</p>
 		</div>
 		<c:if test="${not empty years}">
-			<table class="table">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>Année</th>
@@ -31,24 +31,10 @@
 					</tr>
 				</thead>
 				<c:forEach var="year" items="${years}">
-					<tr class="well" id="${year}">
-						<td colspan="2"><b>${year}</b></td>
-					</tr>
-					<tr id="automn">
-						<td class="span12"><b>Automne</b></td>
-						<td class="centered"><a class="btn" href="offering/${year}/Automne"><i
-								class="icon-search"></i></a></td>
-					</tr>
-          <tr id="hiver">
-            <td class="span12"><b>Hiver</b></td>
-            <td class="centered"><a class="btn" href="offering/${year}/Hiver"><i
+					<tr id="${year}">
+						<td><b>${year}</b></td><td><a class="btn pull-right" href="offering/${year}"><i
                 class="icon-search"></i></a></td>
-          </tr>
-          <tr id="summer">
-            <td class="span12"><b>Été</b></td>
-            <td class="centered"><a class="btn" href="offering/${year}/Ete"><i
-                class="icon-search"></i></a></td>
-          </tr>
+					</tr>
 				</c:forEach>
 			</table>
 		</c:if>

@@ -33,7 +33,7 @@
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
 								<td class="centered"><a class="btn btn-success"
-									href="addcourse?acronym=${course.acronym}&semester=${semester}"><i
+									href="addcourse?acronym=${course.acronym}"><i
 										class="icon-plus-sign icon-white"></i></a></td>
 							</tr>
 						</c:forEach>
