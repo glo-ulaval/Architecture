@@ -74,7 +74,7 @@ public class SectionModel {
 		TimeDedicated timeDedicated = section.getTimeDedicated();
 		this.hoursInClass = timeDedicated.getCourseHours();
 		this.hoursInLab = timeDedicated.getLabHours();
-		this.hoursAtHome = timeDedicated.getOthersHours();
+		this.hoursAtHome = timeDedicated.getOtherHours();
 
 		TimeSlot timeSlot = section.getLabTimeSlot();
 		if (timeSlot != null) {

@@ -46,17 +46,17 @@
 						<div id="hour_group">
 							<label class="control-label" for="hours_class">En classe</label>
 							<input type="text" placeholder="H"
-								class="input-small hours_class" name="hoursInClass" value="0">
+								class="input-small hours_class" name="hoursInClass" value="${course.timeDedicated.courseHours}">
 						</div>
 						<div id="hour_group">
 							<label class="control-label" for="hours_labo">Labo/Travail
 								dirigé</label> <input type="text" placeholder="H"
-								class="input-small hours_labo" name="hoursInLab" value="0">
+								class="input-small hours_labo" name="hoursInLab" value="${course.timeDedicated.labHours}">
 						</div>
 						<div id="hour_group">
 							<label class="control-label" for="hours_home">Travail
 								personnel</label> <input type="text" placeholder="H"
-								class="input-small hours_home" name="hoursAtHome" value="0">
+								class="input-small hours_home" name="hoursAtHome" value="${course.timeDedicated.otherHours}">
 						</div>
 					</div>
 				</div>
