@@ -1,12 +1,12 @@
 <div class="row-fluid">
 	<div class="span6">
 		<h2>Mes disponibilités</h2>
-		<p>Permet à l'utilisateur d'entrer/modifier ses periodes d'enseignement et
+		<p>Permet à l'utilisateur d'entrer/modifier ses périodes d'enseignement et
 			de disponiblités.</p>
 	</div>
 	<div class="span6">
 		<h2>Accepter horaire</h2>
-		<p>Permet à l'utilisateur d'accepter/refuser un horraire généré par le systeme.</p>
+		<p>Permet à l'utilisateur d'accepter/refuser un horaire généré par le systeme.</p>
 	</div>
 </div>
 <div class="row-fluid">
