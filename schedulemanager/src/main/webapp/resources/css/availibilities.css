@@ -1,4 +1,4 @@
-.selectable .ui-selecting {
+.selectable .ui-selecting, .selectable2 .ui-selecting {
 	background: grey;
 }
 
@@ -6,7 +6,11 @@
 	background: #4BCC00;
 }
 
-.selectable {
+.selectable2 .ui-selected {
+	background: #FFF945;
+}
+
+.selectable, .selectable2 {
 	list-style-type: none;
 	margin: 0;
 }
