@@ -76,23 +76,42 @@ function setHours(day, hour){
 }
 
 function loadAvailibilitiesFromJSON(json) {
+	
+	var level = "Unavailable, Available, PreferedNotAvailable";
+	
 	for(var i = 0; i < 13; i++){
 		var hour = i+8;
 		
-		if(json.monday[i]){
+		if(json.monday[i] == "Available"){
 			$('#mon'+hour+'-1').addClass('ui-selected');
 		}
-		if(json.tuesday[i]){
+		if(json.tuesday[i] == "Available"){
 			$('#tue'+hour+'-1').addClass('ui-selected');
 		}
-		if(json.wednesday[i]){
+		if(json.wednesday[i] == "Available"){
 			$('#wed'+hour+'-1').addClass('ui-selected');
 		}
-		if(json.thursday[i]){
+		if(json.thursday[i] == "Available"){
 			$('#thu'+hour+'-1').addClass('ui-selected');
 		}
-		if(json.friday[i]){
+		if(json.friday[i] == "Available"){
 			$('#fri'+hour+'-1').addClass('ui-selected');
+		}
+		
+		if(json.monday[i] == "PreferedNotAvailable"){
+			$('#mon'+hour+'-2').addClass('ui-selected');
+		}
+		if(json.tuesday[i] == "PreferedNotAvailable"){
+			$('#tue'+hour+'-2').addClass('ui-selected');
+		}
+		if(json.wednesday[i] == "PreferedNotAvailable"){
+			$('#wed'+hour+'-2').addClass('ui-selected');
+		}
+		if(json.thursday[i] == "PreferedNotAvailable"){
+			$('#thu'+hour+'-2').addClass('ui-selected');
+		}
+		if(json.friday[i] == "PreferedNotAvailable"){
+			$('#fri'+hour+'-2').addClass('ui-selected');
 		}
 	}
 }

@@ -39,8 +39,8 @@
 		<c:import url="partialViews/availibilitiesSuccess.jsp"></c:import>
 		<div class="row-fluid">
 			<div class="btn-group">
-				<button id="btn-dispo" class="btn">1</button>
-				<button id="btn-ssi-dispo" class="btn">2</button>
+				<button id="btn-dispo" class="btn">Disponible</button>
+				<button id="btn-ssi-dispo" class="btn">Sur demande</button>
 			</div>
 		</div>
 		<div class="row-fluid">
