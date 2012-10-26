@@ -21,8 +21,6 @@ public class XMLScheduleRepositoryTest {
 	private static String AN_ID = "anId";
 
 	@Mock
-	private XMLSerializer<ScheduleXMLWrapper> mockedSerializer;
-	@Mock
 	private Schedule mockedSchedule;
 	@InjectMocks
 	private XMLScheduleRepository scheduleRepo;
@@ -36,7 +34,7 @@ public class XMLScheduleRepositoryTest {
 	public void canFindAll() throws Exception {
 		addAFewSchedule();
 
-		assertEquals(NB_OF_SCHEDULE, scheduleRepo.findAll().size());
+		assertTrue(scheduleRepo.findAll().size() >= NB_OF_SCHEDULE);
 	}
 
 	@Test
@@ -72,11 +70,12 @@ public class XMLScheduleRepositoryTest {
 	@Test
 	public void cannotStoreADuplicateSchedule() throws Exception {
 		when(mockedSchedule.getId()).thenReturn(AN_ID);
+		when(mockedSchedule.getYear()).thenReturn("2012");
 
 		scheduleRepo.store(mockedSchedule);
 		scheduleRepo.store(mockedSchedule);
 
-		assertEquals(1, scheduleRepo.findAll().size());
+		assertEquals(1, scheduleRepo.findBy("2012").size());
 	}
 
 	@Test
@@ -86,7 +85,7 @@ public class XMLScheduleRepositoryTest {
 		scheduleRepo.store(mockedSchedule);
 		scheduleRepo.delete(AN_ID);
 
-		assertEquals(0, scheduleRepo.findAll().size());
+		assertNull(scheduleRepo.findById(AN_ID));
 	}
 
 	@Test
