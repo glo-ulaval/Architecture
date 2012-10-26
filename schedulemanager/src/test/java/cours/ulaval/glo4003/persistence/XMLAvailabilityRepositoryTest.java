@@ -14,10 +14,12 @@ import cours.ulaval.glo4003.domain.Availability;
 public class XMLAvailabilityRepositoryTest {
 
 	private static final String UN_IDUL = "un_idul";
+
 	@Mock
 	Availability availability;
 	@Mock
 	XMLSerializer<AvailabilityXMLWrapper> serializer;
+
 	@InjectMocks
 	XMLAvailabilityRepository repo;
 
@@ -28,15 +30,13 @@ public class XMLAvailabilityRepositoryTest {
 	}
 
 	@Test
-	public void canInstantiate()
-			throws Exception {
+	public void canInstantiate() throws Exception {
 
 		assertNotNull(repo);
 	}
 
 	@Test
-	public void canFindAnAvailabilityWithAnIdul()
-			throws Exception {
+	public void canFindAnAvailabilityWithAnIdul() throws Exception {
 		repo.store(availability);
 
 		assertEquals(availability, repo.findByIdul(UN_IDUL));

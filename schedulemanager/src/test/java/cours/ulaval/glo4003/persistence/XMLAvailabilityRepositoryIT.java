@@ -2,9 +2,7 @@ package cours.ulaval.glo4003.persistence;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,62 +11,38 @@ import cours.ulaval.glo4003.domain.Availability;
 
 public class XMLAvailabilityRepositoryIT {
 
+	private static final String JSON_STRING = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,2,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
+
 	private static final String UN_IDUL = "enseignant";
 	private XMLAvailabilityRepository repository;
 
 	@Before
-	public void setUp()
-			throws Exception {
+	public void setUp() throws Exception {
 		repository = new XMLAvailabilityRepository();
 	}
 
 	@Test
-	public void canSaveAvailabilities()
-			throws Exception {
-		Availability availability = createAvailabilities();
+	public void canSaveAvailabilities() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		repository.store(availability);
+		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
+
+		repository.store(availabilities);
 
 	}
 
 	@Test
-	public void canLoadAnAvailability() {
-		Availability availability = createAvailabilities();
+	public void canLoadAnAvailability() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		assertEquals(availability.getAvailabilities().get(0).getDayOfWeek(), repository.findByIdul(UN_IDUL).getAvailabilities()
-				.get(0).getDayOfWeek());
-		assertEquals(availability.getAvailabilities().get(0).getStartTime().getHour(), repository.findByIdul(UN_IDUL)
-				.getAvailabilities().get(0).getStartTime().getHour());
-		assertEquals(availability.getAvailabilities().get(0).getDuration(), repository.findByIdul(UN_IDUL).getAvailabilities()
-				.get(0).getDuration());
-	}
+		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
 
-	private Availability createAvailabilities() {
-		List<Boolean> disponibility = new ArrayList<Boolean>();
-
-		disponibility.add(true);
-		disponibility.add(true);
-		disponibility.add(true);
-		disponibility.add(true);
-		disponibility.add(true);
-		disponibility.add(true);
-		disponibility.add(false);
-		disponibility.add(false);
-		disponibility.add(false);
-		disponibility.add(false);
-		disponibility.add(true);
-		disponibility.add(true);
-		disponibility.add(true);
-
-		AvailabilityModel model = new AvailabilityModel();
-		model.setMonday(disponibility);
-		model.setTuesday(disponibility);
-		model.setWednesday(disponibility);
-		model.setThursday(disponibility);
-		model.setFriday(disponibility);
-
-		Availability availability = new Availability(model, UN_IDUL);
-
-		return availability;
+		assertEquals(availabilities.getMonday(), repository.findByIdul(UN_IDUL).getMonday());
+		assertEquals(availabilities.getTuesday(), repository.findByIdul(UN_IDUL).getTuesday());
+		assertEquals(availabilities.getWednesday(), repository.findByIdul(UN_IDUL).getWednesday());
+		assertEquals(availabilities.getThursday(), repository.findByIdul(UN_IDUL).getThursday());
+		assertEquals(availabilities.getFriday(), repository.findByIdul(UN_IDUL).getFriday());
 	}
 }

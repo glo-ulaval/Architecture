@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	
 	$('#submit').click(function() {
-		console.log(generateAvailibilitiesJSON());
 		postTeacherAvailabilities();
 	});
 
@@ -23,6 +22,7 @@ $(document).ready(function() {
 		$(".selectable2").show();
 	});
 	
+	console.log(json);
 	loadAvailibilitiesFromJSON(json);
 });
 

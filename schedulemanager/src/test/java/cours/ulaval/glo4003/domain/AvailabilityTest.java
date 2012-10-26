@@ -14,7 +14,7 @@ import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 
 public class AvailabilityTest {
 
-	private static final String JSON_STRING = "{\"monday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"tuesday\":[true,true,true,true,true,true,true,false,false,false,true,true,true],\"wednesday\":[true,true,true,true,true,true,true,true,true,true,false,false,false],\"thursday\":[false,false,false,false,false,true,true,true,true,true,true,true,true],\"friday\":[true,true,true,true,true,true,true,true,true,true,false,false,false]}";
+	private static final String JSON_STRING = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,2,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
 
 	@Mock
 	ObjectMapper mapper;
@@ -26,8 +26,7 @@ public class AvailabilityTest {
 	Availability availabilities;
 
 	@Before
-	public void setUp()
-			throws Exception {
+	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		when(mapper.readValue(JSON_STRING, AvailabilityModel.class)).thenReturn(availabilityModel);
 	}
