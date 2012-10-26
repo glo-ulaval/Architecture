@@ -21,6 +21,8 @@ public class XMLScheduleRepositoryTest {
 	private static String AN_ID = "anId";
 
 	@Mock
+	private XMLSerializer<ScheduleXMLWrapper> mockedSerializer;
+	@Mock
 	private Schedule mockedSchedule;
 	@InjectMocks
 	private XMLScheduleRepository scheduleRepo;
