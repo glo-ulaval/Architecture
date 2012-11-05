@@ -2,15 +2,12 @@ package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import cours.ulaval.glo4003.domain.Role;
-import cours.ulaval.glo4003.domain.User;
+import org.junit.*;
 
 public class UserTest {
 
 	private static String IDUL = "brgaa";
+	private static String NAME = "Bruno Gagnon-Adam";
 	private static String PASSWORD = "motdepasse";
 	private static Role ROLE = Role.Directeur;
 	private static String WRONG_PASSWORD = "mauvaismotdepasse";
@@ -19,7 +16,7 @@ public class UserTest {
 
 	@Before
 	public void setUp() {
-		user = new User(IDUL, PASSWORD, ROLE);
+		user = new User(IDUL, NAME, PASSWORD, ROLE);
 	}
 
 	@Test
@@ -32,6 +29,12 @@ public class UserTest {
 	public void canGetUsername() {
 
 		assertEquals(IDUL, user.getIdul());
+	}
+
+	@Test
+	public void canGetName() {
+
+		assertEquals(NAME, user.getName());
 	}
 
 	@Test

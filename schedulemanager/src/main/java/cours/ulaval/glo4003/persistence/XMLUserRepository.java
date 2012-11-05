@@ -1,11 +1,9 @@
 package cours.ulaval.glo4003.persistence;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import cours.ulaval.glo4003.domain.Role;
-import cours.ulaval.glo4003.domain.User;
-import cours.ulaval.glo4003.domain.repository.UserRepository;
+import cours.ulaval.glo4003.domain.*;
+import cours.ulaval.glo4003.domain.repository.*;
 
 public class XMLUserRepository implements UserRepository {
 
@@ -15,10 +13,10 @@ public class XMLUserRepository implements UserRepository {
 
 		// Le XML n'est pas encore implémenté alors on remplis la liste
 		// directement.
-		User teacher = new User("enseignant", "pass", Role.Enseignant);
+		User teacher = new User("enseignant", "Enseignant", "pass", Role.Enseignant);
 		users.put(teacher.getIdul(), teacher);
 
-		User director = new User("directeur", "pass", Role.Directeur);
+		User director = new User("directeur", "Directeur", "pass", Role.Directeur);
 		users.put(director.getIdul(), director);
 	}
 
