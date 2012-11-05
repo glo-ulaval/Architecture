@@ -9,7 +9,7 @@ public class UserTest {
 	private static String IDUL = "brgaa";
 	private static String NAME = "Bruno Gagnon-Adam";
 	private static String PASSWORD = "motdepasse";
-	private static Role ROLE = Role.Directeur;
+	private static Role ROLE = Role.ROLE_Directeur;
 	private static String WRONG_PASSWORD = "mauvaismotdepasse";
 
 	private User user;
@@ -51,8 +51,8 @@ public class UserTest {
 
 	@Test
 	public void canSetRoleOfAUser() {
-		user.setRole(Role.Enseignant);
+		user.setRole(Role.ROLE_Enseignant);
 
-		assertEquals(Role.Enseignant, user.getRole());
+		assertEquals(Role.ROLE_Enseignant, user.getRole());
 	}
 }

@@ -18,7 +18,7 @@ public class XMLUserRepositoryTest {
 	@Test
 	public void canFindUserByIdul() {
 
-		User director = new User("directeur", "Directeur", "pass", Role.Directeur);
+		User director = new User("directeur", "Directeur", "pass", Role.ROLE_Directeur);
 
 		assertEquals(director.getIdul(), repository.findByIdul("directeur").getIdul());
 		assertEquals(director.getRole(), repository.findByIdul("directeur").getRole());

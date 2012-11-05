@@ -21,6 +21,10 @@ public class User {
 		return idul;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
 	public boolean validateCredentials(String password) {
 		return (password == this.password);
 	}
@@ -34,7 +38,6 @@ public class User {
 	}
 
 	public String getName() {
-
 		return name;
 	}
 }
