@@ -22,5 +22,6 @@ public class XMLUserRepositoryTest {
 
 		assertEquals(director.getIdul(), repository.findByIdul("directeur").getIdul());
 		assertEquals(director.getRole(), repository.findByIdul("directeur").getRole());
+		assertEquals(director.getName(), repository.findByIdul("directeur").getName());
 	}
 }
