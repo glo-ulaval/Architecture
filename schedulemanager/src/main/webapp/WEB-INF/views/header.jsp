@@ -11,6 +11,7 @@
 					<ul class="nav">
 						<li><a href="/schedulemanager">Accueil</a></li>
 						<c:if test="${not empty user.idul}">
+						  <c:url var="menu" value="/menu"></c:url>
 							<li><a href="${menu}">Menu</a></li>
 						</c:if>
 						<li><a href="#">À propos</a></li>
