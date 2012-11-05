@@ -43,3 +43,7 @@ body {
 .yellow {
 	background-color : #FFD078;
 }
+
+.inline {
+	display:inline;
+}

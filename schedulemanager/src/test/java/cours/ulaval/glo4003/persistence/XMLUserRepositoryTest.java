@@ -2,11 +2,9 @@ package cours.ulaval.glo4003.persistence;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import cours.ulaval.glo4003.domain.Role;
-import cours.ulaval.glo4003.domain.User;
+import cours.ulaval.glo4003.domain.*;
 
 public class XMLUserRepositoryTest {
 
@@ -20,9 +18,10 @@ public class XMLUserRepositoryTest {
 	@Test
 	public void canFindUserByIdul() {
 
-		User director = new User("directeur", "pass", Role.Directeur);
+		User director = new User("directeur", "Directeur", "pass", Role.ROLE_Directeur);
 
 		assertEquals(director.getIdul(), repository.findByIdul("directeur").getIdul());
 		assertEquals(director.getRole(), repository.findByIdul("directeur").getRole());
+		assertEquals(director.getName(), repository.findByIdul("directeur").getName());
 	}
 }

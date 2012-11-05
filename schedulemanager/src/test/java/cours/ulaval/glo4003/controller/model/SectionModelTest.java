@@ -76,7 +76,7 @@ public class SectionModelTest {
 	}
 
 	@Test
-	public void canInstantiateSectionModelFromSection() {
+	public void canGetBasicInformationWhenInstantiateSectionModelFromSection() {
 		Section section = createSection();
 		SectionModel model = new SectionModel(section);
 
@@ -86,16 +86,34 @@ public class SectionModelTest {
 		assertEquals(section.getTeachers(), model.getTeachers());
 		assertEquals(section.getTeachMode().toString(), model.getTeachMode());
 		assertEquals(section.getCourseAcronym(), model.getAcronym());
+	}
+
+	@Test
+	public void canGetTimeDedicatedWhenInstantiateSectionModelFromSection() {
+		Section section = createSection();
+		SectionModel model = new SectionModel(section);
 
 		TimeDedicated timeDedicated = section.getTimeDedicated();
 		assertEquals(timeDedicated.getCourseHours(), (int) model.getHoursInClass());
 		assertEquals(timeDedicated.getLabHours(), (int) model.getHoursInLab());
 		assertEquals(timeDedicated.getOtherHours(), (int) model.getHoursAtHome());
+	}
+
+	@Test
+	public void canGetLabTimeSlotWhenInstantiateSectionModelFromSection() {
+		Section section = createSection();
+		SectionModel model = new SectionModel(section);
 
 		TimeSlot labTimeSlot = section.getLabTimeSlot();
 		assertEquals(labTimeSlot.getStartTime().toString(), model.getLaboTimeSlotStart());
 		assertEquals(labTimeSlot.getEndTime().toString(), model.getLaboTimeSlotEnd());
 		assertEquals("Vendredi", model.getLabDay());
+	}
+
+	@Test
+	public void canGetTimeSlotsWhenInstantiateSectionModelFromSection() {
+		Section section = createSection();
+		SectionModel model = new SectionModel(section);
 
 		assertEquals(1, model.getTimeSlotStarts().size());
 		assertEquals(1, model.getTimeSlotEnds().size());

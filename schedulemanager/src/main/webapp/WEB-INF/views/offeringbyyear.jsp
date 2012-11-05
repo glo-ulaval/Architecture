@@ -38,22 +38,27 @@
 						<thead>
 							<tr>
 								<th>Titre</th>
-								<th>Credits</th>
+								<th>Crédits</th>
 								<th>Cycle</th>
-								<th>Actions</th>
+								<th class="centered">Détails</th>
+								<th class="centered">Actions</th>
 							</tr>
 						</thead>
+						<c:url var = "courseurl" value="/course/"></c:url>
 						<c:forEach var="course" items="${courses}">
 							<tr id="${course.acronym}">
 								<td><b>${course.acronym} - ${course.title}</b></td>
 								<td>${course.credits}</td>
 								<td>${course.cycle}</td>
-								<td class="centered"><a class="btn btn-danger"
+								<td class="centered"><a class="btn btn-info"
+                  href="${courseurl}${course.acronym}"><i
+                    class="icon-info-sign icon-white"></i></a></td>
+                 <td class="centered"><a class="btn btn-danger"
 									href="deletecourse?acronym=${course.acronym}"><i
 										class="icon-trash icon-white"></i></a></td>
 							</tr>
 						</c:forEach>
-					</table>
+					</table
 				</c:if>
 			</div>
 		</div>

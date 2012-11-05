@@ -1,5 +1,5 @@
 package cours.ulaval.glo4003.domain;
 
 public enum Role {
-	Directeur, Responsable, Enseignant, Administrateur;
+	ROLE_Directeur, ROLE_Responsable, ROLE_Enseignant, ROLE_Administrateur;
 }
