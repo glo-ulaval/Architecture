@@ -58,7 +58,7 @@
 										class="icon-trash icon-white"></i></a></td>
 							</tr>
 						</c:forEach>
-					</table
+					</table>
 				</c:if>
 			</div>
 		</div>
