@@ -3,6 +3,9 @@ package cours.ulaval.glo4003.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Course {
 
 	public static int HOURS_PER_CREDITS = 3;
@@ -86,4 +89,15 @@ public class Course {
 	public void setPrerequisites(List<Prerequisite> prerequisites) {
 		this.prerequisites = prerequisites;
 	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
 }

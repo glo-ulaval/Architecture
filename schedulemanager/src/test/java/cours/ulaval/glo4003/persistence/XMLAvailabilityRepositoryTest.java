@@ -31,7 +31,6 @@ public class XMLAvailabilityRepositoryTest {
 
 	@Test
 	public void canInstantiate() throws Exception {
-
 		assertNotNull(repo);
 	}
 
