@@ -45,11 +45,13 @@ public class Time {
 	}
 
 	private String adjustTime(String time) {
+		String modifiedTime = time;
+
 		if (time.matches("\\d+:0$")) {
-			time += "0";
+			modifiedTime += "0";
 		}
 
-		return time;
+		return modifiedTime;
 	}
 
 	public Integer getHour() {

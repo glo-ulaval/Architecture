@@ -96,7 +96,7 @@ public class SectionModel {
 		Section section = new Section();
 		section.setCourseAcronym(acronym);
 		section.setGroup(group);
-		section.setNrc(nrc.toString());
+		section.setNrc(nrc);
 		section.setPersonInCharge(personInCharge);
 		section.setTeachers(teachers);
 		section.setTeachMode(TeachMode.valueOf(teachMode));
@@ -122,10 +122,10 @@ public class SectionModel {
 		TimeSlot timeSlot = new TimeSlot();
 
 		String[] hoursMinStart = start.split(":");
-		Time startTime = new Time(new Integer(hoursMinStart[0]), new Integer(hoursMinStart[1]));
+		Time startTime = new Time(Integer.valueOf(hoursMinStart[0]), Integer.valueOf(hoursMinStart[1]));
 
 		String[] hoursMinEnd = end.split(":");
-		Time endTime = new Time(new Integer(hoursMinEnd[0]), new Integer(hoursMinEnd[1]));
+		Time endTime = new Time(Integer.valueOf(hoursMinEnd[0]), Integer.valueOf(hoursMinEnd[1]));
 
 		timeSlot.setStartTime(startTime);
 		timeSlot.setEndTime(endTime);
