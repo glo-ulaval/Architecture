@@ -17,13 +17,15 @@
 <script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js" />" /></script>
 <script type="text/javascript" src="<c:url value="/resources/js/calendar.js" />" /></script>
-
 </head>
-
-<table class="table">
+<body>
+<c:import url="header.jsp" />
+<div class="container">
+<h1>Horaire</h1>
+<table class="table table-striped">
 	<tr>
 		<td class="day"></td>
-		<td class="hours">
+		<td class="hours-head">
 			<div class="hour-head">8:30</div>
 			<div class="hour-head">9:00</div>
 			<div class="hour-head">9:30</div>
@@ -56,163 +58,178 @@
 	<tr>
 		<td class="day">Lundi</td>
 		<td class="hours">
-			<div class="hour">
+			<div id="mon85" class="hour">
 			    <div class="event">
-			        <div class="event-name">Event</div>
+			        <div class="event-name" title="GLO-4003 - Architecture">GLO-4003</div>
 			    </div>
 			</div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
+			<div id="mon90" class="hour">
+				<div class="event">
+			        <div class="event-name" title="IFT-2103-Programmation de jeux vidéo">IFT-2103</div>
+			    </div>
+			</div>
+			<div id="mon95" class="hour">
+				<div class="event">
+			        <div class="event-name" title="IFT-1001-Algorithmique et programmation">IFT-1001</div>
+			    </div>
+			</div>
+			<div id="mon100" class="hour"></div>
+			<div id="mon105" class="hour"></div>
+			<div id="mon110" class="hour"></div>
+			<div id="mon115" class="hour"></div>
+			<div id="mon120" class="hour"></div>
+			<div id="mon125" class="hour"></div>
+			<div id="mon130" class="hour"></div>
+			<div id="mon135" class="hour"></div>
+			<div id="mon140" class="hour"></div>
+			<div id="mon145" class="hour"></div>
+			<div id="mon150" class="hour"></div>
+			<div id="mon155" class="hour"></div>
+			<div id="mon160" class="hour"></div>
+			<div id="mon165" class="hour"></div>
+			<div id="mon170" class="hour"></div>
+			<div id="mon175" class="hour"></div>
+			<div id="mon180" class="hour"></div>
+			<div id="mon185" class="hour"></div>
+			<div id="mon190" class="hour"></div>
+			<div id="mon195" class="hour"></div>
+			<div id="mon200" class="hour"></div>
+			<div id="mon205" class="hour"></div>
+			<div id="mon210" class="hour"></div>
+			<div id="mon215" class="hour"></div>
 		</td>
 	</tr>
 	<tr>
 		<td class="day">Mardi</td>
 		<td class="hours">
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
+			<div id="tue85" class="hour"></div>
+			<div id="tue90" class="hour"></div>
+			<div id="tue95" class="hour"></div>
+			<div id="tue100" class="hour"></div>
+			<div id="tue105" class="hour"></div>
+			<div id="tue110" class="hour"></div>
+			<div id="tue115" class="hour"></div>
+			<div id="tue120" class="hour"></div>
+			<div id="tue125" class="hour"></div>
+			<div id="tue130" class="hour"></div>
+			<div id="tue135" class="hour"></div>
+			<div id="tue140" class="hour"></div>
+			<div id="tue145" class="hour"></div>
+			<div id="tue150" class="hour"></div>
+			<div id="tue155" class="hour"></div>
+			<div id="tue160" class="hour"></div>
+			<div id="tue165" class="hour"></div>
+			<div id="tue170" class="hour"></div>
+			<div id="tue175" class="hour"></div>
+			<div id="tue180" class="hour"></div>
+			<div id="tue185" class="hour"></div>
+			<div id="tue190" class="hour"></div>
+			<div id="tue195" class="hour"></div>
+			<div id="tue200" class="hour"></div>
+			<div id="tue205" class="hour"></div>
+			<div id="tue210" class="hour"></div>
+			<div id="tue215" class="hour"></div>
 		</td>
 	</tr>
 	<tr>
 		<td class="day">Mercredi</td>
 		<td class="hours">
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
+			<div id="wed85" class="hour"></div>
+			<div id="wed90" class="hour"></div>
+			<div id="wed95" class="hour"></div>
+			<div id="wed100" class="hour"></div>
+			<div id="wed105" class="hour"></div>
+			<div id="wed110" class="hour"></div>
+			<div id="wed115" class="hour"></div>
+			<div id="wed120" class="hour"></div>
+			<div id="wed125" class="hour"></div>
+			<div id="wed130" class="hour"></div>
+			<div id="wed135" class="hour"></div>
+			<div id="wed140" class="hour"></div>
+			<div id="wed145" class="hour"></div>
+			<div id="wed150" class="hour"></div>
+			<div id="wed155" class="hour"></div>
+			<div id="wed160" class="hour"></div>
+			<div id="wed165" class="hour"></div>
+			<div id="wed170" class="hour"></div>
+			<div id="wed175" class="hour"></div>
+			<div id="wed180" class="hour"></div>
+			<div id="wed185" class="hour"></div>
+			<div id="wed190" class="hour"></div>
+			<div id="wed195" class="hour"></div>
+			<div id="wed200" class="hour"></div>
+			<div id="wed205" class="hour"></div>
+			<div id="wed210" class="hour"></div>
+			<div id="wed215" class="hour"></div>
 		</td>
 	</tr>
 	<tr>
 		<td class="day">Jeudi</td>
 		<td class="hours">
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
+			<div id="thu85" class="hour"></div>
+			<div id="thu90" class="hour"></div>
+			<div id="thu95" class="hour"></div>
+			<div id="thu100" class="hour"></div>
+			<div id="thu105" class="hour"></div>
+			<div id="thu110" class="hour"></div>
+			<div id="thu115" class="hour"></div>
+			<div id="thu120" class="hour"></div>
+			<div id="thu125" class="hour"></div>
+			<div id="thu130" class="hour"></div>
+			<div id="thu135" class="hour"></div>
+			<div id="thu140" class="hour"></div>
+			<div id="thu145" class="hour"></div>
+			<div id="thu150" class="hour"></div>
+			<div id="thu155" class="hour"></div>
+			<div id="thu160" class="hour"></div>
+			<div id="thu165" class="hour"></div>
+			<div id="thu170" class="hour"></div>
+			<div id="thu175" class="hour"></div>
+			<div id="thu180" class="hour"></div>
+			<div id="thu185" class="hour"></div>
+			<div id="thu190" class="hour"></div>
+			<div id="thu195" class="hour"></div>
+			<div id="thu200" class="hour"></div>
+			<div id="thu205" class="hour"></div>
+			<div id="thu210" class="hour"></div>
+			<div id="thu215" class="hour"></div>
 		</td>
 	</tr>
 	<tr>
 		<td class="day">Vendredi</td>
 		<td class="hours">
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
-			<div class="hour"></div>
+			<div id="fri85" class="hour"></div>
+			<div id="fri90" class="hour"></div>
+			<div id="fri95" class="hour"></div>
+			<div id="fri100" class="hour"></div>
+			<div id="fri105" class="hour"></div>
+			<div id="fri110" class="hour"></div>
+			<div id="fri115" class="hour"></div>
+			<div id="fri120" class="hour"></div>
+			<div id="fri125" class="hour"></div>
+			<div id="fri130" class="hour"></div>
+			<div id="fri135" class="hour"></div>
+			<div id="fri140" class="hour"></div>
+			<div id="fri145" class="hour"></div>
+			<div id="fri150" class="hour"></div>
+			<div id="fri155" class="hour"></div>
+			<div id="fri160" class="hour"></div>
+			<div id="fri165" class="hour"></div>
+			<div id="fri170" class="hour"></div>
+			<div id="fri175" class="hour"></div>
+			<div id="fri180" class="hour"></div>
+			<div id="fri185" class="hour"></div>
+			<div id="fri190" class="hour"></div>
+			<div id="fri195" class="hour"></div>
+			<div id="fri200" class="hour"></div>
+			<div id="fri205" class="hour"></div>
+			<div id="fri210" class="hour"></div>
+			<div id="fri215" class="hour"></div>
 		</td>
 	</tr>
 </table>
+</div>
+</body>
+</html>
 
 

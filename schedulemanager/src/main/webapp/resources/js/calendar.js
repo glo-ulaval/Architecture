@@ -4,4 +4,6 @@ $(function() {
 	});
 
 	$(".hour").disableSelection();
+
+	$(document).tooltip();
 });

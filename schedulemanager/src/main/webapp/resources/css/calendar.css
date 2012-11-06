@@ -1,34 +1,60 @@
-html,body {
-	padding-top: 23px;
-	height: 100%;
-	overflow-x: hidden;
+.container {
+	width: 1400px;
+}
+
+.table th,.table td {
+	padding: 0px;
+	border-left: 1px solid #DEDEDE;
+	border-bottom: 1px solid #DEDEDE;
 }
 
 .day {
-	width: 15%;
-}
-
-.hour,.hour-head {
-	width: 35px;
-	height: 50px;
-	float: left;
-	border-right: 1px solid #000;
-	padding: 5px;
+	width: 67px;
+	border-right: 1px solid #DEDEDE;
+	text-align: center;
 }
 
 .hours {
-	width: 85%;
+	width: 1200px;
+	height: 100px;
 }
 
-.event{
-	background-color: red;
-	width: 70px;
+.hour,.hour-head {
+	width: 48px;
+	height: 100%;
+	float: left;
+	border-right: 1px solid #DEDEDE;
+	text-align: center;
+}
+
+.hour-head, .hours-head {
+	font-weight : bold;
+	padding: 8px 0px 8px;
+	height: 20px;
+}
+
+.event {
+	width: 90px;
+	height: 25px;
+	display: inline-block;
+	color: white;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: blue;
+	border-radius: 35px;
+	border: 2px solid #DEDEDE;
+}
+
+.event-name {
+	padding: 4px 12px 0px;
 }
 
 .ui-sortable-placeholder {
 	border: 1px dotted black;
 	visibility: visible !important;
-	height: 50px !important;
+	height: 30px !important;
+	background-color: #999;
 }
 
 .ui-sortable-placeholder * {
