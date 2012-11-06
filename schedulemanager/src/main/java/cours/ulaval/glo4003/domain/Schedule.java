@@ -1,7 +1,11 @@
 package cours.ulaval.glo4003.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import cours.ulaval.glo4003.domain.conflict.Conflict;
 
 public class Schedule {
 
@@ -10,6 +14,8 @@ public class Schedule {
 	private Semester semester;
 	private Map<String, Section> sections;
 	private String personInCharge;
+	private List<Conflict> conflicts;
+	private Integer score;
 
 	public Schedule() {
 	}
@@ -17,6 +23,7 @@ public class Schedule {
 	public Schedule(String id) {
 		this.id = id;
 		sections = new HashMap<String, Section>();
+		conflicts = new ArrayList<Conflict>();
 	}
 
 	public void add(Section section) {
@@ -25,8 +32,19 @@ public class Schedule {
 		}
 	}
 
+	public void add(Conflict conflict) {
+		this.conflicts.add(conflict);
+	}
+
 	public void delete(String sectionNrc) {
 		sections.remove(sectionNrc);
+	}
+
+	public void calculateScore() {
+		score = 0;
+		for (Conflict conflict : conflicts) {
+			score += conflict.getScore();
+		}
 	}
 
 	private boolean sectionExist(String nrc) {
@@ -71,6 +89,22 @@ public class Schedule {
 
 	public void setPersonInCharge(String personInCharge) {
 		this.personInCharge = personInCharge;
+	}
+
+	public List<Conflict> getConflicts() {
+		return conflicts;
+	}
+
+	public void setConflicts(List<Conflict> conflicts) {
+		this.conflicts = conflicts;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 
 }
