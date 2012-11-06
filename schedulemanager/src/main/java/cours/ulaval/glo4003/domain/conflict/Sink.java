@@ -6,8 +6,4 @@ public class Sink extends Pipe {
 	public void calculateTotalScore(Schedule schedule) {
 
 	}
-
-	public void notifyConflictDetector() {
-
-	}
 }

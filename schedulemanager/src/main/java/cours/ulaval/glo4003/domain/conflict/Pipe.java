@@ -3,9 +3,9 @@ package cours.ulaval.glo4003.domain.conflict;
 import cours.ulaval.glo4003.domain.Schedule;
 
 public abstract class Pipe {
-	private Pipe nextPipe;
+	protected Pipe nextPipe;
 
-	public void nextPipe(Schedule schedule) {
+	protected void run(Schedule schedule) {
 
 	}
 
