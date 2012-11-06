@@ -77,7 +77,6 @@ public class Availability {
 	}
 
 	public AvailabilityModel getModel() {
-
 		AvailabilityModel model = new AvailabilityModel();
 
 		model.setMonday(this.monday);
