@@ -28,6 +28,7 @@
         <c:forEach var="year" items="${years}">
           <tr class="well" id="${year}">
             <td><b>${year}</b></td>
+			<td>&nbsp;</td>
           </tr>
           <tr id="automn">
             <td class="span12"><b>Automne</b></td>
