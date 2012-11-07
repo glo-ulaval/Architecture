@@ -3,11 +3,8 @@ package cours.ulaval.glo4003.domain;
 public class User {
 
 	private String idul;
-
 	private String name;
-
 	private String password;
-
 	private Role role;
 
 	public User(String idul, String name, String password, Role role) {
@@ -26,7 +23,7 @@ public class User {
 	}
 
 	public boolean validateCredentials(String password) {
-		return (password == this.password);
+		return this.password.equals(password);
 	}
 
 	public void setRole(Role role) {

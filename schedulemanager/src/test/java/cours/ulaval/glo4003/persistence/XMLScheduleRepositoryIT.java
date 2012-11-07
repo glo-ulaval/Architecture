@@ -18,7 +18,7 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
-public class XMLScheduleRepositoryIT {
+public class XMLScheduleRepositoryIT extends ITTestBase {
 	private static Schedule aSchedule;
 	private static XMLScheduleRepository repository;
 	private static Schedule anotherSchedule;

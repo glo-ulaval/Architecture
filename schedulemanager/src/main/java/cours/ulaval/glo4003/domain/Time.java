@@ -8,7 +8,6 @@ public class Time {
 	private Integer hour;
 	private Integer minute;
 
-	// This constructor is for serialization purpose
 	public Time() {
 	}
 
@@ -27,12 +26,10 @@ public class Time {
 		} else if (hour == time.getHour()) {
 			if (minute > time.getMinute()) {
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
+
+		return false;
 	}
 
 	public boolean before(Time time) {
@@ -41,12 +38,20 @@ public class Time {
 		} else if (hour == time.getHour()) {
 			if (minute < time.getMinute()) {
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
+
+		return false;
+	}
+
+	private String adjustTime(String time) {
+		String modifiedTime = time;
+
+		if (time.matches("\\d+:0$")) {
+			modifiedTime += "0";
+		}
+
+		return modifiedTime;
 	}
 
 	public Integer getHour() {
@@ -67,17 +72,12 @@ public class Time {
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(hour).append(minute).toHashCode();
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Time) {
-			final Time other = (Time) obj;
-			return new EqualsBuilder().append(this.hour, other.getHour()).append(this.minute, other.getMinute()).isEquals();
-		} else {
-			return false;
-		}
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	@Override
@@ -85,11 +85,4 @@ public class Time {
 		return adjustTime(this.hour + ":" + this.minute);
 	}
 
-	private String adjustTime(String time) {
-		if (time.matches("\\d+:0$")) {
-			time += "0";
-		}
-
-		return time;
-	}
 }

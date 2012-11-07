@@ -47,3 +47,11 @@ body {
 .inline {
 	display:inline;
 }
+
+.profil {
+	margin:0 5px;
+}
+
+.textRight {
+	text-align : right;
+}

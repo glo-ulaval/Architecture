@@ -22,6 +22,11 @@ public class TimeSlot {
 		calculateEndTime();
 	}
 
+	private void calculateEndTime() {
+		endTime = new Time(startTime.getHour(), startTime.getMinute());
+		endTime.addHours(duration);
+	}
+
 	public Time getStartTime() {
 		return startTime;
 	}
@@ -54,8 +59,4 @@ public class TimeSlot {
 		this.dayOfWeek = dayOfWeek;
 	}
 
-	private void calculateEndTime() {
-		endTime = new Time(startTime.getHour(), startTime.getMinute());
-		endTime.addHours(duration);
-	}
 }

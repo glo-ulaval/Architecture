@@ -13,7 +13,7 @@ import cours.ulaval.glo4003.domain.Prerequisite;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.utils.ResourcesLoader;
 
-public class XMLCourseRepositoryIT {
+public class XMLCourseRepositoryIT extends ITTestBase {
 
 	private XMLSerializer<CoursesXMLWrapper> serializer;
 	private XMLCourseRepository repository;

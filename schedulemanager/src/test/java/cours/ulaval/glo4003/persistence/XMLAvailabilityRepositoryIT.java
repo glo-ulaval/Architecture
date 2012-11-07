@@ -9,7 +9,7 @@ import org.junit.Test;
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 import cours.ulaval.glo4003.domain.Availability;
 
-public class XMLAvailabilityRepositoryIT {
+public class XMLAvailabilityRepositoryIT extends ITTestBase {
 
 	private static final String JSON_STRING = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,2,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
 
@@ -38,6 +38,7 @@ public class XMLAvailabilityRepositoryIT {
 		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
 		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
+		repository.store(availabilities);
 
 		assertEquals(availabilities.getMonday(), repository.findByIdul(UN_IDUL).getMonday());
 		assertEquals(availabilities.getTuesday(), repository.findByIdul(UN_IDUL).getTuesday());

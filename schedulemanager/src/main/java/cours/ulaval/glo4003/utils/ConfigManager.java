@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public final class ConfigManager {
 
-	private static final String CONFIG_FILE_PATH = "/Configs.properties";
+	private static String CONFIG_FILE_PATH = "/Configs.properties";
 
 	private static ConfigManager configManager;
 
@@ -41,5 +41,10 @@ public final class ConfigManager {
 
 	public String getAvailabilitiesFilePath() {
 		return properties.getProperty("AvailabilitiesFilePath");
+	}
+
+	// Use for tests
+	public static void setConfigFilePath(String path) {
+		CONFIG_FILE_PATH = path;
 	}
 }

@@ -1,4 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+  prefix="sec"%>
+<%@ page session="true"%>
 <%@ page session="true"%>
 <!DOCTYPE html>
 <html>
@@ -19,8 +22,15 @@
 	<c:import url="header.jsp" />
 	<div class="container">
 		<div class="hero-unit">
-			<h1>Éditer/Visualiser une offre de cours</h1>
-			<p>Choisissez l'année à visualiser/éditer.</p>
+			<h1>
+				<sec:authorize access="hasRole('ROLE_Directeur')">
+      Éditer/
+    </sec:authorize>
+				Visualiser une offre de cours
+			</h1>
+			<p>Choisissez l'année à visualiser<sec:authorize access="hasRole('ROLE_Directeur')">
+      /éditer.
+    </sec:authorize></p>
 		</div>
 		<c:if test="${not empty years}">
 			<table class="table table-striped">
@@ -32,8 +42,9 @@
 				</thead>
 				<c:forEach var="year" items="${years}">
 					<tr id="${year}">
-						<td><b>${year}</b></td><td><a class="btn pull-right" href="offering/${year}"><i
-                class="icon-search"></i></a></td>
+						<td><b>${year}</b></td>
+						<td><a class="btn pull-right" href="offering/${year}"><i
+								class="icon-search"></i></a></td>
 					</tr>
 				</c:forEach>
 			</table>

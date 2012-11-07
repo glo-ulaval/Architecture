@@ -18,7 +18,7 @@ import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
 @Controller
 @RequestMapping(value = "/availabilities")
-public class TeacherController {
+public class AvailabilitiesController {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
