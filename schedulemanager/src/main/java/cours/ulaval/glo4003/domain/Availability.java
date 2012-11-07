@@ -1,5 +1,6 @@
 package cours.ulaval.glo4003.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
@@ -8,11 +9,11 @@ public class Availability {
 
 	private String idul;
 
-	private List<AvailabilityLevel> monday;
-	private List<AvailabilityLevel> tuesday;
-	private List<AvailabilityLevel> wednesday;
-	private List<AvailabilityLevel> thursday;
-	private List<AvailabilityLevel> friday;
+	private List<AvailabilityLevel> monday = new ArrayList<AvailabilityLevel>();
+	private List<AvailabilityLevel> tuesday = new ArrayList<AvailabilityLevel>();
+	private List<AvailabilityLevel> wednesday = new ArrayList<AvailabilityLevel>();
+	private List<AvailabilityLevel> thursday = new ArrayList<AvailabilityLevel>();
+	private List<AvailabilityLevel> friday = new ArrayList<AvailabilityLevel>();
 
 	public Availability() {
 		super();

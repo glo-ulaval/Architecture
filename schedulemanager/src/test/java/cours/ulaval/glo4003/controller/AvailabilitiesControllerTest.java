@@ -72,6 +72,15 @@ public class AvailabilitiesControllerTest {
 	}
 
 	@Test
+	public void canGetAvailibitiesViewWhenThereAreNoAvailibilities() {
+		when(repository.findByIdul(user.getIdul())).thenReturn(null);
+		ModelAndView mv = controller.availabilities(request);
+
+		assertEquals("availabilities", mv.getViewName());
+		assertFalse(mv.getModel().containsKey("availabilitiesJSON"));
+	}
+
+	@Test
 	public void canGetAvailibilitiesEditView() throws Exception {
 		assertEquals("Vos disponibilités ont été enregistrées avec succès", controller.availabilities(JSON_STRING, request));
 	}

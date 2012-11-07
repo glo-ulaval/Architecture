@@ -29,16 +29,19 @@ public class AvailabilitiesController {
 	public ModelAndView availabilities(HttpServletRequest request) {
 
 		User user = (User) request.getSession().getAttribute("user");
-		AvailabilityModel model = repository.findByIdul(user.getIdul()).getModel();
-
-		String availabilitiesJSON;
+		Availability availability = repository.findByIdul(user.getIdul());
 		ModelAndView mv = new ModelAndView("availabilities");
-		try {
-			availabilitiesJSON = mapper.writeValueAsString(model);
+		if (availability != null) {
+			AvailabilityModel model = availability.getModel();
 
-			mv.addObject("availabilitiesJSON", availabilitiesJSON);
-		} catch (Exception e) {
-			e.printStackTrace();
+			String availabilitiesJSON;
+			try {
+				availabilitiesJSON = mapper.writeValueAsString(model);
+
+				mv.addObject("availabilitiesJSON", availabilitiesJSON);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		return mv;

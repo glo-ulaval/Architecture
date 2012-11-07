@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Availabilities>
 	<availabilities>
-		<friday>Unavailable</friday>
-		<friday>Unavailable</friday>
-		<friday>Unavailable</friday>
-		<friday>Available</friday>
-		<friday>Available</friday>
-		<friday>Available</friday>
-		<friday>Available</friday>
-		<friday>Available</friday>
-		<friday>Unavailable</friday>
-		<friday>Unavailable</friday>
-		<friday>Unavailable</friday>
-		<friday>Unavailable</friday>
-		<friday>Unavailable</friday>
-		<idul>enseignant</idul>
+		<idul>LULAM50</idul>
 		<monday>Available</monday>
 		<monday>Available</monday>
 		<monday>Available</monday>
@@ -67,5 +54,18 @@
 		<wednesday>Unavailable</wednesday>
 		<wednesday>Available</wednesday>
 		<wednesday>Available</wednesday>
+    <friday>Unavailable</friday>
+    <friday>Unavailable</friday>
+    <friday>Unavailable</friday>
+    <friday>Available</friday>
+    <friday>Available</friday>
+    <friday>Available</friday>
+    <friday>Available</friday>
+    <friday>Available</friday>
+    <friday>Unavailable</friday>
+    <friday>Unavailable</friday>
+    <friday>Unavailable</friday>
+    <friday>Unavailable</friday>
+    <friday>Unavailable</friday>
 	</availabilities>
 </Availabilities>
