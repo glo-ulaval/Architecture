@@ -21,7 +21,7 @@ public class UserSecurityDetails implements UserDetails {
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
-		roleList.add(new GrantedAuthorityImpl(user.getRole().toString()));
+		roleList.add(new GrantedAuthorityImpl(user.getRoles().toString()));
 		return roleList;
 	}
 
