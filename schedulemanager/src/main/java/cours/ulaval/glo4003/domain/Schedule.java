@@ -1,6 +1,8 @@
 package cours.ulaval.glo4003.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Schedule {
@@ -59,6 +61,10 @@ public class Schedule {
 
 	public Map<String, Section> getSections() {
 		return sections;
+	}
+
+	public List<Section> getSectionsList() {
+		return new ArrayList<Section>(sections.values());
 	}
 
 	public void setSections(Map<String, Section> sections) {

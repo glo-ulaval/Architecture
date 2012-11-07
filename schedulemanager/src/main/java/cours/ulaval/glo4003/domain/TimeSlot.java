@@ -27,6 +27,22 @@ public class TimeSlot {
 		endTime.addHours(duration);
 	}
 
+	public boolean isOverlapping(TimeSlot timeslot) {
+		if (dayOfWeek != timeslot.dayOfWeek) {
+			return false;
+		} else {
+			if (endTime.before(timeslot.getStartTime()) || endTime.equals(timeslot.getStartTime())) {
+				return false;
+			}
+
+			if (startTime.after(timeslot.getEndTime()) || startTime.equals(timeslot.getEndTime())) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public Time getStartTime() {
 		return startTime;
 	}
