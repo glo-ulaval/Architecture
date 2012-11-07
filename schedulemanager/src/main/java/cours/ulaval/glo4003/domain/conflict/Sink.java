@@ -3,11 +3,13 @@ package cours.ulaval.glo4003.domain.conflict;
 import cours.ulaval.glo4003.domain.Schedule;
 
 public class Sink extends Pipe {
-	public void calculateTotalScore(Schedule schedule) {
 
+	@Override
+	protected void run(Schedule schedule) {
+		calculateTotalScore(schedule);
 	}
 
-	public void notifyConflictDetector() {
-
+	private void calculateTotalScore(Schedule schedule) {
+		schedule.calculateScore();
 	}
 }

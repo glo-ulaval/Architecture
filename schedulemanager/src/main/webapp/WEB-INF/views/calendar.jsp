@@ -32,47 +32,35 @@
 			<div class="hour-head">10:00</div>
 			<div class="hour-head">10:30</div>
 			<div class="hour-head">11:00</div>
-			<div class="hour-head">11:00</div>
+			<div class="hour-head">11:30</div>
 			<div class="hour-head">12:00</div>
-			<div class="hour-head">12:00</div>
+			<div class="hour-head">12:30</div>
 			<div class="hour-head">13:00</div>
-			<div class="hour-head">13:00</div>
+			<div class="hour-head">13:30</div>
 			<div class="hour-head">14:00</div>
-			<div class="hour-head">14:00</div>
+			<div class="hour-head">14:30</div>
 			<div class="hour-head">15:00</div>
-			<div class="hour-head">15:00</div>
+			<div class="hour-head">15:30</div>
 			<div class="hour-head">16:00</div>
-			<div class="hour-head">16:00</div>
+			<div class="hour-head">16:30</div>
 			<div class="hour-head">17:00</div>
-			<div class="hour-head">17:00</div>
+			<div class="hour-head">17:30</div>
 			<div class="hour-head">18:00</div>
-			<div class="hour-head">18:00</div>
+			<div class="hour-head">18:30</div>
 			<div class="hour-head">19:00</div>
-			<div class="hour-head">19:00</div>
+			<div class="hour-head">19:30</div>
 			<div class="hour-head">20:00</div>
-			<div class="hour-head">20:00</div>
+			<div class="hour-head">20:30</div>
 			<div class="hour-head">21:00</div>
-			<div class="hour-head">21:00</div>
+			<div class="hour-head">21:30</div>
 		</td>
 	</tr>
 	<tr>
 		<td class="day">Lundi</td>
 		<td class="hours">
-			<div id="mon85" class="hour">
-			    <div class="event">
-			        <div class="event-name" title="GLO-4003 - Architecture">GLO-4003</div>
-			    </div>
-			</div>
-			<div id="mon90" class="hour">
-				<div class="event">
-			        <div class="event-name" title="IFT-2103-Programmation de jeux vidéo">IFT-2103</div>
-			    </div>
-			</div>
-			<div id="mon95" class="hour">
-				<div class="event">
-			        <div class="event-name" title="IFT-1001-Algorithmique et programmation">IFT-1001</div>
-			    </div>
-			</div>
+			<div id="mon85" class="hour"></div>
+			<div id="mon90" class="hour"></div>
+			<div id="mon95" class="hour"></div>
 			<div id="mon100" class="hour"></div>
 			<div id="mon105" class="hour"></div>
 			<div id="mon110" class="hour"></div>

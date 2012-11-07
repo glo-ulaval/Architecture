@@ -1,11 +1,11 @@
 package cours.ulaval.glo4003.utils;
 
-import java.io.IOException;
-import java.util.Properties;
+import java.io.*;
+import java.util.*;
 
 public final class ConfigManager {
 
-	private static final String CONFIG_FILE_PATH = "/Configs.properties";
+	private static String CONFIG_FILE_PATH = "/Configs.properties";
 
 	private static ConfigManager configManager;
 
@@ -31,6 +31,10 @@ public final class ConfigManager {
 		return properties.getProperty("CoursesFilePath");
 	}
 
+	public String getUsersFilePath() {
+		return properties.getProperty("UsersFilePath");
+	}
+
 	public String getOfferingsFilePath() {
 		return properties.getProperty("OfferingsFilePath");
 	}
@@ -41,5 +45,10 @@ public final class ConfigManager {
 
 	public String getAvailabilitiesFilePath() {
 		return properties.getProperty("AvailabilitiesFilePath");
+	}
+
+	// Use for tests
+	public static void setConfigFilePath(String path) {
+		CONFIG_FILE_PATH = path;
 	}
 }

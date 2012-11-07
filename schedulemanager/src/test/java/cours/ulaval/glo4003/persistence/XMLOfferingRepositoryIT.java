@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +13,8 @@ import org.junit.Test;
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.Semester;
 
-//FIXME je suis complètement couplé avec le fichier xml et je suis complètement broken
-public class XMLOfferingRepositoryIT {
+public class XMLOfferingRepositoryIT extends ITTestBase {
 
-	private static final String STORED_OFFERING_YEAR = "2011-2012";
 	private static final String NEW_OFFERING_YEAR = "2009-2010";
 	private static final Semester A_SEMESTER = Semester.Automne;
 	XMLOfferingRepository repository;
@@ -25,15 +24,31 @@ public class XMLOfferingRepositoryIT {
 		repository = new XMLOfferingRepository();
 	}
 
-	@Test
-	public void canGetOfferings() {
-		List<String> years = repository.findYears();
-		Offering offering = repository.find(years.get(years.indexOf(STORED_OFFERING_YEAR)));
+	@After
+	public void tearDown() throws Exception {
+		repository.clearAll();
+	}
 
-		assertTrue(years.contains(STORED_OFFERING_YEAR));
-		assertNotNull(offering);
-		assertEquals(STORED_OFFERING_YEAR, offering.getYear());
-		assertEquals(5, offering.getOffering().size());
+	@Test
+	public void canGetYearsWithoutOfferings() throws Exception {
+		List<String> years = repository.findYears();
+
+		assertEquals(0, years.size());
+	}
+
+	@Test
+	public void canGetOfferings() throws Exception {
+		Offering offering = new Offering();
+		offering.addCourse("GLO-2003");
+		offering.setYear(NEW_OFFERING_YEAR);
+		repository.store(offering);
+
+		List<String> years = repository.findYears();
+		offering = repository.find(NEW_OFFERING_YEAR);
+
+		assertTrue(years.contains(NEW_OFFERING_YEAR));
+		assertEquals(NEW_OFFERING_YEAR, offering.getYear());
+		assertEquals(1, offering.getOffering().size());
 		assertTrue(offering.getOffering().contains("GLO-2003"));
 	}
 

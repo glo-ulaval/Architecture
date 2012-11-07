@@ -50,9 +50,9 @@ public class UserTest {
 	}
 
 	@Test
-	public void canSetRoleOfAUser() {
-		user.setRole(Role.ROLE_Enseignant);
+	public void canAddRoleOfAUser() {
+		user.addRole(Role.ROLE_Enseignant);
 
-		assertEquals(Role.ROLE_Enseignant, user.getRole());
+		assertTrue(user.getRoles().contains(Role.ROLE_Enseignant));
 	}
 }

@@ -15,8 +15,7 @@ public class XMLOfferingRepository implements OfferingRepository {
 	private XMLSerializer<OfferingXMLWrapper> serializer;
 	private Map<String, Offering> offerings = new HashMap<String, Offering>();
 
-	public XMLOfferingRepository()
-			throws Exception {
+	public XMLOfferingRepository() throws Exception {
 		serializer = new XMLSerializer<OfferingXMLWrapper>(OfferingXMLWrapper.class);
 		parseXML();
 	}
@@ -43,37 +42,31 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	@Override
-	public void store(Offering offering)
-			throws Exception {
+	public void store(Offering offering) throws Exception {
 		offerings.put(offering.getYear(), offering);
 		saveXML();
 	}
 
 	@Override
-	public void delete(String year, Semester semester)
-			throws Exception {
+	public void delete(String year, Semester semester) throws Exception {
 		offerings.remove(year);
 		saveXML();
 	}
 
 	@Override
-	public void delete(String year)
-			throws Exception {
+	public void delete(String year) throws Exception {
 		offerings.remove(year);
 		saveXML();
 	}
 
-	private void parseXML()
-			throws Exception {
-		List<Offering> deserializedOfferings = serializer.deserialize(ConfigManager.getConfigManager().getOfferingsFilePath())
-				.getOfferings();
+	private void parseXML() throws Exception {
+		List<Offering> deserializedOfferings = serializer.deserialize(ConfigManager.getConfigManager().getOfferingsFilePath()).getOfferings();
 		for (Offering offering : deserializedOfferings) {
 			offerings.put(offering.getYear(), offering);
 		}
 	}
 
-	private void saveXML()
-			throws Exception {
+	private void saveXML() throws Exception {
 		OfferingXMLWrapper offeringDTO = new OfferingXMLWrapper();
 		List<Offering> offeringList = new ArrayList<Offering>();
 		for (Offering offering : offerings.values()) {
@@ -84,8 +77,12 @@ public class XMLOfferingRepository implements OfferingRepository {
 	}
 
 	// DO NOT USE -- for test purpose only
-	protected XMLOfferingRepository(XMLSerializer<OfferingXMLWrapper> mockedSerializer)
-			throws Exception {
+	protected XMLOfferingRepository(XMLSerializer<OfferingXMLWrapper> mockedSerializer) throws Exception {
 		serializer = mockedSerializer;
+	}
+
+	protected void clearAll() throws Exception {
+		offerings.clear();
+		saveXML();
 	}
 }
