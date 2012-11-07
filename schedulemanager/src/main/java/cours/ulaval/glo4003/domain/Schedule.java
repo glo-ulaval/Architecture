@@ -79,6 +79,10 @@ public class Schedule {
 		return sections;
 	}
 
+	public List<Section> getSectionsList() {
+		return new ArrayList<Section>(sections.values());
+	}
+
 	public void setSections(Map<String, Section> sections) {
 		this.sections = sections;
 	}

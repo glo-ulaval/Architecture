@@ -36,6 +36,42 @@ public class TimeSlotTest {
 		assertEquals(endTime.getMinute(), timeSlot.getEndTime().getMinute());
 	}
 
+	@Test
+	public void ifCloseButNotOverlappingThenReturnFalse() {
+		TimeSlot times1 = new TimeSlot(new Time(4, 0), 2, DayOfWeek.MONDAY);
+		TimeSlot times2 = new TimeSlot(new Time(6, 0), 2, DayOfWeek.MONDAY);
+
+		assertFalse(times1.isOverlapping(times2));
+		assertFalse(times2.isOverlapping(times1));
+	}
+
+	@Test
+	public void ifNotOverlappoingThenReturnFalse() {
+		TimeSlot times1 = new TimeSlot(new Time(4, 0), 2, DayOfWeek.MONDAY);
+		TimeSlot times2 = new TimeSlot(new Time(7, 0), 2, DayOfWeek.MONDAY);
+
+		assertFalse(times1.isOverlapping(times2));
+		assertFalse(times2.isOverlapping(times1));
+	}
+
+	@Test
+	public void ifOverlappingThenReturnFalse() {
+		TimeSlot times1 = new TimeSlot(new Time(4, 0), 3, DayOfWeek.MONDAY);
+		TimeSlot times2 = new TimeSlot(new Time(6, 0), 2, DayOfWeek.MONDAY);
+
+		assertTrue(times1.isOverlapping(times2));
+		assertTrue(times2.isOverlapping(times1));
+	}
+
+	@Test
+	public void ifNotSameDayThenDontOverlap() {
+		TimeSlot times1 = new TimeSlot(new Time(4, 0), 3, DayOfWeek.MONDAY);
+		TimeSlot times2 = new TimeSlot(new Time(6, 0), 2, DayOfWeek.SATURDAY);
+
+		assertFalse(times1.isOverlapping(times2));
+		assertFalse(times2.isOverlapping(times1));
+	}
+
 	private Time generateEndTime() {
 		Time endTime = new Time();
 		endTime.setHour(A_HOUR + A_DURATION);
