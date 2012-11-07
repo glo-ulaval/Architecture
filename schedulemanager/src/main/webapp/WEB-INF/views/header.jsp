@@ -17,9 +17,13 @@
 						<li><a href="#">À propos</a></li>
 						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
 					</ul>
+					<c:url var="profileUrl" value="/profile"></c:url>
 					<c:if test="${not empty user.idul}">
+            <div class="floatRight">
+              <a class="btn btn-info profil" href="${profileUrl}"><b>Modifier mon profil</b></a>
+            </div>
 						<div class="btn-group floatRight">
-							<a class="btn btn-inverse" href="#"> <i
+							<a class="btn btn-inverse"> <i
 								class="icon-user icon-white"></i><b class="username">${user.idul}</b>
 							</a> <a class="btn btn-inverse" href="<c:url value="/logout" />">
 								<i class="icon-remove icon-white"></i>

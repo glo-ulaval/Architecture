@@ -29,12 +29,21 @@
 			<h1>Menu</h1>
 			<p>Veuillez sélectionner une option :</p>
 		</div>
+    <sec:authorize access="hasRole('ROLE_Administrateur')">
+      <c:import url="partialViews/menuAdmin.jsp" />
+    </sec:authorize>
 		<sec:authorize access="hasRole('ROLE_Directeur')">
 			<c:import url="partialViews/menuDirector.jsp" />
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_Enseignant')">
 			<c:import url="partialViews/menuTeacher.jsp" />
 		</sec:authorize>
+    <sec:authorize access="hasRole('ROLE_Responsable')">
+      <c:import url="partialViews/menuManager.jsp" />
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_Usager')">
+      <c:import url="partialViews/menuUser.jsp" />
+    </sec:authorize>
 	</div>
 	<c:import url="footer.jsp" />
 </body>

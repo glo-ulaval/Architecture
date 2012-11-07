@@ -1,8 +1,7 @@
 <div class="row-fluid">
 	<div class="span6">
 		<h2>Offre de cours</h2>
-		<p>Permet à l'utilisateur d'éditer une offre de cours ainsi que de
-			visualiser les existantes.</p>
+		<p>Permet à l'utilisateur de visualiser les offres de cours existantes.</p>
 	</div>
 	<div class="span6">
 		<h2>Visualiser un horaire</h2>
