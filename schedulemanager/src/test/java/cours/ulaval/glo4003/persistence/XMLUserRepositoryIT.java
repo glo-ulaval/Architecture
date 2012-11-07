@@ -10,19 +10,24 @@ public class XMLUserRepositoryIT extends ITTestBase {
 
 	private XMLUserRepository users;
 
+	private User teacher;
+	private User director;
+
 	@Before
 	public void setUp() throws Exception {
 		users = new XMLUserRepository();
+
+		teacher = new User("enseignant", "Enseignant", "pass", Role.ROLE_Enseignant);
+		director = new User("directeur", "Directeur", "pass", Role.ROLE_Directeur);
+		director.addRole(Role.ROLE_Enseignant);
+		director.addRole(Role.ROLE_Usager);
 	}
 
 	@Test
 	public void canSaveUser() throws Exception {
-		User teacher = new User("enseignant", "Enseignant", "pass", Role.ROLE_Enseignant);
+
 		users.store(teacher);
 
-		User director = new User("directeur", "Directeur", "pass", Role.ROLE_Directeur);
-		director.addRole(Role.ROLE_Enseignant);
-		director.addRole(Role.ROLE_Usager);
 		users.store(director);
 
 		User responsable = new User("responsable", "Responsable", "pass", Role.ROLE_Responsable);
@@ -39,4 +44,9 @@ public class XMLUserRepositoryIT extends ITTestBase {
 		assertTrue(users.findAll().contains(teacher));
 	}
 
+	@Test
+	public void canFindUser() throws Exception {
+		assertEquals(teacher.getIdul(), users.findByIdul("enseignant").getIdul());
+		assertEquals(director.getIdul(), users.findByIdul("directeur").getIdul());
+	}
 }

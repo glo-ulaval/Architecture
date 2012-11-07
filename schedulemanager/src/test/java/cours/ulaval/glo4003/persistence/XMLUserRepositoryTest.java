@@ -17,13 +17,39 @@ public class XMLUserRepositoryTest {
 	@Mock
 	private User user;
 
+	@InjectMocks
 	private XMLUserRepository repository;
+
+	private User teacher;
+	private User director;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		repository = new XMLUserRepository();
+		repository = new XMLUserRepository(mockedSerializer);
 		when(user.getIdul()).thenReturn(VALID_IDUL);
+
+		createUsers();
+	}
+
+	public void createUsers() throws Exception {
+
+		teacher = new User("enseignant", "Enseignant", "pass", Role.ROLE_Enseignant);
+		repository.store(teacher);
+
+		director = new User("directeur", "Directeur", "pass", Role.ROLE_Directeur);
+		director.addRole(Role.ROLE_Enseignant);
+		director.addRole(Role.ROLE_Usager);
+		repository.store(director);
+
+		User responsable = new User("responsable", "Responsable", "pass", Role.ROLE_Responsable);
+		repository.store(responsable);
+
+		User administrator = new User("administrateur", "Administrateur", "pass", Role.ROLE_Administrateur);
+		repository.store(administrator);
+
+		User utilisateur = new User("utilisateur", "Utilisateur", "pass", Role.ROLE_Usager);
+		repository.store(utilisateur);
 	}
 
 	@Test
@@ -36,12 +62,17 @@ public class XMLUserRepositoryTest {
 	@Test
 	public void canFindUserByIdul() throws Exception {
 
-		User director = new User("directeur", "Directeur", "pass", Role.ROLE_Directeur);
+		User utilisateur = new User("utilisateur", "Utilisateur", "pass", Role.ROLE_Usager);
 
-		repository.store(director);
+		repository.store(utilisateur);
 
-		assertEquals(director.getIdul(), repository.findByIdul("directeur").getIdul());
-		assertEquals(director.getRoles(), repository.findByIdul("directeur").getRoles());
-		assertEquals(director.getName(), repository.findByIdul("directeur").getName());
+		assertEquals(utilisateur.getIdul(), repository.findByIdul("utilisateur").getIdul());
+		assertEquals(utilisateur.getRoles(), repository.findByIdul("utilisateur").getRoles());
+		assertEquals(utilisateur.getName(), repository.findByIdul("utilisateur").getName());
+	}
+
+	@Test
+	public void canFindUserByRole() throws Exception {
+		assertEquals(teacher.getIdul(), repository.findByRole(Role.ROLE_Enseignant).get(0).getIdul());
 	}
 }
