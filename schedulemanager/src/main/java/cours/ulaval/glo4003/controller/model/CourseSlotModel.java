@@ -10,6 +10,7 @@ public class CourseSlotModel {
 	private String acronym;
 	private String group;
 	private Boolean isLab;
+	private String dayOfWeek;
 
 	public CourseSlotModel(Section section, TimeSlot timeSlot, Boolean isLab) {
 		this.nrc = section.getNrc();
@@ -18,6 +19,7 @@ public class CourseSlotModel {
 		this.timeStart = timeSlot.getStartTime().toString();
 		this.timeEnd = timeSlot.getEndTime().toString();
 		this.isLab = isLab;
+		this.dayOfWeek = timeSlot.getDayOfWeek().toString();
 	}
 
 	public String getTimeSlotStart() {
@@ -66,5 +68,13 @@ public class CourseSlotModel {
 
 	public void setIsLab(Boolean isLab) {
 		this.isLab = isLab;
+	}
+
+	public String getDayOfWeek() {
+		return dayOfWeek;
+	}
+
+	public void setDayOfWeek(String dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
 	}
 }
