@@ -6,6 +6,7 @@ import org.springframework.security.core.*;
 import org.springframework.security.core.authority.*;
 import org.springframework.security.core.userdetails.*;
 
+import cours.ulaval.glo4003.domain.*;
 import cours.ulaval.glo4003.domain.User;
 
 public class UserSecurityDetails implements UserDetails {
@@ -21,7 +22,9 @@ public class UserSecurityDetails implements UserDetails {
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
-		roleList.add(new GrantedAuthorityImpl(user.getRoles().toString()));
+		for (Role role : user.getRoles()) {
+			roleList.add(new GrantedAuthorityImpl(role.toString()));
+		}
 		return roleList;
 	}
 
