@@ -29,21 +29,37 @@
 			<h1>Menu</h1>
 			<p>Veuillez sélectionner une option :</p>
 		</div>
-    <sec:authorize access="hasRole('ROLE_Administrateur')">
-      <c:import url="partialViews/menuAdmin.jsp" />
-    </sec:authorize>
+		<c:choose>
+			<c:when test="${ empty error }"></c:when>
+			<c:when test="${error != 'success'}">
+				<div class="alert alert-error">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>Erreur!</strong> Une erreur est survenue, veuillez
+					réessayer - ${error}.
+				</div>
+			</c:when>
+			<c:when test="${ error == 'success'}">
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>Succès!</strong> La requête s'est effectuée avec succès.
+				</div>
+			</c:when>
+		</c:choose>
+		<sec:authorize access="hasRole('ROLE_Administrateur')">
+			<c:import url="partialViews/menuAdmin.jsp" />
+		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_Directeur')">
 			<c:import url="partialViews/menuDirector.jsp" />
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_Enseignant')">
 			<c:import url="partialViews/menuTeacher.jsp" />
 		</sec:authorize>
-    <sec:authorize access="hasRole('ROLE_Responsable')">
-      <c:import url="partialViews/menuManager.jsp" />
-    </sec:authorize>
-    <sec:authorize access="hasRole('ROLE_Usager')">
-      <c:import url="partialViews/menuUser.jsp" />
-    </sec:authorize>
+		<sec:authorize access="hasRole('ROLE_Responsable')">
+			<c:import url="partialViews/menuManager.jsp" />
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_Usager')">
+			<c:import url="partialViews/menuUser.jsp" />
+		</sec:authorize>
 	</div>
 	<c:import url="footer.jsp" />
 </body>

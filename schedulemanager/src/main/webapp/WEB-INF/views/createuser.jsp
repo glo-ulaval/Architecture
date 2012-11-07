@@ -50,10 +50,10 @@
 						<td id="permissions"><span class="per"></span><select
 							class="input-large" name="roles">
 								<option>Administrateur</option>
-								<option>Directeur de département</option>
+								<option>Directeur</option>
 								<option>Enseignant</option>
-								<option>Responsable horaire</option>
-								<option>Usager régulier</option>
+								<option>Responsable</option>
+								<option>Usager</option>
 						</select> <a class="btn btn-success addRole" onClick=addRole()><i
 								class="icon-plus-sign icon-white"></i></a></span></td>
 					</tr>

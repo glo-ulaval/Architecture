@@ -9,12 +9,13 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.User;
+import cours.ulaval.glo4003.utils.UserModelGenerator;
 
 public class UserModelTest {
 
 	@Test
 	public void canConvertBasicUserModelToUser() {
-		UserModel model = createUserModel();
+		UserModel model = UserModelGenerator.createUserModel();
 
 		User user = model.convertToUser();
 
@@ -25,7 +26,7 @@ public class UserModelTest {
 
 	@Test
 	public void canConvertUserModelWithRolesToUser() {
-		UserModel model = createUserModel();
+		UserModel model = UserModelGenerator.createUserModel();
 		model.setRoles(Arrays.asList("Administrateur", "Enseignant"));
 
 		User user = model.convertToUser();
@@ -35,14 +36,4 @@ public class UserModelTest {
 		assertTrue(roles.contains(Role.ROLE_Administrateur));
 		assertTrue(roles.contains(Role.ROLE_Enseignant));
 	}
-
-	private UserModel createUserModel() {
-		UserModel model = new UserModel();
-		model.setIdul("HABBA");
-		model.setName("Derp");
-		model.setPassword("HelloILoveKitties");
-
-		return model;
-	}
-
 }
