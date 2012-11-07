@@ -1,7 +1,7 @@
 package cours.ulaval.glo4003.utils;
 
-import java.io.IOException;
-import java.util.Properties;
+import java.io.*;
+import java.util.*;
 
 public final class ConfigManager {
 
@@ -29,6 +29,10 @@ public final class ConfigManager {
 
 	public String getCoursesFilePath() {
 		return properties.getProperty("CoursesFilePath");
+	}
+
+	public String getUsersFilePath() {
+		return properties.getProperty("UsersFilePath");
 	}
 
 	public String getOfferingsFilePath() {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <users>
+        <idul>NATAW</idul>
+        <name>Nadia Tawbi</name>
+        <password>pass</password>
+        <roles>ROLE_Directeur</roles>
+        <roles>ROLE_Enseignant</roles>
+    </users>
+    <users>
+        <idul>ADMIN</idul>
+        <name>Administrateur</name>
+        <password>admin</password>
+        <roles>ROLE_Administrateur</roles>
+    </users>
+    <users>
+        <idul>NADUC33</idul>
+        <name>Nancy Duchesneau</name>
+        <password>pass</password>
+        <roles>ROLE_Responsable</roles>
+    </users>
+    <users>
+        <idul>LULAM50</idul>
+        <name>Luc Lamontagne</name>
+        <password>pass</password>
+        <roles>ROLE_Enseignant</roles>
+    </users>
+    <users>
+        <idul>MPPAR3</idul>
+        <name>Marc-Philippe Parent</name>
+        <password>pass</password>
+        <roles>ROLE_Enseignant</roles>
+    </users>
+    <users>
+        <idul>DELAU</idul>
+        <name>Denis Laurendeau</name>
+        <password>pass</password>
+        <roles>ROLE_Enseignant</roles>
+    </users>
+    <users>
+        <idul>ELOUD</idul>
+        <name>Elisabeth Oudar</name>
+        <password>pass</password>
+        <roles>ROLE_Usager</roles>
+    </users>
+</users>
