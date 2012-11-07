@@ -4,6 +4,7 @@ import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TimeSlot;
 
 public class CourseSlotModel {
+
 	private String timeStart;
 	private String timeEnd;
 	private String nrc;
@@ -11,6 +12,7 @@ public class CourseSlotModel {
 	private String group;
 	private Boolean isLab;
 	private String dayOfWeek;
+	private Integer duration;
 
 	public CourseSlotModel(Section section, TimeSlot timeSlot, Boolean isLab) {
 		this.nrc = section.getNrc();
@@ -20,6 +22,7 @@ public class CourseSlotModel {
 		this.timeEnd = timeSlot.getEndTime().toString();
 		this.isLab = isLab;
 		this.dayOfWeek = timeSlot.getDayOfWeek().toString();
+		this.duration = timeSlot.getDuration();
 	}
 
 	public String getTimeSlotStart() {
@@ -77,4 +80,13 @@ public class CourseSlotModel {
 	public void setDayOfWeek(String dayOfWeek) {
 		this.dayOfWeek = dayOfWeek;
 	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
+
 }

@@ -12,6 +12,10 @@
 <link href="<c:url value="/resources/css/menu.css" />" rel="stylesheet">
 <link href='<c:url value="/resources/css/calendar.css" />' rel="stylesheet"/>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+
+<script type="text/javascript">
+	var cs = ${sections};
+</script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
@@ -20,7 +24,6 @@
 </head>
 <body>
 <c:import url="header.jsp" />
-<div class="container">
 <h1>Horaire</h1>
 <table class="table table-striped">
 	<tr>
@@ -216,7 +219,6 @@
 		</td>
 	</tr>
 </table>
-</div>
 </body>
 </html>
 
