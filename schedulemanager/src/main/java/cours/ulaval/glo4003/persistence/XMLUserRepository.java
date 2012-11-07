@@ -25,6 +25,9 @@ public class XMLUserRepository implements UserRepository {
 
 		User administrator = new User("administrateur", "Administrateur", "pass", Role.ROLE_Administrateur);
 		users.put(administrator.getIdul(), administrator);
+
+		User utilisateur = new User("utilisateur", "Utilisateur", "pass", Role.ROLE_Usager);
+		users.put(utilisateur.getIdul(), utilisateur);
 	}
 
 	public User findByIdul(String idul) {
