@@ -15,7 +15,7 @@
 			<div class="span8 controls">
 				<select class="input-xlarge" name="personInCharge" value="teachers">
 					<c:forEach items="${teachers}" var="teacher">
-						<option><script type="text/javascript">addOneTeacher("${teacher}");</script>${teacher}</option>
+						<option>${teacher}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -24,7 +24,7 @@
 			<label class="span3 control-label">Enseignants :</label>
 			<div class="span8 controls">
 				<div class="teachers" id="teacherDropDown">
-					<select class="input-xlarge" name="teachers"><c:forEach
+					<select class="input-xlarge teachersLOLOL" name="teachers"><c:forEach
 							items="${teachers}" var="teacher">
 							<option>${teacher}</option>
 						</c:forEach></select>

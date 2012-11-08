@@ -1,5 +1,3 @@
-var teachers = new Array();
-
 $(document).ready(function() {
 
 	$('.hours_class').bind('input', function() {
@@ -48,23 +46,20 @@ function addHours(teachmode, hours) {
 	element.innerHTML = html;
 }
 
-function addOneTeacher(teacher){
-	teachers.push(teacher);
-}
-
 function addTeacher(teachmode) {
 	var newDiv = document.createElement('div');
 	newDiv.setAttribute('class', 'divteacher');
-	var select = document.createElement('select');
-	select.setAttribute('class', 'input-xlarge');
-	select.setAttribute('name', 'teachers');
-	for (var i = 0; i < (teachers.length /3); i++) {
-		var opt = document.createElement("option");
-		opt.text = teachers[i];
-		select.options.add(opt);
-	}
-	newDiv.appendChild(select);
-	newDiv.innerHTML += "<a class=\"btn btn-danger removeTeacher\" onClick=removeTeacher(\"" + teachmode + "\")><i class=\"icon-minus-sign icon-white\"></i></a>";
+	$(".teachersLOLOL").first().clone().appendTo(newDiv);
+	var a = $('<a/>', {
+		class : 'btn btn-danger removeTeacher',
+		onClick : 'removeTeacher("' + teachmode + '")'
+	});
+	var i = $('<i/>', {
+		class : 'icon-minus-sign icon-white'
+	});
+	
+	i.appendTo(a);
+	a.appendTo(newDiv);
 	
 	var pane = document.getElementById(teachmode);
 	var teacher = pane.getElementsByClassName("teachers")[0];
