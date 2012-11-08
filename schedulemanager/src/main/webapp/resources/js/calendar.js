@@ -7,7 +7,7 @@ $(function() {
 	});
 	$('.hour').disableSelection();
 	
-	$('.event').tooltip();
+	
 	
 	for (var i = 0; i < cs.courseSlots.length; i++) {
 		var event = $('<div/>', {
@@ -29,6 +29,20 @@ $(function() {
 		minHeight: 25,
 		grid: 100
 	});
+	
+	$('.event').dblclick(function() {
+		
+		var nrc = $(this).children().attr('id');
+		var url = "http://localhost:8080/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111";
+		
+		$.get(url, function(data) {
+
+				$('#editCourse').find('.modal-body').html(data);
+				$('#editCourse').modal('show');
+			});
+	});
+
+	$('.event').tooltip();
 });
 
 function findId(cs) {

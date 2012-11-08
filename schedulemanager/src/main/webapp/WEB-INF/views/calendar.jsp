@@ -60,7 +60,7 @@
 	</tr>
 	<tr>
 		<td class="day">Lundi</td>
-		<td class="hours">
+		<td class="hours-column">
 			<div id="mon85" class="hour"></div>
 			<div id="mon90" class="hour"></div>
 			<div id="mon95" class="hour"></div>
@@ -92,7 +92,7 @@
 	</tr>
 	<tr>
 		<td class="day">Mardi</td>
-		<td class="hours">
+		<td class="hours-column">
 			<div id="tue85" class="hour"></div>
 			<div id="tue90" class="hour"></div>
 			<div id="tue95" class="hour"></div>
@@ -124,7 +124,7 @@
 	</tr>
 	<tr>
 		<td class="day">Mercredi</td>
-		<td class="hours">
+		<td class="hours-column">
 			<div id="wed85" class="hour"></div>
 			<div id="wed90" class="hour"></div>
 			<div id="wed95" class="hour"></div>
@@ -156,7 +156,7 @@
 	</tr>
 	<tr>
 		<td class="day">Jeudi</td>
-		<td class="hours">
+		<td class="hours-column">
 			<div id="thu85" class="hour"></div>
 			<div id="thu90" class="hour"></div>
 			<div id="thu95" class="hour"></div>
@@ -188,7 +188,7 @@
 	</tr>
 	<tr>
 		<td class="day">Vendredi</td>
-		<td class="hours">
+		<td class="hours-column">
 			<div id="fri85" class="hour"></div>
 			<div id="fri90" class="hour"></div>
 			<div id="fri95" class="hour"></div>
@@ -219,6 +219,14 @@
 		</td>
 	</tr>
 </table>
+
+	<div id="editCourse" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-body">
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+	  </div>
+	</div>
 </body>
 </html>
 
