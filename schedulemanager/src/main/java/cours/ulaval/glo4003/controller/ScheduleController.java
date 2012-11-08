@@ -21,6 +21,7 @@ import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
+import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
@@ -119,7 +120,11 @@ public class ScheduleController {
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
 		mv.addObject("id", id);
-		mv.addObject("teachers", userRepository.findByRole(Role.ROLE_Enseignant));
+		List<String> teachers = new ArrayList<String>();
+		for (User teacher : userRepository.findByRole(Role.ROLE_Enseignant)) {
+			teachers.add(teacher.getName());
+		}
+		mv.addObject("teachers", teachers);
 
 		return mv;
 	}
@@ -143,7 +148,9 @@ public class ScheduleController {
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			return scheduleById(id);
+			ModelAndView mv = scheduleById(id);
+			mv.addObject("user", userRepository.findByIdul(principal.getName()));
+			return mv;
 		}
 		ModelAndView mv = new ModelAndView("createschedule");
 		try {

@@ -45,6 +45,7 @@ public class ScheduleControllerTest {
 	private final String A_SCHEDULE_ID = "ScheduleId";
 	private final String A_SECTION_NRC = "86758";
 	private final String AN_IDUL = "HABBA";
+	private final String A_USERNAME = "Hello";
 
 	@Mock
 	private CourseRepository mockedCourseRepository;
@@ -67,7 +68,9 @@ public class ScheduleControllerTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		user = new User();
+		user.setName(A_USERNAME);
 		user.addRole(Role.ROLE_Responsable);
+		user.addRole(Role.ROLE_Enseignant);
 
 		Map<String, Section> sections = new HashMap<String, Section>();
 		course = mock(Course.class);
@@ -85,6 +88,7 @@ public class ScheduleControllerTest {
 		when(mockedScheduleRepository.findById(A_SCHEDULE_ID)).thenReturn(schedule);
 		when(mockedScheduleRepository.findAll()).thenReturn(Arrays.asList(schedule));
 		when(mockedUserRepository.findByIdul(AN_IDUL)).thenReturn(user);
+		when(mockedUserRepository.findByRole(Role.ROLE_Enseignant)).thenReturn(Arrays.asList(user));
 	}
 
 	@Test
@@ -131,6 +135,7 @@ public class ScheduleControllerTest {
 		assertEquals(A_YEAR, mv.getModel().get("year"));
 		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
 		assertEquals(A_SCHEDULE_ID, mv.getModel().get("id"));
+		assertTrue(mv.getModel().containsKey("teachers"));
 	}
 
 	@Test
@@ -170,9 +175,10 @@ public class ScheduleControllerTest {
 		Principal principal = mock(Principal.class);
 		when(principal.getName()).thenReturn(AN_IDUL);
 		user = new User();
+		when(mockedUserRepository.findByIdul(AN_IDUL)).thenReturn(user);
 		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model, principal);
 
-		assertEquals("createschedule", mv.getViewName());
+		assertEquals("schedulebyid", mv.getViewName());
 	}
 
 	@Test

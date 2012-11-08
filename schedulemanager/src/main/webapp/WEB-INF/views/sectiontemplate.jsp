@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/schedule/addsection/${id}/${year}/${semester}" var="url" />
 <form action="${url}" method=POST scope="request" commandName="section">
 	<input type="hidden" name="teachMode" value="${param.teachmode}"
@@ -15,7 +15,7 @@
 			<div class="span8 controls">
 				<select class="input-xlarge" name="personInCharge" value="teachers">
 					<c:forEach items="${teachers}" var="teacher">
-						<option>${teacher.name}</option>
+						<option><script type="text/javascript">addOneTeacher("${teacher}");</script>${teacher}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -23,10 +23,10 @@
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Enseignants :</label>
 			<div class="span8 controls">
-				<div class="teachers" id="teacherDropDown" >
-					<select class="input-xlarge"name="teachers"><c:forEach
+				<div class="teachers" id="teacherDropDown">
+					<select class="input-xlarge" name="teachers"><c:forEach
 							items="${teachers}" var="teacher">
-							<option>${teacher.name}</option>
+							<option>${teacher}</option>
 						</c:forEach></select>
 				</div>
 				<a class="btn btn-success" onClick=addTeacher("${param.teachmode}")><i
