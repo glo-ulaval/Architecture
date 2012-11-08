@@ -21,12 +21,16 @@ public class LoginController {
 	UserRepository userRepository;
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	public String menu(ModelMap model, Principal principal, HttpServletRequest request) {
+	public ModelAndView menu(ModelMap model, Principal principal, HttpServletRequest request) {
+
+		ModelAndView mv = new ModelAndView("menu");
 
 		User user = userRepository.findByIdul(principal.getName());
 		request.getSession().setAttribute("user", user);
 
-		return "menu";
+		mv.addObject("confirm", true);
+
+		return mv;
 	}
 
 	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)

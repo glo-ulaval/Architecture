@@ -9,7 +9,14 @@
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="/schedulemanager">Accueil</a></li>
+					   <c:choose>
+					   <c:when test="${not empty user.idul}">
+					   <li><a href="<c:url value="/logout" />">Accueil</a></li>
+					   </c:when>
+					   <c:otherwise>
+            <li><a href="/schedulemanager">Accueil</a></li>
+					   </c:otherwise>
+					   </c:choose>
 						<c:if test="${not empty user.idul}">
 						  <c:url var="menu" value="/menu"></c:url>
 							<li><a href="${menu}">Menu</a></li>

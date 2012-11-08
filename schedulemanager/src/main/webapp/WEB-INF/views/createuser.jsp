@@ -42,7 +42,7 @@
 					</tr>
 					<tr>
 						<td class="centered"><b>Mot de passe : &nbsp;</b></td>
-						<td><input class="textRight" type="text" name="password"
+						<td><input class="textRight" type="password" name="password"
 							scope="request"></br></td>
 					</tr>
 					<tr>

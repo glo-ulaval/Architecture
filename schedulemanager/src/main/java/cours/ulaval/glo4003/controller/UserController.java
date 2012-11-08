@@ -1,7 +1,8 @@
 package cours.ulaval.glo4003.controller;
 
+import java.security.Principal;
+
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,7 +29,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
-	public ModelAndView createUser(@ModelAttribute("user") UserModel model) {
+	public ModelAndView createUser(@ModelAttribute("user") UserModel model, Principal principal) {
 		ModelAndView mv = new ModelAndView("menu");
 
 		User userToCreate = model.convertToUser();
@@ -38,6 +39,9 @@ public class UserController {
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}
+
+		mv.addObject("user", userRepository.findByIdul(principal.getName()));
+		mv.addObject("confirm", false);
 
 		return mv;
 	}
@@ -54,20 +58,21 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/profile/{idul}", method = RequestMethod.POST)
-	public ModelAndView saveProfile(@PathVariable String idul, @ModelAttribute("user") UserModel model, HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("home");
+	public ModelAndView saveProfile(@PathVariable String idul, @ModelAttribute("user") UserModel model, Principal principal) {
+		ModelAndView mv = new ModelAndView("menu");
 
 		User user = userRepository.findByIdul(idul);
 		user.setName(model.getName());
 		user.setPassword(model.getPassword());
 		try {
 			userRepository.store(user);
+			mv.addObject("error", ControllerMessages.SUCCESS);
 		} catch (Exception e) {
-			e.printStackTrace();
+			mv.addObject("error", e.getMessage());
 		}
 
-		request.getSession().invalidate();
-		mv.addObject("logout", "Veuillez vous reconnecter");
+		mv.addObject("user", userRepository.findByIdul(principal.getName()));
+		mv.addObject("confirm", false);
 
 		return mv;
 	}

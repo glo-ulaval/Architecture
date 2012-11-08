@@ -54,8 +54,9 @@ public class LoginControllerTest {
 	public void canGetMenu() {
 		when(principal.getName()).thenReturn(UN_IDUL);
 		when(repository.findByIdul(principal.getName())).thenReturn(user);
+		ModelAndView mv = controller.menu(model, principal, request);
 
-		assertEquals("menu", controller.menu(model, principal, request));
+		assertEquals("menu", mv.getViewName());
 
 		verify(session).setAttribute("user", user);
 	}
