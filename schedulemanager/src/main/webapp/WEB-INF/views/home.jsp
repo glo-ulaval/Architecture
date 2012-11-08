@@ -26,7 +26,7 @@
 		</c:if>
 		<div class="hero-unit">
 			<h1></h1>
-			<img src="resources/img/logo.png" alt="" />
+			<img src="<c:url value="/resources/img/logo.png" />" alt="" />
 			<p>Bienvenue sur l'application ScheduleManager développée dans le
 				cadre du cours "GLO-4003 - Architecture Logicielle".</p>
 		</div>

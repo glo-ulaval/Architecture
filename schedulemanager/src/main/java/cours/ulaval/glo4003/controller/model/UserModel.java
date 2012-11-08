@@ -13,6 +13,19 @@ public class UserModel {
 	private String password;
 	private List<String> roles = new ArrayList<String>();
 
+	public UserModel() {
+
+	}
+
+	public UserModel(User user) {
+		idul = user.getIdul();
+		name = user.getName();
+		password = user.getPassword();
+		for (Role role : user.getRoles()) {
+			roles.add(role.toString().replace("ROLE_", ""));
+		}
+	}
+
 	public User convertToUser() {
 		User user = new User();
 		user.setIdul(idul);

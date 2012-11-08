@@ -17,7 +17,7 @@
 						<li><a href="#">À propos</a></li>
 						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
 					</ul>
-					<c:url var="profileUrl" value="/profile"></c:url>
+					<c:url var="profileUrl" value="/profile/${user.idul}"></c:url>
 					<c:if test="${not empty user.idul}">
             <div class="floatRight">
               <a class="btn btn-info profil" href="${profileUrl}"><b>Modifier mon profil</b></a>

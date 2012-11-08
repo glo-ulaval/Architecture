@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
+import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
@@ -29,9 +31,11 @@ import cours.ulaval.glo4003.domain.TeachMode;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
+import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
+import cours.ulaval.glo4003.domain.repository.UserRepository;
 
 public class ScheduleControllerTest {
 
@@ -40,6 +44,7 @@ public class ScheduleControllerTest {
 	private final Semester A_SEMESTER = Semester.Automne;
 	private final String A_SCHEDULE_ID = "ScheduleId";
 	private final String A_SECTION_NRC = "86758";
+	private final String AN_IDUL = "HABBA";
 
 	@Mock
 	private CourseRepository mockedCourseRepository;
@@ -47,6 +52,8 @@ public class ScheduleControllerTest {
 	private OfferingRepository mockedOfferingRepository;
 	@Mock
 	private ScheduleRepository mockedScheduleRepository;
+	@Mock
+	private UserRepository mockedUserRepository;
 
 	@InjectMocks
 	private ScheduleController controller;
@@ -54,10 +61,13 @@ public class ScheduleControllerTest {
 	private Course course;
 	private List<Course> courses;
 	private Schedule schedule;
+	private User user;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		user = new User();
+		user.addRole(Role.ROLE_Responsable);
 
 		Map<String, Section> sections = new HashMap<String, Section>();
 		course = mock(Course.class);
@@ -74,6 +84,7 @@ public class ScheduleControllerTest {
 		when(mockedCourseRepository.findByAcronym(AN_ACRONYM)).thenReturn(course);
 		when(mockedScheduleRepository.findById(A_SCHEDULE_ID)).thenReturn(schedule);
 		when(mockedScheduleRepository.findAll()).thenReturn(Arrays.asList(schedule));
+		when(mockedUserRepository.findByIdul(AN_IDUL)).thenReturn(user);
 	}
 
 	@Test
@@ -89,8 +100,7 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleByYearReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void scheduleByYearReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID);
 
 		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
@@ -98,16 +108,14 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void addScheduleReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void addScheduleReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.addSchedule();
 
 		assertEquals(mockedOfferingRepository.findYears(), mv.getModel().get("years"));
 	}
 
 	@Test
-	public void addScheduleWithYearReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void addScheduleWithYearReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.addSchedule(A_YEAR, A_SEMESTER);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
@@ -141,7 +149,9 @@ public class ScheduleControllerTest {
 	@Test
 	public void canEditASection() throws Exception {
 		SectionModel model = mock(SectionModel.class);
-		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model);
+		Principal principal = mock(Principal.class);
+		when(principal.getName()).thenReturn(AN_IDUL);
+		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model, principal);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
 		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
@@ -155,8 +165,18 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canPostASection()
-			throws Exception {
+	public void canEditASectionWithAUserThatIsNotAManager() throws Exception {
+		SectionModel model = mock(SectionModel.class);
+		Principal principal = mock(Principal.class);
+		when(principal.getName()).thenReturn(AN_IDUL);
+		user = new User();
+		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model, principal);
+
+		assertEquals("createschedule", mv.getViewName());
+	}
+
+	@Test
+	public void canPostASection() throws Exception {
 		SectionModel model = mock(SectionModel.class);
 		Section section = createSection();
 		when(model.convertToSection()).thenReturn(section);

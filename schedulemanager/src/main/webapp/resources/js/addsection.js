@@ -49,7 +49,7 @@ function addHours(teachmode, hours) {
 function addTeacher(teachmode) {
 	var newDiv = document.createElement('div');
 	newDiv.setAttribute('class', 'divteacher');
-	newDiv.innerHTML = "<select class=\"input-xlarge\" name=\"teachers\" value=\"${selected}\"><option>Thierry Eude</option><option>Nadia Tawbi</option><option>Denis Laurendeau</option><option>C\'est ça la</option><option>Marc-Philippe Parent</option></select><a class=\"btn btn-danger removeTeacher\" onClick=removeTeacher(\"" + teachmode + "\")><i class=\"icon-minus-sign icon-white\"></i></a>";
+	newDiv.innerHTML = "<select class=\"input-xlarge\" name=\"teachers\"></select><a class=\"btn btn-danger removeTeacher\" onClick=removeTeacher(\"" + teachmode + "\")><i class=\"icon-minus-sign icon-white\"></i></a>";
 	
 	var pane = document.getElementById(teachmode);
 	var teacher = pane.getElementsByClassName("teachers")[0];
