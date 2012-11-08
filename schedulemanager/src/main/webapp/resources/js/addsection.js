@@ -49,7 +49,7 @@ function addHours(teachmode, hours) {
 function addTeacher(teachmode) {
 	var newDiv = document.createElement('div');
 	newDiv.setAttribute('class', 'divteacher');
-	$(".teachersLOLOL").first().clone().appendTo(newDiv);
+	$(".teachersDropdown").first().clone().appendTo(newDiv);
 	var a = $('<a/>', {
 		class : 'btn btn-danger removeTeacher',
 		onClick : 'removeTeacher("' + teachmode + '")'

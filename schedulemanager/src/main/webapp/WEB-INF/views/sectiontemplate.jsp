@@ -23,8 +23,8 @@
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Enseignants :</label>
 			<div class="span8 controls">
-				<div class="teachers" id="teacherDropDown">
-					<select class="input-xlarge teachersLOLOL" name="teachers"><c:forEach
+				<div class="teachers">
+					<select class="input-xlarge teachersDropdown" name="teachers"><c:forEach
 							items="${teachers}" var="teacher">
 							<option>${teacher}</option>
 						</c:forEach></select>
