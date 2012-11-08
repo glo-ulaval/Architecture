@@ -1,10 +1,15 @@
 package cours.ulaval.glo4003.persistence;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import cours.ulaval.glo4003.domain.*;
-import cours.ulaval.glo4003.domain.repository.*;
-import cours.ulaval.glo4003.utils.*;
+import cours.ulaval.glo4003.domain.Role;
+import cours.ulaval.glo4003.domain.User;
+import cours.ulaval.glo4003.domain.repository.UserRepository;
+import cours.ulaval.glo4003.utils.ConfigManager;
 
 public class XMLUserRepository implements UserRepository {
 
@@ -48,6 +53,7 @@ public class XMLUserRepository implements UserRepository {
 		}
 	}
 
+	@Override
 	public List<User> findByRole(Role role) {
 
 		List<User> usersWithRole = new ArrayList<User>();

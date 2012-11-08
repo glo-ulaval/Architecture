@@ -9,7 +9,14 @@
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="/schedulemanager">Accueil</a></li>
+					   <c:choose>
+					   <c:when test="${not empty user.idul}">
+					   <li><a href="<c:url value="/logout" />">Accueil</a></li>
+					   </c:when>
+					   <c:otherwise>
+            <li><a href="/schedulemanager">Accueil</a></li>
+					   </c:otherwise>
+					   </c:choose>
 						<c:if test="${not empty user.idul}">
 						  <c:url var="menu" value="/menu"></c:url>
 							<li><a href="${menu}">Menu</a></li>
@@ -17,7 +24,7 @@
 						<li><a href="#">À propos</a></li>
 						<li><a href="https://github.com/glo-ulaval/Architecture">Source</a></li>
 					</ul>
-					<c:url var="profileUrl" value="/profile"></c:url>
+					<c:url var="profileUrl" value="/profile/${user.idul}"></c:url>
 					<c:if test="${not empty user.idul}">
             <div class="floatRight">
               <a class="btn btn-info profil" href="${profileUrl}"><b>Modifier mon profil</b></a>

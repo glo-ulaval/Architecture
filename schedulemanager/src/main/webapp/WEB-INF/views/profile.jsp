@@ -22,47 +22,35 @@
 </head>
 <body>
 	<c:import url="header.jsp" />
+	<c:url value="/profile/${user.idul}" var="url" />
 	<form action="${url}" method=POST scope="request" commandName="user">
 		<div class="container">
 			<div class="row-fluid">
 				<div class="hero-unit">
-					<h1>Création d'un nouvel usager</h1>
+					<h1>Édition du profile</h1>
+					<h3>&nbsp;&nbsp;&nbsp; - ${user.name}</h3>
 				</div>
-				<c:url value="/createuser" var="url" />
-				<table class="table table-striped">
-					<tr>
-						<td class="centered"><b>Nom : &nbsp;</b></td>
-						<td><input class="textRight" type="text" name="name"
-							scope="request"></br></td>
-					</tr>
-					<tr>
-						<td class="centered"><b>IDUL : &nbsp;</b></td>
-						<td><input class="textRight" type="text" name="idul"
-							scope="request"></br></td>
-					</tr>
-					<tr>
-						<td class="centered"><b>Mot de passe : &nbsp;</b></td>
-						<td><input class="textRight" type="password" name="password"
-							scope="request"></br></td>
-					</tr>
-					<tr>
-						<td class="centered"><b>Permissions : &nbsp;</b></td>
-						<td id="permissions"><span class="per"></span><select
-							class="input-large" name="roles">
-								<option>Administrateur</option>
-								<option>Directeur</option>
-								<option>Enseignant</option>
-								<option>Responsable</option>
-								<option>Usager</option>
-						</select> <a class="btn btn-success addRole" onClick=addRole()><i
-								class="icon-plus-sign icon-white"></i></a></span></td>
-					</tr>
-				</table>
+        <table class="table table-striped">
+          <tr>
+            <td class="centered"><b>IDUL : &nbsp;</b></td>
+            <td><input class="textRight" type="text" name="idul"
+              scope="request" value="${user.idul}" disabled></br></td>
+          </tr>
+          <tr>
+            <td class="centered"><b>Nom : &nbsp;</b></td>
+            <td><input class="textRight" type="text" name="name"
+              scope="request" value="${user.name}"></br></td>
+          </tr>
+          <tr>
+            <td class="centered"><b>Mot de passe : &nbsp;</b></td>
+            <td><input class="textRight" type="password" name="password"
+              scope="request" value="${user.password}"></br></td>
+          </tr>
+        </table>
 			</div>
     <input type="submit" class="btn btn-success pull-right"
-    value="Créer">
+    value="Sauvegarder">
 		</div>
-	</form>
 	<c:import url="footer.jsp" />
 </body>
 </html>

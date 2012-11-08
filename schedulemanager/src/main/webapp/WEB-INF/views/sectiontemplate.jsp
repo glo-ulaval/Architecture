@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/schedule/addsection/${id}/${year}/${semester}" var="url" />
 <form action="${url}" method=POST scope="request" commandName="section">
 	<input type="hidden" name="teachMode" value="${param.teachmode}"
@@ -13,13 +13,10 @@
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Titulaire :</label>
 			<div class="span8 controls">
-				<select class="input-xlarge" name="personInCharge"
-					value="${selected}">
-					<option>Thierry Eude</option>
-					<option>Nadia Tawbi</option>
-					<option>Denis Laurendeau</option>
-					<option>C'est ça la</option>
-					<option>Marc-Philippe Parent</option>
+				<select class="input-xlarge" name="personInCharge" value="teachers">
+					<c:forEach items="${teachers}" var="teacher">
+						<option>${teacher}</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
@@ -27,12 +24,10 @@
 			<label class="span3 control-label">Enseignants :</label>
 			<div class="span8 controls">
 				<div class="teachers">
-					<select class="input-xlarge" name="teachers" value="${selected}"><option>Thierry
-							Eude</option>
-						<option>Nadia Tawbi</option>
-						<option>Denis Laurendeau</option>
-						<option>C\'est ça la</option>
-						<option>Marc-Philippe Parent</option></select>
+					<select class="input-xlarge teachersDropdown" name="teachers"><c:forEach
+							items="${teachers}" var="teacher">
+							<option>${teacher}</option>
+						</c:forEach></select>
 				</div>
 				<a class="btn btn-success" onClick=addTeacher("${param.teachmode}")><i
 					class="icon-plus-sign icon-white"></i></a>
@@ -46,17 +41,20 @@
 						<div id="hour_group">
 							<label class="control-label" for="hours_class">En classe</label>
 							<input type="text" placeholder="H"
-								class="input-small hours_class" name="hoursInClass" value="${course.timeDedicated.courseHours}">
+								class="input-small hours_class" name="hoursInClass"
+								value="${course.timeDedicated.courseHours}">
 						</div>
 						<div id="hour_group">
 							<label class="control-label" for="hours_labo">Labo/Travail
 								dirigé</label> <input type="text" placeholder="H"
-								class="input-small hours_labo" name="hoursInLab" value="${course.timeDedicated.labHours}">
+								class="input-small hours_labo" name="hoursInLab"
+								value="${course.timeDedicated.labHours}">
 						</div>
 						<div id="hour_group">
 							<label class="control-label" for="hours_home">Travail
 								personnel</label> <input type="text" placeholder="H"
-								class="input-small hours_home" name="hoursAtHome" value="${course.timeDedicated.otherHours}">
+								class="input-small hours_home" name="hoursAtHome"
+								value="${course.timeDedicated.otherHours}">
 						</div>
 					</div>
 				</div>

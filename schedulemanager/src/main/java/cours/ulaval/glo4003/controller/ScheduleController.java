@@ -1,5 +1,6 @@
 package cours.ulaval.glo4003.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
+import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
+import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
+import cours.ulaval.glo4003.domain.repository.UserRepository;
 
 @Controller
 @RequestMapping(value = "/schedule")
@@ -35,6 +39,9 @@ public class ScheduleController {
 
 	@Inject
 	private ScheduleRepository scheduleRepository;
+
+	@Inject
+	private UserRepository userRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
@@ -51,20 +58,17 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView scheduleById(@PathVariable String id)
-			throws Exception {
+	public ModelAndView scheduleById(@PathVariable String id) throws Exception {
 		ModelAndView mv = new ModelAndView("schedulebyid");
 
 		mv.addObject("schedule", new ScheduleModel(scheduleRepository.findById(id)));
-		mv.addObject("sections", new SortedSlotsModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections()
-				.values())));
+		mv.addObject("sections", new SortedSlotsModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections().values())));
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView addSchedule()
-			throws Exception {
+	public ModelAndView addSchedule() throws Exception {
 		ModelAndView mv = new ModelAndView("addschedule");
 		mv.addObject("years", offeringRepository.findYears());
 
@@ -72,8 +76,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.GET)
-	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester)
-			throws Exception {
+	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester) throws Exception {
 		Schedule schedule = new Schedule(scheduleRepository.getId(year, semester));
 		schedule.setYear(year);
 		schedule.setSemester(semester);
@@ -91,8 +94,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.POST)
 	public ModelAndView postSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@ModelAttribute("section") SectionModel section)
-			throws Exception {
+			@ModelAttribute("section") SectionModel section) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
 		scheduleRepository.store(schedule);
@@ -118,6 +120,11 @@ public class ScheduleController {
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
 		mv.addObject("id", id);
+		List<String> teachers = new ArrayList<String>();
+		for (User teacher : userRepository.findByRole(Role.ROLE_Enseignant)) {
+			teachers.add(teacher.getName());
+		}
+		mv.addObject("teachers", teachers);
 
 		return mv;
 	}
@@ -139,7 +146,12 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section) {
+			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
+		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
+			ModelAndView mv = scheduleById(id);
+			mv.addObject("user", userRepository.findByIdul(principal.getName()));
+			return mv;
+		}
 		ModelAndView mv = new ModelAndView("createschedule");
 		try {
 			Schedule schedule = scheduleRepository.findById(id);
@@ -180,8 +192,8 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/deletesection/{scheduleId}/{year}/{semester}/{sectionNrc}", method = RequestMethod.GET)
-	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc,
-			@PathVariable String year, @PathVariable Semester semester) {
+	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc, @PathVariable String year,
+			@PathVariable Semester semester) {
 		ModelAndView mv = new ModelAndView("createschedule");
 
 		try {
