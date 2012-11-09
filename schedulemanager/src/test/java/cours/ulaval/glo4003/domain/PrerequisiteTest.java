@@ -8,12 +8,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.Prerequisite;
-
 public class PrerequisiteTest {
 
+	private static final String AN_ACRONYM = "anAcronym";
 	private Prerequisite prerequisite;
-	private List<String> acronyms = Arrays.asList("anAcronym");
+	private List<String> acronyms = Arrays.asList(AN_ACRONYM);
 
 	@Before
 	public void setUp() {
@@ -44,5 +43,19 @@ public class PrerequisiteTest {
 		prerequisite.setIsConcomitant(true);
 
 		assertTrue(prerequisite.getIsConcomitant());
+	}
+
+	@Test
+	public void containsAcronymShouldReturnTrueIfAcronymIsAPrerequisite() {
+		prerequisite.setAcronyms(acronyms);
+
+		assertTrue(prerequisite.containsAcronym(AN_ACRONYM));
+	}
+
+	@Test
+	public void containsAcronymShouldReturnFalseIfAcronymIsAPrerequisite() {
+		prerequisite.setAcronyms(acronyms);
+
+		assertFalse(prerequisite.containsAcronym("not_a_prerequisite"));
 	}
 }

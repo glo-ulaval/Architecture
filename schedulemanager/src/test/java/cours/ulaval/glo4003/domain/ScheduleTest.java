@@ -6,7 +6,7 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.conflict.ConcomittingCoursesConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
 
 public class ScheduleTest {
 

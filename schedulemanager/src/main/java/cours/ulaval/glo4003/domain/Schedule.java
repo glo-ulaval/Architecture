@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cours.ulaval.glo4003.domain.conflict.Conflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
 public class Schedule {
 
