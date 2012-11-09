@@ -83,29 +83,31 @@ public class UserController {
 
 	@RequestMapping(value = "/edituser", method = RequestMethod.GET)
 	public ModelAndView getUsers() {
-		ModelAndView mv = new ModelAndView("edituser");
+		ModelAndView mv = new ModelAndView("edituserchoice");
 
-		buildDataForView(mv);
+		buildUserModel(mv);
 
 		return mv;
 	}
 
-	private void buildDataForView(ModelAndView mv) {
-		List<User> users = new ArrayList<User>(userRepository.findAll());
-
-		List<UserModel> usersModel = new ArrayList<UserModel>();
-
-		for (User user : users) {
-			usersModel.add(new UserModel(user));
-		}
-
-		mv.addObject("users", usersModel);
-	}
-
-	@RequestMapping(value = "/edituser", method = RequestMethod.POST)
+	@RequestMapping(value = "/getUserRoles", method = RequestMethod.POST)
 	public ModelAndView editUser(String userToChange, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("edituserroles");
 
 		User user = userRepository.findByIdul(userToChange);
+		UserModel userModel = new UserModel(user);
+
+		mv.addObject("user", userToChange);
+		mv.addObject("roles", userModel.getRoles());
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/changeroles", method = RequestMethod.POST)
+	public ModelAndView changeRoles(String userIdul, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("edituserchoice");
+
+		User user = userRepository.findByIdul(userIdul);
 		List<Role> roles = new ArrayList<Role>();
 
 		if (request.getParameter("roleAdmin") != null) {
@@ -125,10 +127,30 @@ public class UserController {
 		}
 
 		user.setRoles(roles);
-		userRepository.store(user);
 
-		ModelAndView mv = new ModelAndView("edituser");
-		buildDataForView(mv);
+		try {
+			userRepository.store(user);
+			mv.addObject("error", ControllerMessages.SUCCESS);
+		} catch (Exception e) {
+			mv.addObject("error", e.getMessage());
+		}
+		buildUserModel(mv);
 		return mv;
+	}
+
+	public void buildUserModel(ModelAndView mv) {
+		List<User> users = new ArrayList<User>(userRepository.findAll());
+		List<UserModel> usersModel = new ArrayList<UserModel>();
+
+		for (User user : users) {
+			UserModel model = new UserModel();
+			model.setIdul(user.getIdul());
+			model.setName(user.getName());
+
+			usersModel.add(model);
+		}
+
+		mv.addObject("users", usersModel);
+
 	}
 }

@@ -5,3 +5,7 @@ table td {
 .addRole {
 	margin-top: -10px;
 }
+
+form{
+	line-height: 28px;	
+}
