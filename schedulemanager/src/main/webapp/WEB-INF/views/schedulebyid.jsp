@@ -25,6 +25,10 @@
 		<b>* Notez que les sections indiquées en <span class = "yellow">jaune</span> sont des sections de laboratoire.</b>
     <br/>
     <br/>
+		<div class="btn-group">
+		  <a href="#" type="button" class="btn active">Liste</a>
+		  <a href="/schedulemanager/calendar/${schedule.id}" type="button" class="btn">Calendrier</a>
+		</div>
 		<div class="schedule_details">
 		<c:url var="editsection" value="/schedule/editsection/${schedule.id}/${schedule.year}/${schedule.semester}"></c:url>
 		<c:url var="deletesection" value="/schedule/deletesection/${schedule.id}/${schedule.year}/${schedule.semester}"></c:url>

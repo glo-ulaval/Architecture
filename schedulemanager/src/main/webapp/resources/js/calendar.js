@@ -1,4 +1,7 @@
 $(function() {
+	
+	console.log(sections);
+	
 	$('.hour').sortable({
 		connectWith : '.hour',
 		start: function(e, ui){
@@ -33,7 +36,8 @@ $(function() {
 	$('.event').dblclick(function() {
 		
 		var nrc = $(this).children().attr('id');
-		var url = "http://localhost:8080/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111";
+		var currentUrl = document.URL;
+		var url = currentUrl.replace("calendar","schedule/editsection") + "/2011-2012/Automne/" + nrc;
 		
 		$.get(url, function(data) {
 
@@ -43,6 +47,7 @@ $(function() {
 	});
 
 	$('.event').tooltip();
+	
 });
 
 function findId(cs) {

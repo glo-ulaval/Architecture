@@ -119,7 +119,6 @@ public class SectionModel {
 	}
 
 	private TimeSlot convertTimeSlot(String day, String start, String end) {
-		TimeSlot timeSlot = new TimeSlot();
 
 		String[] hoursMinStart = start.split(":");
 		Time startTime = new Time(Integer.valueOf(hoursMinStart[0]), Integer.valueOf(hoursMinStart[1]));
@@ -127,11 +126,7 @@ public class SectionModel {
 		String[] hoursMinEnd = end.split(":");
 		Time endTime = new Time(Integer.valueOf(hoursMinEnd[0]), Integer.valueOf(hoursMinEnd[1]));
 
-		timeSlot.setStartTime(startTime);
-		timeSlot.setEndTime(endTime);
-		timeSlot.setDayOfWeek(daysAssociations.get(day));
-
-		return timeSlot;
+		return new TimeSlot(startTime, endTime, daysAssociations.get(day));
 	}
 
 	public String getAcronym() {

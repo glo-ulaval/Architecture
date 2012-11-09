@@ -15,6 +15,13 @@ public class TimeSlot {
 		this.endTime = new Time();
 	}
 
+	public TimeSlot(Time startTime, Time endTime, DayOfWeek dayOfWeek) {
+		this.startTime = startTime;
+		this.duration = endTime.getHour() - startTime.getHour();
+		this.dayOfWeek = dayOfWeek;
+		calculateEndTime();
+	}
+
 	public TimeSlot(Time startTime, Integer duration, DayOfWeek dayOfWeek) {
 		this.startTime = startTime;
 		this.duration = duration;
