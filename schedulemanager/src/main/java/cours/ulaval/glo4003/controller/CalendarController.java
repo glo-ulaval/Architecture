@@ -37,8 +37,6 @@ public class CalendarController {
 			e.printStackTrace();
 		}
 
-		System.out.println(JSON);
-
 		mv.addObject("sections", JSON);
 		return mv;
 	}

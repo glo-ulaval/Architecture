@@ -9,17 +9,17 @@ $(function() {
 	
 	
 	
-	for (var i = 0; i < cs.courseSlots.length; i++) {
+	for (var i = 0; i < sections.courseSlots.length; i++) {
 		var event = $('<div/>', {
 		    class : 'event',
-		    width : setDuration(cs.courseSlots[i]),
-		}).appendTo(findId(cs.courseSlots[i]));
+		    width : setDuration(sections.courseSlots[i]),
+		}).appendTo(findId(sections.courseSlots[i]));
 		
 		$('<div/>', {
-		    id: cs.courseSlots[i].nrc,
-		    title: cs.courseSlots[i].acronym,
+		    id: sections.courseSlots[i].nrc,
+		    title: sections.courseSlots[i].acronym,
 		    class : 'event-name',
-		    text : cs.courseSlots[i].acronym,
+		    text : sections.courseSlots[i].acronym,
 		}).appendTo(event);
 	}
 
