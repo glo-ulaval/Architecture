@@ -3,10 +3,13 @@ package cours.ulaval.glo4003.domain;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
 public class ScheduleTest {
 
@@ -68,5 +71,12 @@ public class ScheduleTest {
 		schedule.calculateScore();
 
 		assertEquals(A_SCORE, schedule.getScore());
+	}
+
+	@Test
+	public void canAddAllConflicts() {
+		schedule.addAll(Arrays.asList((Conflict) conflict, (Conflict) conflict));
+
+		assertEquals(2, schedule.getConflicts().size());
 	}
 }

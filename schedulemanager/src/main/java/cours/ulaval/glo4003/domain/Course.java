@@ -34,6 +34,15 @@ public class Course {
 		this.timeDedicated = timeDedicated;
 	}
 
+	public boolean isConcomitting(Course course) {
+		for (Prerequisite prerequisite : prerequisites) {
+			if (prerequisite.containsAcronym(course.getAcronym()) && prerequisite.getIsConcomitant()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public String getAcronym() {
 		return acronym;
 	}
