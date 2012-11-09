@@ -42,6 +42,38 @@ public class CourseTest {
 	}
 
 	@Test
+	public void canTellIfACourseIsConcomitting() {
+		String anAcronym = "acronym";
+
+		Prerequisite prerequisite = mock(Prerequisite.class);
+		when(prerequisite.containsAcronym(anAcronym)).thenReturn(true);
+		when(prerequisite.getIsConcomitant()).thenReturn(true);
+
+		Course otherCourse = new Course();
+		otherCourse.setAcronym(anAcronym);
+
+		course.setPrerequisites(Arrays.asList(prerequisite));
+
+		assertTrue(course.isConcomitting(otherCourse));
+	}
+
+	@Test
+	public void canTellIfACourseIsNotConcomitting() {
+		String anAcronym = "acronym";
+
+		Prerequisite prerequisite = mock(Prerequisite.class);
+		when(prerequisite.containsAcronym(anAcronym)).thenReturn(true);
+		when(prerequisite.getIsConcomitant()).thenReturn(false);
+
+		Course otherCourse = new Course();
+		otherCourse.setAcronym(anAcronym);
+
+		course.setPrerequisites(Arrays.asList(prerequisite));
+
+		assertFalse(course.isConcomitting(otherCourse));
+	}
+
+	@Test
 	public void canGetAcronym() {
 		String acronym = "An acronym";
 		course.setAcronym(acronym);
@@ -102,4 +134,5 @@ public class CourseTest {
 
 		assertEquals(timeDedicated, course.getTimeDedicated());
 	}
+
 }

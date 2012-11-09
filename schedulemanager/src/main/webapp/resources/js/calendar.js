@@ -1,4 +1,7 @@
 $(function() {
+	
+	console.log(sections);
+	
 	$('.hour').sortable({
 		connectWith : '.hour',
 		start: function(e, ui){
@@ -9,17 +12,17 @@ $(function() {
 	
 	
 	
-	for (var i = 0; i < cs.courseSlots.length; i++) {
+	for (var i = 0; i < sections.courseSlots.length; i++) {
 		var event = $('<div/>', {
 		    class : 'event',
-		    width : setDuration(cs.courseSlots[i]),
-		}).appendTo(findId(cs.courseSlots[i]));
+		    width : setDuration(sections.courseSlots[i]),
+		}).appendTo(findId(sections.courseSlots[i]));
 		
 		$('<div/>', {
-		    id: cs.courseSlots[i].nrc,
-		    title: cs.courseSlots[i].acronym,
+		    id: sections.courseSlots[i].nrc,
+		    title: sections.courseSlots[i].acronym,
 		    class : 'event-name',
-		    text : cs.courseSlots[i].acronym,
+		    text : sections.courseSlots[i].acronym,
 		}).appendTo(event);
 	}
 
@@ -33,7 +36,8 @@ $(function() {
 	$('.event').dblclick(function() {
 		
 		var nrc = $(this).children().attr('id');
-		var url = "http://localhost:8080/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111";
+		var currentUrl = document.URL;
+		var url = currentUrl.replace("calendar","schedule/editsection") + "/2011-2012/Automne/" + nrc;
 		
 		$.get(url, function(data) {
 
@@ -43,6 +47,7 @@ $(function() {
 	});
 
 	$('.event').tooltip();
+	
 });
 
 function findId(cs) {

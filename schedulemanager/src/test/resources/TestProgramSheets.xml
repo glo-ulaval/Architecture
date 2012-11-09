@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<programsheets>
+    <programSheetGLO>
+        <courses>
+            <entry>
+                <key>GLO-2000</key>
+                <value>3</value>
+            </entry>
+        </courses>
+    </programSheetGLO>
+    <programSheetIFT>
+        <courses>
+            <entry>
+                <key>IFT-1001</key>
+                <value>1</value>
+            </entry>
+        </courses>
+    </programSheetIFT>
+</programsheets>

@@ -36,6 +36,10 @@ public class Schedule {
 		this.conflicts.add(conflict);
 	}
 
+	public void addAll(List<Conflict> conflicts) {
+		this.conflicts.addAll(conflicts);
+	}
+
 	public void delete(String sectionNrc) {
 		sections.remove(sectionNrc);
 	}

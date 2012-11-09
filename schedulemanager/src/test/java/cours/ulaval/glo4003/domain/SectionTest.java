@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
@@ -12,29 +13,35 @@ import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 public class SectionTest {
 	private static final int A_HOUR = 10;
 	private static final int A_MINUTE = 30;
-	private static final int A_DURATION = 3;
 
-	@Test
-	public void canInstantiateASection() {
-		Section section = new Section();
+	private String nrc;
+	private String group;
+	private String personInCharge;
+	private List<String> teachers;
+	private TimeDedicated timeDedicated;
+	private TeachMode teachMode;
+	private List<TimeSlot> courseTimeSlot;
+	private TimeSlot labTimeSlot;
+	private String courseAcronym;
+	private Section section;
 
-		assertNotNull(section);
+	@Before
+	public void setUp() {
+		nrc = "87134";
+		group = "A";
+		personInCharge = "a responsable person";
+		teachers = Arrays.asList("teacher1", "teacher2");
+		timeDedicated = new TimeDedicated();
+		teachMode = TeachMode.InCourse;
+		courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
+		labTimeSlot = new TimeSlot();
+		courseAcronym = "GLO_4002";
+		section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot,
+				labTimeSlot);
 	}
 
 	@Test
 	public void canInstantiateSectionWithParameters() {
-		String nrc = "87134";
-		String group = "A";
-		String personInCharge = "a responsable person";
-		List<String> teachers = Arrays.asList("teacher1", "teacher2");
-		TimeDedicated timeDedicated = new TimeDedicated();
-		TeachMode teachMode = TeachMode.InCourse;
-		List<TimeSlot> courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
-		TimeSlot labTimeSlot = new TimeSlot();
-		String courseAcronym = "GLO_4002";
-
-		Section section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot, labTimeSlot);
-
 		assertEquals(nrc, section.getNrc());
 		assertEquals(group, section.getGroup());
 		assertEquals(personInCharge, section.getPersonInCharge());
@@ -44,6 +51,15 @@ public class SectionTest {
 		assertEquals(courseTimeSlot, section.getCourseTimeSlots());
 		assertEquals(labTimeSlot, section.getLabTimeSlot());
 		assertEquals(courseAcronym, section.getCourseAcronym());
+	}
+
+	@Test
+	public void canGetCourseAndLAbTimeSlots() {
+
+		List<TimeSlot> timeSlots = section.getCoursesAndLabTimeSlots();
+
+		assertEquals(2, timeSlots.size());
+
 	}
 
 	private Time generateTimeSlotStartTime() {

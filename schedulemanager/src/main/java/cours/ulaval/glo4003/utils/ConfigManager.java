@@ -1,7 +1,7 @@
 package cours.ulaval.glo4003.utils;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.Properties;
 
 public final class ConfigManager {
 
@@ -45,6 +45,10 @@ public final class ConfigManager {
 
 	public String getAvailabilitiesFilePath() {
 		return properties.getProperty("AvailabilitiesFilePath");
+	}
+
+	public String getProgramSheetFilePath() {
+		return properties.getProperty("ProgramSheetFilePath");
 	}
 
 	// Use for tests
