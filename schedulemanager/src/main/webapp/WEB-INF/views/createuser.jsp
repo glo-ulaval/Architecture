@@ -28,6 +28,8 @@
 				<div class="hero-unit">
 					<h1>Création d'un nouvel usager</h1>
 				</div>
+				* Notez que le mot de passe par défaut est "pass". L'utilisateur devra changer son mot de passe.<br/>
+				<br>
 				<c:url value="/createuser" var="url" />
 				<table class="table table-striped">
 					<tr>
@@ -38,11 +40,6 @@
 					<tr>
 						<td class="centered"><b>IDUL : &nbsp;</b></td>
 						<td><input class="textRight" type="text" name="idul"
-							scope="request"></br></td>
-					</tr>
-					<tr>
-						<td class="centered"><b>Mot de passe : &nbsp;</b></td>
-						<td><input class="textRight" type="password" name="password"
 							scope="request"></br></td>
 					</tr>
 					<tr>

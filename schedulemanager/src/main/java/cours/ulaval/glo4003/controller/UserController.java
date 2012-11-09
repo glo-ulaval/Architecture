@@ -22,6 +22,8 @@ import cours.ulaval.glo4003.domain.repository.UserRepository;
 @Controller
 public class UserController {
 
+	private static final String DEFAULT_PASSWORD = "pass";
+
 	@Inject
 	UserRepository userRepository;
 
@@ -37,6 +39,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("menu");
 
 		User userToCreate = model.convertToUser();
+		userToCreate.setPassword(DEFAULT_PASSWORD);
 		try {
 			userRepository.store(userToCreate);
 			mv.addObject("error", ControllerMessages.SUCCESS);
