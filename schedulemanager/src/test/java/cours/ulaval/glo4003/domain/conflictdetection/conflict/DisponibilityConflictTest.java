@@ -1,19 +1,22 @@
-package cours.ulaval.glo4003.domain.conflict;
+package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ConcomittingCoursesConflictTest extends Conflict {
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.DisponibilityConflict;
+
+public class DisponibilityConflictTest {
+
 	private static final String A_NRC = "11234";
 	private static final String ANOTHER_NRC = "78123";
 
 	@Test
 	public void canInstantiateDisponibilityConflictWithParam() {
-		ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(A_NRC, ANOTHER_NRC);
+		DisponibilityConflict conflict = new DisponibilityConflict(A_NRC, ANOTHER_NRC);
 
 		assertEquals(A_NRC, conflict.getFirstNrc());
 		assertEquals(ANOTHER_NRC, conflict.getSecondNrc());
-		assertEquals(40, conflict.getScore());
+		assertEquals(10, conflict.getScore());
 	}
 }

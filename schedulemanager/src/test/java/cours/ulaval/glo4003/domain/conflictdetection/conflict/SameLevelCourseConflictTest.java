@@ -1,8 +1,10 @@
-package cours.ulaval.glo4003.domain.conflict;
+package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
 
 public class SameLevelCourseConflictTest {
 	private static final String A_NRC = "11234";

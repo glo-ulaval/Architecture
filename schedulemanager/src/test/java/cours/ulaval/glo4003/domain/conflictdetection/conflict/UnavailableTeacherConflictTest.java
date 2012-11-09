@@ -1,8 +1,10 @@
-package cours.ulaval.glo4003.domain.conflict;
+package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 
 public class UnavailableTeacherConflictTest {
 

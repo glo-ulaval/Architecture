@@ -1,8 +1,11 @@
 package cours.ulaval.glo4003.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.UserModel;
+import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.repository.UserRepository;
 
 @Controller
 public class UserController {
+
+	private static final String DEFAULT_PASSWORD = "pass";
 
 	@Inject
 	UserRepository userRepository;
@@ -33,6 +39,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("menu");
 
 		User userToCreate = model.convertToUser();
+		userToCreate.setPassword(DEFAULT_PASSWORD);
 		try {
 			userRepository.store(userToCreate);
 			mv.addObject("error", ControllerMessages.SUCCESS);
@@ -74,6 +81,57 @@ public class UserController {
 		mv.addObject("user", userRepository.findByIdul(principal.getName()));
 		mv.addObject("confirm", false);
 
+		return mv;
+	}
+
+	@RequestMapping(value = "/edituser", method = RequestMethod.GET)
+	public ModelAndView getUsers() {
+		ModelAndView mv = new ModelAndView("edituser");
+
+		buildDataForView(mv);
+
+		return mv;
+	}
+
+	private void buildDataForView(ModelAndView mv) {
+		List<User> users = new ArrayList<User>(userRepository.findAll());
+
+		List<UserModel> usersModel = new ArrayList<UserModel>();
+
+		for (User user : users) {
+			usersModel.add(new UserModel(user));
+		}
+
+		mv.addObject("users", usersModel);
+	}
+
+	@RequestMapping(value = "/edituser", method = RequestMethod.POST)
+	public ModelAndView editUser(String userToChange, HttpServletRequest request) throws Exception {
+
+		User user = userRepository.findByIdul(userToChange);
+		List<Role> roles = new ArrayList<Role>();
+
+		if (request.getParameter("roleAdmin") != null) {
+			roles.add(Role.ROLE_Administrateur);
+		}
+		if (request.getParameter("roleDirecteur") != null) {
+			roles.add(Role.ROLE_Directeur);
+		}
+		if (request.getParameter("roleEnseignant") != null) {
+			roles.add(Role.ROLE_Enseignant);
+		}
+		if (request.getParameter("roleResponsable") != null) {
+			roles.add(Role.ROLE_Responsable);
+		}
+		if (request.getParameter("roleUsager") != null) {
+			roles.add(Role.ROLE_Usager);
+		}
+
+		user.setRoles(roles);
+		userRepository.store(user);
+
+		ModelAndView mv = new ModelAndView("edituser");
+		buildDataForView(mv);
 		return mv;
 	}
 }
