@@ -21,8 +21,8 @@ public class XMLUserRepository implements UserRepository {
 		parseXML();
 	}
 
-	public XMLUserRepository(XMLSerializer<UserXMLWrapper> mockedSerializer) {
-		serializer = mockedSerializer;
+	public XMLUserRepository(XMLSerializer<UserXMLWrapper> serializer) {
+		this.serializer = serializer;
 	}
 
 	public User findByIdul(String idul) {
@@ -40,19 +40,6 @@ public class XMLUserRepository implements UserRepository {
 		return users.values();
 	}
 
-	public void saveXML() throws Exception {
-		UserXMLWrapper userXMLWrapper = new UserXMLWrapper();
-		userXMLWrapper.setUsers(new ArrayList<User>(users.values()));
-		serializer.serialize(userXMLWrapper, ConfigManager.getConfigManager().getUsersFilePath());
-	}
-
-	public void parseXML() throws Exception {
-		List<User> deserializedUsers = serializer.deserialize(ConfigManager.getConfigManager().getUsersFilePath()).getUsers();
-		for (User user : deserializedUsers) {
-			users.put(user.getIdul(), user);
-		}
-	}
-
 	@Override
 	public List<User> findByRole(Role role) {
 
@@ -65,6 +52,19 @@ public class XMLUserRepository implements UserRepository {
 		}
 
 		return usersWithRole;
+	}
+
+	private void saveXML() throws Exception {
+		UserXMLWrapper userXMLWrapper = new UserXMLWrapper();
+		userXMLWrapper.setUsers(new ArrayList<User>(users.values()));
+		serializer.serialize(userXMLWrapper, ConfigManager.getConfigManager().getUsersFilePath());
+	}
+
+	private void parseXML() throws Exception {
+		List<User> deserializedUsers = serializer.deserialize(ConfigManager.getConfigManager().getUsersFilePath()).getUsers();
+		for (User user : deserializedUsers) {
+			users.put(user.getIdul(), user);
+		}
 	}
 
 }
