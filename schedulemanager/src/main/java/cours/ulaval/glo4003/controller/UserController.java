@@ -1,17 +1,22 @@
 package cours.ulaval.glo4003.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.UserModel;
+import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.repository.UserRepository;
 
@@ -75,5 +80,56 @@ public class UserController {
 		mv.addObject("confirm", false);
 
 		return mv;
+	}
+
+	@RequestMapping(value = "/edituser", method = RequestMethod.GET)
+	public ModelAndView getUsers() {
+		ModelAndView mv = new ModelAndView("edituser");
+
+		List<User> users = new ArrayList<User>(userRepository.findAll());
+
+		List<UserModel> usersModel = new ArrayList<UserModel>();
+
+		for (User user : users) {
+			usersModel.add(new UserModel(user));
+		}
+
+		mv.addObject("users", usersModel);
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/edituser", method = RequestMethod.POST)
+	@ResponseBody
+	public String editUser(String userToChange, HttpServletRequest request) throws Exception {
+
+		User user = userRepository.findByIdul(userToChange);
+
+		List<Role> roles = new ArrayList<Role>();
+
+		if (request.getParameter("roleAdmin") != null) {
+			roles.add(Role.ROLE_Administrateur);
+		}
+
+		if (request.getParameter("roleDirecteur") != null) {
+			roles.add(Role.ROLE_Directeur);
+		}
+
+		if (request.getParameter("roleEnseignant") != null) {
+			roles.add(Role.ROLE_Enseignant);
+		}
+
+		if (request.getParameter("roleResponsable") != null) {
+			roles.add(Role.ROLE_Responsable);
+		}
+
+		if (request.getParameter("roleUsager") != null) {
+			roles.add(Role.ROLE_Usager);
+		}
+
+		user.setRoles(roles);
+		userRepository.store(user);
+
+		return userRepository.findByIdul(userToChange).getRoles().toString();
 	}
 }
