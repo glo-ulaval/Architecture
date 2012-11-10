@@ -42,7 +42,7 @@
 				<form action="/schedulemanager/changeroles/" method=POST scope="request" commandName="user">
 					<div>
 						<select id='userToChange' name='userToChange'>
-							<option value="null">Professeurs:</option>
+							<option value="null">Usagers:</option>
 							<c:forEach var="user" items="${users}">
 								<option value="${user.idul}"> ${user.name} </option>
 							</c:forEach>
