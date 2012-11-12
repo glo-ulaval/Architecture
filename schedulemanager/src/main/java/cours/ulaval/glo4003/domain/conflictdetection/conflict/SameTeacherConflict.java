@@ -1,6 +1,5 @@
 package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
-
 public class SameTeacherConflict extends Conflict {
 
 	// for serialization purpose only
@@ -12,4 +11,8 @@ public class SameTeacherConflict extends Conflict {
 		this.setScore(50);
 	}
 
+	@Override
+	public String getDescription() {
+		return "Les deux cours ont le même professeur durant la même période.";
+	}
 }

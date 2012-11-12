@@ -37,4 +37,6 @@ public abstract class Conflict {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+	public abstract String getDescription();
 }
