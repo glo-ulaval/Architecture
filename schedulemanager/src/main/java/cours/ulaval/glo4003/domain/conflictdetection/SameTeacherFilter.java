@@ -1,8 +1,5 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
@@ -12,8 +9,6 @@ public class SameTeacherFilter extends Filter {
 
 	@Override
 	public void run(Schedule schedule) {
-		List<String> teachersFiltered = new ArrayList<String>();
-
 		for (Section section : schedule.getSectionsList()) {
 			for (String teacher : section.getTeachers()) {
 				for (Section secondSection : schedule.getSectionsList()) {
@@ -24,9 +19,6 @@ public class SameTeacherFilter extends Filter {
 						}
 					}
 				}
-
-				teachersFiltered.add(teacher);
-
 			}
 		}
 	}
