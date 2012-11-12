@@ -33,7 +33,7 @@ $(function() {
 		grid: 100
 	});
 	
-	$('.event').dblclick(function() {
+	$('.event').dblclick(function(event) {
 		redirectToEditSection();
 	});
 
@@ -58,15 +58,9 @@ function setDuration(cs) {
 }
 
 function redirectToEditSection(){
-	var nrc = $(this).children().attr('id');
+	var nrc = $(event.target).attr('id');
 	var currentUrl = document.URL;
 	var url = currentUrl.replace('calendar','schedule/editsection') + '/2011-2012/Automne/' + nrc;
 	
 	window.location.replace(url);
-	
-	$.get(url, function(data) {
-
-			$('#editCourse').find('.modal-body').html(data);
-			$('#editCourse').modal('show');
-		});
 }
