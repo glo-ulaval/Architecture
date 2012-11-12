@@ -10,7 +10,6 @@ import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseCon
 public class Section {
 	private String nrc;
 	private String group;
-
 	private String personInCharge;
 	private List<String> teachers;
 	private TeachMode teachMode;
