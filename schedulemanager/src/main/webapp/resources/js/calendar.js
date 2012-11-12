@@ -6,6 +6,19 @@ $(function() {
 		connectWith : '.hour',
 		start: function(e, ui){
 	        ui.placeholder.width(ui.item.width());
+	    },
+	    receive : function(e, ui){
+	    	$.ajax({
+				type : "POST",
+				url : '/schedulemanager/schedule/' + id + '/update',
+				data : { nrc: "John", timeStart: "2pm", timeEnd: "derp" },
+				success: function(data) {
+
+				},
+				error : function() {
+
+				}
+			});
 	    }
 	});
 	$('.hour').disableSelection();
