@@ -19,16 +19,6 @@ public class Availability {
 		super();
 	}
 
-	public Availability(AvailabilityModel availability, String idul) {
-		monday = availability.getMonday();
-		tuesday = availability.getTuesday();
-		wednesday = availability.getWednesday();
-		thursday = availability.getThursday();
-		friday = availability.getFriday();
-
-		this.idul = idul;
-	}
-
 	public String getIdul() {
 		return idul;
 	}

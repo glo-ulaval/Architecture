@@ -25,6 +25,18 @@ public class AvailabilityModel {
 		friday = availability.getFriday();
 	}
 
+	public Availability toAvailability (String idul) {
+		Availability availability = new Availability();
+		availability.setMonday(monday);
+		availability.setTuesday(tuesday);
+		availability.setThursday(thursday);
+		availability.setWednesday(wednesday);
+		availability.setFriday(friday);
+		availability.setIdul(idul);
+		
+		return availability;
+	}
+	
 	public List<AvailabilityLevel> getMonday() {
 		return monday;
 	}

@@ -26,7 +26,7 @@ public class XMLAvailabilityRepositoryIT extends ITTestBase {
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
+		Availability availabilities = availabilityModel.toAvailability(UN_IDUL);
 
 		repository.store(availabilities);
 
@@ -37,7 +37,7 @@ public class XMLAvailabilityRepositoryIT extends ITTestBase {
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
+		Availability availabilities = availabilityModel.toAvailability(UN_IDUL);
 		repository.store(availabilities);
 
 		assertEquals(availabilities.getMonday(), repository.findByIdul(UN_IDUL).getMonday());
