@@ -21,6 +21,7 @@
 	float: left;
 	border-right: 1px solid rgba(240, 240, 240, 0.5);
 	text-align: center;
+	overflow: visible;
 }
 
 .hour-head, .hours-head {
@@ -30,7 +31,7 @@
 }
 
 .event {
-	width: 100px;
+	width: 50px;
 	height: 25px;
 	display: inline-block;
 	color: white;
@@ -41,8 +42,9 @@
 }
 
 .event-name {
-	border: 1px solid white;
 	height: 100%;
+	width: 100px;
+	margin-left: -50px;
 }
 
 .ui-sortable-placeholder {
