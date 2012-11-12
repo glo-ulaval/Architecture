@@ -66,14 +66,14 @@ public class Section {
 	public boolean isOverlaping(Section section) {
 		for (TimeSlot timeSlot : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot secondTimeSlot : section.getCoursesAndLabTimeSlots()) {
-				if (timeSlot.isOverlapping(secondTimeSlot) && !timeSlot.equals(secondTimeSlot)) {
+				if (timeSlot.isOverlapping(secondTimeSlot)) {
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
+
 	public List<Conflict> generateSameLevelCoursesConflicts(Section otherSection) {
 		List<Conflict> conflicts = new ArrayList<Conflict>();
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {

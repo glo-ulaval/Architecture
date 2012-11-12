@@ -1,6 +1,7 @@
 package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,8 +37,8 @@ public class SectionTest {
 		teachers = Arrays.asList("teacher1", "teacher2");
 		timeDedicated = new TimeDedicated();
 		teachMode = TeachMode.InCourse;
-		courseTimeSlot = Arrays.asList(new TimeSlot(generateCourseTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
-		labTimeSlot = new TimeSlot(generateCourseTimeSlotStartTime(), 3, DayOfWeek.FRIDAY);
+		courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
+		labTimeSlot = new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.FRIDAY);
 		courseAcronym = "GLO_4002";
 		section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot, labTimeSlot);
 	}
@@ -66,7 +67,7 @@ public class SectionTest {
 	public void weCanFindATeacherInTheList() {
 		assertTrue(section.hasTeacher("teacher1"));
 	}
-	
+
 	@Test
 	public void canGenerateConcomittingCourseConflicts() {
 		List<Conflict> conflicts = section.generateConcomittingConflicts(section);
@@ -87,7 +88,27 @@ public class SectionTest {
 		}
 	}
 
-	private Time generateCourseTimeSlotStartTime() {
+	@Test
+	public void canDetectIfTwoSectionOverlap() {
+		List<TimeSlot> timeSlots = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
+
+		Section sectionOverlapping = mock(Section.class);
+		when(sectionOverlapping.getCoursesAndLabTimeSlots()).thenReturn(timeSlots);
+
+		assertTrue(section.isOverlaping(sectionOverlapping));
+	}
+
+	@Test
+	public void canDetectIfTwoSectionDontOverlap() {
+		List<TimeSlot> timeSlots = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.WEDNESDAY));
+
+		Section sectionOverlapping = mock(Section.class);
+		when(sectionOverlapping.getCoursesAndLabTimeSlots()).thenReturn(timeSlots);
+
+		assertFalse(section.isOverlaping(sectionOverlapping));
+	}
+
+	private Time generateTimeSlotStartTime() {
 		Time startTime = new Time(A_HOUR, A_MINUTE);
 		return startTime;
 	}
