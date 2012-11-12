@@ -6,14 +6,17 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.controller.model.CalendarModel;
 import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
@@ -43,6 +46,8 @@ public class ScheduleController {
 	@Inject
 	private UserRepository userRepository;
 
+	private ObjectMapper mapper = new ObjectMapper();
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
 		ModelAndView mv = new ModelAndView("schedule");
@@ -57,13 +62,29 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView scheduleById(@PathVariable String id) throws Exception {
-		ModelAndView mv = new ModelAndView("schedulebyid");
+	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
+	public ModelAndView scheduleById(@PathVariable String id, @PathVariable String view) throws Exception {
 
-		mv.addObject("schedule", new ScheduleModel(scheduleRepository.findById(id)));
-		mv.addObject("sections", new SortedSlotsModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections().values())));
+		ModelAndView mv;
+		if (view.contentEquals("calendar")) {
+			mv = new ModelAndView("calendar");
+			CalendarModel calendarModel = new CalendarModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections().values()));
 
+			String JSON = "";
+			try {
+				JSON = mapper.writeValueAsString(calendarModel);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			mv.addObject("sections", JSON);
+			mv.addObject("scheduleId", id);
+		} else {
+			mv = new ModelAndView("schedulebyid");
+			mv.addObject("schedule", new ScheduleModel(scheduleRepository.findById(id)));
+			mv.addObject("sections", new SortedSlotsModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections().values())));
+
+		}
 		return mv;
 	}
 
@@ -132,6 +153,9 @@ public class ScheduleController {
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.GET)
 	public ModelAndView editSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc) {
+
+		// ModelAndView mv = new
+		// ModelAndView("partialViews/editSectionPartial");
 		ModelAndView mv = new ModelAndView("editsection");
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
@@ -147,8 +171,9 @@ public class ScheduleController {
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
+
 		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			ModelAndView mv = scheduleById(id);
+			ModelAndView mv = scheduleById(id, "calendar");
 			mv.addObject("user", userRepository.findByIdul(principal.getName()));
 			return mv;
 		}
@@ -168,6 +193,18 @@ public class ScheduleController {
 			mv.addObject("error", e.getMessage());
 		}
 		return mv;
+	}
+
+	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateSection(@PathVariable String id, String nrc, String timeStart, String timeEnd, Principal principal) throws Exception {
+
+		System.out.println(id);
+		System.out.println(nrc);
+		System.out.println(timeStart);
+		System.out.println(timeEnd);
+
+		return "success";
 	}
 
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)

@@ -105,7 +105,7 @@ public class ScheduleControllerTest {
 
 	@Test
 	public void scheduleByYearReturnsTheCorrectModelAndView() throws Exception {
-		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID);
+		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "calendar");
 
 		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
 		assertTrue(mv.getModel().get("sections") instanceof SortedSlotsModel);

@@ -15,6 +15,8 @@
 
 <script type="text/javascript">
 	var sections = ${sections};
+	
+	var id = "${scheduleId}";
 </script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
@@ -25,6 +27,10 @@
 <body>
 <c:import url="header.jsp" />
 <h1>Horaire</h1>
+<div class="btn-group">
+  <a href="list" type="button" class="btn">Liste</a>
+  <a href="#" type="button" class="btn active">Calendrier</a>
+</div>
 <table class="table table-striped">
 	<tr>
 		<td class="day"></td>
@@ -219,14 +225,6 @@
 		</td>
 	</tr>
 </table>
-
-	<div id="editCourse" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-body">
-	  </div>
-	  <div class="modal-footer">
-	    <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-	  </div>
-	</div>
 </body>
 </html>
 
