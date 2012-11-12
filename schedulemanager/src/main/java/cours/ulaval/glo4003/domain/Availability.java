@@ -77,15 +77,4 @@ public class Availability {
 		this.friday = friday;
 	}
 
-	public AvailabilityModel getModel() {
-		AvailabilityModel model = new AvailabilityModel();
-
-		model.setMonday(this.monday);
-		model.setTuesday(this.tuesday);
-		model.setWednesday(this.wednesday);
-		model.setThursday(this.thursday);
-		model.setFriday(this.friday);
-
-		return model;
-	}
 }

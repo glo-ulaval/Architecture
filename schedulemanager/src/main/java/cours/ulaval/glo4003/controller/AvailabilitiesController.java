@@ -32,7 +32,7 @@ public class AvailabilitiesController {
 		Availability availability = repository.findByIdul(user.getIdul());
 		ModelAndView mv = new ModelAndView("availabilities");
 		if (availability != null) {
-			AvailabilityModel model = availability.getModel();
+			AvailabilityModel model = new AvailabilityModel(availability);
 
 			String availabilitiesJSON;
 			try {

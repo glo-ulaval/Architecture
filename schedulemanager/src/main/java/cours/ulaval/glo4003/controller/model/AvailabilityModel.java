@@ -2,6 +2,7 @@ package cours.ulaval.glo4003.controller.model;
 
 import java.util.List;
 
+import cours.ulaval.glo4003.domain.Availability;
 import cours.ulaval.glo4003.domain.AvailabilityLevel;
 
 public class AvailabilityModel {
@@ -11,6 +12,14 @@ public class AvailabilityModel {
 	private List<AvailabilityLevel> wednesday;
 	private List<AvailabilityLevel> thursday;
 	private List<AvailabilityLevel> friday;
+	
+	public AvailabilityModel (Availability availability) {
+		monday = availability.getMonday();
+		tuesday = availability.getTuesday();
+		wednesday = availability.getWednesday();
+		thursday = availability.getThursday();
+		friday = availability.getFriday();
+	}
 
 	public List<AvailabilityLevel> getMonday() {
 		return monday;
