@@ -6,6 +6,10 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
+import cours.ulaval.glo4003.domain.conflictdetection.ConcomittingCoursesFilter;
+import cours.ulaval.glo4003.domain.conflictdetection.CourseLevelFilter;
+import cours.ulaval.glo4003.domain.conflictdetection.SameTeacherFilter;
+import cours.ulaval.glo4003.domain.conflictdetection.UnavailableTeacherFilter;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
@@ -54,6 +58,26 @@ public class AppConfig {
 	public UserSecurityService userSecurityService()
 			throws Exception {
 		return new UserSecurityService();
+	}
+
+	@Bean
+	public ConcomittingCoursesFilter concomittingCoursesFilter() {
+		return new ConcomittingCoursesFilter();
+	}
+
+	@Bean
+	public CourseLevelFilter courseLevelFilter() {
+		return new CourseLevelFilter();
+	}
+
+	@Bean
+	public SameTeacherFilter sameTeacherFilter() {
+		return new SameTeacherFilter();
+	}
+
+	@Bean
+	public UnavailableTeacherFilter unavailableTeacherFilter() {
+		return new UnavailableTeacherFilter();
 	}
 
 	@Bean

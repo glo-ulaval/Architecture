@@ -32,7 +32,7 @@ public class AvailabilitiesController {
 		Availability availability = repository.findByIdul(user.getIdul());
 		ModelAndView mv = new ModelAndView("availabilities");
 		if (availability != null) {
-			AvailabilityModel model = availability.getModel();
+			AvailabilityModel model = new AvailabilityModel(availability);
 
 			String availabilitiesJSON;
 			try {
@@ -56,7 +56,7 @@ public class AvailabilitiesController {
 		AvailabilityModel model;
 		try {
 			model = mapper.readValue(availabilityJSON, AvailabilityModel.class);
-			Availability availability = new Availability(model, user.getIdul());
+			Availability availability = model.toAvailability(user.getIdul());
 			repository.store(availability);
 		} catch (Exception e) {
 			return "Une erreur est survenue, veuillez réessayer.";

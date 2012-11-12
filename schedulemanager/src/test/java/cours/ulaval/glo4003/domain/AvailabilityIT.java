@@ -28,7 +28,7 @@ public class AvailabilityIT {
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
-		Availability availabilities = new Availability(availabilityModel, UN_IDUL);
+		Availability availabilities = availabilityModel.toAvailability(UN_IDUL);
 
 		assertNotNull(availabilities);
 		assertEquals(UN_IDUL, availabilities.getIdul());

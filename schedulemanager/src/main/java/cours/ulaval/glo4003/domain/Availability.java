@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class Availability {
 
@@ -19,14 +20,34 @@ public class Availability {
 		super();
 	}
 
-	public Availability(AvailabilityModel availability, String idul) {
-		monday = availability.getMonday();
-		tuesday = availability.getTuesday();
-		wednesday = availability.getWednesday();
-		thursday = availability.getThursday();
-		friday = availability.getFriday();
+	public List<AvailabilityLevel> getListWithDay(DayOfWeek day) {
+		switch (day) {
+		case FRIDAY:
+			return friday;
+		case MONDAY:
+			return monday;
+		case THURSDAY:
+			return thursday;
+		case TUESDAY:
+			return tuesday;
+		case WEDNESDAY:
+			return wednesday;
+		default:
+			return null;
+		}
+	}
 
-		this.idul = idul;
+	public AvailabilityLevel isAvailableForTimeSlot(TimeSlot timeSlot) {
+		int timeSlotBeginningIndex = timeSlot.getStartTime().getHour() - 8;
+		List<AvailabilityLevel> day = getListWithDay(timeSlot.getDayOfWeek());
+		for (int i = 0; i < timeSlot.getDuration(); i++) {
+			if (day.get(timeSlotBeginningIndex + i) == AvailabilityLevel.Unavailable) {
+				return AvailabilityLevel.Unavailable;
+			} else if (day.get(timeSlotBeginningIndex + i) == AvailabilityLevel.PreferedNotAvailable) {
+				return AvailabilityLevel.PreferedNotAvailable;
+			}
+		}
+		return AvailabilityLevel.Available;
 	}
 
 	public String getIdul() {
@@ -77,15 +98,4 @@ public class Availability {
 		this.friday = friday;
 	}
 
-	public AvailabilityModel getModel() {
-		AvailabilityModel model = new AvailabilityModel();
-
-		model.setMonday(this.monday);
-		model.setTuesday(this.tuesday);
-		model.setWednesday(this.wednesday);
-		model.setThursday(this.thursday);
-		model.setFriday(this.friday);
-
-		return model;
-	}
 }

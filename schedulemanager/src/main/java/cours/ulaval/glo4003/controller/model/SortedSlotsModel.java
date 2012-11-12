@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import cours.ulaval.glo4003.controller.model.utils.TimeSlotComparator;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TimeSlot;
-import cours.ulaval.glo4003.utils.TimeSlotComparator;
 
 public class SortedSlotsModel {
 
