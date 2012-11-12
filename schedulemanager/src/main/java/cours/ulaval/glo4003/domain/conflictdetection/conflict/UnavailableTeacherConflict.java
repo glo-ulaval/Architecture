@@ -1,6 +1,5 @@
 package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
-
 public class UnavailableTeacherConflict extends Conflict {
 
 	// for serialization purpose only
@@ -12,4 +11,8 @@ public class UnavailableTeacherConflict extends Conflict {
 		this.setScore(40);
 	}
 
+	@Override
+	public String getDescription() {
+		return "Le professeur n'est pas disponible durant la période du cours.";
+	}
 }
