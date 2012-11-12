@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.controller.utils;
+package cours.ulaval.glo4003.controller.model.utils;
 
 import java.util.Comparator;
 

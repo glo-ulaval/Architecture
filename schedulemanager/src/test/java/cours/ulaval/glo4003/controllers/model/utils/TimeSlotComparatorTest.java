@@ -1,4 +1,4 @@
-package cours.ulaval.glo4003.controllers.utils;
+package cours.ulaval.glo4003.controllers.model.utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import cours.ulaval.glo4003.controller.model.CourseSlotModel;
-import cours.ulaval.glo4003.controller.utils.TimeSlotComparator;
+import cours.ulaval.glo4003.controller.model.utils.TimeSlotComparator;
 
 public class TimeSlotComparatorTest {
 
