@@ -13,6 +13,10 @@ public class AvailabilityModel {
 	private List<AvailabilityLevel> thursday;
 	private List<AvailabilityLevel> friday;
 	
+	public AvailabilityModel () {
+		
+	}
+	
 	public AvailabilityModel (Availability availability) {
 		monday = availability.getMonday();
 		tuesday = availability.getTuesday();
