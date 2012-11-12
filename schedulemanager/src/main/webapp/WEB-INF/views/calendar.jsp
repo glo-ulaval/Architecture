@@ -225,14 +225,6 @@
 		</td>
 	</tr>
 </table>
-
-	<div id="editCourse" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-body">
-	  </div>
-	  <div class="modal-footer">
-	    <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-	  </div>
-	</div>
 </body>
 </html>
 

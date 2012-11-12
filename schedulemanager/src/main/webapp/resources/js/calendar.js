@@ -46,17 +46,8 @@ $(function() {
 		grid: 100
 	});
 	
-	$('.event').dblclick(function() {
-		
-		var nrc = $(this).children().attr('id');
-		var currentUrl = document.URL;
-		var url = currentUrl.replace("calendar","schedule/editsection") + "/2011-2012/Automne/" + nrc;
-		
-		$.get(url, function(data) {
-
-				$('#editCourse').find('.modal-body').html(data);
-				$('#editCourse').modal('show');
-			});
+	$('.event').dblclick(function(event) {
+		redirectToEditSection();
 	});
 
 	$('.event').tooltip();
@@ -77,4 +68,12 @@ function minutes(cs) {
 
 function setDuration(cs) {
 	return (cs.duration * 100) + 'px';
+}
+
+function redirectToEditSection(){
+	var nrc = $(event.target).attr('id');
+	var currentUrl = document.URL;
+	var url = currentUrl.replace('calendar','schedule/editsection') + '/2011-2012/Automne/' + nrc;
+	
+	window.location.replace(url);
 }
