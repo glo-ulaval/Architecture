@@ -44,6 +44,10 @@ body {
 	background-color : #FFD078;
 }
 
+.red {
+  background-color : #FE2E2E;
+}
+
 .inline {
 	display:inline;
 }
