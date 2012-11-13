@@ -100,6 +100,9 @@ public class Schedule {
 	}
 
 	public List<Conflict> getConflicts() {
+		if (conflicts == null) {
+			conflicts = new ArrayList<Conflict>();
+		}
 		return conflicts;
 	}
 
