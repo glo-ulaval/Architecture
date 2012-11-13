@@ -55,3 +55,7 @@ body {
 .textRight {
 	text-align : right;
 }
+
+.btn-label{
+	width: 100px;
+}

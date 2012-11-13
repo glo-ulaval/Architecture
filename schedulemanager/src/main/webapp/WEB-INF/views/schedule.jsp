@@ -49,10 +49,10 @@
 					<tr id="${schedule.id}">
 						<td class="span12">[${schedule.semester} ${schedule.year}] ${schedule.id}</td>
 						<td class="centered">
-							<a class="btn" href="${scheduleurl}/${schedule.id}/list"><i class="icon-list"></i></a>
+							<a class="btn btn-label" href="${scheduleurl}/${schedule.id}/list"><i class="icon-list"></i> Liste</a>
 						</td>
 						<td class="centered">
-							<a class="btn" href="${scheduleurl}/${schedule.id}/calendar"><i class="icon-calendar"></i></a>
+							<a class="btn btn-label" href="${scheduleurl}/${schedule.id}/calendar"><i class="icon-calendar"></i> Calendrier</a>
 						</td>
 						<sec:authorize access="hasRole('ROLE_Responsable')">
 						<td class="centered">
