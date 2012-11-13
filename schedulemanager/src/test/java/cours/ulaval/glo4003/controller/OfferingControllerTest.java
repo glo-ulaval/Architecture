@@ -99,7 +99,7 @@ public class OfferingControllerTest {
 		verify(mockedOfferingRepository).store(any(Offering.class));
 		verify(mockedOfferingRepository).find("2012");
 		verify(mockedOffering).addCourse("GLO-4003");
-		verify(mockedCourseRepository).findByOffering(any(Offering.class));
+		verify(mockedCourseRepository, times(2)).findByOffering(any(Offering.class));
 		assertEquals("offeringbyyear", mv.getViewName());
 		assertTrue(mv.getModel().containsKey("year"));
 		assertTrue(mv.getModel().containsKey("courses"));
@@ -112,6 +112,6 @@ public class OfferingControllerTest {
 
 		verify(mockedOfferingRepository, times(2)).find("2012");
 		verify(mockedOffering, times(2)).addCourse("GLO-4003");
-		verify(mockedCourseRepository, times(2)).findByOffering(any(Offering.class));
+		verify(mockedCourseRepository, times(4)).findByOffering(any(Offering.class));
 	}
 }

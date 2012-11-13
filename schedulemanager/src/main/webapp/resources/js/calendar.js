@@ -1,7 +1,5 @@
 $(function() {
 	
-	console.log(sections);
-	
 	$('.hour').sortable({
 		connectWith : '.hour',
 		start: function(e, ui){
@@ -31,25 +29,36 @@ $(function() {
 	
 	
 	for (var i = 0; i < sections.courseSlots.length; i++) {
-		var event = $('<div/>', {
-		    class : 'event',
-		    width : setDuration(sections.courseSlots[i]),
-		}).appendTo(findId(sections.courseSlots[i]));
-		
-		$('<div/>', {
-		    id: sections.courseSlots[i].nrc,
-		    title: sections.courseSlots[i].acronym,
-		    class : 'event-name',
-		    text : sections.courseSlots[i].acronym,
-		}).appendTo(event);
-	}
 
-	$('.event').resizable({
-		minWidth: 90,
-		maxHeight: 25,
-		minHeight: 25,
-		grid: 100
-	});
+		var duration = parseInt(sections.courseSlots[i].duration);
+		duration = 2*duration;
+		var color = randomColor();
+
+		for ( var j = 0; j < duration ; j++) {
+			var cs = sections.courseSlots[i];
+
+			var hour = cs.timeSlotStart.split(':')[0];
+			var minute = minutes(cs);
+			var nextTime = parseInt(hour + minute);
+			nextTime = nextTime + 5*j;
+			
+			
+			var event = $('<div/>', {
+			    class : 'event',
+			});
+			event.css('background-color', color);
+			
+			event.appendTo(findId(cs, nextTime));
+			if(j == duration-1){
+				$('<div/>', {
+					id: sections.courseSlots[i].nrc,
+					title: sections.courseSlots[i].acronym,
+					class : 'event-name',
+					text : sections.courseSlots[i].acronym,
+				}).appendTo(event);
+			}
+		}
+	}
 	
 	$('.event').dblclick(function(event) {
 		redirectToEditSection();
@@ -59,8 +68,12 @@ $(function() {
 	
 });
 
-function findId(cs) {
-	return ('#'+ cs.dayOfWeek.toLowerCase().substring(0,3) + cs.timeSlotStart.split(':')[0] + minutes(cs));
+function randomColor() {
+	return '#'+Math.floor(Math.random()*16777215).toString(16);
+}
+
+function findId(cs, nextTime) {
+	return ('#'+ cs.dayOfWeek.toLowerCase().substring(0,3) + nextTime);
 }
 
 function minutes(cs) {

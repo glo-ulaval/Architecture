@@ -32,6 +32,10 @@ ROLE D'ENSEIGNANT
 **User :** enseignant
 **Password :** pass
 
+ROLE D'ADMINISTRATEUR
+**User :** ADMIN
+**Password :** admin
+
 Lancer les tests d'intégration à partir de Maven en CLI 
 =======================================================
 

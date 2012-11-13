@@ -5,7 +5,10 @@ import java.util.List;
 
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.DisponibilityConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
+import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
 public class Section {
 	private String nrc;
@@ -21,8 +24,8 @@ public class Section {
 	public Section() {
 	}
 
-	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode, TimeDedicated timeDedicated,
-			String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
+	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode,
+			TimeDedicated timeDedicated, String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
 		super();
 		this.nrc = nrc;
 		this.group = group;
@@ -51,7 +54,8 @@ public class Section {
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
-					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(courseAcronym, otherSection.getCourseAcronym());
+					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(courseAcronym,
+							otherSection.getCourseAcronym());
 					conflicts.add(conflict);
 				}
 			}
@@ -80,6 +84,23 @@ public class Section {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
 					SameLevelCourseConflict conflict = new SameLevelCourseConflict(courseAcronym, otherSection.getCourseAcronym());
+					conflicts.add(conflict);
+				}
+			}
+		}
+		return conflicts;
+	}
+
+	public List<Conflict> generateUnavailableTeacherConflicts(AvailabilityRepository repository) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		for (String idul : teachers) {
+			for (TimeSlot timeSlot : getCoursesAndLabTimeSlots()) {
+				Availability availability = repository.findByIdul(idul);
+				if (availability.isAvailableForTimeSlot(timeSlot) == AvailabilityLevel.Unavailable) {
+					UnavailableTeacherConflict conflict = new UnavailableTeacherConflict(nrc, "");
+					conflicts.add(conflict);
+				} else if (availability.isAvailableForTimeSlot(timeSlot) == AvailabilityLevel.PreferedNotAvailable) {
+					DisponibilityConflict conflict = new DisponibilityConflict(nrc, "");
 					conflicts.add(conflict);
 				}
 			}

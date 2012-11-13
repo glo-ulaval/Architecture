@@ -78,25 +78,26 @@ public class OfferingController {
 	}
 
 	@RequestMapping(value = "/{year}/addcourse")
-	public ModelAndView addCourseFromAvailableCourses(@PathVariable String year, @RequestParam(required = true, value = "acronym") String acronym) {
+	public ModelAndView addCourseFromAvailableCourses(@PathVariable String year, @RequestParam(required = true, value = "acronym") String acronym) throws Exception {
 
 		ModelAndView mv = new ModelAndView("offeringbyyear");
+		if (!offeringRepository.containsOfferingFor(year)) {
+			offeringRepository.store(new Offering(year));
+		}
+		Offering offering = offeringRepository.find(year);
+		List<Course> courses = courseRepository.findByOffering(offering);
 
 		try {
-			if (!offeringRepository.containsOfferingFor(year)) {
-				offeringRepository.store(new Offering(year));
-			}
-			Offering offering = offeringRepository.find(year);
 			offering.addCourse(acronym);
 
-			List<Course> courses = courseRepository.findByOffering(offering);
+			courses = courseRepository.findByOffering(offering);
 
-			mv.addObject("year", year);
-			mv.addObject("courses", courses);
 			mv.addObject("error", ControllerMessages.SUCCESS);
 		} catch (Exception e) {
 			mv.addObject("error", e.getMessage());
 		}
+		mv.addObject("year", year);
+		mv.addObject("courses", courses);
 
 		return mv;
 	}
