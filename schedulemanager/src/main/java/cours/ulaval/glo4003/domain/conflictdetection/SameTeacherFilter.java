@@ -4,8 +4,6 @@ import java.util.List;
 
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameTeacherConflict;
 
 public class SameTeacherFilter extends Filter {
 
@@ -20,10 +18,7 @@ public class SameTeacherFilter extends Filter {
 				for (int j = i + 1; j < sections.size(); j++) {
 					Section secondSection = sections.get(j);
 					if (secondSection.hasTeacher(teacher)) {
-						if (section.isOverlaping(secondSection)) {
-							Conflict conflict = new SameTeacherConflict(section.getNrc(), secondSection.getNrc());
-							schedule.add(conflict);
-						}
+						schedule.addAll(section.generateSameTeacherConflicts(secondSection));
 					}
 				}
 			}

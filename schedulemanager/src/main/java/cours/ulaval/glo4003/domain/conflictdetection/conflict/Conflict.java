@@ -1,17 +1,23 @@
 package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
+import cours.ulaval.glo4003.domain.TimeSlot;
+
 public abstract class Conflict {
 	private String firstNrc;
 	private String secondNrc;
+	private TimeSlot firstTimeSlot;
+	private TimeSlot secondTimeSlot;
 	private int score;
 
 	// for serialization purpose only
 	public Conflict() {
 	}
 
-	public Conflict(String aNrc, String anotherNrc) {
+	public Conflict(String aNrc, String anotherNrc, TimeSlot firstTimeSlot, TimeSlot secondTimeSlot) {
 		this.firstNrc = aNrc;
 		this.secondNrc = anotherNrc;
+		this.firstTimeSlot = firstTimeSlot;
+		this.secondTimeSlot = secondTimeSlot;
 	}
 
 	public String getFirstNrc() {
@@ -36,6 +42,22 @@ public abstract class Conflict {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public TimeSlot getFirstTimeSlot() {
+		return firstTimeSlot;
+	}
+
+	public void setFirstTimeSlot(TimeSlot firstTimeSlot) {
+		this.firstTimeSlot = firstTimeSlot;
+	}
+
+	public TimeSlot getSecondTimeSlot() {
+		return secondTimeSlot;
+	}
+
+	public void setSecondTimeSlot(TimeSlot secondTimeSlot) {
+		this.secondTimeSlot = secondTimeSlot;
 	}
 
 	public abstract String getDescription();
