@@ -58,14 +58,9 @@
 						</c:otherwise>
 					</c:choose>
 					<tr class="${color}">
-						<td class="span12"><b>${mondaysection.timeSlotStart} -
+						<td><b>${mondaysection.timeSlotStart} -
 								${mondaysection.timeSlotEnd}</b> || ${mondaysection.acronym}
 							(${mondaysection.nrc} - ${mondaysection.group})</td>
-						<c:forEach var="conflict" items="${mondaysection.conflicts}">
-              <td class="centered"><a class="btn btn-warning"
-                href="#"><i
-                  class="icon-warning-sign"></i></a></td>
-						</c:forEach>
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
 							<td class="centered"><a class="btn btn-info"
@@ -75,6 +70,11 @@
 								href="${deletesection}/${mondaysection.nrc}"><i
 									class="icon-trash icon-white"></i></a></td>
 						</sec:authorize>
+            <c:if test="${fn:length(mondaysection.conflicts) > 0}">
+              <td><a class="btn btn-warning"
+                href="#" title="Détails du/des conflit(s)"><i
+                  class="icon-warning-sign"></i></a></td>
+            </c:if>
 					</tr>
 				</c:forEach>
 				<tr class="well">
