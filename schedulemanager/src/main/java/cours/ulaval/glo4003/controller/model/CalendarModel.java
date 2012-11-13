@@ -1,8 +1,10 @@
 package cours.ulaval.glo4003.controller.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import cours.ulaval.glo4003.controller.model.utils.TimeSlotComparator;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TimeSlot;
 
@@ -22,6 +24,7 @@ public class CalendarModel {
 				courseSlots.add(new CourseSlotModel(section, timeSlot, true));
 			}
 		}
+		Collections.sort(courseSlots, new TimeSlotComparator());
 	}
 
 	public List<CourseSlotModel> getCourseSlots() {

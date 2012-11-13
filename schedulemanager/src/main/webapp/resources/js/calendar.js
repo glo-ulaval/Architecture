@@ -1,3 +1,5 @@
+console.log(sections);
+
 $(function() {
 	
 	$('.hour').sortable({
