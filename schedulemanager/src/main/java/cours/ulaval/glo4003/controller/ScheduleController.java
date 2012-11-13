@@ -24,6 +24,9 @@ import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
+import cours.ulaval.glo4003.domain.Time;
+import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
@@ -173,7 +176,7 @@ public class ScheduleController {
 			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 
 		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			ModelAndView mv = scheduleById(id, "calendar");
+			ModelAndView mv = scheduleById(id, "list");
 			mv.addObject("user", userRepository.findByIdul(principal.getName()));
 			return mv;
 		}
@@ -197,12 +200,43 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
 	@ResponseBody
-	public String updateSection(@PathVariable String id, String nrc, String timeStart, String timeEnd, Principal principal) throws Exception {
+	public String updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
+			String duration, Principal principal) throws Exception {
 
-		System.out.println(id);
-		System.out.println(nrc);
-		System.out.println(timeStart);
-		System.out.println(timeEnd);
+		System.out.println("idhoraire:" + id);
+		System.out.println("nrc:" + nrc);
+		System.out.println("oldDay:" + oldDay);
+		System.out.println("oldTimeStart:" + oldTimeStart);
+		System.out.println("newDay:" + newDay);
+		System.out.println("newTimeStart:" + newTimeStart);
+		System.out.println("duration:" + duration);
+
+		DayOfWeek newDayOfWeek = null;
+		if (newDay == "mon") {
+			newDayOfWeek = DayOfWeek.MONDAY;
+		} else if (newDay == "tue") {
+			newDayOfWeek = DayOfWeek.TUESDAY;
+		} else if (newDay == "wed") {
+			newDayOfWeek = DayOfWeek.WEDNESDAY;
+		} else if (newDay == "thu") {
+			newDayOfWeek = DayOfWeek.THURSDAY;
+		} else if (newDay == "fri") {
+			newDayOfWeek = DayOfWeek.FRIDAY;
+		}
+
+		TimeSlot newTimeSlot = new TimeSlot(new Time(Integer.parseInt(newTimeStart.split(":")[0]), Integer.parseInt(newTimeStart.split(":")[1])),
+				Integer.parseInt(duration), newDayOfWeek);
+
+		Time oldTmStart = new Time(Integer.parseInt(oldTimeStart.split(":")[0]), Integer.parseInt(oldTimeStart.split(":")[1]));
+
+		List<TimeSlot> timeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCoursesAndLabTimeSlots();
+
+		for (TimeSlot slot : timeSlots) {
+			if (slot.getDayOfWeek().toString().toLowerCase().substring(0, 2) == oldDay || slot.getStartTime().equals(oldTmStart)) {
+				timeSlots.remove(slot);
+				timeSlots.add(newTimeSlot);
+			}
+		}
 
 		return "success";
 	}

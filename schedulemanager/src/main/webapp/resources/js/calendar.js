@@ -11,12 +11,17 @@ $(function() {
 	    	$.ajax({
 				type : "POST",
 				url : '/schedulemanager/schedule/' + id + '/update',
-				data : { nrc: "John", timeStart: "2pm", timeEnd: "derp" },
+				data : { nrc: ui.item.find('div[class="event-name"]').attr('id').toString(), 
+						 oldDay: getDay(ui.sender),
+						 oldTimeStart: getTimeStart(ui.sender), 
+						 newDay: getDay(ui.item.parent()),
+						 newTimeStart: getTimeStart(ui.item.parent()),
+						 duration: getDuration(ui.item)},
 				success: function(data) {
-
+					
 				},
 				error : function() {
-
+					
 				}
 			});
 	    }
@@ -76,4 +81,27 @@ function redirectToEditSection(){
 	var url = currentUrl.replace('calendar','schedule/editsection') + '/2011-2012/Automne/' + nrc;
 	
 	window.location.replace(url);
+}
+
+function getDay(object){
+	return object.attr('id').substr(0,3);
+}
+	
+function getTimeStart(object) {
+	var time = object.attr('id').substr(3);
+	var hour = time.substr(0, time.length - 1);
+	var minute = time.substr(time.length - 1);
+	if(minute == "5") {
+		minute = "30";
+	}else {
+		minute = "00";
+	}
+	return hour + ":" + minute;
+} 
+
+function getDuration(object) {
+	var pixelWidth = object.css('width').substr(0, object.css('width').length - 2);
+	var duration = pixelWidth/50;
+	return duration;
+	
 }

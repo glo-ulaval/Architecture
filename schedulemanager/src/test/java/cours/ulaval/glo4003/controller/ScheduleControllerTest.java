@@ -104,11 +104,17 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleByYearReturnsTheCorrectModelAndView() throws Exception {
-		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "calendar");
+	public void scheduleByYearListViewReturnsTheCorrectModelAndView() throws Exception {
+		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list");
 
 		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
 		assertTrue(mv.getModel().get("sections") instanceof SortedSlotsModel);
+	}
+
+	// TODO
+	@Test
+	public void scheduleByYearCalendarViewReturnsTheCorrectModelAndView() throws Exception {
+
 	}
 
 	@Test
@@ -179,6 +185,7 @@ public class ScheduleControllerTest {
 		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model, principal);
 
 		assertEquals("schedulebyid", mv.getViewName());
+		// This test is made only on the list view
 	}
 
 	@Test
