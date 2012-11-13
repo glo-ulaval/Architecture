@@ -51,9 +51,6 @@
 						<td class="centered">
 							<a class="btn" href="${scheduleurl}/${schedule.id}/list"><i class="icon-search"></i></a>
 						</td>
-						<td class="centered">
-							<a class="btn" href="${scheduleurl}/${schedule.id}/calendar"><i class="icon-search"></i></a>
-						</td>
 						<sec:authorize access="hasRole('ROLE_Responsable')">
 						<td class="centered">
 							<a class="btn btn-danger" href="${scheduleurl}/delete/${schedule.id}"><i class="icon-trash icon-white"></i></a>
