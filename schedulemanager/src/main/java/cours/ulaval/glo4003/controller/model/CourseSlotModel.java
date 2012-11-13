@@ -1,7 +1,11 @@
 package cours.ulaval.glo4003.controller.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
 public class CourseSlotModel {
 
@@ -13,6 +17,7 @@ public class CourseSlotModel {
 	private Boolean isLab;
 	private String dayOfWeek;
 	private Integer duration;
+	private List<ConflictModel> conflicts;
 
 	public CourseSlotModel(Section section, TimeSlot timeSlot, Boolean isLab) {
 		this.nrc = section.getNrc();
@@ -23,6 +28,11 @@ public class CourseSlotModel {
 		this.isLab = isLab;
 		this.dayOfWeek = timeSlot.getDayOfWeek().toString();
 		this.duration = timeSlot.getDuration();
+		conflicts = new ArrayList<ConflictModel>();
+	}
+
+	public void addConflict(Conflict conflict) {
+		conflicts.add(new ConflictModel(conflict));
 	}
 
 	public String getTimeSlotStart() {
@@ -87,6 +97,30 @@ public class CourseSlotModel {
 
 	public void setDuration(Integer duration) {
 		this.duration = duration;
+	}
+
+	public String getTimeStart() {
+		return timeStart;
+	}
+
+	public void setTimeStart(String timeStart) {
+		this.timeStart = timeStart;
+	}
+
+	public String getTimeEnd() {
+		return timeEnd;
+	}
+
+	public void setTimeEnd(String timeEnd) {
+		this.timeEnd = timeEnd;
+	}
+
+	public List<ConflictModel> getConflicts() {
+		return conflicts;
+	}
+
+	public void setConflicts(List<ConflictModel> conflicts) {
+		this.conflicts = conflicts;
 	}
 
 }

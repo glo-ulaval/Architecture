@@ -84,8 +84,11 @@ public class ScheduleController {
 			mv.addObject("scheduleId", id);
 		} else {
 			mv = new ModelAndView("schedulebyid");
-			mv.addObject("schedule", new ScheduleModel(scheduleRepository.findById(id)));
-			mv.addObject("sections", new SortedSlotsModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections().values())));
+			Schedule schedule = scheduleRepository.findById(id);
+			mv.addObject("schedule", new ScheduleModel(schedule));
+			SortedSlotsModel model = new SortedSlotsModel(new ArrayList<Section>(schedule.getSections().values()));
+			model.addConflicts(schedule.getConflicts());
+			mv.addObject("sections", model);
 
 		}
 		return mv;

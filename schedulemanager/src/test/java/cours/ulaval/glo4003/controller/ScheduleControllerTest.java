@@ -5,7 +5,6 @@ import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,10 +27,14 @@ import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.TeachMode;
+import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
@@ -104,11 +107,35 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleByYearListViewReturnsTheCorrectModelAndView() throws Exception {
+	public void scheduleByIdListViewReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list");
 
 		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
 		assertTrue(mv.getModel().get("sections") instanceof SortedSlotsModel);
+	}
+
+	@Test
+	public void scheduleByIdListViewReturnsTheCorrectModelWithSimpleConflict() throws Exception {
+		Time time = new Time(8, 30);
+		TimeSlot firstTimeSlot = new TimeSlot(time, 2, DayOfWeek.TUESDAY);
+		Conflict conflict = new UnavailableTeacherConflict(A_SECTION_NRC, A_USERNAME, firstTimeSlot);
+		when(schedule.getConflicts()).thenReturn(Arrays.asList(conflict));
+		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list");
+
+		SortedSlotsModel model = (SortedSlotsModel) mv.getModel().get("sections");
+		assertEquals(1, model.getTuesday().get(0).getConflicts().size());
+	}
+
+	@Test
+	public void scheduleByIdListViewReturnsTheCorrectModelWithConflictWithTwoSlots() throws Exception {
+		Time time = new Time(8, 30);
+		TimeSlot firstTimeSlot = new TimeSlot(time, 2, DayOfWeek.TUESDAY);
+		Conflict conflict = new ConcomittingCoursesConflict(A_SECTION_NRC, A_SECTION_NRC, firstTimeSlot, firstTimeSlot);
+		when(schedule.getConflicts()).thenReturn(Arrays.asList(conflict));
+		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list");
+
+		SortedSlotsModel model = (SortedSlotsModel) mv.getModel().get("sections");
+		assertEquals(2, model.getTuesday().get(0).getConflicts().size());
 	}
 
 	// TODO
@@ -234,13 +261,14 @@ public class ScheduleControllerTest {
 
 	private Section createSection() {
 		Section section = new Section();
-		section.setNrc("00000");
+		section.setNrc(A_SECTION_NRC);
 		section.setTimeDedicated(new TimeDedicated(2, 3, 4));
 		section.setTeachMode(TeachMode.InCourse);
 		TimeSlot slot = new TimeSlot();
 		slot.setDayOfWeek(DayOfWeek.FRIDAY);
 		section.setLabTimeSlot(slot);
-		section.setCourseTimeSlots(new ArrayList<TimeSlot>());
+		Time time = new Time(8, 30);
+		section.setCourseTimeSlots(Arrays.asList(new TimeSlot(time, 2, DayOfWeek.TUESDAY)));
 
 		return section;
 	}
