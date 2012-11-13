@@ -44,8 +44,7 @@ public class SectionTest {
 		courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
 		labTimeSlot = new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.FRIDAY);
 		courseAcronym = "GLO_4002";
-		section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot,
-				labTimeSlot);
+		section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot, labTimeSlot);
 	}
 
 	@Test
@@ -94,6 +93,16 @@ public class SectionTest {
 	}
 
 	@Test
+	public void canGenerateSameTeacherConflicts() {
+		List<Conflict> conflicts = section.generateSameTeacherConflicts(section);
+
+		assertEquals(2, conflicts.size());
+		for (int i = 0; i < conflicts.size(); i++) {
+			assertTrue(conflicts.get(i) instanceof ConcomittingCoursesConflict);
+		}
+	}
+
+	@Test
 	public void canGenerateUnavailableTeacherConflict() {
 		Availability availabilityMock = mock(Availability.class);
 		when(availabilityMock.isAvailableForTimeSlot(any(TimeSlot.class))).thenReturn(AvailabilityLevel.Unavailable,
@@ -106,26 +115,6 @@ public class SectionTest {
 		assertEquals(4, conflicts.size());
 		assertTrue(conflicts.get(0) instanceof UnavailableTeacherConflict);
 		assertTrue(conflicts.get(1) instanceof DisponibilityConflict);
-	}
-
-	@Test
-	public void canDetectIfTwoSectionOverlap() {
-		List<TimeSlot> timeSlots = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
-
-		Section sectionOverlapping = mock(Section.class);
-		when(sectionOverlapping.getCoursesAndLabTimeSlots()).thenReturn(timeSlots);
-
-		assertTrue(section.isOverlaping(sectionOverlapping));
-	}
-
-	@Test
-	public void canDetectIfTwoSectionDontOverlap() {
-		List<TimeSlot> timeSlots = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.WEDNESDAY));
-
-		Section sectionOverlapping = mock(Section.class);
-		when(sectionOverlapping.getCoursesAndLabTimeSlots()).thenReturn(timeSlots);
-
-		assertFalse(section.isOverlaping(sectionOverlapping));
 	}
 
 	private Time generateTimeSlotStartTime() {
