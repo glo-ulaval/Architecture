@@ -229,12 +229,20 @@ public class ScheduleController {
 
 		Time oldTmStart = new Time(Integer.parseInt(oldTimeStart.split(":")[0]), Integer.parseInt(oldTimeStart.split(":")[1]));
 
-		List<TimeSlot> timeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCoursesAndLabTimeSlots();
+		List<TimeSlot> courseTimeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCourseTimeSlots();
 
-		for (TimeSlot slot : timeSlots) {
+		for (TimeSlot slot : courseTimeSlots) {
 			if (slot.getDayOfWeek().toString().toLowerCase().substring(0, 2) == oldDay || slot.getStartTime().equals(oldTmStart)) {
-				timeSlots.remove(slot);
-				timeSlots.add(newTimeSlot);
+				courseTimeSlots.remove(slot);
+				courseTimeSlots.add(newTimeSlot);
+				scheduleRepository.findById(id).getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
+			}
+		}
+
+		TimeSlot labTimeSlot = scheduleRepository.findById(id).getSections().get(nrc).getLabTimeSlot();
+		if (labTimeSlot != null) {
+			if (labTimeSlot.getDayOfWeek().toString().toLowerCase().substring(0, 2) == oldDay || labTimeSlot.getStartTime().equals(oldTmStart)) {
+				scheduleRepository.findById(id).getSections().get(nrc).setLabTimeSlot(newTimeSlot);
 			}
 		}
 
