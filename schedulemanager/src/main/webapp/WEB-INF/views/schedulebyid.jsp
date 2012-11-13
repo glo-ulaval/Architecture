@@ -61,11 +61,16 @@
 						<td class="span12"><b>${mondaysection.timeSlotStart} -
 								${mondaysection.timeSlotEnd}</b> || ${mondaysection.acronym}
 							(${mondaysection.nrc} - ${mondaysection.group})</td>
+						<c:forEach var="conflict" items="${mondaysection.conflicts}">
+              <td class="centered"><a class="btn btn-warning"
+                href="#"><i
+                  class="icon-warning-sign"></i></a></td>
+						</c:forEach>
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-warning"
+							<td class="centered"><a class="btn btn-info"
 								href="${editsection}/${mondaysection.nrc}"><i
-									class="icon-edit"></i></a></td>
+									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${mondaysection.nrc}"><i
 									class="icon-trash icon-white"></i></a></td>
@@ -93,9 +98,9 @@
 							(${tuesdaysection.nrc} - ${tuesdaysection.group})</td>
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-warning"
+							<td class="centered"><a class="btn btn-info"
 								href="${editsection}/${tuesdaysection.nrc}"><i
-									class="icon-edit"></i></a></td>
+									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${tuesdaysection.nrc}"><i
 									class="icon-trash icon-white"></i></a></td>
@@ -123,9 +128,9 @@
 							(${wednesdaysection.nrc} - ${wednesdaysection.group})</td>
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-warning"
+							<td class="centered"><a class="btn btn-info"
 								href="${editsection}/${wednesdaysection.nrc}"><i
-									class="icon-edit"></i></a></td>
+									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${wednesdaysection.nrc}"><i
 									class="icon-trash icon-white"></i></a></td>
@@ -153,9 +158,9 @@
 							(${thursdaysection.nrc} - ${thursdaysection.group})</td>
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-warning"
+							<td class="centered"><a class="btn btn-info"
 								href="${editsection}/${thursdaysection.nrc}"><i
-									class="icon-edit"></i></a></td>
+									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${thursdaysection.nrc}"><i
 									class="icon-trash icon-white"></i></a></td>
@@ -183,9 +188,9 @@
 							(${fridaysection.nrc} - ${fridaysection.group})</td>
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-warning"
+							<td class="centered"><a class="btn btn-info"
 								href="${editsection}/${fridaysection.nrc}"><i
-									class="icon-edit"></i></a></td>
+									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${fridaysection.nrc}"><i
 									class="icon-trash icon-white"></i></a></td>
