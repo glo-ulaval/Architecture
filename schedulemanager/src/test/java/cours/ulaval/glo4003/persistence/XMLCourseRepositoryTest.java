@@ -80,6 +80,14 @@ public class XMLCourseRepositoryTest {
 		verify(mockedSerializer, times(2)).serialize(any(CoursesXMLWrapper.class), anyString());
 	}
 
+	@Test
+	public void canClearTheRepository()
+			throws Exception {
+		repository.clear();
+
+		assertEquals(0, repository.findAll().size());
+	}
+
 	private CoursesXMLWrapper prepareMockedCourseDTO() {
 		CoursesXMLWrapper dto = new CoursesXMLWrapper();
 		List<Course> courses = new ArrayList<Course>();
