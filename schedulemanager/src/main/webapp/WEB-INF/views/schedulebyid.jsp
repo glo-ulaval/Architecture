@@ -28,10 +28,11 @@
 		</div>
 		<br /> <b>* Notez que les sections indiquées en <span
 			class="yellow">jaune</span> sont des sections de laboratoire.
-		</b> <br><br>
-		<b>* Les plages horaires indiquées en <span
-      class="red">rouge</span> sont en conflits, soit avec une autre plage horaire ou avec une disponibilité d'un professeur.
-    </b> <br /> <br />
+		</b> <br>
+		<br> <b>* Les plages horaires indiquées en <span class="red">rouge</span>
+			sont en conflits, soit avec une autre plage horaire ou avec une
+			disponibilité d'un professeur.
+		</b> <br /> <br />
 		<div class="btn-group">
 			<a href="#" type="button" class="btn active">Liste</a> <a
 				href="calendar" type="button" class="btn">Calendrier</a>
@@ -43,7 +44,7 @@
 				value="/schedule/deletesection/${schedule.id}/${schedule.year}/${schedule.semester}"></c:url>
 			<table class="table">
 				<tr class="well">
-					<td colspan="3"><h4>Lundi</h4></td>
+					<td colspan="4"><h4>Lundi</h4></td>
 				</tr>
 				<c:set var="counter" value="0" />
 				<c:forEach var="mondaysection" items="${sections.monday}">
@@ -55,7 +56,7 @@
 							<c:set value="red" var="color"></c:set>
 						</c:when>
 						<c:otherwise>
-						  <c:set value="" var="color"></c:set>
+							<c:set value="" var="color"></c:set>
 						</c:otherwise>
 					</c:choose>
 					<tr class="${color}">
@@ -67,34 +68,35 @@
 							<td class="centered"><a class="btn btn-info"
 								href="${editsection}/${mondaysection.nrc}"><i
 									class="icon-edit icon-white"></i></a></td>
-							<td class="centered"><a class="btn btn-danger"
+							<td class="centered">
+						<a class="btn btn-danger"
 								href="${deletesection}/${mondaysection.nrc}"><i
-									class="icon-trash icon-white"></i></a></td>
-						</sec:authorize>
-            <c:if test="${fn:length(mondaysection.conflicts) > 0}">
-              <c:url var="conflicturl" value="/conflict/monday/${counter}"></c:url>
-              <td><a class="btn btn-warning"
-                href="${conflicturl}" title="Détails du/des conflit(s)"><i
-                  class="icon-warning-sign"></i></a></td>
-            </c:if>
+								class="icon-trash icon-white"></i></a>
+							</td></sec:authorize>
+						<c:if test="${fn:length(mondaysection.conflicts) > 0}">
+							<c:url var="conflicturl" value="/conflict/monday/${counter}"></c:url>
+							<td><a class="btn btn-warning" href="${conflicturl}"
+								title="Détails du/des conflit(s)"><i
+									class="icon-warning-sign"></i></a></td>
+						</c:if>
 					</tr>
-				<c:set var="counter" value="${counter+1}" />
+					<c:set var="counter" value="${counter+1}" />
 				</c:forEach>
 				<tr class="well">
-					<td colspan="3"><h4>Mardi</h4></td>
+					<td colspan="4"><h4>Mardi</h4></td>
 				</tr>
 				<c:forEach var="tuesdaysection" items="${sections.tuesday}">
-          <c:choose>
-            <c:when test="${tuesdaysection.isLab}">
-              <c:set value="yellow" var="color"></c:set>
-            </c:when>
-            <c:when test="${fn:length(tuesdaysection.conflicts) > 0}">
-              <c:set value="red" var="color"></c:set>
-            </c:when>
-            <c:otherwise>
-              <c:set value="" var="color"></c:set>
-            </c:otherwise>
-          </c:choose>
+					<c:choose>
+						<c:when test="${tuesdaysection.isLab}">
+							<c:set value="yellow" var="color"></c:set>
+						</c:when>
+						<c:when test="${fn:length(tuesdaysection.conflicts) > 0}">
+							<c:set value="red" var="color"></c:set>
+						</c:when>
+						<c:otherwise>
+							<c:set value="" var="color"></c:set>
+						</c:otherwise>
+					</c:choose>
 					<tr class="${color}">
 						<td class="span12"><b>${tuesdaysection.timeSlotStart} -
 								${tuesdaysection.timeSlotEnd}</b> || ${tuesdaysection.acronym}
@@ -111,20 +113,20 @@
 					</tr>
 				</c:forEach>
 				<tr class="well">
-					<td colspan="3"><h4>Mercredi</h4></td>
+					<td colspan="4"><h4>Mercredi</h4></td>
 				</tr>
 				<c:forEach var="wednesdaysection" items="${sections.wednesday}">
-          <c:choose>
-            <c:when test="${wednesdaysection.isLab}">
-              <c:set value="yellow" var="color"></c:set>
-            </c:when>
-            <c:when test="${fn:length(wednesdaysection.conflicts) > 0}">
-              <c:set value="red" var="color"></c:set>
-            </c:when>
-            <c:otherwise>
-              <c:set value="" var="color"></c:set>
-            </c:otherwise>
-          </c:choose>
+					<c:choose>
+						<c:when test="${wednesdaysection.isLab}">
+							<c:set value="yellow" var="color"></c:set>
+						</c:when>
+						<c:when test="${fn:length(wednesdaysection.conflicts) > 0}">
+							<c:set value="red" var="color"></c:set>
+						</c:when>
+						<c:otherwise>
+							<c:set value="" var="color"></c:set>
+						</c:otherwise>
+					</c:choose>
 					<tr class="${color}">
 						<td class="span12"><b>${wednesdaysection.timeSlotStart} -
 								${wednesdaysection.timeSlotEnd}</b> || ${wednesdaysection.acronym}
@@ -141,20 +143,20 @@
 					</tr>
 				</c:forEach>
 				<tr class="well">
-					<td colspan="3"><h4>Jeudi</h4></td>
+					<td colspan="4"><h4>Jeudi</h4></td>
 				</tr>
 				<c:forEach var="thursdaysection" items="${sections.thursday}">
-          <c:choose>
-            <c:when test="${thursdaysection.isLab}">
-              <c:set value="yellow" var="color"></c:set>
-            </c:when>
-            <c:when test="${fn:length(thursdaysection.conflicts) > 0}">
-              <c:set value="red" var="color"></c:set>
-            </c:when>
-            <c:otherwise>
-              <c:set value="" var="color"></c:set>
-            </c:otherwise>
-          </c:choose>
+					<c:choose>
+						<c:when test="${thursdaysection.isLab}">
+							<c:set value="yellow" var="color"></c:set>
+						</c:when>
+						<c:when test="${fn:length(thursdaysection.conflicts) > 0}">
+							<c:set value="red" var="color"></c:set>
+						</c:when>
+						<c:otherwise>
+							<c:set value="" var="color"></c:set>
+						</c:otherwise>
+					</c:choose>
 					<tr class="${color}">
 						<td class="span12"><b>${thursdaysection.timeSlotStart} -
 								${thursdaysection.timeSlotEnd}</b> || ${thursdaysection.acronym}
@@ -171,20 +173,20 @@
 					</tr>
 				</c:forEach>
 				<tr class="well">
-					<td colspan="3"><h4>Vendredi</h4></td>
+					<td colspan="4"><h4>Vendredi</h4></td>
 				</tr>
 				<c:forEach var="fridaysection" items="${sections.friday}">
-          <c:choose>
-            <c:when test="${fridaysection.isLab}">
-              <c:set value="yellow" var="color"></c:set>
-            </c:when>
-            <c:when test="${fn:length(fridaysection.conflicts) > 0}">
-              <c:set value="red" var="color"></c:set>
-            </c:when>
-            <c:otherwise>
-              <c:set value="" var="color"></c:set>
-            </c:otherwise>
-          </c:choose>
+					<c:choose>
+						<c:when test="${fridaysection.isLab}">
+							<c:set value="yellow" var="color"></c:set>
+						</c:when>
+						<c:when test="${fn:length(fridaysection.conflicts) > 0}">
+							<c:set value="red" var="color"></c:set>
+						</c:when>
+						<c:otherwise>
+							<c:set value="" var="color"></c:set>
+						</c:otherwise>
+					</c:choose>
 					<tr class="${color}">
 						<td class="span12"><b>${fridaysection.timeSlotStart} -
 								${fridaysection.timeSlotEnd}</b> || ${fridaysection.acronym}
