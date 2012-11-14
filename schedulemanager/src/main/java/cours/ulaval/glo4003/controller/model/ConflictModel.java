@@ -65,7 +65,19 @@ public class ConflictModel {
 	}
 
 	public String getDayOfWeek() {
-		return dayOfWeek;
+		String day = "";
+		if (dayOfWeek.equals("MONDAY")) {
+			day = "Lundi";
+		} else if (dayOfWeek.equals("TUESDAY")) {
+			day = "Mardi";
+		} else if (dayOfWeek.equals("WEDNESDAY")) {
+			day = "Mercredi";
+		} else if (dayOfWeek.equals("THURSDAY")) {
+			day = "Jeudi";
+		} else if (dayOfWeek.equals("FRIDAY")) {
+			day = "Vendredi";
+		}
+		return day;
 	}
 
 	public void setDayOfWeek(String dayOfWeek) {
