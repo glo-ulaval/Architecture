@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cours.ulaval.glo4003.controller.model.CalendarModel;
 import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.SortedSlotsCache;
 import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
@@ -66,7 +67,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
-	public ModelAndView scheduleById(@PathVariable String id, @PathVariable String view) throws Exception {
+	public ModelAndView scheduleById(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
 
 		ModelAndView mv;
 		if (view.contentEquals("calendar")) {
@@ -88,6 +89,7 @@ public class ScheduleController {
 			mv.addObject("schedule", new ScheduleModel(schedule));
 			SortedSlotsModel model = new SortedSlotsModel(new ArrayList<Section>(schedule.getSections().values()));
 			model.addConflicts(schedule.getConflicts());
+			SortedSlotsCache.getCache().setCachedValue(principal.getName(), model);
 			mv.addObject("sections", model);
 
 		}
@@ -179,7 +181,7 @@ public class ScheduleController {
 			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 
 		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			ModelAndView mv = scheduleById(id, "list");
+			ModelAndView mv = scheduleById(id, "list", principal);
 			mv.addObject("user", userRepository.findByIdul(principal.getName()));
 			return mv;
 		}

@@ -45,6 +45,7 @@
 				<tr class="well">
 					<td colspan="3"><h4>Lundi</h4></td>
 				</tr>
+				<c:set var="counter" value="0" />
 				<c:forEach var="mondaysection" items="${sections.monday}">
 					<c:choose>
 						<c:when test="${mondaysection.isLab}">
@@ -71,11 +72,13 @@
 									class="icon-trash icon-white"></i></a></td>
 						</sec:authorize>
             <c:if test="${fn:length(mondaysection.conflicts) > 0}">
+              <c:url var="conflicturl" value="/conflict/monday/${counter}"></c:url>
               <td><a class="btn btn-warning"
-                href="#" title="Détails du/des conflit(s)"><i
+                href="${conflicturl}" title="Détails du/des conflit(s)"><i
                   class="icon-warning-sign"></i></a></td>
             </c:if>
 					</tr>
+				<c:set var="counter" value="${counter+1}" />
 				</c:forEach>
 				<tr class="well">
 					<td colspan="3"><h4>Mardi</h4></td>

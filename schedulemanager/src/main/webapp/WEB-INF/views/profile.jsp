@@ -27,7 +27,7 @@
 		<div class="container">
 			<div class="row-fluid">
 				<div class="hero-unit">
-					<h1>Édition du profile</h1>
+					<h1>Édition du profil</h1>
 					<h3>&nbsp;&nbsp;&nbsp; - ${user.name}</h3>
 				</div>
         <table class="table table-striped">

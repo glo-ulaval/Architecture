@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.ScheduleModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.SortedSlotsCache;
 import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
@@ -66,6 +67,7 @@ public class ScheduleControllerTest {
 	private List<Course> courses;
 	private Schedule schedule;
 	private User user;
+	private Principal principal;
 
 	@Before
 	public void setUp() {
@@ -78,6 +80,8 @@ public class ScheduleControllerTest {
 		Map<String, Section> sections = new HashMap<String, Section>();
 		course = mock(Course.class);
 		schedule = mock(Schedule.class);
+		principal = mock(Principal.class);
+		when(principal.getName()).thenReturn(A_USERNAME);
 		when(schedule.getSemester()).thenReturn(Semester.Automne);
 		Offering offering = mock(Offering.class);
 		List<String> years = Arrays.asList(A_YEAR);
@@ -108,10 +112,17 @@ public class ScheduleControllerTest {
 
 	@Test
 	public void scheduleByIdListViewReturnsTheCorrectModelAndView() throws Exception {
-		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list");
+		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list", principal);
 
 		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
 		assertTrue(mv.getModel().get("sections") instanceof SortedSlotsModel);
+	}
+
+	@Test
+	public void scheduleByIdListViewAddsSortedSlotsInCache() throws Exception {
+		controller.scheduleById(A_SCHEDULE_ID, "list", principal);
+
+		assertEquals(1, SortedSlotsCache.getCache().getCacheCount());
 	}
 
 	@Test
@@ -120,7 +131,7 @@ public class ScheduleControllerTest {
 		TimeSlot firstTimeSlot = new TimeSlot(time, 2, DayOfWeek.TUESDAY);
 		Conflict conflict = new UnavailableTeacherConflict(A_SECTION_NRC, A_USERNAME, firstTimeSlot);
 		when(schedule.getConflicts()).thenReturn(Arrays.asList(conflict));
-		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list");
+		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list", principal);
 
 		SortedSlotsModel model = (SortedSlotsModel) mv.getModel().get("sections");
 		assertEquals(1, model.getTuesday().get(0).getConflicts().size());
@@ -132,7 +143,7 @@ public class ScheduleControllerTest {
 		TimeSlot firstTimeSlot = new TimeSlot(time, 2, DayOfWeek.TUESDAY);
 		Conflict conflict = new ConcomittingCoursesConflict(A_SECTION_NRC, A_SECTION_NRC, firstTimeSlot, firstTimeSlot);
 		when(schedule.getConflicts()).thenReturn(Arrays.asList(conflict));
-		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list");
+		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list", principal);
 
 		SortedSlotsModel model = (SortedSlotsModel) mv.getModel().get("sections");
 		assertEquals(2, model.getTuesday().get(0).getConflicts().size());
