@@ -15,4 +15,7 @@ public interface CourseRepository {
 	public Course findByAcronym(String acronym);
 
 	public void store(Course course);
+
+	// WARNING -- this method is for tests only
+	public void clear();
 }
