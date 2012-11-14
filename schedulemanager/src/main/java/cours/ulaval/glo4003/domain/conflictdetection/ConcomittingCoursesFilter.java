@@ -26,6 +26,14 @@ public class ConcomittingCoursesFilter extends Filter {
 				}
 			}
 		}
+		nextPipe(schedule);
+	}
+
+	@Override
+	public void nextPipe(Schedule schedule) {
+		if (nextPipe != null) {
+			nextPipe.run(schedule);
+		}
 	}
 
 	private boolean areConcomitting(Section section, Section otherSection) {

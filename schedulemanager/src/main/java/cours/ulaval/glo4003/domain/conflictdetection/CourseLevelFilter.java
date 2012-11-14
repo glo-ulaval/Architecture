@@ -26,6 +26,14 @@ public class CourseLevelFilter extends Filter {
 				}
 			}
 		}
+		nextPipe(schedule);
+	}
+
+	@Override
+	public void nextPipe(Schedule schedule) {
+		if (nextPipe != null) {
+			nextPipe.run(schedule);
+		}
 	}
 
 	private boolean areSameLevelCourses(Section section, Section otherSection) {
