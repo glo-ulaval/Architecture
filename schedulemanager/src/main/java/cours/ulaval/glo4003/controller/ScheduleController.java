@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.controller.model.CalendarModel;
-import cours.ulaval.glo4003.controller.model.ScheduleModel;
+import cours.ulaval.glo4003.controller.model.ScheduleInformationModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
-import cours.ulaval.glo4003.controller.model.SortedSlotsCache;
-import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
@@ -56,10 +54,10 @@ public class ScheduleController {
 	public ModelAndView schedule() {
 		ModelAndView mv = new ModelAndView("schedule");
 
-		List<ScheduleModel> scheduleModels = new ArrayList<ScheduleModel>();
+		List<ScheduleInformationModel> scheduleModels = new ArrayList<ScheduleInformationModel>();
 
 		for (Schedule schedule : scheduleRepository.findAll()) {
-			scheduleModels.add(new ScheduleModel(schedule));
+			scheduleModels.add(new ScheduleInformationModel(schedule));
 		}
 
 		mv.addObject("schedules", scheduleModels);
@@ -69,35 +67,28 @@ public class ScheduleController {
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
 	public ModelAndView scheduleById(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
 
+		CalendarModel calendarModel = new CalendarModel(scheduleRepository.findById(id));
+
 		ModelAndView mv;
 		if (view.contentEquals("calendar")) {
-			mv = new ModelAndView("calendar");
-
-			Schedule schedule = scheduleRepository.findById(id);
-
-			CalendarModel calendarModel = new CalendarModel(new ArrayList<Section>(schedule.getSections().values()), schedule.getYear(), schedule
-					.getSemester().toString(), schedule.getId());
-
-			String JSON = "";
-			try {
-				JSON = mapper.writeValueAsString(calendarModel);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			mv.addObject("schedule", JSON);
-			mv.addObject("scheduleId", id);
+			mv = new ModelAndView("schedulecalendar");
+			mv.addObject("schedule", convertToJson(calendarModel));
 		} else {
-			mv = new ModelAndView("schedulebyid");
-			Schedule schedule = scheduleRepository.findById(id);
-			mv.addObject("schedule", new ScheduleModel(schedule));
-			SortedSlotsModel model = new SortedSlotsModel(new ArrayList<Section>(schedule.getSections().values()));
-			model.addConflicts(schedule.getConflicts());
-			SortedSlotsCache.getCache().setCachedValue(principal.getName(), model);
-			mv.addObject("sections", model);
-
+			mv = new ModelAndView("schedulelist");
+			mv.addObject("schedule", calendarModel);
 		}
+
 		return mv;
+	}
+
+	private String convertToJson(CalendarModel calendarModel) {
+		String JSON = "";
+		try {
+			JSON = mapper.writeValueAsString(calendarModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return JSON;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -166,8 +157,6 @@ public class ScheduleController {
 	public ModelAndView editSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc) {
 
-		// ModelAndView mv = new
-		// ModelAndView("partialViews/editSectionPartial");
 		ModelAndView mv = new ModelAndView("editsection");
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);

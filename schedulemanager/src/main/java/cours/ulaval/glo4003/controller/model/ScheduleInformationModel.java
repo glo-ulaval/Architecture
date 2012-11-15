@@ -2,13 +2,13 @@ package cours.ulaval.glo4003.controller.model;
 
 import cours.ulaval.glo4003.domain.Schedule;
 
-public class ScheduleModel {
+public class ScheduleInformationModel {
 
 	private String year;
 	private String semester;
 	private String id;
 
-	public ScheduleModel(Schedule schedule) {
+	public ScheduleInformationModel(Schedule schedule) {
 		this.year = schedule.getYear();
 		this.semester = schedule.getSemester().toString();
 		this.id = schedule.getId();

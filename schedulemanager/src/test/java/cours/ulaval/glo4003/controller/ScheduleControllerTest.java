@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.ModelAndView;
 
-import cours.ulaval.glo4003.controller.model.ScheduleModel;
+import cours.ulaval.glo4003.controller.model.ScheduleInformationModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.controller.model.SortedSlotsCache;
 import cours.ulaval.glo4003.controller.model.SortedSlotsModel;
@@ -114,7 +114,7 @@ public class ScheduleControllerTest {
 	public void scheduleByIdListViewReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.scheduleById(A_SCHEDULE_ID, "list", principal);
 
-		assertTrue(mv.getModel().get("schedule") instanceof ScheduleModel);
+		assertTrue(mv.getModel().get("schedule") instanceof ScheduleInformationModel);
 		assertTrue(mv.getModel().get("sections") instanceof SortedSlotsModel);
 	}
 

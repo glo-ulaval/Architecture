@@ -5,66 +5,110 @@ import java.util.Collections;
 import java.util.List;
 
 import cours.ulaval.glo4003.controller.model.utils.TimeSlotComparator;
+import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TimeSlot;
 
 public class CalendarModel {
 
-	private String year;
-	private String semester;
-	private String id;
+	private ScheduleInformationModel scheduleInfo;
 
-	private List<CourseSlotModel> courseSlots = new ArrayList<CourseSlotModel>();
+	private List<CourseSlotModel> monday = new ArrayList<CourseSlotModel>();
+	private List<CourseSlotModel> tuesday = new ArrayList<CourseSlotModel>();
+	private List<CourseSlotModel> wednesday = new ArrayList<CourseSlotModel>();
+	private List<CourseSlotModel> thursday = new ArrayList<CourseSlotModel>();
+	private List<CourseSlotModel> friday = new ArrayList<CourseSlotModel>();
 
-	public CalendarModel(List<Section> sections, String year, String semester, String id) {
-		for (Section section : sections) {
-			for (TimeSlot timeSlot : section.getCourseTimeSlots()) {
-				courseSlots.add(new CourseSlotModel(section, timeSlot, false));
+	public CalendarModel(Schedule schedule) {
+		scheduleInfo = new ScheduleInformationModel(schedule);
+
+		for (Section section : schedule.getSectionsList()) {
+			for (TimeSlot timeSlot : section.getCoursesAndLabTimeSlots()) {
+				addToList(section, timeSlot, false);
+			}
+			if (section.getLabTimeSlot() != null) {
+				addToList(section, section.getLabTimeSlot(), true);
 			}
 		}
-		for (Section section : sections) {
-			TimeSlot timeSlot = section.getLabTimeSlot();
-			if (timeSlot != null) {
-				courseSlots.add(new CourseSlotModel(section, timeSlot, true));
-			}
+		sort();
+	}
+
+	private void sort() {
+		Collections.sort(monday, new TimeSlotComparator());
+		Collections.sort(tuesday, new TimeSlotComparator());
+		Collections.sort(wednesday, new TimeSlotComparator());
+		Collections.sort(thursday, new TimeSlotComparator());
+		Collections.sort(friday, new TimeSlotComparator());
+	}
+
+	private void addToList(Section section, TimeSlot timeSlot, boolean isLab) {
+		switch (timeSlot.getDayOfWeek()) {
+		case MONDAY:
+			monday.add(new CourseSlotModel(section, timeSlot, isLab));
+			break;
+		case TUESDAY:
+			tuesday.add(new CourseSlotModel(section, timeSlot, isLab));
+			break;
+		case WEDNESDAY:
+			wednesday.add(new CourseSlotModel(section, timeSlot, isLab));
+			break;
+		case THURSDAY:
+			thursday.add(new CourseSlotModel(section, timeSlot, isLab));
+			break;
+		case FRIDAY:
+			friday.add(new CourseSlotModel(section, timeSlot, isLab));
+			break;
+		default:
+			break;
 		}
-		Collections.sort(courseSlots, new TimeSlotComparator());
-
-		this.year = year;
-		this.semester = semester;
-		this.id = id;
 	}
 
-	public List<CourseSlotModel> getCourseSlots() {
-		return courseSlots;
+	public ScheduleInformationModel getScheduleInfo() {
+		return scheduleInfo;
 	}
 
-	public void setCourseSlots(List<CourseSlotModel> courseSlots) {
-		this.courseSlots = courseSlots;
+	public void setScheduleInfo(ScheduleInformationModel scheduleInfo) {
+		this.scheduleInfo = scheduleInfo;
 	}
 
-	public String getYear() {
-		return year;
+	public List<CourseSlotModel> getMonday() {
+		return monday;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setMonday(List<CourseSlotModel> monday) {
+		this.monday = monday;
 	}
 
-	public String getSemester() {
-		return semester;
+	public List<CourseSlotModel> getTuesday() {
+		return tuesday;
 	}
 
-	public void setSemester(String semester) {
-		this.semester = semester;
+	public void setTuesday(List<CourseSlotModel> tuesday) {
+		this.tuesday = tuesday;
 	}
 
-	public String getId() {
-		return id;
+	public List<CourseSlotModel> getWednesday() {
+		return wednesday;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setWednesday(List<CourseSlotModel> wednesday) {
+		this.wednesday = wednesday;
+	}
+
+	public List<CourseSlotModel> getThursday() {
+		return thursday;
+	}
+
+	public void setThursday(List<CourseSlotModel> thursday) {
+		this.thursday = thursday;
+	}
+
+	public List<CourseSlotModel> getFriday() {
+		return friday;
+	}
+
+	public void setFriday(List<CourseSlotModel> friday) {
+		this.friday = friday;
 	}
 
 }

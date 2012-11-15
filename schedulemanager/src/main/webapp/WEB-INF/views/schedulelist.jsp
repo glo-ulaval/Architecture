@@ -3,6 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ page session="true"%>
+<c:set var="id" value="${schedule.scheduleInfo.id}"/>
+<c:set var="semester" value="${schedule.scheduleInfo.semester}"/>
+<c:set var="year" value="${schedule.scheduleInfo.year}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +26,7 @@
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
-				<h1>[${schedule.semester} ${schedule.year}] ${schedule.id}</h1>
+				<h1>[${semester} ${year}] ${id}</h1>
 			</div>
 		</div>
 		<br /> <b>* Notez que les sections indiquées en <span
@@ -39,15 +42,15 @@
 		</div>
 		<div class="schedule_details">
 			<c:url var="editsection"
-				value="/schedule/editsection/${schedule.id}/${schedule.year}/${schedule.semester}"></c:url>
+				value="/schedule/editsection/${id}/${year}/${semester}"></c:url>
 			<c:url var="deletesection"
-				value="/schedule/deletesection/${schedule.id}/${schedule.year}/${schedule.semester}"></c:url>
+				value="/schedule/deletesection/${id}/${year}/${semester}"></c:url>
 			<table class="table">
 				<tr class="well">
 					<td colspan="4"><h4>Lundi</h4></td>
 				</tr>
 				<c:set var="counter" value="0" />
-				<c:forEach var="mondaysection" items="${sections.monday}">
+				<c:forEach var="mondaysection" items="${schedule.monday}">
 					<c:choose>
 						<c:when test="${mondaysection.isLab}">
 							<c:set value="yellow" var="color"></c:set>
@@ -85,7 +88,7 @@
 				<tr class="well">
 					<td colspan="4"><h4>Mardi</h4></td>
 				</tr>
-				<c:forEach var="tuesdaysection" items="${sections.tuesday}">
+				<c:forEach var="tuesdaysection" items="${schedule.tuesday}">
 					<c:choose>
 						<c:when test="${tuesdaysection.isLab}">
 							<c:set value="yellow" var="color"></c:set>
@@ -115,7 +118,7 @@
 				<tr class="well">
 					<td colspan="4"><h4>Mercredi</h4></td>
 				</tr>
-				<c:forEach var="wednesdaysection" items="${sections.wednesday}">
+				<c:forEach var="wednesdaysection" items="${schedule.wednesday}">
 					<c:choose>
 						<c:when test="${wednesdaysection.isLab}">
 							<c:set value="yellow" var="color"></c:set>
@@ -145,7 +148,7 @@
 				<tr class="well">
 					<td colspan="4"><h4>Jeudi</h4></td>
 				</tr>
-				<c:forEach var="thursdaysection" items="${sections.thursday}">
+				<c:forEach var="thursdaysection" items="${schedule.thursday}">
 					<c:choose>
 						<c:when test="${thursdaysection.isLab}">
 							<c:set value="yellow" var="color"></c:set>
@@ -175,7 +178,7 @@
 				<tr class="well">
 					<td colspan="4"><h4>Vendredi</h4></td>
 				</tr>
-				<c:forEach var="fridaysection" items="${sections.friday}">
+				<c:forEach var="fridaysection" items="${schedule.friday}">
 					<c:choose>
 						<c:when test="${fridaysection.isLab}">
 							<c:set value="yellow" var="color"></c:set>

@@ -34,10 +34,6 @@ public class CourseSlotModel {
 		this.duration = timeSlot.getDuration();
 	}
 
-	public void addConflict(Conflict conflict) {
-		conflicts.add(new ConflictModel(conflict));
-	}
-
 	public String getTimeSlotStart() {
 		return timeStart;
 	}
@@ -116,6 +112,14 @@ public class CourseSlotModel {
 
 	public void setTimeEnd(String timeEnd) {
 		this.timeEnd = timeEnd;
+	}
+
+	public void addConflict(Conflict conflict) {
+		conflicts.add(new ConflictModel(conflict));
+	}
+
+	public void removeConflict(Conflict conflict) {
+		conflicts.remove(conflict);
 	}
 
 	public List<ConflictModel> getConflicts() {

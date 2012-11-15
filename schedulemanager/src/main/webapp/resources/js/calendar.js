@@ -57,7 +57,7 @@ function initializeCalendar(){
 		receive : function(e, ui) {
 			$.ajax({
 				type : "POST",
-				url : '/schedulemanager/schedule/' + id + '/update',
+				url : '/schedulemanager/schedule/' + schedule.scheduleinfo.id + '/update',
 				data : {
 					nrc : ui.item.find('.event-name').attr('id').toString(),
 					oldDay : getDay(ui.sender),
