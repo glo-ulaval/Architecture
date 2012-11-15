@@ -39,6 +39,11 @@
 	vertical-align: baseline;
 	background-color: rgba(0, 70, 255, 0.5);
 	border-bottom: 2px solid #DEDEDE;
+	cursor: move;
+}
+
+.event:hover{
+	background-color: rgba(0, 70, 255, 0.3);
 }
 
 .event-name {

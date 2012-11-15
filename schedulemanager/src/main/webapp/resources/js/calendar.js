@@ -3,10 +3,10 @@ $(function() {
 	
 	var prevDay = "MONDAY";
 	var height = 0;
-	for ( var i = 0; i < sections.courseSlots.length; i++) {
+	for ( var i = 0; i < schedule.courseSlots.length; i++) {
 		
-		var durationInHours = parseInt(sections.courseSlots[i].duration);
-		var cs = sections.courseSlots[i];
+		var durationInHours = parseInt(schedule.courseSlots[i].duration);
+		var cs = schedule.courseSlots[i];
 		var nextTime = getNextTime(cs);
 
 		if(prevDay != cs.dayOfWeek){
@@ -104,11 +104,13 @@ function setDuration(cs) {
 
 function redirectToEditSection() {
 	var nrc = $(event.target).attr('id');
-	var currentUrl = document.URL;
-	var url = currentUrl.replace('calendar', 'schedule/editsection')
-			+ '/2011-2012/Automne/' + nrc;
+	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/' + id + '/' 
+		+ schedule.year + '/'+ schedule.semester + '/' + nrc;
 
-	window.location.replace(url);
+	window.location.assign(url);
+	
+	//http://localhost:8080/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/90111
+	//http://localhost:8080/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111
 }
 
 function getDay(object) {

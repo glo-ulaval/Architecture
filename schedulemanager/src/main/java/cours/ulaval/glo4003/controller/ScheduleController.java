@@ -72,7 +72,11 @@ public class ScheduleController {
 		ModelAndView mv;
 		if (view.contentEquals("calendar")) {
 			mv = new ModelAndView("calendar");
-			CalendarModel calendarModel = new CalendarModel(new ArrayList<Section>(scheduleRepository.findById(id).getSections().values()));
+
+			Schedule schedule = scheduleRepository.findById(id);
+
+			CalendarModel calendarModel = new CalendarModel(new ArrayList<Section>(schedule.getSections().values()), schedule.getYear(), schedule
+					.getSemester().toString(), schedule.getId());
 
 			String JSON = "";
 			try {
@@ -81,7 +85,7 @@ public class ScheduleController {
 				e.printStackTrace();
 			}
 
-			mv.addObject("sections", JSON);
+			mv.addObject("schedule", JSON);
 			mv.addObject("scheduleId", id);
 		} else {
 			mv = new ModelAndView("schedulebyid");
