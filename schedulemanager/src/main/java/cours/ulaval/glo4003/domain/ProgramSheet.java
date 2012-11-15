@@ -24,7 +24,10 @@ public class ProgramSheet {
 	}
 
 	public boolean areCoursesSameLevel(String firstAcronym, String secondAcronym) {
-		return courses.get(firstAcronym) == courses.get(secondAcronym);
+		if (courses.containsKey(firstAcronym) && courses.containsKey(secondAcronym)) {
+			return courses.get(firstAcronym) == courses.get(secondAcronym);
+		}
+		return false;
 	}
 
 }
