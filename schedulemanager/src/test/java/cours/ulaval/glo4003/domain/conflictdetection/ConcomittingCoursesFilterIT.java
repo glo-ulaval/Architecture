@@ -86,7 +86,7 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 		filter.run(schedule);
 
 		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("IFT-2002", schedule.getConflicts().get(0).getFirstNrc());
+		assertEquals("11765", schedule.getConflicts().get(0).getFirstNrc());
 	}
 
 	@Test
