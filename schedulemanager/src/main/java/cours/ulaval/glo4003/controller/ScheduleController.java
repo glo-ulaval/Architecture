@@ -203,14 +203,6 @@ public class ScheduleController {
 	public String updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
 			String duration, Principal principal) throws Exception {
 
-		// System.out.println("idhoraire:" + id);
-		// System.out.println("nrc:" + nrc);
-		// System.out.println("oldDay:" + oldDay);
-		// System.out.println("oldTimeStart:" + oldTimeStart);
-		// System.out.println("newDay:" + newDay);
-		// System.out.println("newTimeStart:" + newTimeStart);
-		// System.out.println("duration:" + duration);
-
 		DayOfWeek newDayOfWeek = null;
 		if (newDay == "mon") {
 			newDayOfWeek = DayOfWeek.MONDAY;
