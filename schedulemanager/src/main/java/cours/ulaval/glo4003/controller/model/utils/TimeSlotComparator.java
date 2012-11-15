@@ -14,12 +14,37 @@ public class TimeSlotComparator implements Comparator<CourseSlotModel> {
 
 		Integer sort = null;
 
-		if (slot1Time.before(slot2Time)) {
+		if (getDayValue(slot1.getDayOfWeek()) > getDayValue(slot2.getDayOfWeek())) {
+			sort = 1;
+		} else if (getDayValue(slot1.getDayOfWeek()) < getDayValue(slot2.getDayOfWeek())) {
 			sort = -1;
 		} else {
-			sort = 1;
+			if (slot1Time.before(slot2Time)) {
+				sort = -1;
+			} else {
+				sort = 1;
+			}
 		}
 
 		return sort;
+	}
+
+	private Integer getDayValue(String day) {
+		if (day.toLowerCase().equals("monday")) {
+			return 1;
+		}
+		if (day.toLowerCase().equals("tuesday")) {
+			return 2;
+		}
+		if (day.toLowerCase().equals("wednesday")) {
+			return 3;
+		}
+		if (day.toLowerCase().equals("thursday")) {
+			return 4;
+		}
+		if (day.toLowerCase().equals("friday")) {
+			return 5;
+		}
+		return 0;
 	}
 }
