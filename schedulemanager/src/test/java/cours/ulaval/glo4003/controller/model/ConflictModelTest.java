@@ -36,7 +36,7 @@ public class ConflictModelTest {
 
 		assertEquals(model.getDescription(), conflict.getDescription());
 		assertEquals(model.getFirstNrc(), conflict.getFirstNrc());
-		assertEquals(model.getDayOfWeek(), firstTimeSlot.getDayOfWeek().toString());
+		assertEquals(model.getDayOfWeek(), "Lundi");
 		assertEquals(model.getFirstStartTime(), firstTimeSlot.getStartTime().toString());
 		assertEquals(model.getFirstEndTime(), firstTimeSlot.getEndTime().toString());
 	}
