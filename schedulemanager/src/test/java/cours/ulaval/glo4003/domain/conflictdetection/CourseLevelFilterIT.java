@@ -14,6 +14,7 @@ import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
 import cours.ulaval.glo4003.domain.repository.ProgramSheetRepository;
 import cours.ulaval.glo4003.persistence.ITTestBase;
 import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
@@ -67,6 +68,7 @@ public class CourseLevelFilterIT extends ITTestBase {
 		assertEquals(1, schedule.getConflicts().size());
 		assertEquals("90876", schedule.getConflicts().get(0).getFirstNrc());
 		assertEquals("87134", schedule.getConflicts().get(0).getSecondNrc());
+		assertTrue(schedule.getConflicts().get(0) instanceof SameLevelCourseConflict);
 	}
 
 	@Test
@@ -84,6 +86,7 @@ public class CourseLevelFilterIT extends ITTestBase {
 		assertEquals(1, schedule.getConflicts().size());
 		assertEquals("11765", schedule.getConflicts().get(0).getFirstNrc());
 		assertEquals("21345", schedule.getConflicts().get(0).getSecondNrc());
+		assertTrue(schedule.getConflicts().get(0) instanceof SameLevelCourseConflict);
 	}
 
 	@Test

@@ -9,4 +9,7 @@ public interface AvailabilityRepository {
 	public void store(Availability availabilities)
 			throws Exception;
 
+	public void clear()
+			throws Exception;
+
 }
