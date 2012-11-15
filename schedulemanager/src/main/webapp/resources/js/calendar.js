@@ -124,7 +124,7 @@ function getTimeStart(object) {
 
 function getDuration(object) {
 	var pixelWidth = object.css('width').substr(0, object.css('width').length - 2);
-	var duration = pixelWidth/50;
+	var duration = pixelWidth/100;
 	return duration;
 	
 }
