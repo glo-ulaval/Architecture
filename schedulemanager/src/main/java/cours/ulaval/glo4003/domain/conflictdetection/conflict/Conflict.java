@@ -1,10 +1,15 @@
 package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
-import cours.ulaval.glo4003.domain.TimeSlot;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-public abstract class Conflict {
+import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.persistence.ConflictXMLAdapter;
+
+@XmlJavaTypeAdapter(ConflictXMLAdapter.class)
+public class Conflict {
 	private String firstNrc;
 	private String secondNrc;
+	private String teacher;
 	private TimeSlot firstTimeSlot;
 	private TimeSlot secondTimeSlot;
 	private int score;
@@ -13,9 +18,10 @@ public abstract class Conflict {
 	public Conflict() {
 	}
 
-	public Conflict(String aNrc, String anotherNrc, TimeSlot firstTimeSlot, TimeSlot secondTimeSlot) {
+	public Conflict(String aNrc, String anotherNrc, String teacher, TimeSlot firstTimeSlot, TimeSlot secondTimeSlot) {
 		this.firstNrc = aNrc;
 		this.secondNrc = anotherNrc;
+		this.teacher = teacher;
 		this.firstTimeSlot = firstTimeSlot;
 		this.secondTimeSlot = secondTimeSlot;
 	}
@@ -34,6 +40,14 @@ public abstract class Conflict {
 
 	public void setSecondNrc(String secondNrc) {
 		this.secondNrc = secondNrc;
+	}
+
+	public String getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
 	}
 
 	public int getScore() {
@@ -60,5 +74,7 @@ public abstract class Conflict {
 		this.secondTimeSlot = secondTimeSlot;
 	}
 
-	public abstract String getDescription();
+	public String getDescription() {
+		return "";
+	}
 }

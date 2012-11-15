@@ -2,7 +2,6 @@ package cours.ulaval.glo4003.controller.model;
 
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConflictWithTeacher;
 
 public class ConflictModel {
 
@@ -29,14 +28,10 @@ public class ConflictModel {
 		this.dayOfWeek = firstTimeSlot.getDayOfWeek().toString();
 		this.firstStartTime = firstTimeSlot.getStartTime().toString();
 		this.firstEndTime = firstTimeSlot.getEndTime().toString();
-
+		this.teacher = conflict.getTeacher();
 		if (secondTimeSlot != null) {
 			this.secondStartTime = secondTimeSlot.getStartTime().toString();
 			this.secondEndTime = secondTimeSlot.getEndTime().toString();
-		}
-
-		if (conflict instanceof ConflictWithTeacher) {
-			this.teacher = ((ConflictWithTeacher) conflict).getTeacher();
 		}
 	}
 

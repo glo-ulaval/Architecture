@@ -10,7 +10,6 @@ import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConflictWithTeacher;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 
 public class ConflictModelTest {
@@ -43,7 +42,7 @@ public class ConflictModelTest {
 
 	@Test
 	public void canBuildConflictModelFromConflictWithTeacher() {
-		ConflictWithTeacher conflict = prepareConflictWithTeacher();
+		Conflict conflict = prepareConflictWithTeacher();
 
 		ConflictModel model = new ConflictModel(conflict);
 
@@ -61,7 +60,7 @@ public class ConflictModelTest {
 		assertEquals(model.getSecondEndTime(), secondTimeSlot.getEndTime().toString());
 	}
 
-	private ConflictWithTeacher prepareConflictWithTeacher() {
+	private Conflict prepareConflictWithTeacher() {
 		return new UnavailableTeacherConflict(A_NRC, A_TEACHER, firstTimeSlot);
 	}
 

@@ -2,7 +2,8 @@ package cours.ulaval.glo4003.domain.conflictdetection.conflict;
 
 import cours.ulaval.glo4003.domain.TimeSlot;
 
-public class DisponibilityConflict extends ConflictWithTeacher {
+public class DisponibilityConflict extends Conflict {
+	public static final int SCORE = 10;
 
 	// for serialization purpose only
 	public DisponibilityConflict() {
@@ -10,7 +11,7 @@ public class DisponibilityConflict extends ConflictWithTeacher {
 
 	public DisponibilityConflict(String aNrc, String teacher, TimeSlot firstTimeSlot) {
 		super(aNrc, "", teacher, firstTimeSlot, null);
-		this.setScore(10);
+		this.setScore(SCORE);
 	}
 
 	@Override

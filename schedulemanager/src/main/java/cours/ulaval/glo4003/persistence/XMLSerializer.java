@@ -26,17 +26,21 @@ public class XMLSerializer<T> {
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;
 
-	public XMLSerializer(Class<T> type) throws JAXBException {
+	public XMLSerializer(Class<T> type)
+			throws JAXBException {
 		this.type = type;
 		JAXBContext context = JAXBContext.newInstance(type);
 		marshaller = context.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		unmarshaller = context.createUnmarshaller();
+		unmarshaller.setAdapter(new ConflictXMLAdapter());
 		resourcesLoader = new ResourcesLoader();
 	}
 
 	@SuppressWarnings("unchecked")
-	public T deserialize(String resourceName) throws JAXBException, SerializationException {
+	public T deserialize(String resourceName)
+			throws JAXBException,
+				SerializationException {
 		InputStream stream = resourcesLoader.loadResource(type, resourceName);
 
 		if (stream != null) {
@@ -46,8 +50,10 @@ public class XMLSerializer<T> {
 		}
 	}
 
-	public void serialize(T element, String resourceName) throws JAXBException, URISyntaxException,
-			FileNotFoundException {
+	public void serialize(T element, String resourceName)
+			throws JAXBException,
+				URISyntaxException,
+				FileNotFoundException {
 		OutputStream stream = resourcesLoader.loadResourceForWriting(resourceName);
 
 		marshaller.marshal(element, stream);
