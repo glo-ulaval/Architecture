@@ -18,7 +18,7 @@ public class SameTeacherFilter extends Filter {
 				for (int j = i + 1; j < sections.size(); j++) {
 					Section secondSection = sections.get(j);
 					if (secondSection.hasTeacher(teacher)) {
-						schedule.addAll(section.generateSameTeacherConflicts(secondSection));
+						schedule.addAll(section.generateSameTeacherConflicts(secondSection, teacher));
 					}
 				}
 			}
