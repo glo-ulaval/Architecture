@@ -36,14 +36,13 @@ $(function() {
 		duration = 2*duration;
 		var color = randomColor();
 
-		for ( var j = 0; j < duration ; j++) {
+		//for ( var j = 0; j < duration ; j++) {
 			var cs = sections.courseSlots[i];
 
 			var hour = cs.timeSlotStart.split(':')[0];
 			var minute = minutes(cs);
 			var nextTime = parseInt(hour + minute);
-			nextTime = nextTime + 5*j;
-			
+			//nextTime = nextTime + 5*j;
 			
 			var event = $('<div/>', {
 			    class : 'event',
@@ -52,19 +51,21 @@ $(function() {
 			
 			event.appendTo(findId(cs, nextTime));
 			
+			event.css('width',  parseInt(sections.courseSlots[i].duration)*100 +'px');
+			
 			var position = event.parent().position();
 			event.css('position', 'absolute');
 			event.css('top', position.top + i*25);
 			
-			if(j == duration-1){
+			//if(j == duration-1){
 				$('<div/>', {
 					id: sections.courseSlots[i].nrc,
 					title: sections.courseSlots[i].acronym,
 					class : 'event-name',
 					text : sections.courseSlots[i].acronym,
 				}).appendTo(event);
-			}
-		}
+			//}
+		//}
 	}
 	
 	$('.event').dblclick(function(event) {

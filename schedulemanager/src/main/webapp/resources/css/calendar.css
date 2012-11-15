@@ -21,7 +21,6 @@
 	float: left;
 	border-right: 1px solid rgba(240, 240, 240, 0.5);
 	overflow: visible;
-	align : left;
 }
 
 .hour-head, .hours-head {
@@ -44,7 +43,7 @@
 .event-name {
 	height: 100%;
 	width: 100px;
-	margin-left: -50px;
+	margin-left: 5px;
 }
 
 .ui-sortable-placeholder {
