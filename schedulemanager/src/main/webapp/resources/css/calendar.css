@@ -37,7 +37,8 @@
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 	white-space: nowrap;
 	vertical-align: baseline;
-	background-color: rgba(0, 0, 255, 0.50);
+	background-color: rgba(0, 70, 255, 0.5);
+	border-bottom: 2px solid #DEDEDE;
 }
 
 .event-name {
