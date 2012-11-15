@@ -17,7 +17,11 @@ public class CourseSlotModel {
 	private Boolean isLab;
 	private String dayOfWeek;
 	private Integer duration;
-	private List<ConflictModel> conflicts;
+	private List<ConflictModel> conflicts = new ArrayList<ConflictModel>();
+
+	public CourseSlotModel() {
+
+	}
 
 	public CourseSlotModel(Section section, TimeSlot timeSlot, Boolean isLab) {
 		this.nrc = section.getNrc();
@@ -28,7 +32,6 @@ public class CourseSlotModel {
 		this.isLab = isLab;
 		this.dayOfWeek = timeSlot.getDayOfWeek().toString();
 		this.duration = timeSlot.getDuration();
-		conflicts = new ArrayList<ConflictModel>();
 	}
 
 	public void addConflict(Conflict conflict) {

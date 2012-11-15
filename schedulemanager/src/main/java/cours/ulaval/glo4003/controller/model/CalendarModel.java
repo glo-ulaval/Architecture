@@ -25,7 +25,7 @@ public class CalendarModel {
 			}
 		}
 		Collections.sort(courseSlots, new TimeSlotComparator());
-
+		
 		for (CourseSlotModel cs : courseSlots) {
 			System.out.println(cs.getAcronym());
 		}

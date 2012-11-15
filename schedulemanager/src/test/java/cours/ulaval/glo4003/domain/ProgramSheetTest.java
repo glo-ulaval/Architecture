@@ -13,6 +13,7 @@ public class ProgramSheetTest {
 	private static final String A_FIRST_ACRONYM = "GLO-2000";
 	private static final String A_SECOND_ACRONYM = "GLO-2001";
 	private static final String A_THIRD_ACRONYM = "GLO-2002";
+	private static final String A_COURSE_NOT_ON_PROGRAM_SHEETS = "GLO-7000";
 
 	private ProgramSheet programSheet;
 
@@ -22,13 +23,18 @@ public class ProgramSheetTest {
 	}
 
 	@Test
-	public void canGetIfTwoCoursesAreOnSameLevelWhenTheyAre() {
+	public void canTellIfTwoCoursesAreSameLevel() {
 		assertTrue(programSheet.areCoursesSameLevel(A_FIRST_ACRONYM, A_THIRD_ACRONYM));
 	}
 
 	@Test
-	public void canGetIfTwoCoursesAreOnSameLevelWhenTheyArent() {
+	public void canTellIfTwoCoursesArentSameLevel() {
 		assertFalse(programSheet.areCoursesSameLevel(A_FIRST_ACRONYM, A_SECOND_ACRONYM));
+	}
+
+	@Test
+	public void shouldTellThatTwoCoursesAreNotSameLevelIfAtLeastOneOfThemIsNotInProgramSheet() {
+		assertFalse(programSheet.areCoursesSameLevel(A_COURSE_NOT_ON_PROGRAM_SHEETS, A_SECOND_ACRONYM));
 	}
 
 	private Map<String, Integer> createCoursesMap() {

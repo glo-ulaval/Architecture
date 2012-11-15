@@ -33,4 +33,8 @@ public class SortedSlotsCache {
 		return cachedValues.values().size();
 	}
 
+	public void clearCache() {
+		cachedValues.clear();
+	}
+
 }

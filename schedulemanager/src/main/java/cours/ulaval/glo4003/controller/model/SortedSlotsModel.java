@@ -17,6 +17,10 @@ public class SortedSlotsModel {
 	private List<CourseSlotModel> thursday;
 	private List<CourseSlotModel> friday;
 
+	public SortedSlotsModel() {
+
+	}
+
 	public SortedSlotsModel(List<Section> sections) {
 		initialize();
 		for (Section section : sections) {
