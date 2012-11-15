@@ -9,7 +9,7 @@ public class DifferentLevelCourseConflict extends Conflict {
 	}
 
 	public DifferentLevelCourseConflict(String aNrc, String anotherNrc, TimeSlot firstTimeSlot, TimeSlot secondTimeSlot) {
-		super(aNrc, anotherNrc, firstTimeSlot, secondTimeSlot);
+		super(aNrc, anotherNrc, "", firstTimeSlot, secondTimeSlot);
 		this.setScore(30);
 	}
 
