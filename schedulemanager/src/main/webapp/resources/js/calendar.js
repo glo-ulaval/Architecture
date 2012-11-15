@@ -1,39 +1,51 @@
+console.log(schedule);
+
 $(function() {
 	initializeCalendar();
-	
-	var prevDay = "MONDAY";
-	var height = 0;
-	for ( var i = 0; i < schedule.courseSlots.length; i++) {
-		
-		var durationInHours = parseInt(schedule.courseSlots[i].duration);
-		var cs = schedule.courseSlots[i];
-		var nextTime = getNextTime(cs);
 
-		if(prevDay != cs.dayOfWeek){
-			height = 0;
-		}
-		
-		createEventDiv(height, durationInHours, cs, nextTime);
-
-		prevDay = cs.dayOfWeek;
-		height++;
+	for ( var i = 0; i < schedule.monday.length; i++) {
+		var cs = schedule.monday[i];
+		generateCourses(cs, i);
+	}
+	for ( var i = 0; i < schedule.tuesday.length; i++) {
+		var cs = schedule.tuesday[i];
+		generateCourses(cs, i);
+	}
+	for ( var i = 0; i < schedule.wednesday.length; i++) {
+		var cs = schedule.wednesday[i];
+		generateCourses(cs, i);
+	}
+	for ( var i = 0; i < schedule.thursday.length; i++) {
+		var cs = schedule.thursday[i];
+		generateCourses(cs, i);
+	}
+	for ( var i = 0; i < schedule.friday.length; i++) {
+		var cs = schedule.friday[i];
+		generateCourses(cs, i);
 	}
 
 	setEventFunctions();
 
 });
 
+function generateCourses(cs, height) {
+	var durationInHours = parseInt(cs.duration);
+	var nextTime = getNextTime(cs);
+
+	createEventDiv(height, durationInHours, cs, nextTime);
+}
+
 function createEventDiv(height, durationInHours, cs, nextTime) {
 	var event = $('<div/>', {
 		class : 'event',
 	});
 	event.appendTo(findId(cs, nextTime));
-	event.css('width', durationInHours * 100+'px');
+	event.css('width', durationInHours * 100 + 'px');
 
 	var position = event.parent().position();
 	event.css('position', 'absolute');
 	event.css('top', position.top + height * 25);
-	
+
 	$('<div/>', {
 		id : cs.nrc,
 		title : cs.acronym,
@@ -48,37 +60,40 @@ function getNextTime(cs) {
 	return parseInt(hour + minute);
 }
 
-function initializeCalendar(){
-	$('.hour').sortable({
-		connectWith : '.hour',
-		start : function(e, ui) {
-			ui.placeholder.width(ui.item.width());
-		},
-		receive : function(e, ui) {
-			$.ajax({
-				type : "POST",
-				url : '/schedulemanager/schedule/' + schedule.scheduleinfo.id + '/update',
-				data : {
-					nrc : ui.item.find('.event-name').attr('id').toString(),
-					oldDay : getDay(ui.sender),
-					oldTimeStart : getTimeStart(ui.sender),
-					newDay : getDay(ui.item.parent()),
-					newTimeStart : getTimeStart(ui.item.parent()),
-					duration : getDuration(ui.item)
+function initializeCalendar() {
+	$('.hour').sortable(
+			{
+				connectWith : '.hour',
+				start : function(e, ui) {
+					ui.placeholder.width(ui.item.width());
 				},
-				success : function(data) {
+				receive : function(e, ui) {
+					$.ajax({
+						type : "POST",
+						url : '/schedulemanager/schedule/'
+								+ schedule.scheduleinfo.id + '/update',
+						data : {
+							nrc : ui.item.find('.event-name').attr('id')
+									.toString(),
+							oldDay : getDay(ui.sender),
+							oldTimeStart : getTimeStart(ui.sender),
+							newDay : getDay(ui.item.parent()),
+							newTimeStart : getTimeStart(ui.item.parent()),
+							duration : getDuration(ui.item)
+						},
+						success : function(data) {
 
-				},
-				error : function() {
+						},
+						error : function() {
 
+						}
+					});
 				}
 			});
-		}
-	});
 	$('.hour').disableSelection();
 }
 
-function setEventFunctions(){
+function setEventFunctions() {
 	$('.event').dblclick(function(event) {
 		redirectToEditSection();
 	});
@@ -104,13 +119,10 @@ function setDuration(cs) {
 
 function redirectToEditSection() {
 	var nrc = $(event.target).attr('id');
-	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/' + id + '/' 
-		+ schedule.year + '/'+ schedule.semester + '/' + nrc;
+	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
+			+ id + '/' + schedule.year + '/' + schedule.semester + '/' + nrc;
 
 	window.location.assign(url);
-	
-	//http://localhost:8080/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/90111
-	//http://localhost:8080/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111
 }
 
 function getDay(object) {
@@ -130,7 +142,8 @@ function getTimeStart(object) {
 }
 
 function getDuration(object) {
-	var pixelWidth = object.css('width').substr(0, object.css('width').length - 2);
-	var duration = pixelWidth/100;
+	var pixelWidth = object.css('width').substr(0,
+			object.css('width').length - 2);
+	var duration = pixelWidth / 100;
 	return duration;
 }
