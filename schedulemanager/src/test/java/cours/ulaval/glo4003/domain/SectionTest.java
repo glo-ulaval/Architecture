@@ -15,6 +15,7 @@ import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCourse
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.DisponibilityConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameTeacherConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
@@ -44,7 +45,8 @@ public class SectionTest {
 		courseTimeSlot = Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY));
 		labTimeSlot = new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.FRIDAY);
 		courseAcronym = "GLO_4002";
-		section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot, labTimeSlot);
+		section = new Section(nrc, group, personInCharge, teachers, teachMode, timeDedicated, courseAcronym, courseTimeSlot,
+				labTimeSlot);
 	}
 
 	@Test
@@ -94,11 +96,11 @@ public class SectionTest {
 
 	@Test
 	public void canGenerateSameTeacherConflicts() {
-		List<Conflict> conflicts = section.generateSameTeacherConflicts(section);
+		List<Conflict> conflicts = section.generateSameTeacherConflicts(section, "teacher1");
 
 		assertEquals(2, conflicts.size());
 		for (int i = 0; i < conflicts.size(); i++) {
-			assertTrue(conflicts.get(i) instanceof ConcomittingCoursesConflict);
+			assertTrue(conflicts.get(i) instanceof SameTeacherConflict);
 		}
 	}
 

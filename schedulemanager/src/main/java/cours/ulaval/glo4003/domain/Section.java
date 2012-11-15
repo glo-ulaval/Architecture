@@ -7,6 +7,7 @@ import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCourse
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.DisponibilityConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameTeacherConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
@@ -24,8 +25,8 @@ public class Section {
 	public Section() {
 	}
 
-	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode, TimeDedicated timeDedicated,
-			String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
+	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode,
+			TimeDedicated timeDedicated, String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
 		super();
 		this.nrc = nrc;
 		this.group = group;
@@ -54,7 +55,7 @@ public class Section {
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
-					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(courseAcronym, otherSection.getCourseAcronym(),
+					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(nrc, otherSection.getNrc(),
 							sectionTimeSlots, otherSectionTimeSlots);
 					conflicts.add(conflict);
 				}
@@ -67,13 +68,13 @@ public class Section {
 		return teachers.contains(teacher);
 	}
 
-	public List<Conflict> generateSameTeacherConflicts(Section otherSection) {
+	public List<Conflict> generateSameTeacherConflicts(Section otherSection, String teacher) {
 		List<Conflict> conflicts = new ArrayList<Conflict>();
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
-					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(courseAcronym, otherSection.getCourseAcronym(),
-							sectionTimeSlots, otherSectionTimeSlots);
+					SameTeacherConflict conflict = new SameTeacherConflict(nrc, otherSection.getNrc(), teacher, sectionTimeSlots,
+							otherSectionTimeSlots);
 					conflicts.add(conflict);
 				}
 			}
@@ -86,7 +87,7 @@ public class Section {
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
-					SameLevelCourseConflict conflict = new SameLevelCourseConflict(courseAcronym, otherSection.getCourseAcronym(), sectionTimeSlots,
+					SameLevelCourseConflict conflict = new SameLevelCourseConflict(nrc, otherSection.getNrc(), sectionTimeSlots,
 							otherSectionTimeSlots);
 					conflicts.add(conflict);
 				}

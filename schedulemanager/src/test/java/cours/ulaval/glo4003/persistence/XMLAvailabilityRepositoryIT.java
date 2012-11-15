@@ -17,12 +17,14 @@ public class XMLAvailabilityRepositoryIT extends ITTestBase {
 	private XMLAvailabilityRepository repository;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp()
+			throws Exception {
 		repository = new XMLAvailabilityRepository();
 	}
 
 	@Test
-	public void canSaveAvailabilities() throws Exception {
+	public void canSaveAvailabilities()
+			throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
@@ -33,7 +35,8 @@ public class XMLAvailabilityRepositoryIT extends ITTestBase {
 	}
 
 	@Test
-	public void canLoadAnAvailability() throws Exception {
+	public void canLoadAnAvailability()
+			throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
 
@@ -45,5 +48,20 @@ public class XMLAvailabilityRepositoryIT extends ITTestBase {
 		assertEquals(availabilities.getWednesday(), repository.findByIdul(UN_IDUL).getWednesday());
 		assertEquals(availabilities.getThursday(), repository.findByIdul(UN_IDUL).getThursday());
 		assertEquals(availabilities.getFriday(), repository.findByIdul(UN_IDUL).getFriday());
+	}
+
+	@Test
+	public void canClearAvailabilities()
+			throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		AvailabilityModel availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
+
+		Availability availabilities = availabilityModel.toAvailability(UN_IDUL);
+		repository.store(availabilities);
+
+		repository.clear();
+
+		assertNull(repository.findByIdul(UN_IDUL));
+
 	}
 }

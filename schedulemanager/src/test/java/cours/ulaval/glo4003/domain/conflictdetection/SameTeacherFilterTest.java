@@ -25,14 +25,15 @@ public class SameTeacherFilterTest {
 	private List<Conflict> conflicts;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp()
+			throws Exception {
 		Section section = mock(Section.class);
 		Section section2 = mock(Section.class);
 		conflicts = new ArrayList<Conflict>();
 
 		when(section.getNrc()).thenReturn("AN_NRC");
 		when(section.getTeachers()).thenReturn(Arrays.asList(TEACHER));
-		when(section.generateSameTeacherConflicts(section2)).thenReturn(conflicts);
+		when(section.generateSameTeacherConflicts(section2, TEACHER)).thenReturn(conflicts);
 
 		when(section2.getNrc()).thenReturn("AN_NRC2");
 		when(section2.hasTeacher(TEACHER)).thenReturn(true);

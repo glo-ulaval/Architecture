@@ -19,6 +19,7 @@ import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.persistence.ITTestBase;
 import cours.ulaval.glo4003.persistence.XMLCourseRepository;
@@ -86,7 +87,8 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 		filter.run(schedule);
 
 		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("IFT-2002", schedule.getConflicts().get(0).getFirstNrc());
+		assertEquals("11765", schedule.getConflicts().get(0).getFirstNrc());
+		assertTrue(schedule.getConflicts().get(0) instanceof ConcomittingCoursesConflict);
 	}
 
 	@Test
