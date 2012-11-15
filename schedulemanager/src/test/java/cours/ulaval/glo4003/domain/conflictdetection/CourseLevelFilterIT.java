@@ -65,8 +65,8 @@ public class CourseLevelFilterIT extends ITTestBase {
 		filter.run(schedule);
 
 		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("GLO-1010", schedule.getConflicts().get(0).getFirstNrc());
-		assertEquals("GLO-1901", schedule.getConflicts().get(0).getSecondNrc());
+		assertEquals("90876", schedule.getConflicts().get(0).getFirstNrc());
+		assertEquals("87134", schedule.getConflicts().get(0).getSecondNrc());
 	}
 
 	@Test
@@ -82,8 +82,8 @@ public class CourseLevelFilterIT extends ITTestBase {
 		filter.run(schedule);
 
 		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("IFT-2002", schedule.getConflicts().get(0).getFirstNrc());
-		assertEquals("IFT-1000", schedule.getConflicts().get(0).getSecondNrc());
+		assertEquals("11765", schedule.getConflicts().get(0).getFirstNrc());
+		assertEquals("21345", schedule.getConflicts().get(0).getSecondNrc());
 	}
 
 	@Test

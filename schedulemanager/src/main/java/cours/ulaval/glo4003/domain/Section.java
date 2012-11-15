@@ -24,8 +24,8 @@ public class Section {
 	public Section() {
 	}
 
-	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode, TimeDedicated timeDedicated,
-			String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
+	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode,
+			TimeDedicated timeDedicated, String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
 		super();
 		this.nrc = nrc;
 		this.group = group;
@@ -54,7 +54,7 @@ public class Section {
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
-					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(courseAcronym, otherSection.getCourseAcronym(),
+					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(nrc, otherSection.getNrc(),
 							sectionTimeSlots, otherSectionTimeSlots);
 					conflicts.add(conflict);
 				}
@@ -72,7 +72,7 @@ public class Section {
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
-					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(courseAcronym, otherSection.getCourseAcronym(),
+					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(nrc, otherSection.getNrc(),
 							sectionTimeSlots, otherSectionTimeSlots);
 					conflicts.add(conflict);
 				}
@@ -86,7 +86,7 @@ public class Section {
 		for (TimeSlot sectionTimeSlots : getCoursesAndLabTimeSlots()) {
 			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
 				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
-					SameLevelCourseConflict conflict = new SameLevelCourseConflict(courseAcronym, otherSection.getCourseAcronym(), sectionTimeSlots,
+					SameLevelCourseConflict conflict = new SameLevelCourseConflict(nrc, otherSection.getNrc(), sectionTimeSlots,
 							otherSectionTimeSlots);
 					conflicts.add(conflict);
 				}
