@@ -73,4 +73,10 @@ public class XMLCourseRepository implements CourseRepository {
 		parseXML();
 	}
 
+	@Override
+	public void clear() {
+		courses = new HashMap<String, Course>();
+		saveXML();
+	}
+
 }

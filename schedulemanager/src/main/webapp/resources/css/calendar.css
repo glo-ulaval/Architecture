@@ -20,8 +20,8 @@
 	height: 100%;
 	float: left;
 	border-right: 1px solid rgba(240, 240, 240, 0.5);
-	text-align: center;
 	overflow: visible;
+	align : left;
 }
 
 .hour-head, .hours-head {

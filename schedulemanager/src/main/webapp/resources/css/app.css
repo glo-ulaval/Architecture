@@ -44,6 +44,10 @@ body {
 	background-color : #FFD078;
 }
 
+.red {
+  background-color : #FE2E2E;
+}
+
 .inline {
 	display:inline;
 }
@@ -58,4 +62,8 @@ body {
 
 .btn-label{
 	width: 100px;
+}
+
+.blue {
+	color : #2E64FE;
 }

@@ -23,5 +23,13 @@ public class SameTeacherFilter extends Filter {
 				}
 			}
 		}
+		nextPipe(schedule);
+	}
+
+	@Override
+	public void nextPipe(Schedule schedule) {
+		if (nextPipe != null) {
+			nextPipe.run(schedule);
+		}
 	}
 }

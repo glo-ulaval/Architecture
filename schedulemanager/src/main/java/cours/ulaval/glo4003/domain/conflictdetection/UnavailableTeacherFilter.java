@@ -16,6 +16,14 @@ public class UnavailableTeacherFilter extends Filter {
 		for (Section section : schedule.getSectionsList()) {
 			schedule.addAll(section.generateUnavailableTeacherConflicts(repository));
 		}
+		nextPipe(schedule);
+	}
+
+	@Override
+	public void nextPipe(Schedule schedule) {
+		if (nextPipe != null) {
+			nextPipe.run(schedule);
+		}
 	}
 
 	public void setRepository(AvailabilityRepository repository) {

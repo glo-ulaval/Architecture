@@ -2,6 +2,8 @@ console.log(sections);
 
 $(function() {
 	
+	console.log(sections);
+	
 	$('.hour').sortable({
 		connectWith : '.hour',
 		start: function(e, ui){
@@ -11,7 +13,7 @@ $(function() {
 	    	$.ajax({
 				type : "POST",
 				url : '/schedulemanager/schedule/' + id + '/update',
-				data : { nrc: ui.item.find('div[class="event-name"]').attr('id').toString(), 
+				data : { nrc: ui.item.find('.event-name').attr('id').toString(), 
 						 oldDay: getDay(ui.sender),
 						 oldTimeStart: getTimeStart(ui.sender), 
 						 newDay: getDay(ui.item.parent()),
@@ -51,6 +53,11 @@ $(function() {
 			event.css('background-color', color);
 			
 			event.appendTo(findId(cs, nextTime));
+			
+			var position = event.parent().position();
+			event.css('position', 'absolute');
+			event.css('top', position.top + i*25);
+			
 			if(j == duration-1){
 				$('<div/>', {
 					id: sections.courseSlots[i].nrc,
