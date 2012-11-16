@@ -1,12 +1,14 @@
 package cours.ulaval.glo4003.controller.security;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import org.springframework.security.core.*;
-import org.springframework.security.core.authority.*;
-import org.springframework.security.core.userdetails.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import cours.ulaval.glo4003.domain.*;
+import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.User;
 
 public class UserSecurityDetails implements UserDetails {
