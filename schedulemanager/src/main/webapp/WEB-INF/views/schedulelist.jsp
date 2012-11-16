@@ -41,15 +41,14 @@
 				href="calendar" type="button" class="btn">Calendrier</a>
 		</div>
 		<div class="schedule_details">
-			<c:url var="editsection"
-				value="/schedule/editsection/${id}/${year}/${semester}"></c:url>
-			<c:url var="deletesection"
-				value="/schedule/deletesection/${id}/${year}/${semester}"></c:url>
+			<c:url var="editsection" value="/schedule/editsection/${id}/${year}/${semester}"></c:url>
+			<c:url var="deletesection" value="/schedule/deletesection/${id}/${year}/${semester}"></c:url>
 			<table class="table">
 				<tr class="well">
 					<td colspan="4"><h4>Lundi</h4></td>
 				</tr>
 				<c:set var="counter" value="0" />
+				
 				<c:forEach var="mondaysection" items="${schedule.monday}">
 					<c:choose>
 						<c:when test="${mondaysection.isLab}">
@@ -63,28 +62,46 @@
 						</c:otherwise>
 					</c:choose>
 					<tr class="${color}">
-						<td><b>${mondaysection.timeSlotStart} -
-								${mondaysection.timeSlotEnd}</b> || ${mondaysection.acronym}
+						<td><b>${mondaysection.timeSlotStart} - ${mondaysection.timeSlotEnd}</b> || ${mondaysection.acronym}
 							(${mondaysection.nrc} - ${mondaysection.group})</td>
-						<sec:authorize
-							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${mondaysection.nrc}/list"><i
-									class="icon-edit icon-white"></i></a></td>
+						<sec:authorize access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
 							<td class="centered">
-						<a class="btn btn-danger"
-								href="${deletesection}/${mondaysection.nrc}"><i
-								class="icon-trash icon-white"></i></a>
-							</td></sec:authorize>
+								<a class="btn btn-info" href="${editsection}/${mondaysection.nrc}">
+								<i class="icon-edit icon-white"></i></a>
+							</td>
+							<td class="centered">
+								<a class="btn btn-danger" href="${deletesection}/${mondaysection.nrc}">
+								<i class="icon-trash icon-white"></i></a>
+							</td>
+						</sec:authorize>
 						<c:if test="${fn:length(mondaysection.conflicts) > 0}">
 							<c:url var="conflicturl" value="/conflict/monday/${counter}"></c:url>
 							<td><a class="btn btn-warning" href="${conflicturl}"
-								title="Détails du/des conflit(s)"><i
-									class="icon-warning-sign"></i></a></td>
+								title="Détails du/des conflit(s)"><i class="icon-warning-sign"></i></a>
+							</td>
 						</c:if>
+					</tr> 
+					<c:if test="${fn:length(mondaysection.conflicts) > 0}">
+					<tr class="conflits"> 
+						<td colspan="4">
+							<ul>
+								<c:forEach var="conflict" items="${mondaysection.conflicts}">
+								<li class="conflit">
+									${sectionConflict.firstNrc} - ${sectionConflict.description} 
+									<a href="#" class="btn"><i class="icon-chevron-down"></i></a>
+									<div class="details-conflit">
+										<c:import url="conflict.jsp" />
+									</div>
+								</li>
+								</c:forEach>
+							</ul>
+						</td>
 					</tr>
+					</c:if>
+					
 					<c:set var="counter" value="${counter+1}" />
 				</c:forEach>
+				
 				<tr class="well">
 					<td colspan="4"><h4>Mardi</h4></td>
 				</tr>
@@ -115,6 +132,9 @@
 						</sec:authorize>
 					</tr>
 				</c:forEach>
+				
+				
+				
 				<tr class="well">
 					<td colspan="4"><h4>Mercredi</h4></td>
 				</tr>
@@ -145,6 +165,7 @@
 						</sec:authorize>
 					</tr>
 				</c:forEach>
+				
 				<tr class="well">
 					<td colspan="4"><h4>Jeudi</h4></td>
 				</tr>
@@ -175,6 +196,7 @@
 						</sec:authorize>
 					</tr>
 				</c:forEach>
+				
 				<tr class="well">
 					<td colspan="4"><h4>Vendredi</h4></td>
 				</tr>
