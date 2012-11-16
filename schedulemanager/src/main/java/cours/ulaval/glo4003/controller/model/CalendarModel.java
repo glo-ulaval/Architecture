@@ -37,7 +37,9 @@ public class CalendarModel {
 
 		sortCoursesByTime();
 		
-		schedule.add(new UnavailableTeacherConflict("IFT-2000", "Thierry Eude", new TimeSlot(new Time(8,30), 3, DayOfWeek.MONDAY)));
+		//Temporaire pour tests uniquement
+		schedule.add(new UnavailableTeacherConflict("90111", "Thierry Eude", new TimeSlot(new Time(8,30), 3, DayOfWeek.MONDAY)));
+		
 		associateConflictsToACourseSlot(schedule.getConflicts());
 	}
 
@@ -100,7 +102,7 @@ public class CalendarModel {
 
 	private boolean isSameCourse(TimeSlot time, String nrc, CourseSlotModel model) {
 
-		if (model.getNrc() != nrc) {
+		if (!model.getNrc().equals(nrc)) {
 			return false;
 		}
 		if (!model.getTimeSlotStart().equals(time.getStartTime().toString())) {
