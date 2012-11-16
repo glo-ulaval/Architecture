@@ -182,6 +182,7 @@ public class ScheduleController {
 		try {
 			Schedule schedule = scheduleRepository.findById(id);
 			schedule.delete(sectionNrc);
+			section.setNrc(sectionNrc);
 			schedule.add(section.convertToSection());
 			scheduleRepository.store(schedule);
 			mv.addObject("error", ControllerMessages.SUCCESS);

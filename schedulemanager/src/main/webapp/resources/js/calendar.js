@@ -120,7 +120,7 @@ function setDuration(cs) {
 function redirectToEditSection() {
 	var nrc = $(event.target).attr('id');
 	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
-			+ id + '/' + schedule.year + '/' + schedule.semester + '/' + nrc;
+			+ schedule.scheduleInfo.id + '/' + schedule.scheduleInfo.year + '/' + schedule.scheduleInfo.semester + '/' + nrc;
 
 	window.location.assign(url);
 }
