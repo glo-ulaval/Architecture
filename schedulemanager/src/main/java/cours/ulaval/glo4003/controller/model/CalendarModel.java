@@ -37,9 +37,6 @@ public class CalendarModel {
 
 		sortCoursesByTime();
 		
-		//Temporaire pour tests uniquement
-		schedule.add(new UnavailableTeacherConflict("90111", "Thierry Eude", new TimeSlot(new Time(8,30), 3, DayOfWeek.MONDAY)));
-		
 		associateConflictsToACourseSlot(schedule.getConflicts());
 	}
 

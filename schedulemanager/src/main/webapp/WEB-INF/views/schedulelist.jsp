@@ -76,8 +76,9 @@
 						</sec:authorize>
 						<c:if test="${fn:length(mondaysection.conflicts) > 0}">
 							<c:url var="conflicturl" value="/conflict/monday/${counter}"></c:url>
-							<td><a class="btn btn-warning" href="${conflicturl}"
-								title="Détails du/des conflit(s)"><i class="icon-warning-sign"></i></a>
+							<td>
+								<a href="#" title="Détails du/des conflit(s)" class="btn show-details-conflict">
+									<i class="icon-chevron-down"></i></a>
 							</td>
 						</c:if>
 					</tr> 
@@ -88,9 +89,35 @@
 								<c:forEach var="conflict" items="${mondaysection.conflicts}">
 								<li class="conflit">
 									${conflict.firstNrc} - ${conflict.description} 
-									<a href="#" class="btn"><i class="icon-chevron-down"></i></a>
-									<div class="details-conflit">
-										khaskdh fashdkjgash gkj askj
+									<a href="#" class="btn show-details-conflict"><i class="icon-chevron-down"></i></a>
+									<div class="details-conflict">
+										<c:choose>
+											<c:when test="${not empty conflict.secondNrc}">
+												<div>
+													Entre la section <b>${conflict.firstNrc}</b> et la section <b>${conflict.secondNrc}</b>,
+													dans les plages horaires du <b>${conflict.dayOfWeek}</b> allant
+													de <b><span class="blue">${conflict.firstStartTime}</span></b>
+													à <b><span class="blue">${conflict.firstEndTime}</span></b> et
+													de <b><span class="blue">${conflict.secondStartTime}</span></b>
+													à <b><span class="blue">${conflict.secondEndTime}</span></b>.
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div>
+													Dans la section <b>${conflict.firstNrc}</b>, dans la plage
+													horaire du <b>${conflict.dayOfWeek}</b> allant de <b><span
+														class="blue">${conflict.firstStartTime}</span></b> à <b><span
+														class="blue">${conflict.firstEndTime}</span></b> .
+												</div>
+											</c:otherwise>
+										</c:choose>
+										
+										<br>
+										
+										<c:if test="${not empty conflict.teacher}">
+											<h4>Professeur impliqué :</h4>
+											<div>${conflict.teacher}</div>
+										</c:if>
 									</div>
 								</li>
 								</c:forEach>
