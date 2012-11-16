@@ -18,8 +18,8 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/app.js" />" /></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/bootstrap.js" />" /></script>
+<script type="text/javascript"	src="<c:url value="/resources/js/bootstrap.js" />" /></script>
+<script type="text/javascript"	src="<c:url value="/resources/js/schedule.js" />" /></script>
 </head>
 <body>
 	<c:import url="header.jsp" />
@@ -77,13 +77,13 @@
 						<c:if test="${fn:length(mondaysection.conflicts) > 0}">
 							<c:url var="conflicturl" value="/conflict/monday/${counter}"></c:url>
 							<td>
-								<a href="#" title="Détails du/des conflit(s)" class="btn show-details-conflict">
+								<a href="#" title="Détails du/des conflit(s)" class="btn show-conflicts">
 									<i class="icon-chevron-down"></i></a>
 							</td>
 						</c:if>
 					</tr> 
 					<c:if test="${fn:length(mondaysection.conflicts) > 0}">
-					<tr class="conflits"> 
+					<tr class="conflicts"> 
 						<td colspan="4">
 							<ul>
 								<c:forEach var="conflict" items="${mondaysection.conflicts}">
