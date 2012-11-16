@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <schedules>
     <schedule>
+		<conflicts>
+            <firstNrc>90111</firstNrc>
+            <firstTimeSlot>
+                <dayOfWeek>MONDAY</dayOfWeek>
+                <duration>3</duration>
+                <endTime>
+                    <hour>11</hour>
+                    <minute>30</minute>
+                </endTime>
+                <startTime>
+                    <hour>8</hour>
+                    <minute>30</minute>
+                </startTime>
+            </firstTimeSlot>
+            <score>40</score>
+            <teacher>Thierry Eude</teacher>
+        </conflicts>
         <id>2011-2012-Automne-1</id>
         <personInCharge>Nadia Tawbi</personInCharge>
         <sections>
