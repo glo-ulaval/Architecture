@@ -134,7 +134,6 @@ public class ScheduleControllerTest {
 	// ModelAndView mv = controller.scheduleView(A_SCHEDULE_ID, "list",
 	// principal);
 	//
-	// System.out.println(mv.getModel().get("section"));
 	// CalendarModel model = (CalendarModel) mv.getModel().get("sections");
 	// assertEquals(1, model.getTuesday().get(0).getConflicts().size());
 	// }

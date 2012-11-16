@@ -201,6 +201,47 @@ public class ScheduleController {
 	public String updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
 			String duration, Principal principal) throws Exception {
 
+		TimeSlot newTimeSlot = new TimeSlot(new Time(getHour(newTimeStart), getMinutes(newTimeStart)), getDuration(duration), getDayOfWeek(newDay));
+
+		Time oldTmStart = new Time(getHour(oldTimeStart), getMinutes(oldTimeStart));
+
+		List<TimeSlot> courseTimeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCourseTimeSlots();
+
+		for (TimeSlot slot : courseTimeSlots) {
+			if (getDayOfWeekAbreviation(slot) == oldDay || slot.getStartTime().equals(oldTmStart)) {
+				courseTimeSlots.remove(slot);
+				courseTimeSlots.add(newTimeSlot);
+				scheduleRepository.findById(id).getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
+			}
+		}
+
+		TimeSlot labTimeSlot = scheduleRepository.findById(id).getSections().get(nrc).getLabTimeSlot();
+		if (labTimeSlot != null) {
+			if (getDayOfWeekAbreviation(labTimeSlot) == oldDay || labTimeSlot.getStartTime().equals(oldTmStart)) {
+				scheduleRepository.findById(id).getSections().get(nrc).setLabTimeSlot(newTimeSlot);
+			}
+		}
+
+		return "success";
+	}
+
+	private String getDayOfWeekAbreviation(TimeSlot slot) {
+		return slot.getDayOfWeek().toString().toLowerCase().substring(0, 2);
+	}
+
+	private int getDuration(String duration) {
+		return Integer.parseInt(duration);
+	}
+
+	private int getHour(String newTimeStart) {
+		return Integer.parseInt(newTimeStart.split(":")[0]);
+	}
+
+	private int getMinutes(String newTimeStart) {
+		return Integer.parseInt(newTimeStart.split(":")[1]);
+	}
+
+	private DayOfWeek getDayOfWeek(String newDay) {
 		DayOfWeek newDayOfWeek = null;
 		if (newDay == "mon") {
 			newDayOfWeek = DayOfWeek.MONDAY;
@@ -213,38 +254,7 @@ public class ScheduleController {
 		} else if (newDay == "fri") {
 			newDayOfWeek = DayOfWeek.FRIDAY;
 		}
-
-		TimeSlot newTimeSlot = new TimeSlot(new Time(Integer.parseInt(newTimeStart.split(":")[0]), Integer.parseInt(newTimeStart.split(":")[1])),
-				Integer.parseInt(duration), newDayOfWeek);
-
-		Time oldTmStart = new Time(Integer.parseInt(oldTimeStart.split(":")[0]), Integer.parseInt(oldTimeStart.split(":")[1]));
-
-		List<TimeSlot> courseTimeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCourseTimeSlots();
-
-		for (TimeSlot slot : courseTimeSlots) {
-			if (slot.getDayOfWeek().toString().toLowerCase().substring(0, 2) == oldDay || slot.getStartTime().equals(oldTmStart)) {
-				courseTimeSlots.remove(slot);
-				courseTimeSlots.add(newTimeSlot);
-				scheduleRepository.findById(id).getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
-			}
-		}
-
-		TimeSlot labTimeSlot = scheduleRepository.findById(id).getSections().get(nrc).getLabTimeSlot();
-		if (labTimeSlot != null) {
-			if (labTimeSlot.getDayOfWeek().toString().toLowerCase().substring(0, 2) == oldDay || labTimeSlot.getStartTime().equals(oldTmStart)) {
-				scheduleRepository.findById(id).getSections().get(nrc).setLabTimeSlot(newTimeSlot);
-			}
-		}
-
-		List<TimeSlot> test = scheduleRepository.findById(id).getSections().get(nrc).getCoursesAndLabTimeSlots();
-		for (TimeSlot ts : test) {
-			System.out.println("nrc: " + nrc);
-			System.out.println("startTime: " + ts.getStartTime().toString());
-			System.out.println("endTime: " + ts.getEndTime().toString());
-		}
-		System.out.println(scheduleRepository.findById(id).getSections().get(nrc).getCoursesAndLabTimeSlots());
-
-		return "success";
+		return newDayOfWeek;
 	}
 
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
