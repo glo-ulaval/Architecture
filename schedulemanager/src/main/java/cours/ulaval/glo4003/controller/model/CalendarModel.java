@@ -15,13 +15,17 @@ import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacher
 
 public class CalendarModel {
 
+	private String[] days = {"monday", "tuesday", "wednesday", "thursday", "friday"};
+	private String[] jours = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
+	
 	private ScheduleInformationModel scheduleInfo;
-
+	
 	private List<CourseSlotModel> monday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> tuesday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> wednesday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> thursday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> friday = new ArrayList<CourseSlotModel>();
+
 
 	public CalendarModel(Schedule schedule) {
 		scheduleInfo = new ScheduleInformationModel(schedule);
@@ -189,5 +193,23 @@ public class CalendarModel {
 	public void setFriday(List<CourseSlotModel> friday) {
 		this.friday = friday;
 	}
+	
+	
+	public String[] getDays() {
+		return days;
+	}
 
+	public void setDays(String[] days) {
+		this.days = days;
+	}
+
+	public String[] getJours() {
+		return jours;
+	}
+
+	public void setJours(String[] jours) {
+		this.jours = jours;
+	}
+
+	
 }
