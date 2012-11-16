@@ -87,10 +87,10 @@
 							<ul>
 								<c:forEach var="conflict" items="${mondaysection.conflicts}">
 								<li class="conflit">
-									${sectionConflict.firstNrc} - ${sectionConflict.description} 
+									${conflict.firstNrc} - ${conflict.description} 
 									<a href="#" class="btn"><i class="icon-chevron-down"></i></a>
 									<div class="details-conflit">
-										<c:import url="conflict.jsp" />
+										khaskdh fashdkjgash gkj askj
 									</div>
 								</li>
 								</c:forEach>

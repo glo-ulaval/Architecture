@@ -7,8 +7,11 @@ import java.util.List;
 import cours.ulaval.glo4003.controller.model.utils.TimeSlotComparator;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 
 public class CalendarModel {
 
@@ -33,6 +36,8 @@ public class CalendarModel {
 		}
 
 		sortCoursesByTime();
+		
+		schedule.add(new UnavailableTeacherConflict("IFT-2000", "Thierry Eude", new TimeSlot(new Time(8,30), 3, DayOfWeek.MONDAY)));
 		associateConflictsToACourseSlot(schedule.getConflicts());
 	}
 
