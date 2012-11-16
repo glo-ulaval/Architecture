@@ -20,7 +20,15 @@
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js" />" /></script>
+<sec:authorize access="hasAnyRole('ROLE_Responsable')">
+<script type="text/javascript" src="<c:url value="/resources/js/calendaradmin.js" />" /></script>
+</sec:authorize>
 <script type="text/javascript" src="<c:url value="/resources/js/calendar.js" />" /></script>
+<style>
+.event {
+	cursor: default;
+}
+</style>
 </head>
 <body>
 <c:import url="header.jsp" />
