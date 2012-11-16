@@ -247,15 +247,15 @@ public class ScheduleController {
 
 	private DayOfWeek getDayOfWeek(String newDay) {
 		DayOfWeek newDayOfWeek = null;
-		if (newDay == "mon") {
+		if (newDay.equals("mon")) {
 			newDayOfWeek = DayOfWeek.MONDAY;
-		} else if (newDay == "tue") {
+		} else if (newDay.equals("tue")) {
 			newDayOfWeek = DayOfWeek.TUESDAY;
-		} else if (newDay == "wed") {
+		} else if (newDay.equals("wed")) {
 			newDayOfWeek = DayOfWeek.WEDNESDAY;
-		} else if (newDay == "thu") {
+		} else if (newDay.equals("thu")) {
 			newDayOfWeek = DayOfWeek.THURSDAY;
-		} else if (newDay == "fri") {
+		} else if (newDay.equals("fri")) {
 			newDayOfWeek = DayOfWeek.FRIDAY;
 		}
 		return newDayOfWeek;

@@ -11,6 +11,7 @@ function initializeDraggableCalendar() {
 					ui.placeholder.width(ui.item.width());
 				},
 				receive : function(e, ui) {
+					$(ui.item).css('top', $(e.target).position().top+'px');
 					$.ajax({
 						type : "POST",
 						url : '/schedulemanager/schedule/'
@@ -33,4 +34,14 @@ function setDoubleClickEdit() {
 	$('.event').dblclick(function(event) {
 		redirectToEditSection();
 	});
+}
+
+function redirectToEditSection() {
+	console.log("is that called?");
+	var nrc = $(event.target).attr('id');
+	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
+			+ schedule.scheduleInfo.id + '/' + schedule.scheduleInfo.year + '/' + schedule.scheduleInfo.semester + '/' + nrc + '/calendar';
+
+	console.log(url);
+	window.location.assign(url);
 }

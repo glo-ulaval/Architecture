@@ -71,16 +71,6 @@ function setDuration(cs) {
 	return (cs.duration * 100) + 'px';
 }
 
-function redirectToEditSection() {
-	console.log("is that called?");
-	var nrc = $(event.target).attr('id');
-	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
-			+ schedule.scheduleInfo.id + '/' + schedule.scheduleInfo.year + '/' + schedule.scheduleInfo.semester + '/' + nrc + '/calendar';
-
-	console.log(url);
-	window.location.assign(url);
-}
-
 function getDay(object) {
 	return object.attr('id').substr(0, 3);
 }
