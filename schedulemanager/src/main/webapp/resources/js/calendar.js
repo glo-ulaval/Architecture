@@ -1,7 +1,4 @@
-console.log(schedule);
-
 $(function() {
-	initializeCalendar();
 
 	for ( var i = 0; i < schedule.monday.length; i++) {
 		var cs = schedule.monday[i];
@@ -23,9 +20,7 @@ $(function() {
 		var cs = schedule.friday[i];
 		generateCourses(cs, i);
 	}
-
-	setEventFunctions();
-
+	$('.hour').disableSelection();
 });
 
 function generateCourses(cs, height) {
@@ -58,47 +53,6 @@ function getNextTime(cs) {
 	var hour = cs.timeSlotStart.split(':')[0];
 	var minute = minutes(cs);
 	return parseInt(hour + minute);
-}
-
-function initializeCalendar() {
-	$('.hour').sortable(
-			{
-				connectWith : '.hour',
-				start : function(e, ui) {
-					ui.placeholder.width(ui.item.width());
-				},
-				receive : function(e, ui) {
-					$.ajax({
-						type : "POST",
-						url : '/schedulemanager/schedule/'
-								+ schedule.scheduleinfo.id + '/update',
-						data : {
-							nrc : ui.item.find('.event-name').attr('id')
-									.toString(),
-							oldDay : getDay(ui.sender),
-							oldTimeStart : getTimeStart(ui.sender),
-							newDay : getDay(ui.item.parent()),
-							newTimeStart : getTimeStart(ui.item.parent()),
-							duration : getDuration(ui.item)
-						},
-						success : function(data) {
-
-						},
-						error : function() {
-
-						}
-					});
-				}
-			});
-	$('.hour').disableSelection();
-}
-
-function setEventFunctions() {
-	$('.event').dblclick(function(event) {
-		redirectToEditSection();
-	});
-
-	$('.event').tooltip();
 }
 
 function findId(cs, nextTime) {
