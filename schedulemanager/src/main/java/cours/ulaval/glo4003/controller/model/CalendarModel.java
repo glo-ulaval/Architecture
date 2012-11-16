@@ -32,18 +32,27 @@ public class CalendarModel {
 			}
 		}
 
-		sort();
-		addConflicts(schedule.getConflicts());
+		sortCoursesByTime();
+		associateConflictsToACourseSlot(schedule.getConflicts());
 	}
 
-	private void addConflicts(List<Conflict> conflicts) {
+	private void associateConflictsToACourseSlot(List<Conflict> conflicts) {
+
 		for (Conflict conflict : conflicts) {
-			findCourseSlotAccordingToDay(conflict.getFirstTimeSlot(), conflict.getFirstNrc()).addConflict(conflict);
+			setConflictToACourseSlot(conflict, conflict.getFirstNrc(), conflict.getFirstTimeSlot());
+
 			TimeSlot secondTimeSlot = conflict.getSecondTimeSlot();
 
 			if (secondTimeSlot != null) {
-				findCourseSlotAccordingToDay(secondTimeSlot, conflict.getSecondNrc()).addConflict(conflict);
+				setConflictToACourseSlot(conflict, conflict.getSecondNrc(), conflict.getSecondTimeSlot());
 			}
+		}
+	}
+
+	private void setConflictToACourseSlot(Conflict conflict, String nrc, TimeSlot time) {
+		CourseSlotModel courseSlot = findCourseSlotAccordingToDay(time, nrc);
+		if (courseSlot != null) {
+			courseSlot.addConflict(conflict);
 		}
 	}
 
@@ -75,8 +84,7 @@ public class CalendarModel {
 	private CourseSlotModel findCourseSlotAccordingToHours(TimeSlot slot, String nrc, List<CourseSlotModel> models) {
 		CourseSlotModel modelToReturn = null;
 		for (CourseSlotModel model : models) {
-			if (model.getNrc().equals(nrc) && model.getTimeSlotStart().equals(slot.getStartTime().toString())
-					&& model.getTimeSlotEnd().equals(slot.getEndTime().toString())) {
+			if (isSameCourse(slot, nrc, model)) {
 				modelToReturn = model;
 				break;
 			}
@@ -85,7 +93,22 @@ public class CalendarModel {
 		return modelToReturn;
 	}
 
-	private void sort() {
+	private boolean isSameCourse(TimeSlot time, String nrc, CourseSlotModel model) {
+
+		if (model.getNrc() != nrc) {
+			return false;
+		}
+		if (!model.getTimeSlotStart().equals(time.getStartTime().toString())) {
+			return false;
+		}
+		if (!model.getTimeSlotEnd().equals(time.getEndTime().toString())) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private void sortCoursesByTime() {
 		Collections.sort(monday, new TimeSlotComparator());
 		Collections.sort(tuesday, new TimeSlotComparator());
 		Collections.sort(wednesday, new TimeSlotComparator());
