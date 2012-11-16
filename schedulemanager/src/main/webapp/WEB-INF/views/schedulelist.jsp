@@ -69,7 +69,7 @@
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
 							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${mondaysection.nrc}"><i
+								href="${editsection}/${mondaysection.nrc}/list"><i
 									class="icon-edit icon-white"></i></a></td>
 							<td class="centered">
 						<a class="btn btn-danger"
@@ -107,7 +107,7 @@
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
 							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${tuesdaysection.nrc}"><i
+								href="${editsection}/${tuesdaysection.nrc}/list"><i
 									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${tuesdaysection.nrc}"><i
@@ -137,7 +137,7 @@
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
 							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${wednesdaysection.nrc}"><i
+								href="${editsection}/${wednesdaysection.nrc}/list"><i
 									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${wednesdaysection.nrc}"><i
@@ -167,7 +167,7 @@
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
 							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${thursdaysection.nrc}"><i
+								href="${editsection}/${thursdaysection.nrc}/list"><i
 									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${thursdaysection.nrc}"><i
@@ -197,7 +197,7 @@
 						<sec:authorize
 							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
 							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${fridaysection.nrc}"><i
+								href="${editsection}/${fridaysection.nrc}/list"><i
 									class="icon-edit icon-white"></i></a></td>
 							<td class="centered"><a class="btn btn-danger"
 								href="${deletesection}/${fridaysection.nrc}"><i

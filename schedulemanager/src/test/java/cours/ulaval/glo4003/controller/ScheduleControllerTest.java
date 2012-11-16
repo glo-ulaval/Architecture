@@ -178,8 +178,8 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void editSectionReturnsTheCorrectModelAndView() {
-		ModelAndView mv = controller.editSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC);
+	public void editSectionReturnsTheCorrectModelAndViewFromListView() {
+		ModelAndView mv = controller.editSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, "list");
 
 		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
 		verify(schedule).getSections();
@@ -191,11 +191,11 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canEditASection() throws Exception {
+	public void canEditASectionWithinListView() throws Exception {
 		SectionModel model = mock(SectionModel.class);
 		Principal principal = mock(Principal.class);
 		when(principal.getName()).thenReturn(AN_IDUL);
-		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model, principal);
+		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, "list", model, principal);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
 		assertEquals(A_SEMESTER, mv.getModel().get("semester"));
@@ -209,13 +209,13 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canEditASectionWithAUserThatIsNotAManager() throws Exception {
+	public void canEditASectionWithAUserThatIsNotAManagerWithinListView() throws Exception {
 		SectionModel model = mock(SectionModel.class);
 		Principal principal = mock(Principal.class);
 		when(principal.getName()).thenReturn(AN_IDUL);
 		user = new User();
 		when(mockedUserRepository.findByIdul(AN_IDUL)).thenReturn(user);
-		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, model, principal);
+		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, "list", model, principal);
 
 		assertEquals("schedulelist", mv.getViewName());
 		// This test is made only on the list view

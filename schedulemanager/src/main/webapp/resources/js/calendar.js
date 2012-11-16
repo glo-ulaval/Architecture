@@ -118,10 +118,12 @@ function setDuration(cs) {
 }
 
 function redirectToEditSection() {
+	console.log("is that called?");
 	var nrc = $(event.target).attr('id');
 	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
-			+ schedule.scheduleInfo.id + '/' + schedule.scheduleInfo.year + '/' + schedule.scheduleInfo.semester + '/' + nrc;
+			+ schedule.scheduleInfo.id + '/' + schedule.scheduleInfo.year + '/' + schedule.scheduleInfo.semester + '/' + nrc + '/calendar';
 
+	console.log(url);
 	window.location.assign(url);
 }
 

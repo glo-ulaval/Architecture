@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page session="true"%>
 <c:url
-  value="/schedule/editsection/${id}/${year}/${semester}/${section.nrc}"
+  value="/schedule/editsection/${id}/${year}/${semester}/${section.nrc}/${view}"
   var="url" />
 <form action="${url}" method=POST scope="request" commandName="section">
   <input type="hidden" name="teachMode" value="${section.teachMode}"

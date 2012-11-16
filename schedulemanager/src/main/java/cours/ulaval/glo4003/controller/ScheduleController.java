@@ -153,14 +153,15 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.GET)
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.GET)
 	public ModelAndView editSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@PathVariable String sectionNrc) {
+			@PathVariable String sectionNrc, @PathVariable String view) {
 
 		ModelAndView mv = new ModelAndView("editsection");
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
 		mv.addObject("id", id);
+		mv.addObject("view", view);
 
 		Schedule schedule = scheduleRepository.findById(id);
 		Section section = schedule.getSections().get(sectionNrc);
@@ -169,26 +170,28 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.POST)
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
+			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
+
+		Schedule schedule = scheduleRepository.findById(id);
+		schedule.delete(sectionNrc);
+		section.setNrc(sectionNrc);
+		schedule.add(section.convertToSection());
+		scheduleRepository.store(schedule);
 
 		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			ModelAndView mv = scheduleView(id, "list", principal);
+			ModelAndView mv = scheduleView(id, view, principal);
 			mv.addObject("user", userRepository.findByIdul(principal.getName()));
 			return mv;
 		}
 		ModelAndView mv = new ModelAndView("createschedule");
 		try {
-			Schedule schedule = scheduleRepository.findById(id);
-			schedule.delete(sectionNrc);
-			section.setNrc(sectionNrc);
-			schedule.add(section.convertToSection());
-			scheduleRepository.store(schedule);
 			mv.addObject("error", ControllerMessages.SUCCESS);
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
 			mv.addObject("id", id);
+			mv.addObject("view", view);
 			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
 			mv.addObject("sections", getSections(schedule));
 		} catch (Exception e) {
