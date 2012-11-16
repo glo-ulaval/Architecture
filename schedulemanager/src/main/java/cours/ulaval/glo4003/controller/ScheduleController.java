@@ -65,7 +65,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
-	public ModelAndView scheduleById(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
+	public ModelAndView scheduleView(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
 
 		CalendarModel calendarModel = new CalendarModel(scheduleRepository.findById(id));
 
@@ -174,7 +174,7 @@ public class ScheduleController {
 			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 
 		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			ModelAndView mv = scheduleById(id, "list", principal);
+			ModelAndView mv = scheduleView(id, "list", principal);
 			mv.addObject("user", userRepository.findByIdul(principal.getName()));
 			return mv;
 		}

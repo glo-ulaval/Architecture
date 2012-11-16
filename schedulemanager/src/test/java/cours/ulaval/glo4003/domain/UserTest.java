@@ -2,7 +2,8 @@ package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class UserTest {
 
