@@ -3,12 +3,12 @@ $(document).ready(function() {
 	$(".details-conflict").hide();
 
 	$(".show-conflicts").click( function(event) {
-		$(this).parent().parent().next(".conflicts").toggle();
+		$(this).parent().parent().parent().parent().next(".conflicts").toggle();
 		event.preventDefault();
 	});
 	
 	$(".show-details-conflict").click( function(event) {
-		$(this).next(".details-conflict").toggle();
+		$(this).parent().next(".details-conflict").toggle();
 		event.preventDefault();
 	});
 
