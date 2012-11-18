@@ -170,23 +170,14 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
-
-		Schedule schedule = scheduleRepository.findById(id);
-		schedule.delete(sectionNrc);
-		section.setNrc(sectionNrc);
-		schedule.add(section.convertToSection());
-		scheduleRepository.store(schedule);
-
-		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			ModelAndView mv = scheduleView(id, view, principal);
-			mv.addObject("user", userRepository.findByIdul(principal.getName()));
-			return mv;
-		}
 		ModelAndView mv = new ModelAndView("createschedule");
 		try {
+			Schedule schedule = scheduleRepository.findById(id);
+			updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
+
 			mv.addObject("error", ControllerMessages.SUCCESS);
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
@@ -198,6 +189,23 @@ public class ScheduleController {
 			mv.addObject("error", e.getMessage());
 		}
 		return mv;
+	}
+
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.POST)
+	public ModelAndView postEditSectionAndReturnToLastView(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
+
+		Schedule schedule = scheduleRepository.findById(id);
+		updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
+
+		return scheduleView(id, view, principal);
+	}
+
+	private void updateSectionAndSaveToSchedule(String sectionNrc, SectionModel section, Schedule schedule) throws Exception {
+		schedule.delete(sectionNrc);
+		section.setNrc(sectionNrc);
+		schedule.add(section.convertToSection());
+		scheduleRepository.store(schedule);
 	}
 
 	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)

@@ -209,19 +209,6 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canEditASectionWithAUserThatIsNotAManagerWithinListView() throws Exception {
-		SectionModel model = mock(SectionModel.class);
-		Principal principal = mock(Principal.class);
-		when(principal.getName()).thenReturn(AN_IDUL);
-		user = new User();
-		when(mockedUserRepository.findByIdul(AN_IDUL)).thenReturn(user);
-		ModelAndView mv = controller.postEditSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, A_SECTION_NRC, "list", model, principal);
-
-		assertEquals("schedulelist", mv.getViewName());
-		// This test is made only on the list view
-	}
-
-	@Test
 	public void canPostASection() throws Exception {
 		SectionModel model = mock(SectionModel.class);
 		Section section = createSection();
