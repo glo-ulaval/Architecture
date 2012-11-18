@@ -4,22 +4,27 @@ $(function() {
 		var cs = schedule.monday[i];
 		generateCourses(cs, i);
 	}
+	$('#monday').css('height', schedule.monday.length *25 + 'px');
 	for ( var i = 0; i < schedule.tuesday.length; i++) {
 		var cs = schedule.tuesday[i];
 		generateCourses(cs, i);
 	}
+	$('#tuesday').css('height', schedule.tuesday.length *25 + 'px');
 	for ( var i = 0; i < schedule.wednesday.length; i++) {
 		var cs = schedule.wednesday[i];
 		generateCourses(cs, i);
 	}
+	$('#wednesday').css('height', schedule.wednesday.length *25 + 'px');
 	for ( var i = 0; i < schedule.thursday.length; i++) {
 		var cs = schedule.thursday[i];
 		generateCourses(cs, i);
 	}
+	$('#thursday').css('height', schedule.thursday.length *25 + 'px');
 	for ( var i = 0; i < schedule.friday.length; i++) {
 		var cs = schedule.friday[i];
 		generateCourses(cs, i);
 	}
+	$('#friday').css('height', schedule.friday.length *25 + 'px');
 	$('.hour').disableSelection();
 });
 

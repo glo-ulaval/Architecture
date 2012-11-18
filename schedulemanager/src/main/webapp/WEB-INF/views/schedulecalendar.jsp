@@ -71,7 +71,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Lundi</td>
+		<td id="monday" class="day">Lundi</td>
 		<td class="hours-column">
 			<div id="mon85" class="hour"></div>
 			<div id="mon90" class="hour"></div>
@@ -103,7 +103,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Mardi</td>
+		<td id="tuesday" class="day">Mardi</td>
 		<td class="hours-column">
 			<div id="tue85" class="hour"></div>
 			<div id="tue90" class="hour"></div>
@@ -135,7 +135,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Mercredi</td>
+		<td id="wednesday"  class="day">Mercredi</td>
 		<td class="hours-column">
 			<div id="wed85" class="hour"></div>
 			<div id="wed90" class="hour"></div>
@@ -167,7 +167,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Jeudi</td>
+		<td id="thursday"  class="day">Jeudi</td>
 		<td class="hours-column">
 			<div id="thu85" class="hour"></div>
 			<div id="thu90" class="hour"></div>
@@ -199,7 +199,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Vendredi</td>
+		<td id="friday" class="day">Vendredi</td>
 		<td class="hours-column">
 			<div id="fri85" class="hour"></div>
 			<div id="fri90" class="hour"></div>
