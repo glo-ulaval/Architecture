@@ -25,7 +25,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/calendaradmin.js" />" /></script>
 </sec:authorize>
 <style>
-.event {
+.event, .event-name {
 	cursor: default;
 }
 </style>
