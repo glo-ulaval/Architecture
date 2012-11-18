@@ -77,7 +77,7 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 			content: conflictDescription
 		});
 		
-		event.css('background-color', 'rgba(255, 0, 0, 0.5)');
+		event.addClass('red');
 	}
 }
 
