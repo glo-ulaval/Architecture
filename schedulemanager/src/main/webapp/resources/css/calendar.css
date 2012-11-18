@@ -25,6 +25,10 @@
 	overflow: visible;
 }
 
+.hours-head{
+	min-width: 1350px;
+}
+
 .hour-head,.hours-head {
 	font-weight: bold;
 	padding: 8px 0px 8px;
