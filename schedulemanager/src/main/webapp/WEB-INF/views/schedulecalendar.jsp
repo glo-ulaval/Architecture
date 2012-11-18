@@ -24,11 +24,13 @@
 <sec:authorize access="hasAnyRole('ROLE_Responsable')">
 <script type="text/javascript" src="<c:url value="/resources/js/calendaradmin.js" />" /></script>
 </sec:authorize>
+<sec:authorize access="!hasRole('ROLE_Responsable')">
 <style>
 .event, .event-name {
 	cursor: default;
 }
 </style>
+</sec:authorize>
 </head>
 <body>
 <c:import url="header.jsp" />
