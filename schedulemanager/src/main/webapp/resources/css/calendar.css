@@ -76,7 +76,9 @@
 	margin-top: -325px;
 }
 
-.modal-body {
-	height: 550px;
-	max-height: none !important;
+.conflictIcon {
+	float: right;
+	margin-right: 7px;
+	margin-top: 4px;
 }
+

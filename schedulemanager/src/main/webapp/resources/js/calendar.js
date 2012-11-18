@@ -26,6 +26,7 @@ $(function() {
 	}
 	$('#friday').css('height', schedule.friday.length *25 + 'px');
 	$('.hour').disableSelection();
+	
 });
 
 function generateCourses(cs, height) {
@@ -46,12 +47,32 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 	event.css('position', 'absolute');
 	event.css('top', position.top + height * 25);
 
-	$('<div/>', {
+	var course = $('<div/>', {
 		id : cs.nrc,
 		title : cs.acronym,
 		class : 'event-name',
 		text : cs.acronym,
 	}).appendTo(event);
+	
+	
+	if(cs.conflicts.length > 0) {
+		var conflictDescription = "";
+		
+		for(var i = 0; i < cs.conflicts.length; i++){
+			conflictDescription += '<b>' + cs.conflicts[i].firstNrc + '</b>'  + ' ' + cs.conflicts[i].description + '<br/>';
+			conflictDescription += '<b>Professeur impliqué</b>'  + ' ' + cs.conflicts[i].teacher + '<br/><br/>';
+		}
+		
+		var conflictIcon = $('<i/>', {
+			class : 'icon-fire icon-white conflictIcon',
+		}).appendTo(course);
+		conflictIcon.popover({
+			placement: "right",
+			trigger: "hover",
+			title: "Conflit",
+			content: conflictDescription
+		});
+	}
 }
 
 function getNextTime(cs) {
