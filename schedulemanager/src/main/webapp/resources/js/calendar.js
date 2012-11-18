@@ -59,8 +59,8 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 		var conflictDescription = "";
 		
 		for(var i = 0; i < cs.conflicts.length; i++){
-			conflictDescription += '<b>' + cs.conflicts[i].firstNrc + '</b>'  + ' ' + cs.conflicts[i].description + '<br/>';
-			conflictDescription += '<b>Professeur impliqué</b>'  + ' ' + cs.conflicts[i].teacher + '<br/><br/>';
+			conflictDescription += '<b>' + cs.conflicts[i].firstNrc + '</b> ' + cs.conflicts[i].description + '<br/>';
+			conflictDescription += '<b>Professeur impliqu&eacute; : </b><br/>' + cs.conflicts[i].teacher + '<br/><br/>';
 		}
 		
 		var conflictIcon = $('<i/>', {
@@ -72,6 +72,8 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 			title: "Conflit",
 			content: conflictDescription
 		});
+		
+		event.css('background-color', 'rgba(255, 0, 0, 0.5)');
 	}
 }
 
