@@ -7,6 +7,7 @@ function initializeDraggableCalendar() {
 	$('.hour').sortable(
 			{
 				connectWith : '.hour',
+				distance : 50,
 				start : function(e, ui) {
 					ui.placeholder.width(ui.item.width());
 				},
@@ -32,13 +33,15 @@ function initializeDraggableCalendar() {
 
 function setDoubleClickEdit() {
 	$('.event').dblclick(function(event) {
-		redirectToEditSection();
+		redirectToEditSection(event);
 	});
 }
 
 function redirectToEditSection() {
 	var nrc = $(event.target).attr('id');
-	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
+	if(nrc){
+		var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
 			+ schedule.scheduleInfo.id + '/' + schedule.scheduleInfo.year + '/' + schedule.scheduleInfo.semester + '/' + nrc + '/calendar';
-	window.location.assign(url);
+		window.location.assign(url);
+	}
 }

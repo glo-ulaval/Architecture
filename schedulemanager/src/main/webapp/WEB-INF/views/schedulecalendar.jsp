@@ -35,6 +35,16 @@
 <body>
 <c:import url="header.jsp" />
 <h1>Horaire</h1>
+<sec:authorize access="hasAnyRole('ROLE_Responsable')">
+	<p>Double cliquez sur un cours afin d'accéder à sa page d'édition de section.</p>
+	<p>Glissez-déposez les cours afin de changer leurs heures de prestation.</p>
+	<p>Les plages horaires indiquées en <span class="red">rouge</span> 
+		sont en conflits, soit avec une autre plage horaire ou avec une
+		disponibilité d'un professeur.
+	<p>Posez votre curseur sur l'icône <i class="icon-fire"></i> afin d'obtenir les détails sur le(s) conflit(s)
+	conçernant un cours.</p>
+	</p>
+</sec:authorize>
 <div class="btn-group">
   <a href="list" type="button" class="btn">Liste</a>
   <a href="#" type="button" class="btn active">Calendrier</a>
