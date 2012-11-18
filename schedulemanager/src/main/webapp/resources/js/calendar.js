@@ -57,10 +57,14 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 	
 	if(cs.conflicts.length > 0) {
 		var conflictDescription = "";
-		
 		for(var i = 0; i < cs.conflicts.length; i++){
 			conflictDescription += '<b>' + cs.conflicts[i].firstNrc + '</b> ' + cs.conflicts[i].description + '<br/>';
 			conflictDescription += '<b>Professeur impliqu&eacute; : </b><br/>' + cs.conflicts[i].teacher + '<br/><br/>';
+		}
+		
+		var conflictTitle = "Conflit";
+		if(cs.conflicts.length > 1) {
+			conflictTitle += "s";
 		}
 		
 		var conflictIcon = $('<i/>', {
@@ -69,7 +73,7 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 		conflictIcon.popover({
 			placement: "right",
 			trigger: "hover",
-			title: "Conflit",
+			title: conflictTitle,
 			content: conflictDescription
 		});
 		
