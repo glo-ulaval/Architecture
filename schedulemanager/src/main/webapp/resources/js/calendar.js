@@ -54,6 +54,10 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 		text : cs.acronym,
 	}).appendTo(event);
 	
+	if(cs.isLab) {
+		event.addClass('lab');
+	}
+	
 	
 	if(cs.conflicts.length > 0) {
 		var conflictDescription = "";
