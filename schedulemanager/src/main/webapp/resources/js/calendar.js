@@ -81,6 +81,9 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 			content: conflictDescription
 		});
 		
+		if(event.hasClass('lab')) {
+			event.removeClass('lab');
+		}
 		event.addClass('red');
 	}
 }
