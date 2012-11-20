@@ -60,12 +60,15 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 		glo2002Section = new Section("87134", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "GLO-2002", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		glo2002Section.setCourseRepository(courseRepository);
 		ift2004Section = new Section("90876", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "IFT-2004", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		ift2004Section.setCourseRepository(courseRepository);
 		ift2002Section = new Section("11765", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "IFT-2002", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		ift2002Section.setCourseRepository(courseRepository);
 
 	}
 

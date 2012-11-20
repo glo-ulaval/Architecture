@@ -38,18 +38,23 @@ public class CourseLevelFilterIT extends ITTestBase {
 		glo1901Section = new Section("87134", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "GLO-1901", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		glo1901Section.setProgramSheetRepository(programSheetRepository);
 		glo1010Section = new Section("90876", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "GLO-1010", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		glo1010Section.setProgramSheetRepository(programSheetRepository);
 		ift2002Section = new Section("11765", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "IFT-2002", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		ift2002Section.setProgramSheetRepository(programSheetRepository);
 		ift1000Section = new Section("21345", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "IFT-1000", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		ift1000Section.setProgramSheetRepository(programSheetRepository);
 		ift2901Section = new Section("87678", "A", "a responsable person", Arrays.asList("teacher1", "teacher2"),
 				TeachMode.InCourse, new TimeDedicated(), "IFT-2901", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		ift2901Section.setProgramSheetRepository(programSheetRepository);
 
 	}
 

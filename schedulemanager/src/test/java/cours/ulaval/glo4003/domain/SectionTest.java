@@ -11,13 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.DisponibilityConflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameTeacherConflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
-import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
+import cours.ulaval.glo4003.persistence.XMLCourseRepository;
+import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
 
 public class SectionTest {
 	private static final int A_HOUR = 10;
@@ -70,53 +65,40 @@ public class SectionTest {
 	}
 
 	@Test
-	public void weCanFindATeacherInTheList() {
+	public void hasTeacherShouldReturnTrueIfTeacherIsInTeachers() {
 		assertTrue(section.hasTeacher("teacher1"));
 	}
 
 	@Test
-	public void canGenerateConcomittingCourseConflicts() {
-		List<Conflict> conflicts = section.generateConcomittingConflicts(section);
+	public void areSameLevelShouldReturnTrueIfCourseAreSameLevel() {
+		ProgramSheet programSheetMock = mock(ProgramSheet.class);
+		when(programSheetMock.areCoursesSameLevel(anyString(), anyString())).thenReturn(true);
+		XMLProgramSheetRepository repositoryMock = mock(XMLProgramSheetRepository.class);
+		when(repositoryMock.getProgramSheetGLO()).thenReturn(programSheetMock);
+		when(repositoryMock.getProgramSheetIFT()).thenReturn(programSheetMock);
+		section.setProgramSheetRepository(repositoryMock);
 
-		assertEquals(2, conflicts.size());
-		for (int i = 0; i < conflicts.size(); i++) {
-			assertTrue(conflicts.get(i) instanceof ConcomittingCoursesConflict);
-		}
+		assertTrue(section.areSameLevel(section));
+
+		verify(programSheetMock, times(2)).areCoursesSameLevel(anyString(), anyString());
+		verify(repositoryMock).getProgramSheetGLO();
+		verify(repositoryMock).getProgramSheetIFT();
 	}
 
 	@Test
-	public void canGenerateSameLevelCoursesConflicts() {
-		List<Conflict> conflicts = section.generateSameLevelCoursesConflicts(section);
+	public void areConcomittingShouldReturnTrueIfCourseAreSameLevel() {
+		Course courseMock = mock(Course.class);
+		when(courseMock.isConcomitting(any(Course.class))).thenReturn(true);
+		Course anotherCourseMock = mock(Course.class);
+		when(anotherCourseMock.isConcomitting(any(Course.class))).thenReturn(false);
+		XMLCourseRepository repositoryMock = mock(XMLCourseRepository.class);
+		when(repositoryMock.findByAcronym(anyString())).thenReturn(courseMock, anotherCourseMock);
+		section.setCourseRepository(repositoryMock);
 
-		assertEquals(2, conflicts.size());
-		for (int i = 0; i < conflicts.size(); i++) {
-			assertTrue(conflicts.get(i) instanceof SameLevelCourseConflict);
-		}
-	}
+		assertTrue(section.areConcomitting(section));
 
-	@Test
-	public void canGenerateSameTeacherConflicts() {
-		List<Conflict> conflicts = section.generateSameTeacherConflicts(section, "teacher1");
-
-		assertEquals(2, conflicts.size());
-		for (int i = 0; i < conflicts.size(); i++) {
-			assertTrue(conflicts.get(i) instanceof SameTeacherConflict);
-		}
-	}
-
-	@Test
-	public void canGenerateUnavailableTeacherConflict() {
-		Availability availabilityMock = mock(Availability.class);
-		when(availabilityMock.isAvailableForTimeSlot(any(TimeSlot.class))).thenReturn(AvailabilityLevel.Unavailable,
-				AvailabilityLevel.PreferedNotAvailable);
-		AvailabilityRepository repositoryMock = mock(AvailabilityRepository.class);
-		when(repositoryMock.findByIdul(anyString())).thenReturn(availabilityMock);
-
-		List<Conflict> conflicts = section.generateUnavailableTeacherConflicts(repositoryMock);
-
-		assertEquals(4, conflicts.size());
-		assertTrue(conflicts.get(0) instanceof UnavailableTeacherConflict);
-		assertTrue(conflicts.get(1) instanceof DisponibilityConflict);
+		verify(courseMock).isConcomitting(any(Course.class));
+		verify(repositoryMock, times(2)).findByAcronym(anyString());
 	}
 
 	private Time generateTimeSlotStartTime() {
