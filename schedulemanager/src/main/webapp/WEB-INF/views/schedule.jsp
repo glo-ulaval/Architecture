@@ -49,6 +49,19 @@
 					<tr id="${schedule.id}">
 						<td class="span12">[${schedule.semester} ${schedule.year}] ${schedule.id}</td>
 						<td class="centered">
+							<c:choose>
+							      <c:when test="${schedule.score <= 300}">
+							      	<span class="badge badge-success">${schedule.score}</span>
+							      </c:when>
+    							  <c:when test="${schedule.score <= 600 && schedule.score > 300}">
+							      	<span class="badge badge-warning">${schedule.score}</span>
+							      </c:when>
+							      <c:otherwise>
+							      	<span class="badge badge-important">${schedule.score}</span>
+							      </c:otherwise>
+							</c:choose>
+						</td>
+						<td class="centered">
 							<a class="btn btn-label" href="${scheduleurl}/${schedule.id}/list"><i class="icon-list"></i> Liste</a>
 						</td>
 						<td class="centered">
@@ -62,6 +75,11 @@
 					</tr>
 				</c:forEach>
 			</table>
+			
+			<p>Légende des scores d'horaires</p>
+			Bon : <span class="badge badge-success">0-300</span>
+	      	Moyen : <span class="badge badge-warning">301-600</span>
+	      	Pauvre : <span class="badge badge-important">601++</span>
 		</c:if>
 	</div>
 	<c:import url="footer.jsp" />

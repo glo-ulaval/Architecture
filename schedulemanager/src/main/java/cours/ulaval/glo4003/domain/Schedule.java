@@ -15,7 +15,7 @@ public class Schedule {
 	private Map<String, Section> sections;
 	private String personInCharge;
 	private List<Conflict> conflicts = new ArrayList<Conflict>();
-	private Integer score;
+	private Integer score = 0;
 
 	public Schedule() {
 	}
