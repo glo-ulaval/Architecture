@@ -97,6 +97,7 @@ function getConflictTeacher(conflict) {
 		return '<b>Professeur impliqu&eacute; : </b><br/>' + conflict.teacher
 				+ '<br/><br/>';
 	}
+	return '';
 }
 
 function getConflictSecondNrc(conflict) {
@@ -113,6 +114,7 @@ function getConflictSecondNrc(conflict) {
 				+ '</span></b> à <b><span class="blue">'
 				+ conflict.secondEndTime + '</span></b>.';
 	}
+	return '';
 }
 
 function getNextTime(cs) {
