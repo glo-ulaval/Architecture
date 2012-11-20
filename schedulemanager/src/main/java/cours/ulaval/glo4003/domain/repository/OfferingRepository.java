@@ -7,19 +7,16 @@ import cours.ulaval.glo4003.domain.Semester;
 
 public interface OfferingRepository {
 
-	public Boolean containsOfferingFor(String year);
+	Boolean containsOfferingFor(String year);
 
-	public List<String> findYears();
+	void delete(String year) throws Exception;
 
-	public Offering find(String year);
+	void delete(String year, Semester semester) throws Exception;
 
-	public void store(Offering offering)
-			throws Exception;
+	Offering find(String year);
 
-	public void delete(String year, Semester semester)
-			throws Exception;
+	List<String> findYears();
 
-	public void delete(String year)
-			throws Exception;
+	void store(Offering offering) throws Exception;
 
 }

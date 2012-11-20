@@ -7,16 +7,16 @@ import cours.ulaval.glo4003.domain.Semester;
 
 public interface ScheduleRepository {
 
-	public List<Schedule> findAll();
+	void delete(String id) throws Exception;
 
-	public List<Schedule> findBy(String year);
+	List<Schedule> findAll();
 
-	public Schedule findById(String id);
+	List<Schedule> findBy(String year);
 
-	public String getId(String year, Semester semester);
+	Schedule findById(String id);
 
-	public void store(Schedule schedule) throws Exception;
+	String getId(String year, Semester semester);
 
-	public void delete(String id) throws Exception;
+	void store(Schedule schedule) throws Exception;
 
 }

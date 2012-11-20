@@ -7,15 +7,14 @@ import cours.ulaval.glo4003.domain.Offering;
 
 public interface CourseRepository {
 
-	public List<Course> findAll()
-			throws Exception;
-
-	public List<Course> findByOffering(Offering offering);
-
-	public Course findByAcronym(String acronym);
-
-	public void store(Course course);
-
 	// WARNING -- this method is for tests only
-	public void clear();
+	void clear();
+
+	List<Course> findAll() throws Exception;
+
+	Course findByAcronym(String acronym);
+
+	List<Course> findByOffering(Offering offering);
+
+	void store(Course course);
 }

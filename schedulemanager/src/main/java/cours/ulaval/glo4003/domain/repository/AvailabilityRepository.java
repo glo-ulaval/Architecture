@@ -4,12 +4,10 @@ import cours.ulaval.glo4003.domain.Availability;
 
 public interface AvailabilityRepository {
 
-	public Availability findByIdul(String idul);
+	void clear() throws Exception;
 
-	public void store(Availability availabilities)
-			throws Exception;
+	Availability findByIdul(String idul);
 
-	public void clear()
-			throws Exception;
+	void store(Availability availabilities) throws Exception;
 
 }
