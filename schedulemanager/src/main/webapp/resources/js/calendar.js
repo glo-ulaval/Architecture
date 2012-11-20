@@ -1,5 +1,3 @@
-console.log(schedule);
-
 $(function() {
 
 	generateMonday();
@@ -61,7 +59,7 @@ function generateCourses(cs, height) {
 
 function createEventDiv(height, durationInHours, cs, nextTime) {
 	var event = $('<div/>', {
-		class : 'event',
+		class : 'event'
 	});
 	event.appendTo(findId(cs, nextTime));
 	event.css('width', durationInHours * 100 + 'px');
@@ -73,7 +71,7 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 	var course = $('<div/>', {
 		id : cs.nrc,
 		class : 'event-name',
-		text : cs.acronym + ' - ' + cs.group,
+		text : cs.acronym + ' - ' + cs.group
 	}).appendTo(event);
 	
 	if(cs.isLab) {
@@ -100,7 +98,7 @@ function generateConflictsPopover(cs, event, course){
 		}
 		
 		var conflictIcon = $('<i/>', {
-			class : 'icon-fire icon-white conflictIcon',
+			class : 'icon-fire icon-white conflictIcon'
 		}).appendTo(course);
 		conflictIcon.popover({
 			placement: "right",
