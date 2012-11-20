@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Schedule;
@@ -15,6 +16,32 @@ import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
 public class ConcomittingCoursesFilterTest {
+
+	private Schedule scheduleMock;
+	private Section aSectionMock;
+	private Section anotherSectionMock;
+	private Filter nextFilterMock;
+
+	@Before
+	public void setUp() {
+		TimeSlot timeSlotMock = mock(TimeSlot.class);
+		when(timeSlotMock.isOverlapping(any(TimeSlot.class))).thenReturn(true);
+		List<TimeSlot> timeSlotsMocks = Arrays.asList(timeSlotMock);
+
+		aSectionMock = mock(Section.class);
+		anotherSectionMock = mock(Section.class);
+		when(aSectionMock.getCourseAcronym()).thenReturn("GLO-4000");
+		when(aSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
+		when(aSectionMock.areConcomitting(anotherSectionMock)).thenReturn(true);
+		when(anotherSectionMock.getCourseAcronym()).thenReturn("GLO-3000");
+		when(anotherSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
+		List<Section> sectionsMocks = Arrays.asList(aSectionMock, anotherSectionMock);
+
+		scheduleMock = mock(Schedule.class);
+		when(scheduleMock.getSectionsList()).thenReturn(sectionsMocks);
+
+		nextFilterMock = mock(Filter.class);
+	}
 
 	@Test
 	public void canInstantiateAConcommitingCoursesFilter() {
@@ -25,27 +52,23 @@ public class ConcomittingCoursesFilterTest {
 
 	@Test
 	public void canDetectConcimittingCoursesConflicts() {
-		TimeSlot timeSlotMock = mock(TimeSlot.class);
-		when(timeSlotMock.isOverlapping(any(TimeSlot.class))).thenReturn(true);
-		List<TimeSlot> timeSlotsMocks = Arrays.asList(timeSlotMock);
-
-		Section aSectionMock = mock(Section.class);
-		Section anotherSectionMock = mock(Section.class);
-		when(aSectionMock.getCourseAcronym()).thenReturn("GLO-4000");
-		when(aSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
-		when(aSectionMock.areConcomitting(anotherSectionMock)).thenReturn(true);
-		when(anotherSectionMock.getCourseAcronym()).thenReturn("GLO-3000");
-		when(anotherSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
-		List<Section> sectionsMocks = Arrays.asList(aSectionMock, anotherSectionMock);
-
-		Schedule scheduleMock = mock(Schedule.class);
-		when(scheduleMock.getSectionsList()).thenReturn(sectionsMocks);
-
 		ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(scheduleMock);
+		List<Conflict> conflicts = filter.run(scheduleMock);
 
-		verify(scheduleMock).addAll(anyListOf(Conflict.class));
+		assertEquals(1, conflicts.size());
 		verify(aSectionMock).areConcomitting(anotherSectionMock);
 	}
+
+	// @Test
+	// public void
+	// canSayIfSectionWouldCauseConcomittingCourseConflictWithSchedule() {
+	// ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
+	//
+	// filter.compareWithSchedule(anotherSectionMock, scheduleMock);
+	//
+	// verify(scheduleMock).addAll(anyListOf(Conflict.class));
+	// verify(aSectionMock).areConcomitting(anotherSectionMock);
+	// }
 }

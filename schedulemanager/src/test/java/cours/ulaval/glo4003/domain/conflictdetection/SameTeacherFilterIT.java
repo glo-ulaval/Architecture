@@ -1,8 +1,10 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameTeacherConflict;
 import cours.ulaval.glo4003.persistence.ITTestBase;
 
@@ -24,6 +27,7 @@ public class SameTeacherFilterIT extends ITTestBase {
 	private Section glo1901Section;
 	private Section glo1010Section;
 	private Section glo2000Section;
+	private Filter nextFilterMock;
 
 	@Before
 	public void setup()
@@ -37,6 +41,8 @@ public class SameTeacherFilterIT extends ITTestBase {
 		glo2000Section = new Section("09088", "A", "a responsable person", Arrays.asList("teacher2"), TeachMode.InCourse,
 				new TimeDedicated(), "GLO-2000", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY)),
 				null);
+
+		nextFilterMock = mock(Filter.class);
 	}
 
 	@Test
@@ -47,12 +53,14 @@ public class SameTeacherFilterIT extends ITTestBase {
 		schedule.add(glo1010Section);
 
 		SameTeacherFilter filter = new SameTeacherFilter();
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("90876", schedule.getConflicts().get(0).getFirstNrc());
-		assertTrue(schedule.getConflicts().get(0) instanceof SameTeacherConflict);
+		assertEquals(1, conflicts.size());
+		assertEquals("90876", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof SameTeacherConflict);
+		verify(nextFilterMock).run(schedule);
 	}
 
 	@Test
@@ -63,10 +71,12 @@ public class SameTeacherFilterIT extends ITTestBase {
 		schedule.add(glo2000Section);
 
 		SameTeacherFilter filter = new SameTeacherFilter();
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(0, schedule.getConflicts().size());
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule);
 	}
 
 	private Time generateTimeSlotStartTime() {

@@ -12,21 +12,22 @@ import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameTeacherConflic
 public class SameTeacherFilter extends Filter {
 
 	@Override
-	public void run(Schedule schedule) {
+	public List<Conflict> run(Schedule schedule) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
 		List<Section> sections = schedule.getSectionsList();
-
 		for (int i = 0; i < sections.size(); i++) {
 			Section section = sections.get(i);
 			for (String teacher : section.getTeachers()) {
 				for (int j = i + 1; j < sections.size(); j++) {
 					Section secondSection = sections.get(j);
 					if (secondSection.hasTeacher(teacher)) {
-						schedule.addAll(generateSameTeacherConflicts(section, secondSection, teacher));
+						conflicts.addAll(generateSameTeacherConflicts(section, secondSection, teacher));
 					}
 				}
 			}
 		}
-		nextPipe(schedule);
+		conflicts.addAll(nextFilter.run(schedule));
+		return conflicts;
 	}
 
 	private List<Conflict> generateSameTeacherConflicts(Section section, Section otherSection, String teacher) {
@@ -43,10 +44,4 @@ public class SameTeacherFilter extends Filter {
 		return conflicts;
 	}
 
-	@Override
-	public void nextPipe(Schedule schedule) {
-		if (nextPipe != null) {
-			nextPipe.run(schedule);
-		}
-	}
 }

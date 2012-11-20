@@ -1,9 +1,11 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +22,7 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.persistence.ITTestBase;
 import cours.ulaval.glo4003.persistence.XMLCourseRepository;
@@ -32,6 +35,7 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 	private Section glo2002Section;
 	private Section ift2004Section;
 	private Section ift2002Section;
+	private Filter nextFilterMock;
 
 	@Before
 	public void setup()
@@ -70,6 +74,7 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 						DayOfWeek.MONDAY)), null);
 		ift2002Section.setCourseRepository(courseRepository);
 
+		nextFilterMock = mock(Filter.class);
 	}
 
 	@After
@@ -86,12 +91,14 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 
 		ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
 		filter.setRepository(courseRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("11765", schedule.getConflicts().get(0).getFirstNrc());
-		assertTrue(schedule.getConflicts().get(0) instanceof ConcomittingCoursesConflict);
+		assertEquals(1, conflicts.size());
+		assertEquals("11765", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof ConcomittingCoursesConflict);
+		verify(nextFilterMock).run(schedule);
 	}
 
 	@Test
@@ -103,10 +110,12 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 
 		ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
 		filter.setRepository(courseRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(0, schedule.getConflicts().size());
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule);
 	}
 
 	private Time generateTimeSlotStartTime() {

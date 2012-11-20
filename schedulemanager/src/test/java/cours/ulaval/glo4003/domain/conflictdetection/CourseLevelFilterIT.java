@@ -1,8 +1,10 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
 import cours.ulaval.glo4003.domain.repository.ProgramSheetRepository;
 import cours.ulaval.glo4003.persistence.ITTestBase;
@@ -29,6 +32,7 @@ public class CourseLevelFilterIT extends ITTestBase {
 	private Section ift2002Section;
 	private Section ift1000Section;
 	private Section ift2901Section;
+	private Filter nextFilterMock;
 
 	@Before
 	public void setup()
@@ -56,6 +60,7 @@ public class CourseLevelFilterIT extends ITTestBase {
 						DayOfWeek.MONDAY)), null);
 		ift2901Section.setProgramSheetRepository(programSheetRepository);
 
+		nextFilterMock = mock(Filter.class);
 	}
 
 	@Test
@@ -67,13 +72,15 @@ public class CourseLevelFilterIT extends ITTestBase {
 
 		CourseLevelFilter filter = new CourseLevelFilter();
 		filter.setRepository(programSheetRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("90876", schedule.getConflicts().get(0).getFirstNrc());
-		assertEquals("87134", schedule.getConflicts().get(0).getSecondNrc());
-		assertTrue(schedule.getConflicts().get(0) instanceof SameLevelCourseConflict);
+		assertEquals(1, conflicts.size());
+		assertEquals("90876", conflicts.get(0).getFirstNrc());
+		assertEquals("87134", conflicts.get(0).getSecondNrc());
+		assertTrue(conflicts.get(0) instanceof SameLevelCourseConflict);
+		verify(nextFilterMock).run(schedule);
 	}
 
 	@Test
@@ -85,13 +92,15 @@ public class CourseLevelFilterIT extends ITTestBase {
 
 		CourseLevelFilter filter = new CourseLevelFilter();
 		filter.setRepository(programSheetRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("11765", schedule.getConflicts().get(0).getFirstNrc());
-		assertEquals("21345", schedule.getConflicts().get(0).getSecondNrc());
-		assertTrue(schedule.getConflicts().get(0) instanceof SameLevelCourseConflict);
+		assertEquals(1, conflicts.size());
+		assertEquals("11765", conflicts.get(0).getFirstNrc());
+		assertEquals("21345", conflicts.get(0).getSecondNrc());
+		assertTrue(conflicts.get(0) instanceof SameLevelCourseConflict);
+		verify(nextFilterMock).run(schedule);
 	}
 
 	@Test
@@ -104,10 +113,12 @@ public class CourseLevelFilterIT extends ITTestBase {
 
 		CourseLevelFilter filter = new CourseLevelFilter();
 		filter.setRepository(programSheetRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(0, schedule.getConflicts().size());
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule);
 	}
 
 	private Time generateTimeSlotStartTime() {

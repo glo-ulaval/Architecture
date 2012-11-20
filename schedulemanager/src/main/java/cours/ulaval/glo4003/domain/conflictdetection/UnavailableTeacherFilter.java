@@ -24,22 +24,13 @@ public class UnavailableTeacherFilter extends Filter {
 	}
 
 	@Override
-	public void run(Schedule schedule) {
+	public List<Conflict> run(Schedule schedule) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
 		for (Section section : schedule.getSectionsList()) {
-			schedule.addAll(generateUnavailableTeacherConflicts(section, repository));
+			conflicts.addAll(generateUnavailableTeacherConflicts(section, repository));
 		}
-		nextPipe(schedule);
-	}
-
-	@Override
-	public void nextPipe(Schedule schedule) {
-		if (nextPipe != null) {
-			nextPipe.run(schedule);
-		}
-	}
-
-	public void setRepository(AvailabilityRepository repository) {
-		this.repository = repository;
+		conflicts.addAll(nextFilter.run(schedule));
+		return conflicts;
 	}
 
 	private List<Conflict> generateUnavailableTeacherConflicts(Section section, AvailabilityRepository repository) {
@@ -59,6 +50,10 @@ public class UnavailableTeacherFilter extends Filter {
 			}
 		}
 		return conflicts;
+	}
+
+	public void setRepository(AvailabilityRepository repository) {
+		this.repository = repository;
 	}
 
 }

@@ -18,25 +18,20 @@ public class CourseLevelFilter extends Filter {
 	private ProgramSheetRepository repository;
 
 	@Override
-	public void run(Schedule schedule) {
+	public List<Conflict> run(Schedule schedule) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
 		List<Section> sections = schedule.getSectionsList();
 		for (int i = 0; i < sections.size(); i++) {
 			for (int j = i + 1; j < sections.size(); j++) {
 				Section section = sections.get(i);
 				Section otherSection = sections.get(j);
 				if (section.areSameLevel(otherSection)) {
-					schedule.addAll(generateSameLevelCoursesConflicts(section, otherSection));
+					conflicts.addAll(generateSameLevelCoursesConflicts(section, otherSection));
 				}
 			}
 		}
-		nextPipe(schedule);
-	}
-
-	@Override
-	public void nextPipe(Schedule schedule) {
-		if (nextPipe != null) {
-			nextPipe.run(schedule);
-		}
+		conflicts.addAll(nextFilter.run(schedule));
+		return conflicts;
 	}
 
 	private List<Conflict> generateSameLevelCoursesConflicts(Section section, Section otherSection) {

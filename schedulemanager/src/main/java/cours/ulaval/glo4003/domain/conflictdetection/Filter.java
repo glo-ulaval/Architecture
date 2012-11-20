@@ -1,9 +1,16 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
+import java.util.List;
+
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
-public abstract class Filter extends Pipe {
-	public abstract void run(Schedule schedule);
+public abstract class Filter {
+	protected Filter nextFilter;
 
-	public abstract void nextPipe(Schedule schedule);
+	public void connectToFilter(Filter filter) {
+		nextFilter = filter;
+	}
+
+	public abstract List<Conflict> run(Schedule schedule);
 }
