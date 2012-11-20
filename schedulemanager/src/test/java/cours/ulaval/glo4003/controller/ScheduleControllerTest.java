@@ -141,6 +141,7 @@ public class ScheduleControllerTest {
 
 		CalendarModel model = (CalendarModel) mv.getModel().get("schedule");
 		assertEquals(1, model.getTuesday().get(0).getConflicts().size());
+		verify(mockedConflictDetector).detectConflict(schedule);
 	}
 
 	@Test
@@ -153,6 +154,7 @@ public class ScheduleControllerTest {
 
 		CalendarModel model = (CalendarModel) mv.getModel().get("schedule");
 		assertEquals(2, model.getTuesday().get(0).getConflicts().size());
+		verify(mockedConflictDetector).detectConflict(schedule);
 	}
 
 	@Test
@@ -211,6 +213,7 @@ public class ScheduleControllerTest {
 		verify(schedule).delete(A_SECTION_NRC);
 		verify(schedule).add(any(Section.class));
 		verify(mockedScheduleRepository).store(schedule);
+		verify(mockedConflictDetector).detectConflict(schedule);
 	}
 
 	@Test
