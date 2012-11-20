@@ -1,10 +1,14 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
-public class ConflictDetector extends Pipe {
+public class ConflictDetector extends Source {
 	@Inject
 	private ConcomittingCoursesFilter concomittingCoursesFilter;
 	@Inject
@@ -16,27 +20,30 @@ public class ConflictDetector extends Pipe {
 	private Sink sink = new Sink();
 
 	public void detectConflict(Schedule schedule) {
-		run(schedule);
+		List<Conflict> conflicts = run(schedule);
+		schedule.addAll(conflicts);
+		schedule.calculateScore();
 	}
 
-	@Override
-	protected void run(Schedule schedule) {
+	protected List<Conflict> run(Schedule schedule) {
 		connectFilters();
-		startPipe(schedule);
+		return startPipe(schedule);
 	}
 
 	private void connectFilters() {
-		this.connectToPipe(concomittingCoursesFilter);
-		concomittingCoursesFilter.connectToPipe(courseLevelFilter);
-		courseLevelFilter.connectToPipe(sameTeacherFilter);
-		sameTeacherFilter.connectToPipe(unavailableTeacherFilter);
-		unavailableTeacherFilter.connectToPipe(sink);
+		this.connectToFilter(concomittingCoursesFilter);
+		concomittingCoursesFilter.connectToFilter(courseLevelFilter);
+		courseLevelFilter.connectToFilter(sameTeacherFilter);
+		sameTeacherFilter.connectToFilter(unavailableTeacherFilter);
+		unavailableTeacherFilter.connectToFilter(sink);
 	}
 
-	private void startPipe(Schedule schedule) {
-		if (nextPipe != null) {
-			nextPipe.run(schedule);
+	private List<Conflict> startPipe(Schedule schedule) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		if (firstFilter != null) {
+			conflicts.addAll(firstFilter.run(schedule));
 		}
+		return conflicts;
 	}
 
 	// WARNING, DO NOT USE - the following methods are for tests only

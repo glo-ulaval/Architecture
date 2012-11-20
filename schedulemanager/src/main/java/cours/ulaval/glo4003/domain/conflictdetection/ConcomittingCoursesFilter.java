@@ -18,18 +18,25 @@ public class ConcomittingCoursesFilter extends Filter {
 	private CourseRepository repository;
 
 	@Override
-	public void run(Schedule schedule) {
+	public List<Conflict> run(Schedule schedule) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
 		List<Section> sections = schedule.getSectionsList();
 		for (int i = 0; i < sections.size(); i++) {
 			for (int j = i + 1; j < sections.size(); j++) {
 				Section section = sections.get(i);
 				Section otherSection = sections.get(j);
 				if (section.areConcomitting(otherSection)) {
-					schedule.addAll(generateConcomittingConflicts(section, otherSection));
+					conflicts.addAll(generateConcomittingConflicts(section, otherSection));
 				}
 			}
 		}
-		nextPipe(schedule);
+		conflicts.addAll(nextFilter.run(schedule));
+		return conflicts;
+	}
+
+	public void compareWithSchedule(Section anotherSectionMock, Schedule scheduleMock) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private List<Conflict> generateConcomittingConflicts(Section section, Section otherSection) {
@@ -46,15 +53,9 @@ public class ConcomittingCoursesFilter extends Filter {
 		return conflicts;
 	}
 
-	@Override
-	public void nextPipe(Schedule schedule) {
-		if (nextPipe != null) {
-			nextPipe.run(schedule);
-		}
-	}
-
 	// WARNING -- DO NOT USE -- for test only
 	public void setRepository(CourseRepository repo) {
 		repository = repo;
 	}
+
 }

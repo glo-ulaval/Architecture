@@ -1,15 +1,14 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
-public class Sink extends Pipe {
+public class Sink extends Filter {
 
-	@Override
-	protected void run(Schedule schedule) {
-		calculateTotalScore(schedule);
-	}
-
-	private void calculateTotalScore(Schedule schedule) {
-		schedule.calculateScore();
+	public List<Conflict> run(Schedule schedule) {
+		return new ArrayList<Conflict>();
 	}
 }

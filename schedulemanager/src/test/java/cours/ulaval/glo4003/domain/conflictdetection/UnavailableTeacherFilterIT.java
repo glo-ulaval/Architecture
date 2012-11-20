@@ -1,8 +1,10 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
@@ -18,6 +20,7 @@ import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.DisponibilityConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
@@ -38,6 +41,7 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 	private Section glo1901Section;
 	private Section glo1010Section;
 	private Section glo2000Section;
+	private Filter nextFilterMock;
 
 	@BeforeClass
 	public static void setupClass()
@@ -62,6 +66,8 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 		glo2000Section = new Section("09088", "A", "a responsable person", Arrays.asList("teacher1"), TeachMode.InCourse,
 				new TimeDedicated(), "GLO-2000", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.THURSDAY)),
 				null);
+
+		nextFilterMock = mock(Filter.class);
 	}
 
 	@Test
@@ -72,12 +78,14 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 
 		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
 		filter.setRepository(availabilityRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("90876", schedule.getConflicts().get(0).getFirstNrc());
-		assertTrue(schedule.getConflicts().get(0) instanceof DisponibilityConflict);
+		assertEquals(1, conflicts.size());
+		assertEquals("90876", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof DisponibilityConflict);
+		verify(nextFilterMock).run(schedule);
 	}
 
 	@Test
@@ -88,12 +96,14 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 
 		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
 		filter.setRepository(availabilityRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(1, schedule.getConflicts().size());
-		assertEquals("09088", schedule.getConflicts().get(0).getFirstNrc());
-		assertTrue(schedule.getConflicts().get(0) instanceof UnavailableTeacherConflict);
+		assertEquals(1, conflicts.size());
+		assertEquals("09088", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof UnavailableTeacherConflict);
+		verify(nextFilterMock).run(schedule);
 	}
 
 	@Test
@@ -104,10 +114,12 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 
 		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
 		filter.setRepository(availabilityRepository);
+		filter.connectToFilter(nextFilterMock);
 
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		assertEquals(0, schedule.getConflicts().size());
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule);
 	}
 
 	private Time generateTimeSlotStartTime() {

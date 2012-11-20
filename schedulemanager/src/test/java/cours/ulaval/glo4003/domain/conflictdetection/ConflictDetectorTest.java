@@ -27,10 +27,10 @@ public class ConflictDetectorTest {
 
 		conflictDetector.detectConflict(scheduleMock);
 
-		verify(concomittingCoursesFilterMock).connectToPipe(courseLevelFilterMock);
-		verify(courseLevelFilterMock).connectToPipe(sameTeacherFilterMock);
-		verify(sameTeacherFilterMock).connectToPipe(unavailableTeacherFilterMock);
-		verify(unavailableTeacherFilterMock).connectToPipe(sinkMock);
+		verify(concomittingCoursesFilterMock).connectToFilter(courseLevelFilterMock);
+		verify(courseLevelFilterMock).connectToFilter(sameTeacherFilterMock);
+		verify(sameTeacherFilterMock).connectToFilter(unavailableTeacherFilterMock);
+		verify(unavailableTeacherFilterMock).connectToFilter(sinkMock);
 		verify(concomittingCoursesFilterMock).run(scheduleMock);// verify that
 																// the pipe is
 																// started

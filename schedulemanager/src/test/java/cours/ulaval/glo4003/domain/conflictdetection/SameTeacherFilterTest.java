@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
 public class SameTeacherFilterTest {
@@ -22,33 +22,41 @@ public class SameTeacherFilterTest {
 	private Schedule schedule;
 	private SameTeacherFilter filter;
 	private List<Section> sections;
-	private List<Conflict> conflicts;
+	private Filter nextFilterMock;
+	private Section sectionMock;
+	private Section anotherSectionMock;
 
 	@Before
 	public void setUp()
 			throws Exception {
-		Section section = mock(Section.class);
-		Section section2 = mock(Section.class);
-		conflicts = new ArrayList<Conflict>();
+		TimeSlot timeSlotMock = mock(TimeSlot.class);
+		when(timeSlotMock.isOverlapping(any(TimeSlot.class))).thenReturn(true);
+		List<TimeSlot> timeSlotsMocks = Arrays.asList(timeSlotMock);
 
-		when(section.getNrc()).thenReturn("AN_NRC");
-		when(section.getTeachers()).thenReturn(Arrays.asList(TEACHER));
+		sectionMock = mock(Section.class);
+		when(sectionMock.getNrc()).thenReturn("AN_NRC");
+		when(sectionMock.getTeachers()).thenReturn(Arrays.asList(TEACHER));
+		when(sectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
+		anotherSectionMock = mock(Section.class);
+		when(anotherSectionMock.getNrc()).thenReturn("AN_NRC2");
+		when(anotherSectionMock.hasTeacher(TEACHER)).thenReturn(true);
+		when(anotherSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
+		sections = Arrays.asList(sectionMock, anotherSectionMock);
 
-		when(section2.getNrc()).thenReturn("AN_NRC2");
-		when(section2.hasTeacher(TEACHER)).thenReturn(true);
-
-		sections = Arrays.asList(section, section2);
 		schedule = mock(Schedule.class);
 		when(schedule.getSectionsList()).thenReturn(sections);
 
+		nextFilterMock = mock(Filter.class);
+
 		filter = new SameTeacherFilter();
+		filter.connectToFilter(nextFilterMock);
 	}
 
 	@Test
 	public void canVerifyIsThereIsAConflictForTwoSectionForATeacher() {
-		filter.run(schedule);
+		List<Conflict> conflicts = filter.run(schedule);
 
-		verify(schedule, times(1)).addAll(any(List.class));
-		assertEquals(conflicts, schedule.getConflicts());
+		assertEquals(1, conflicts.size());
+		verify(anotherSectionMock).hasTeacher(anyString());
 	}
 }

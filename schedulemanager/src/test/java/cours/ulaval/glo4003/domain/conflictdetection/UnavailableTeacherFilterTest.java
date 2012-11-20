@@ -19,6 +19,8 @@ import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
 public class UnavailableTeacherFilterTest {
 
+	private Filter nextFilterMock;
+
 	@Test
 	public void canInstantiateUnavailableTeacherFilter() {
 		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
@@ -31,15 +33,14 @@ public class UnavailableTeacherFilterTest {
 		TimeSlot timeSlotMock = mock(TimeSlot.class);
 		List<TimeSlot> timeSlotsMocks = Arrays.asList(timeSlotMock);
 
-		List<String> teachers = Arrays.asList("unavailable_teacher");
-		List<String> otherteachers = Arrays.asList("available_teacher");
+		List<String> teachers = Arrays.asList("unavailable_teacher", "available_teacher");
 
 		Section aSectionMock = mock(Section.class);
 		when(aSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
 		when(aSectionMock.getTeachers()).thenReturn(teachers);
 		Section anotherSectionMock = mock(Section.class);
 		when(anotherSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
-		when(aSectionMock.getTeachers()).thenReturn(otherteachers);
+		when(aSectionMock.getTeachers()).thenReturn(teachers);
 		List<Section> sectionsMocks = Arrays.asList(aSectionMock, anotherSectionMock);
 
 		Availability availabilityMock = mock(Availability.class);
@@ -54,11 +55,16 @@ public class UnavailableTeacherFilterTest {
 		Schedule scheduleMock = mock(Schedule.class);
 		when(scheduleMock.getSectionsList()).thenReturn(sectionsMocks);
 
+		nextFilterMock = mock(Filter.class);
+
 		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
+		filter.connectToFilter(nextFilterMock);
 		filter.setRepository(repositoryMock);
 
-		filter.run(scheduleMock);
+		List<Conflict> conflicts = filter.run(scheduleMock);
 
-		verify(scheduleMock, atLeast(1)).addAll(anyListOf(Conflict.class));
+		assertEquals(1, conflicts.size());
+		verify(availabilityMock, atLeast(1)).isAvailableForTimeSlot(timeSlotMock);
+		verify(otherAvailabilityMock, atLeast(1)).isAvailableForTimeSlot(timeSlotMock);
 	}
 }
