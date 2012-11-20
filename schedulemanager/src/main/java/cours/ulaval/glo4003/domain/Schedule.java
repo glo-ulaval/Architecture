@@ -23,7 +23,6 @@ public class Schedule {
 	public Schedule(String id) {
 		this.id = id;
 		sections = new HashMap<String, Section>();
-		//conflicts = new ArrayList<Conflict>();
 	}
 
 	public void add(Section section) {
@@ -116,6 +115,10 @@ public class Schedule {
 
 	public void setScore(Integer score) {
 		this.score = score;
+	}
+
+	public void clearConflicts() {
+		this.conflicts.clear();
 	}
 
 }
