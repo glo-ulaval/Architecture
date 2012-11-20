@@ -210,7 +210,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
 	@ResponseBody
-	public String updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
+	public ModelAndView updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
 			String duration, Principal principal) throws Exception {
 
 		TimeSlot newTimeSlot = new TimeSlot(new Time(getHour(newTimeStart), getMinutes(newTimeStart)), getDuration(duration), getDayOfWeek(newDay));
@@ -234,7 +234,7 @@ public class ScheduleController {
 			}
 		}
 
-		return "success";
+		return scheduleView(id, "calendar", principal);
 	}
 
 	private String getDayOfWeekAbreviation(TimeSlot slot) {
