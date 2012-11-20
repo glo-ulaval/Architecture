@@ -1,32 +1,34 @@
+console.log(schedule);
+
 $(function() {
 
 	for ( var i = 0; i < schedule.monday.length; i++) {
 		var cs = schedule.monday[i];
 		generateCourses(cs, i);
 	}
-	$('#monday').css('height', schedule.monday.length *25 + 'px');
+	$('#monday').css('height', schedule.monday.length * 25 + 'px');
 	for ( var i = 0; i < schedule.tuesday.length; i++) {
 		var cs = schedule.tuesday[i];
 		generateCourses(cs, i);
 	}
-	$('#tuesday').css('height', schedule.tuesday.length *25 + 'px');
+	$('#tuesday').css('height', schedule.tuesday.length * 25 + 'px');
 	for ( var i = 0; i < schedule.wednesday.length; i++) {
 		var cs = schedule.wednesday[i];
 		generateCourses(cs, i);
 	}
-	$('#wednesday').css('height', schedule.wednesday.length *25 + 'px');
+	$('#wednesday').css('height', schedule.wednesday.length * 25 + 'px');
 	for ( var i = 0; i < schedule.thursday.length; i++) {
 		var cs = schedule.thursday[i];
 		generateCourses(cs, i);
 	}
-	$('#thursday').css('height', schedule.thursday.length *25 + 'px');
+	$('#thursday').css('height', schedule.thursday.length * 25 + 'px');
 	for ( var i = 0; i < schedule.friday.length; i++) {
 		var cs = schedule.friday[i];
 		generateCourses(cs, i);
 	}
-	$('#friday').css('height', schedule.friday.length *25 + 'px');
+	$('#friday').css('height', schedule.friday.length * 25 + 'px');
 	$('.hour').disableSelection();
-	
+
 });
 
 function generateCourses(cs, height) {
@@ -49,9 +51,8 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 
 	var course = $('<div/>', {
 		id : cs.nrc,
-		title : cs.acronym,
 		class : 'event-name',
-		text : cs.acronym,
+		text : cs.acronym + ' - ' + cs.group,
 	}).appendTo(event);
 	
 	if(cs.isLab) {
@@ -61,11 +62,14 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 	
 	if(cs.conflicts.length > 0) {
 		var conflictDescription = "";
-		for(var i = 0; i < cs.conflicts.length; i++){
-			conflictDescription += '<b>' + cs.conflicts[i].firstNrc + '</b> ' + cs.conflicts[i].description + '<br/>';
-			conflictDescription += '<b>Professeur impliqu&eacute; : </b><br/>' + cs.conflicts[i].teacher + '<br/><br/>';
+
+		for ( var i = 0; i < cs.conflicts.length; i++) {
+			conflictDescription += '<b>' + cs.conflicts[i].firstNrc + '</b> '
+					+ cs.conflicts[i].description + '<br/>';
+			conflictDescription += getConflictTeacher(cs.conflicts[i]);
+			conflictDescription += getConflictSecondNrc(cs.conflicts[i]);
 		}
-		
+
 		var conflictTitle = "Conflit";
 		if(cs.conflicts.length > 1) {
 			conflictTitle += "s";
@@ -80,12 +84,37 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 			title: conflictTitle,
 			content: conflictDescription
 		});
-		
+
 		if(event.hasClass('lab')) {
 			event.removeClass('lab');
 		}
 		event.addClass('red');
 	}
+}
+
+function getConflictTeacher(conflict) {
+	if (conflict.teacher) {
+		return '<b>Professeur impliqu&eacute; : </b><br/>' + conflict.teacher
+				+ '<br/><br/>';
+	}
+	return '';
+}
+
+function getConflictSecondNrc(conflict) {
+	if (conflict.secondNrc) {
+		return 'Entre la section <b>' + conflict.firstNrc
+				+ '</b> et la section <b>' + conflict.secondNrc
+				+ '</b>, dans les plages horaires du <b>'
+				+ conflict.dayOfWeek + '</b> allant'
+				+ 'de <b><span class="blue">' + conflict.firstStartTime
+				+ '</span></b> à <b><span class="blue">'
+				+ conflict.firstEndTime
+				+ '</span></b> et de <b><span class="blue">'
+				+ conflict.secondStartTime
+				+ '</span></b> à <b><span class="blue">'
+				+ conflict.secondEndTime + '</span></b>.';
+	}
+	return '';
 }
 
 function getNextTime(cs) {
