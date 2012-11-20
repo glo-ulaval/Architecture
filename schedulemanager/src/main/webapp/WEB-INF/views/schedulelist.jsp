@@ -14,12 +14,12 @@
 <link href="<c:url value="/resources/css/bootstrap.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/schedulelist.css" />" rel="stylesheet">
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/app.js" />" /></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/bootstrap.js" />" /></script>
+<script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
+<script type="text/javascript"	src="<c:url value="/resources/js/bootstrap.js" />" /></script>
+<script type="text/javascript"	src="<c:url value="/resources/js/schedule.js" />" /></script>
 </head>
 <body>
 	<c:import url="header.jsp" />
@@ -41,21 +41,22 @@
 				href="calendar" type="button" class="btn">Calendrier</a>
 		</div>
 		<div class="schedule_details">
-			<c:url var="editsection"
-				value="/schedule/editsection/${id}/${year}/${semester}"></c:url>
-			<c:url var="deletesection"
-				value="/schedule/deletesection/${id}/${year}/${semester}"></c:url>
+			<c:url var="editsection" value="/schedule/editsection/${id}/${year}/${semester}"></c:url>
+			<c:url var="deletesection" value="/schedule/deletesection/${id}/${year}/${semester}"></c:url>
 			<table class="table">
+			
+			<c:forEach var="day" items="${schedule.days}" varStatus="i">
 				<tr class="well">
-					<td colspan="4"><h4>Lundi</h4></td>
+					<td colspan="4"><h4>${schedule.jours[i.count - 1]}</h4></td>
 				</tr>
 				<c:set var="counter" value="0" />
-				<c:forEach var="mondaysection" items="${schedule.monday}">
+				
+				<c:forEach var="section" items="${schedule[day]}">
 					<c:choose>
-						<c:when test="${mondaysection.isLab}">
+						<c:when test="${section.isLab}">
 							<c:set value="yellow" var="color"></c:set>
 						</c:when>
-						<c:when test="${fn:length(mondaysection.conflicts) > 0}">
+						<c:when test="${fn:length(section.conflicts) > 0}">
 							<c:set value="red" var="color"></c:set>
 						</c:when>
 						<c:otherwise>
@@ -63,148 +64,93 @@
 						</c:otherwise>
 					</c:choose>
 					<tr class="${color}">
-						<td><b>${mondaysection.timeSlotStart} -
-								${mondaysection.timeSlotEnd}</b> || ${mondaysection.acronym}
-							(${mondaysection.nrc} - ${mondaysection.group})</td>
-						<sec:authorize
-							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${mondaysection.nrc}"><i
-									class="icon-edit icon-white"></i></a></td>
-							<td class="centered">
-						<a class="btn btn-danger"
-								href="${deletesection}/${mondaysection.nrc}"><i
-								class="icon-trash icon-white"></i></a>
-							</td></sec:authorize>
-						<c:if test="${fn:length(mondaysection.conflicts) > 0}">
-							<c:url var="conflicturl" value="/conflict/monday/${counter}"></c:url>
-							<td><a class="btn btn-warning" href="${conflicturl}"
-								title="Détails du/des conflit(s)"><i
-									class="icon-warning-sign"></i></a></td>
-						</c:if>
+						<td colspan="4">
+					
+						<ul class="ligne-conflit">
+							<li><b>${section.timeSlotStart} - ${section.timeSlotEnd}</b> || ${section.acronym}
+							(${section.nrc} - ${section.group})</li>
+
+							
+							<c:choose>
+								<c:when test="${fn:length(section.conflicts) > 0}">
+									<li class="pull-right">
+										<a href="#" class="btn btn-warning show-conflicts"><i class="icon-chevron-down"></i></a>
+									</li>
+								</c:when>
+								
+								<c:otherwise>
+									<li class="pull-right">
+										<button href="#" class="btn disabled"><i class="icon-chevron-down"></i></button>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							
+							<sec:authorize access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
+							<li class="pull-right">
+								<a class="btn btn-danger" href="${deletesection}/${section.nrc}"><i class="icon-trash icon-white"></i></a>
+							</li>
+							
+							<li class="pull-right">
+								<a class="btn btn-info" href="${editsection}/${section.nrc}"><i class="icon-edit icon-white"></i></a>
+							</li>
+							</sec:authorize>
+
+							
+						</ul>
+						
+						</td>
+					</tr> 
+					<c:if test="${fn:length(section.conflicts) > 0}">
+					<tr class="conflicts"> 
+						<td colspan="4">
+							<ul>
+								<c:forEach var="conflict" items="${section.conflicts}">
+								<li class="conflict">
+									<ul>
+										<li>
+										<strong>${conflict.firstNrc} </strong> - ${conflict.description} 
+										<a href="#" class="btn show-details-conflict pull-right"><i class="icon-chevron-right"></i></a>
+										</li>
+										<li class="details-conflict">
+											<c:choose>
+												<c:when test="${not empty conflict.secondNrc}">
+													<div>
+														Entre la section <b>${conflict.firstNrc}</b> et la section <b>${conflict.secondNrc}</b>,
+														dans les plages horaires du <b>${conflict.dayOfWeek}</b> allant
+														de <b><span class="blue">${conflict.firstStartTime}</span></b>
+														à <b><span class="blue">${conflict.firstEndTime}</span></b> et
+														de <b><span class="blue">${conflict.secondStartTime}</span></b>
+														à <b><span class="blue">${conflict.secondEndTime}</span></b>.
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div>
+														Dans la section <b>${conflict.firstNrc}</b>, dans la plage
+														horaire du <b>${conflict.dayOfWeek}</b> allant de <b><span
+															class="blue">${conflict.firstStartTime}</span></b> à <b><span
+															class="blue">${conflict.firstEndTime}</span></b> .
+													</div>
+												</c:otherwise>
+											</c:choose>
+											
+											<br>
+											
+											<c:if test="${not empty conflict.teacher}">
+												<strong>Professeur impliqué :</strong> ${conflict.teacher}
+											</c:if>
+										</li>
+									</ul>
+								</li>
+								</c:forEach>
+							</ul>
+						</td>
 					</tr>
+					</c:if>
+					
 					<c:set var="counter" value="${counter+1}" />
 				</c:forEach>
-				<tr class="well">
-					<td colspan="4"><h4>Mardi</h4></td>
-				</tr>
-				<c:forEach var="tuesdaysection" items="${schedule.tuesday}">
-					<c:choose>
-						<c:when test="${tuesdaysection.isLab}">
-							<c:set value="yellow" var="color"></c:set>
-						</c:when>
-						<c:when test="${fn:length(tuesdaysection.conflicts) > 0}">
-							<c:set value="red" var="color"></c:set>
-						</c:when>
-						<c:otherwise>
-							<c:set value="" var="color"></c:set>
-						</c:otherwise>
-					</c:choose>
-					<tr class="${color}">
-						<td class="span12"><b>${tuesdaysection.timeSlotStart} -
-								${tuesdaysection.timeSlotEnd}</b> || ${tuesdaysection.acronym}
-							(${tuesdaysection.nrc} - ${tuesdaysection.group})</td>
-						<sec:authorize
-							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${tuesdaysection.nrc}"><i
-									class="icon-edit icon-white"></i></a></td>
-							<td class="centered"><a class="btn btn-danger"
-								href="${deletesection}/${tuesdaysection.nrc}"><i
-									class="icon-trash icon-white"></i></a></td>
-						</sec:authorize>
-					</tr>
 				</c:forEach>
-				<tr class="well">
-					<td colspan="4"><h4>Mercredi</h4></td>
-				</tr>
-				<c:forEach var="wednesdaysection" items="${schedule.wednesday}">
-					<c:choose>
-						<c:when test="${wednesdaysection.isLab}">
-							<c:set value="yellow" var="color"></c:set>
-						</c:when>
-						<c:when test="${fn:length(wednesdaysection.conflicts) > 0}">
-							<c:set value="red" var="color"></c:set>
-						</c:when>
-						<c:otherwise>
-							<c:set value="" var="color"></c:set>
-						</c:otherwise>
-					</c:choose>
-					<tr class="${color}">
-						<td class="span12"><b>${wednesdaysection.timeSlotStart} -
-								${wednesdaysection.timeSlotEnd}</b> || ${wednesdaysection.acronym}
-							(${wednesdaysection.nrc} - ${wednesdaysection.group})</td>
-						<sec:authorize
-							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${wednesdaysection.nrc}"><i
-									class="icon-edit icon-white"></i></a></td>
-							<td class="centered"><a class="btn btn-danger"
-								href="${deletesection}/${wednesdaysection.nrc}"><i
-									class="icon-trash icon-white"></i></a></td>
-						</sec:authorize>
-					</tr>
-				</c:forEach>
-				<tr class="well">
-					<td colspan="4"><h4>Jeudi</h4></td>
-				</tr>
-				<c:forEach var="thursdaysection" items="${schedule.thursday}">
-					<c:choose>
-						<c:when test="${thursdaysection.isLab}">
-							<c:set value="yellow" var="color"></c:set>
-						</c:when>
-						<c:when test="${fn:length(thursdaysection.conflicts) > 0}">
-							<c:set value="red" var="color"></c:set>
-						</c:when>
-						<c:otherwise>
-							<c:set value="" var="color"></c:set>
-						</c:otherwise>
-					</c:choose>
-					<tr class="${color}">
-						<td class="span12"><b>${thursdaysection.timeSlotStart} -
-								${thursdaysection.timeSlotEnd}</b> || ${thursdaysection.acronym}
-							(${thursdaysection.nrc} - ${thursdaysection.group})</td>
-						<sec:authorize
-							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${thursdaysection.nrc}"><i
-									class="icon-edit icon-white"></i></a></td>
-							<td class="centered"><a class="btn btn-danger"
-								href="${deletesection}/${thursdaysection.nrc}"><i
-									class="icon-trash icon-white"></i></a></td>
-						</sec:authorize>
-					</tr>
-				</c:forEach>
-				<tr class="well">
-					<td colspan="4"><h4>Vendredi</h4></td>
-				</tr>
-				<c:forEach var="fridaysection" items="${schedule.friday}">
-					<c:choose>
-						<c:when test="${fridaysection.isLab}">
-							<c:set value="yellow" var="color"></c:set>
-						</c:when>
-						<c:when test="${fn:length(fridaysection.conflicts) > 0}">
-							<c:set value="red" var="color"></c:set>
-						</c:when>
-						<c:otherwise>
-							<c:set value="" var="color"></c:set>
-						</c:otherwise>
-					</c:choose>
-					<tr class="${color}">
-						<td class="span12"><b>${fridaysection.timeSlotStart} -
-								${fridaysection.timeSlotEnd}</b> || ${fridaysection.acronym}
-							(${fridaysection.nrc} - ${fridaysection.group})</td>
-						<sec:authorize
-							access="hasAnyRole('ROLE_Responsable', 'ROLE_Directeur')">
-							<td class="centered"><a class="btn btn-info"
-								href="${editsection}/${fridaysection.nrc}"><i
-									class="icon-edit icon-white"></i></a></td>
-							<td class="centered"><a class="btn btn-danger"
-								href="${deletesection}/${fridaysection.nrc}"><i
-									class="icon-trash icon-white"></i></a></td>
-						</sec:authorize>
-					</tr>
-				</c:forEach>
+				
 			</table>
 		</div>
 	</div>

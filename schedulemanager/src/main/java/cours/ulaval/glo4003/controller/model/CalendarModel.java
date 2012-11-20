@@ -8,8 +8,12 @@ import cours.ulaval.glo4003.controller.model.utils.TimeSlotComparator;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
 public class CalendarModel {
+
+	private String[] days = { "monday", "tuesday", "wednesday", "thursday", "friday" };
+	private String[] jours = { "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi" };
 
 	private ScheduleInformationModel scheduleInfo;
 
@@ -23,17 +27,92 @@ public class CalendarModel {
 		scheduleInfo = new ScheduleInformationModel(schedule);
 
 		for (Section section : schedule.getSectionsList()) {
-			for (TimeSlot timeSlot : section.getCoursesAndLabTimeSlots()) {
+			for (TimeSlot timeSlot : section.getCourseTimeSlots()) {
 				addToList(section, timeSlot, false);
 			}
 			if (section.getLabTimeSlot() != null) {
 				addToList(section, section.getLabTimeSlot(), true);
 			}
 		}
-		sort();
+
+		sortCoursesByTime();
+
+		associateConflictsToACourseSlot(schedule.getConflicts());
 	}
 
-	private void sort() {
+	private void associateConflictsToACourseSlot(List<Conflict> conflicts) {
+
+		for (Conflict conflict : conflicts) {
+			setConflictToACourseSlot(conflict, conflict.getFirstNrc(), conflict.getFirstTimeSlot());
+
+			TimeSlot secondTimeSlot = conflict.getSecondTimeSlot();
+
+			if (secondTimeSlot != null) {
+				setConflictToACourseSlot(conflict, conflict.getSecondNrc(), conflict.getSecondTimeSlot());
+			}
+		}
+	}
+
+	private void setConflictToACourseSlot(Conflict conflict, String nrc, TimeSlot time) {
+		CourseSlotModel courseSlot = findCourseSlotAccordingToDay(time, nrc);
+		if (courseSlot != null) {
+			courseSlot.addConflict(conflict);
+		}
+	}
+
+	private CourseSlotModel findCourseSlotAccordingToDay(TimeSlot slot, String nrc) {
+		CourseSlotModel model = null;
+		switch (slot.getDayOfWeek()) {
+		case MONDAY:
+			model = findCourseSlotAccordingToHours(slot, nrc, monday);
+			break;
+		case TUESDAY:
+			model = findCourseSlotAccordingToHours(slot, nrc, tuesday);
+			break;
+		case WEDNESDAY:
+			model = findCourseSlotAccordingToHours(slot, nrc, wednesday);
+			break;
+		case THURSDAY:
+			model = findCourseSlotAccordingToHours(slot, nrc, thursday);
+			break;
+		case FRIDAY:
+			model = findCourseSlotAccordingToHours(slot, nrc, friday);
+			break;
+		default:
+			break;
+		}
+
+		return model;
+	}
+
+	private CourseSlotModel findCourseSlotAccordingToHours(TimeSlot slot, String nrc, List<CourseSlotModel> models) {
+		CourseSlotModel modelToReturn = null;
+		for (CourseSlotModel model : models) {
+			if (isSameCourse(slot, nrc, model)) {
+				modelToReturn = model;
+				break;
+			}
+		}
+
+		return modelToReturn;
+	}
+
+	private boolean isSameCourse(TimeSlot time, String nrc, CourseSlotModel model) {
+
+		if (!model.getNrc().equals(nrc)) {
+			return false;
+		}
+		if (!model.getTimeSlotStart().equals(time.getStartTime().toString())) {
+			return false;
+		}
+		if (!model.getTimeSlotEnd().equals(time.getEndTime().toString())) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private void sortCoursesByTime() {
 		Collections.sort(monday, new TimeSlotComparator());
 		Collections.sort(tuesday, new TimeSlotComparator());
 		Collections.sort(wednesday, new TimeSlotComparator());
@@ -109,6 +188,22 @@ public class CalendarModel {
 
 	public void setFriday(List<CourseSlotModel> friday) {
 		this.friday = friday;
+	}
+
+	public String[] getDays() {
+		return days;
+	}
+
+	public void setDays(String[] days) {
+		this.days = days;
+	}
+
+	public String[] getJours() {
+		return jours;
+	}
+
+	public void setJours(String[] jours) {
+		this.jours = jours;
 	}
 
 }

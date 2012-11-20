@@ -1,32 +1,56 @@
 console.log(schedule);
 
 $(function() {
-	initializeCalendar();
 
+	generateMonday();
+	generateTuesday();
+	generateWednesday();
+	generateThursday();
+	generateFriday();
+
+	$('.hour').disableSelection();
+
+});
+
+function generateMonday(){
 	for ( var i = 0; i < schedule.monday.length; i++) {
 		var cs = schedule.monday[i];
 		generateCourses(cs, i);
 	}
+	$('#monday').css('height', schedule.monday.length * 25 + 'px');
+}
+
+function generateTuesday() {
 	for ( var i = 0; i < schedule.tuesday.length; i++) {
 		var cs = schedule.tuesday[i];
 		generateCourses(cs, i);
 	}
+	$('#tuesday').css('height', schedule.tuesday.length * 25 + 'px');
+}
+
+function generateWednesday(){
 	for ( var i = 0; i < schedule.wednesday.length; i++) {
 		var cs = schedule.wednesday[i];
 		generateCourses(cs, i);
 	}
+	$('#wednesday').css('height', schedule.wednesday.length * 25 + 'px');
+} 
+
+function generateThursday(){
 	for ( var i = 0; i < schedule.thursday.length; i++) {
 		var cs = schedule.thursday[i];
 		generateCourses(cs, i);
 	}
+	$('#thursday').css('height', schedule.thursday.length * 25 + 'px');
+}
+
+function generateFriday(){
 	for ( var i = 0; i < schedule.friday.length; i++) {
 		var cs = schedule.friday[i];
 		generateCourses(cs, i);
 	}
-
-	setEventFunctions();
-
-});
+	$('#friday').css('height', schedule.friday.length * 25 + 'px');
+}
 
 function generateCourses(cs, height) {
 	var durationInHours = parseInt(cs.duration);
@@ -46,59 +70,81 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 	event.css('position', 'absolute');
 	event.css('top', position.top + height * 25);
 
-	$('<div/>', {
+	var course = $('<div/>', {
 		id : cs.nrc,
-		title : cs.acronym,
 		class : 'event-name',
-		text : cs.acronym,
+		text : cs.acronym + ' - ' + cs.group,
 	}).appendTo(event);
+	
+	if(cs.isLab) {
+		event.addClass('lab');
+	}
+	
+	generateConflictsPopover(cs, event, course);
+}
+
+function generateConflictsPopover(cs, event, course){
+	if(cs.conflicts.length > 0) {
+		var conflictDescription = "";
+
+		for ( var i = 0; i < cs.conflicts.length; i++) {
+			conflictDescription += '<b>' + cs.conflicts[i].firstNrc + '</b> '
+					+ cs.conflicts[i].description + '<br/>';
+			conflictDescription += getConflictTeacher(cs.conflicts[i]);
+			conflictDescription += getConflictSecondNrc(cs.conflicts[i]);
+		}
+
+		var conflictTitle = "Conflit";
+		if(cs.conflicts.length > 1) {
+			conflictTitle += "s";
+		}
+		
+		var conflictIcon = $('<i/>', {
+			class : 'icon-fire icon-white conflictIcon',
+		}).appendTo(course);
+		conflictIcon.popover({
+			placement: "right",
+			trigger: "hover",
+			title: conflictTitle,
+			content: conflictDescription
+		});
+
+		if(event.hasClass('lab')) {
+			event.removeClass('lab');
+		}
+		event.addClass('red');
+	}
+}
+
+function getConflictTeacher(conflict) {
+	if (conflict.teacher) {
+		return '<b>Professeur impliqu&eacute; : </b><br/>' + conflict.teacher
+				+ '<br/><br/>';
+	}
+	return '';
+}
+
+function getConflictSecondNrc(conflict) {
+	if (conflict.secondNrc) {
+		return 'Entre la section <b>' + conflict.firstNrc
+				+ '</b> et la section <b>' + conflict.secondNrc
+				+ '</b>, dans les plages horaires du <b>'
+				+ conflict.dayOfWeek + '</b> allant'
+				+ 'de <b><span class="blue">' + conflict.firstStartTime
+				+ '</span></b> à <b><span class="blue">'
+				+ conflict.firstEndTime
+				+ '</span></b> et de <b><span class="blue">'
+				+ conflict.secondStartTime
+				+ '</span></b> à <b><span class="blue">'
+				+ conflict.secondEndTime + '</span></b>.<br/>';
+	}
+	return '';
 }
 
 function getNextTime(cs) {
 	var hour = cs.timeSlotStart.split(':')[0];
 	var minute = minutes(cs);
 	return parseInt(hour + minute);
-}
-
-function initializeCalendar() {
-	$('.hour').sortable(
-			{
-				connectWith : '.hour',
-				start : function(e, ui) {
-					ui.placeholder.width(ui.item.width());
-				},
-				receive : function(e, ui) {
-					$.ajax({
-						type : "POST",
-						url : '/schedulemanager/schedule/'
-								+ schedule.scheduleinfo.id + '/update',
-						data : {
-							nrc : ui.item.find('.event-name').attr('id')
-									.toString(),
-							oldDay : getDay(ui.sender),
-							oldTimeStart : getTimeStart(ui.sender),
-							newDay : getDay(ui.item.parent()),
-							newTimeStart : getTimeStart(ui.item.parent()),
-							duration : getDuration(ui.item)
-						},
-						success : function(data) {
-
-						},
-						error : function() {
-
-						}
-					});
-				}
-			});
-	$('.hour').disableSelection();
-}
-
-function setEventFunctions() {
-	$('.event').dblclick(function(event) {
-		redirectToEditSection();
-	});
-
-	$('.event').tooltip();
 }
 
 function findId(cs, nextTime) {
@@ -115,14 +161,6 @@ function minutes(cs) {
 
 function setDuration(cs) {
 	return (cs.duration * 100) + 'px';
-}
-
-function redirectToEditSection() {
-	var nrc = $(event.target).attr('id');
-	var url = 'http://localhost:8080/schedulemanager/schedule/editsection/'
-			+ id + '/' + schedule.year + '/' + schedule.semester + '/' + nrc;
-
-	window.location.assign(url);
 }
 
 function getDay(object) {

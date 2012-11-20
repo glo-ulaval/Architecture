@@ -7,7 +7,9 @@
 .day {
 	width: 67px;
 	border-right: 1px solid #DEDEDE;
-	text-align: center; !important;
+	text-align: center;
+	!
+	important;
 }
 
 .hours-column {
@@ -23,8 +25,12 @@
 	overflow: visible;
 }
 
-.hour-head, .hours-head {
-	font-weight : bold;
+.hours-head{
+	min-width: 1350px;
+}
+
+.hour-head,.hours-head {
+	font-weight: bold;
 	padding: 8px 0px 8px;
 	height: 20px;
 }
@@ -39,17 +45,17 @@
 	vertical-align: baseline;
 	background-color: rgba(0, 70, 255, 0.5);
 	border-bottom: 2px solid #DEDEDE;
-	cursor: move;
 }
 
-.event:hover{
+.event:hover {
 	background-color: rgba(0, 70, 255, 0.3);
 }
 
 .event-name {
 	height: 100%;
-	width: 100px;
-	margin-left: 5px;
+	width: 100%;
+	padding-left: 5px;
+	cursor: move;
 }
 
 .ui-sortable-placeholder {
@@ -63,14 +69,31 @@
 	visibility: hidden;
 }
 
-#editCourse{
+#editCourse {
 	width: 980px;
 	height: 650px;
 	margin-left: -490px;
 	margin-top: -325px;
 }
 
-.modal-body{
-	height: 550px;
-	max-height: none !important;
+.conflictIcon {
+	float: right;
+	margin-right: 7px;
+	margin-top: 4px;
+}
+
+.red{
+	background-color: rgba(255,0,0,0.5);
+}
+
+.red:hover {
+	background-color: rgba(255,0,0,0.3);
+}
+
+.lab{
+	background-color: rgba(255,200,0,0.7);
+}
+
+.lab:hover {
+	background-color: rgba(255,200,0,0.5);
 }

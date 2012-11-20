@@ -14,7 +14,7 @@ public class Schedule {
 	private Semester semester;
 	private Map<String, Section> sections;
 	private String personInCharge;
-	private List<Conflict> conflicts;
+	private List<Conflict> conflicts = new ArrayList<Conflict>();
 	private Integer score;
 
 	public Schedule() {
@@ -23,7 +23,7 @@ public class Schedule {
 	public Schedule(String id) {
 		this.id = id;
 		sections = new HashMap<String, Section>();
-		conflicts = new ArrayList<Conflict>();
+		//conflicts = new ArrayList<Conflict>();
 	}
 
 	public void add(Section section) {

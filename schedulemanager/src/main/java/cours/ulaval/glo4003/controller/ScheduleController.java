@@ -65,7 +65,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
-	public ModelAndView scheduleById(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
+	public ModelAndView scheduleView(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
 
 		CalendarModel calendarModel = new CalendarModel(scheduleRepository.findById(id));
 
@@ -153,14 +153,15 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.GET)
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.GET)
 	public ModelAndView editSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@PathVariable String sectionNrc) {
+			@PathVariable String sectionNrc, @PathVariable String view) {
 
 		ModelAndView mv = new ModelAndView("editsection");
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
 		mv.addObject("id", id);
+		mv.addObject("view", view);
 
 		Schedule schedule = scheduleRepository.findById(id);
 		Section section = schedule.getSections().get(sectionNrc);
@@ -171,23 +172,17 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@PathVariable String sectionNrc, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
-
-		if (!userRepository.findByIdul(principal.getName()).getRoles().contains(Role.ROLE_Responsable)) {
-			ModelAndView mv = scheduleById(id, "list", principal);
-			mv.addObject("user", userRepository.findByIdul(principal.getName()));
-			return mv;
-		}
+			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 		ModelAndView mv = new ModelAndView("createschedule");
 		try {
 			Schedule schedule = scheduleRepository.findById(id);
-			schedule.delete(sectionNrc);
-			schedule.add(section.convertToSection());
-			scheduleRepository.store(schedule);
+			updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
+
 			mv.addObject("error", ControllerMessages.SUCCESS);
 			mv.addObject("year", year);
 			mv.addObject("semester", semester);
 			mv.addObject("id", id);
+			mv.addObject("view", view);
 			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
 			mv.addObject("sections", getSections(schedule));
 		} catch (Exception e) {
@@ -196,33 +191,36 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.POST)
+	public ModelAndView postEditSectionAndReturnToLastView(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
+
+		Schedule schedule = scheduleRepository.findById(id);
+		updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
+
+		return scheduleView(id, view, principal);
+	}
+
+	private void updateSectionAndSaveToSchedule(String sectionNrc, SectionModel section, Schedule schedule) throws Exception {
+		schedule.delete(sectionNrc);
+		section.setNrc(sectionNrc);
+		schedule.add(section.convertToSection());
+		scheduleRepository.store(schedule);
+	}
+
 	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
 	@ResponseBody
 	public String updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
 			String duration, Principal principal) throws Exception {
 
-		DayOfWeek newDayOfWeek = null;
-		if (newDay == "mon") {
-			newDayOfWeek = DayOfWeek.MONDAY;
-		} else if (newDay == "tue") {
-			newDayOfWeek = DayOfWeek.TUESDAY;
-		} else if (newDay == "wed") {
-			newDayOfWeek = DayOfWeek.WEDNESDAY;
-		} else if (newDay == "thu") {
-			newDayOfWeek = DayOfWeek.THURSDAY;
-		} else if (newDay == "fri") {
-			newDayOfWeek = DayOfWeek.FRIDAY;
-		}
+		TimeSlot newTimeSlot = new TimeSlot(new Time(getHour(newTimeStart), getMinutes(newTimeStart)), getDuration(duration), getDayOfWeek(newDay));
 
-		TimeSlot newTimeSlot = new TimeSlot(new Time(Integer.parseInt(newTimeStart.split(":")[0]), Integer.parseInt(newTimeStart.split(":")[1])),
-				Integer.parseInt(duration), newDayOfWeek);
-
-		Time oldTmStart = new Time(Integer.parseInt(oldTimeStart.split(":")[0]), Integer.parseInt(oldTimeStart.split(":")[1]));
+		Time oldTmStart = new Time(getHour(oldTimeStart), getMinutes(oldTimeStart));
 
 		List<TimeSlot> courseTimeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCourseTimeSlots();
 
 		for (TimeSlot slot : courseTimeSlots) {
-			if (slot.getDayOfWeek().toString().toLowerCase().substring(0, 2) == oldDay || slot.getStartTime().equals(oldTmStart)) {
+			if (getDayOfWeekAbreviation(slot) == oldDay || slot.getStartTime().equals(oldTmStart)) {
 				courseTimeSlots.remove(slot);
 				courseTimeSlots.add(newTimeSlot);
 				scheduleRepository.findById(id).getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
@@ -231,20 +229,44 @@ public class ScheduleController {
 
 		TimeSlot labTimeSlot = scheduleRepository.findById(id).getSections().get(nrc).getLabTimeSlot();
 		if (labTimeSlot != null) {
-			if (labTimeSlot.getDayOfWeek().toString().toLowerCase().substring(0, 2) == oldDay || labTimeSlot.getStartTime().equals(oldTmStart)) {
+			if (getDayOfWeekAbreviation(labTimeSlot) == oldDay || labTimeSlot.getStartTime().equals(oldTmStart)) {
 				scheduleRepository.findById(id).getSections().get(nrc).setLabTimeSlot(newTimeSlot);
 			}
 		}
 
-		List<TimeSlot> test = scheduleRepository.findById(id).getSections().get(nrc).getCoursesAndLabTimeSlots();
-		for (TimeSlot ts : test) {
-			System.out.println("nrc: " + nrc);
-			System.out.println("startTime: " + ts.getStartTime().toString());
-			System.out.println("endTime: " + ts.getEndTime().toString());
-		}
-		System.out.println(scheduleRepository.findById(id).getSections().get(nrc).getCoursesAndLabTimeSlots());
-
 		return "success";
+	}
+
+	private String getDayOfWeekAbreviation(TimeSlot slot) {
+		return slot.getDayOfWeek().toString().toLowerCase().substring(0, 2);
+	}
+
+	private int getDuration(String duration) {
+		return Integer.parseInt(duration);
+	}
+
+	private int getHour(String newTimeStart) {
+		return Integer.parseInt(newTimeStart.split(":")[0]);
+	}
+
+	private int getMinutes(String newTimeStart) {
+		return Integer.parseInt(newTimeStart.split(":")[1]);
+	}
+
+	private DayOfWeek getDayOfWeek(String newDay) {
+		DayOfWeek newDayOfWeek = null;
+		if (newDay.equals("mon")) {
+			newDayOfWeek = DayOfWeek.MONDAY;
+		} else if (newDay.equals("tue")) {
+			newDayOfWeek = DayOfWeek.TUESDAY;
+		} else if (newDay.equals("wed")) {
+			newDayOfWeek = DayOfWeek.WEDNESDAY;
+		} else if (newDay.equals("thu")) {
+			newDayOfWeek = DayOfWeek.THURSDAY;
+		} else if (newDay.equals("fri")) {
+			newDayOfWeek = DayOfWeek.FRIDAY;
+		}
+		return newDayOfWeek;
 	}
 
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)

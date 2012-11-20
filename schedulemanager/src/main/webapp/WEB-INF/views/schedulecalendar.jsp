@@ -21,10 +21,31 @@
 <script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js" />" /></script>
 <script type="text/javascript" src="<c:url value="/resources/js/calendar.js" />" /></script>
+<sec:authorize access="hasAnyRole('ROLE_Responsable')">
+<script type="text/javascript" src="<c:url value="/resources/js/calendaradmin.js" />" /></script>
+</sec:authorize>
+<sec:authorize access="!hasRole('ROLE_Responsable')">
+<style>
+.event, .event-name {
+	cursor: default;
+}
+</style>
+</sec:authorize>
 </head>
 <body>
 <c:import url="header.jsp" />
 <h1>Horaire</h1>
+<sec:authorize access="hasAnyRole('ROLE_Responsable')">
+	<p>Double cliquez sur un cours afin d'accéder à sa page d'édition de section.</p>
+	<p>Glissez-déposez les cours afin de changer leurs heures de prestation.</p>
+	<p>Les plages horaires indiquées en <span class="yellow">jaune</span> 
+		sont des sections de laboratoire.</p>
+	<p>Les plages horaires indiquées en <span class="red">rouge</span> 
+		sont en conflits, soit avec une autre plage horaire ou avec une
+		disponibilité d'un professeur.</p>
+	<p>Posez votre curseur sur l'icône <i class="icon-fire"></i> afin d'obtenir les détails sur le(s) conflit(s)
+	conçernant un cours.</p>
+</sec:authorize>
 <div class="btn-group">
   <a href="list" type="button" class="btn">Liste</a>
   <a href="#" type="button" class="btn active">Calendrier</a>
@@ -63,7 +84,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Lundi</td>
+		<td id="monday" class="day">Lundi</td>
 		<td class="hours-column">
 			<div id="mon85" class="hour"></div>
 			<div id="mon90" class="hour"></div>
@@ -95,7 +116,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Mardi</td>
+		<td id="tuesday" class="day">Mardi</td>
 		<td class="hours-column">
 			<div id="tue85" class="hour"></div>
 			<div id="tue90" class="hour"></div>
@@ -127,7 +148,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Mercredi</td>
+		<td id="wednesday"  class="day">Mercredi</td>
 		<td class="hours-column">
 			<div id="wed85" class="hour"></div>
 			<div id="wed90" class="hour"></div>
@@ -159,7 +180,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Jeudi</td>
+		<td id="thursday"  class="day">Jeudi</td>
 		<td class="hours-column">
 			<div id="thu85" class="hour"></div>
 			<div id="thu90" class="hour"></div>
@@ -191,7 +212,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="day">Vendredi</td>
+		<td id="friday" class="day">Vendredi</td>
 		<td class="hours-column">
 			<div id="fri85" class="hour"></div>
 			<div id="fri90" class="hour"></div>

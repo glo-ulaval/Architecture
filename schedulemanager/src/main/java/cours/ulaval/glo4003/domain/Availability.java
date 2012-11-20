@@ -3,7 +3,6 @@ package cours.ulaval.glo4003.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import cours.ulaval.glo4003.controller.model.AvailabilityModel;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class Availability {

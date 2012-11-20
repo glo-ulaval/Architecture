@@ -2,9 +2,11 @@ package cours.ulaval.glo4003.persistence;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.*;
+import cours.ulaval.glo4003.domain.Role;
+import cours.ulaval.glo4003.domain.User;
 
 public class XMLUserRepositoryIT extends ITTestBase {
 

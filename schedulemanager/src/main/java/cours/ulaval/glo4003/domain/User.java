@@ -1,6 +1,7 @@
 package cours.ulaval.glo4003.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 

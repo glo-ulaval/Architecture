@@ -3,10 +3,14 @@ package cours.ulaval.glo4003.persistence;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import org.junit.*;
-import org.mockito.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import cours.ulaval.glo4003.domain.*;
+import cours.ulaval.glo4003.domain.Role;
+import cours.ulaval.glo4003.domain.User;
 
 public class XMLUserRepositoryTest {
 

@@ -1,10 +1,11 @@
 package cours.ulaval.glo4003.persistence;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import cours.ulaval.glo4003.domain.*;
+import cours.ulaval.glo4003.domain.User;
 
 @XmlRootElement(name = "users")
 public class UserXMLWrapper {

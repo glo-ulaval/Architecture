@@ -94,7 +94,7 @@
 				</c:if>
 			</div>
 		</div>
-		<c:url var="generateurl" value="/schedule/${id}"></c:url>
+		<c:url var="generateurl" value="/schedule/${id}/list"></c:url>
 		<a class="btn btn-success pull-right" href="${generateurl}">Générer</a>
 	</div>
 	<c:import url="footer.jsp" />
