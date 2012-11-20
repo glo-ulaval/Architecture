@@ -3,15 +3,15 @@ package cours.ulaval.glo4003.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.ProgramSheetRepository;
+import cours.ulaval.glo4003.persistence.XMLCourseRepository;
+import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
 
 public class Section {
-	@Inject
+
 	private ProgramSheetRepository programSheetRepository;
-	@Inject
+
 	private CourseRepository courseRepository;
 
 	private String nrc;
@@ -25,10 +25,16 @@ public class Section {
 	private TimeSlot labTimeSlot;
 
 	public Section() {
+		try {
+			programSheetRepository = new XMLProgramSheetRepository();
+			courseRepository = new XMLCourseRepository();
+		} catch (Exception e) {
+
+		}
 	}
 
-	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode,
-			TimeDedicated timeDedicated, String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
+	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode, TimeDedicated timeDedicated,
+			String courseAcronym, List<TimeSlot> courseTimeSlots, TimeSlot labTimeSlot) {
 		super();
 		this.nrc = nrc;
 		this.group = group;
@@ -39,6 +45,13 @@ public class Section {
 		this.courseAcronym = courseAcronym;
 		this.courseTimeSlots = courseTimeSlots;
 		this.labTimeSlot = labTimeSlot;
+
+		try {
+			programSheetRepository = new XMLProgramSheetRepository();
+			courseRepository = new XMLCourseRepository();
+		} catch (Exception e) {
+
+		}
 	}
 
 	public List<TimeSlot> getCoursesAndLabTimeSlots() {

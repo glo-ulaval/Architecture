@@ -32,6 +32,7 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
+import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
@@ -58,6 +59,8 @@ public class ScheduleControllerTest {
 	private ScheduleRepository mockedScheduleRepository;
 	@Mock
 	private UserRepository mockedUserRepository;
+	@Mock
+	private ConflictDetector mockedConflictDetector;
 
 	@InjectMocks
 	private ScheduleController controller;
@@ -75,6 +78,8 @@ public class ScheduleControllerTest {
 		user.setName(A_USERNAME);
 		user.addRole(Role.ROLE_Responsable);
 		user.addRole(Role.ROLE_Enseignant);
+
+		controller.setConflictDetector(mockedConflictDetector);
 
 		Map<String, Section> sections = new HashMap<String, Section>();
 		course = mock(Course.class);

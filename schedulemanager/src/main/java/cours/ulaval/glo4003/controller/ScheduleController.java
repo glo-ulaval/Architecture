@@ -3,7 +3,6 @@ package cours.ulaval.glo4003.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -185,7 +184,6 @@ public class ScheduleController {
 			Schedule schedule = scheduleRepository.findById(id);
 
 			detectAndAddConflictsToSchedule(schedule);
-			Logger.getAnonymousLogger().info("postEditSection - postConflits");
 			updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
 			mv.addObject("error", ControllerMessages.SUCCESS);
@@ -208,7 +206,6 @@ public class ScheduleController {
 		Schedule schedule = scheduleRepository.findById(id);
 
 		detectAndAddConflictsToSchedule(schedule);
-		Logger.getAnonymousLogger().info("postEditSectionAndReturnToLastView - postConflits");
 
 		updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
@@ -338,5 +335,10 @@ public class ScheduleController {
 	private void detectAndAddConflictsToSchedule(Schedule schedule) {
 		schedule.clearConflicts();
 		conflictDetector.detectConflict(schedule);
+	}
+
+	// WARNING : FOR TEST PURPOSE ONLY
+	public void setConflictDetector(ConflictDetector conflictDetector) {
+		this.conflictDetector = conflictDetector;
 	}
 }
