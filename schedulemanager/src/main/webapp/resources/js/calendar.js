@@ -59,7 +59,10 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 		event.addClass('lab');
 	}
 	
-	
+	generateConflictsPopover();
+}
+
+function generateConflictsPopover(){
 	if(cs.conflicts.length > 0) {
 		var conflictDescription = "";
 
