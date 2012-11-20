@@ -245,6 +245,18 @@
                         </startTime>
                     </courseTimeSlots>
                     <group>A</group>
+                   	<labTimeSlot>
+                        <dayOfWeek>FRIDAY</dayOfWeek>
+                        <duration>3</duration>
+                        <endTime>
+                            <hour>16</hour>
+                            <minute>30</minute>
+                        </endTime>
+                        <startTime>
+                            <hour>13</hour>
+                            <minute>30</minute>
+                        </startTime>
+                    </labTimeSlot>
                     <nrc>89782</nrc>
                     <personInCharge>Nadir Belkhiter</personInCharge>
                     <teachMode>InCourse</teachMode>
