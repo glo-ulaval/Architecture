@@ -127,13 +127,13 @@ function getConflictSecondNrc(conflict) {
 		return 'Entre la section <b>' + conflict.firstNrc
 				+ '</b> et la section <b>' + conflict.secondNrc
 				+ '</b>, dans les plages horaires du <b>'
-				+ conflict.dayOfWeek + '</b> allant'
+				+ conflict.dayOfWeek + '</b> allant '
 				+ 'de <b><span class="blue">' + conflict.firstStartTime
-				+ '</span></b> à <b><span class="blue">'
+				+ '</span></b> &agrave <b><span class="blue">'
 				+ conflict.firstEndTime
 				+ '</span></b> et de <b><span class="blue">'
 				+ conflict.secondStartTime
-				+ '</span></b> à <b><span class="blue">'
+				+ '</span></b> &agrave <b><span class="blue">'
 				+ conflict.secondEndTime + '</span></b>.<br/>';
 	}
 	return '';
