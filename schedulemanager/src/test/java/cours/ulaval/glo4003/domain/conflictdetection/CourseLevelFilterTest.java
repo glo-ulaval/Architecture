@@ -10,39 +10,32 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.ProgramSheet;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
-import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
 
 public class CourseLevelFilterTest {
 
-	private ProgramSheet iftProgamSheetMock;
-	private ProgramSheet gloProgamSheetMock;
-	private XMLProgramSheetRepository repositoryMock;
 	private Schedule scheduleMock;
+	private Section aSectionMock;
+	private Section anotherSectionMock;
 
 	@Before
 	public void setUp() {
-		iftProgamSheetMock = mock(ProgramSheet.class);
-		gloProgamSheetMock = mock(ProgramSheet.class);
-
-		repositoryMock = mock(XMLProgramSheetRepository.class);
-		when(repositoryMock.getProgramSheetGLO()).thenReturn(gloProgamSheetMock);
-		when(repositoryMock.getProgramSheetIFT()).thenReturn(iftProgamSheetMock);
 
 		TimeSlot timeSlotMock = mock(TimeSlot.class);
 		when(timeSlotMock.isOverlapping(any(TimeSlot.class))).thenReturn(true);
 		List<TimeSlot> timeSlotsMocks = Arrays.asList(timeSlotMock);
 
-		Section aSectionMock = mock(Section.class);
+		aSectionMock = mock(Section.class);
+		anotherSectionMock = mock(Section.class);
 		when(aSectionMock.getCourseAcronym()).thenReturn("IFT-1000");
 		when(aSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
-		Section anotherSectionMock = mock(Section.class);
+		when(aSectionMock.areSameLevel(anotherSectionMock)).thenReturn(true);
 		when(anotherSectionMock.getCourseAcronym()).thenReturn("GLO-1000");
 		when(anotherSectionMock.getCoursesAndLabTimeSlots()).thenReturn(timeSlotsMocks);
+		when(anotherSectionMock.areSameLevel(aSectionMock)).thenReturn(true);
 		List<Section> sectionsMocks = Arrays.asList(aSectionMock, anotherSectionMock);
 
 		scheduleMock = mock(Schedule.class);
@@ -57,30 +50,13 @@ public class CourseLevelFilterTest {
 	}
 
 	@Test
-	public void canDetectSameLevelCourseConflictInIFTProgramSheet() {
-		when(iftProgamSheetMock.areCoursesSameLevel("IFT-1000", "GLO-1000")).thenReturn(true);
-		when(gloProgamSheetMock.areCoursesSameLevel("IFT-1000", "GLO-1000")).thenReturn(false);
-
+	public void canDetectSameLevelCourseConflict() {
 		CourseLevelFilter filter = new CourseLevelFilter();
-		filter.setRepository(repositoryMock);
 
 		filter.run(scheduleMock);
 
-		verify(iftProgamSheetMock).areCoursesSameLevel("IFT-1000", "GLO-1000");
+		verify(aSectionMock).areSameLevel(anotherSectionMock);
 		verify(scheduleMock).addAll(anyListOf(Conflict.class));
 	}
 
-	@Test
-	public void canDetectSameLevelCourseConflictInGLOProgramSheet() {
-		when(iftProgamSheetMock.areCoursesSameLevel("IFT-1000", "GLO-1000")).thenReturn(false);
-		when(gloProgamSheetMock.areCoursesSameLevel("IFT-1000", "GLO-1000")).thenReturn(true);
-
-		CourseLevelFilter filter = new CourseLevelFilter();
-		filter.setRepository(repositoryMock);
-
-		filter.run(scheduleMock);
-
-		verify(gloProgamSheetMock).areCoursesSameLevel("IFT-1000", "GLO-1000");
-		verify(scheduleMock).addAll(anyListOf(Conflict.class));
-	}
 }

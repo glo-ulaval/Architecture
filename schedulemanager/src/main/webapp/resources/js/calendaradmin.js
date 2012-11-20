@@ -25,6 +25,11 @@ function initializeDraggableCalendar() {
 							newDay : getDay(ui.item.parent()),
 							newTimeStart : getTimeStart(ui.item.parent()),
 							duration : getDuration(ui.item)
+						},
+						success : function(data) {
+							var newDay = getDay(ui.item.parent());
+							schedule = JSON.parse(data.model.schedule);
+							refreshDay(newDay);
 						}
 					});
 				}
@@ -44,4 +49,29 @@ function redirectToEditSection() {
 			+ schedule.scheduleInfo.id + '/' + schedule.scheduleInfo.year + '/' + schedule.scheduleInfo.semester + '/' + nrc + '/calendar';
 		window.location.assign(url);
 	}
+}
+
+function refreshDay(day) {
+	//UNCOMMENT TO REFRESH ONLY THE EDITED DAY
+	//TODO TEST PERFORMANCES
+	//if(day == "mon"){
+		clearDay("monday");
+		generateMonday();
+	//}else if(day == "tue"){
+		clearDay("tuesday");
+		generateTuesday();
+	//}else if (day == "wed") {
+		clearDay("wednesday");
+		generateWednesday();
+	//}else if (day == "thu"){
+		clearDay("thursday");
+		generateThursday();
+	//}else if (day == "fri"){
+		clearDay("friday");
+		generateFriday();
+	//}
+}
+
+function clearDay(day){
+	$('#'+day).next().find('.hour').empty();
 }

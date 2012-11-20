@@ -97,6 +97,7 @@ public class ConflictDetectorIT extends ITTestBase {
 				new ArrayList<Prerequisite>(), new TimeDedicated(3, 0, 6));
 
 		courseRepository = new XMLCourseRepository();
+		programSheetRepository = new XMLProgramSheetRepository();
 
 		courseRepository.store(glo2002);
 		courseRepository.store(ift2004);
@@ -109,27 +110,38 @@ public class ConflictDetectorIT extends ITTestBase {
 		glo2002Section = new Section("87134", "A", "a responsable person", Arrays.asList("teacher1"), TeachMode.InCourse,
 				new TimeDedicated(), "GLO-2002", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY)),
 				null);
+		glo2002Section.setCourseRepository(courseRepository);
+		glo2002Section.setProgramSheetRepository(programSheetRepository);
 		ift2004Section = new Section("90876", "A", "a responsable person", Arrays.asList("teacher2"), TeachMode.InCourse,
 				new TimeDedicated(), "IFT-2004", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY)),
 				null);
+		ift2004Section.setCourseRepository(courseRepository);
+		ift2004Section.setProgramSheetRepository(programSheetRepository);
 		ift2002Section = new Section("11765", "A", "a responsable person", Arrays.asList("teacher3", "teacher4"),
 				TeachMode.InCourse, new TimeDedicated(), "IFT-2002", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
 						DayOfWeek.MONDAY)), null);
+		ift2002Section.setCourseRepository(courseRepository);
+		ift2002Section.setProgramSheetRepository(programSheetRepository);
 		glo1901Section = new Section("87009", "A", "a responsable person", Arrays.asList("teacher5"), TeachMode.InCourse,
 				new TimeDedicated(), "GLO-1901", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY)),
 				null);
+		glo1901Section.setCourseRepository(courseRepository);
+		glo1901Section.setProgramSheetRepository(programSheetRepository);
 		glo1010Section = new Section("44678", "A", "a responsable person", Arrays.asList("teacher3"), TeachMode.InCourse,
 				new TimeDedicated(), "GLO-1010", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY)),
 				null);
+		glo1010Section.setCourseRepository(courseRepository);
+		glo1010Section.setProgramSheetRepository(programSheetRepository);
 		ift2901Section = new Section("87678", "A", "a responsable person", Arrays.asList("teacher1"), TeachMode.InCourse,
 				new TimeDedicated(), "IFT-2901", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.TUESDAY)),
 				null);
+		ift2901Section.setCourseRepository(courseRepository);
+		ift2901Section.setProgramSheetRepository(programSheetRepository);
 		glo3013Section = new Section("98123", "A", "a responsable person", Arrays.asList("teacher1"), TeachMode.InCourse,
 				new TimeDedicated(), "GLO-3013", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.THURSDAY)),
 				null);
-
-		programSheetRepository = new XMLProgramSheetRepository();
-
+		glo3013Section.setCourseRepository(courseRepository);
+		glo3013Section.setProgramSheetRepository(programSheetRepository);
 	}
 
 	@Test
@@ -145,9 +157,7 @@ public class ConflictDetectorIT extends ITTestBase {
 		schedule.add(glo3013Section);
 
 		ConcomittingCoursesFilter concomittingCoursesFilter = new ConcomittingCoursesFilter();
-		concomittingCoursesFilter.setRepository(courseRepository);
 		CourseLevelFilter coursesLevelFilter = new CourseLevelFilter();
-		coursesLevelFilter.setRepository(programSheetRepository);
 		SameTeacherFilter sameTeacherFilter = new SameTeacherFilter();
 		UnavailableTeacherFilter unavailableTeacherFilter = new UnavailableTeacherFilter();
 		unavailableTeacherFilter.setRepository(availabilityRepository);

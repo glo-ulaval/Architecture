@@ -1,12 +1,15 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import cours.ulaval.glo4003.domain.ProgramSheet;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.SameLevelCourseConflict;
 import cours.ulaval.glo4003.domain.repository.ProgramSheetRepository;
 
 public class CourseLevelFilter extends Filter {
@@ -21,8 +24,8 @@ public class CourseLevelFilter extends Filter {
 			for (int j = i + 1; j < sections.size(); j++) {
 				Section section = sections.get(i);
 				Section otherSection = sections.get(j);
-				if (areSameLevelCourses(section, otherSection)) {
-					schedule.addAll(section.generateSameLevelCoursesConflicts(otherSection));
+				if (section.areSameLevel(otherSection)) {
+					schedule.addAll(generateSameLevelCoursesConflicts(section, otherSection));
 				}
 			}
 		}
@@ -36,16 +39,18 @@ public class CourseLevelFilter extends Filter {
 		}
 	}
 
-	private boolean areSameLevelCourses(Section section, Section otherSection) {
-		ProgramSheet iftProgramSheet = repository.getProgramSheetIFT();
-		ProgramSheet gloProgramSheet = repository.getProgramSheetGLO();
-		if (gloProgramSheet.areCoursesSameLevel(section.getCourseAcronym(), otherSection.getCourseAcronym())) {
-			return true;
+	private List<Conflict> generateSameLevelCoursesConflicts(Section section, Section otherSection) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		for (TimeSlot sectionTimeSlots : section.getCoursesAndLabTimeSlots()) {
+			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
+				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
+					SameLevelCourseConflict conflict = new SameLevelCourseConflict(section.getNrc(), otherSection.getNrc(),
+							sectionTimeSlots, otherSectionTimeSlots);
+					conflicts.add(conflict);
+				}
+			}
 		}
-		if (iftProgramSheet.areCoursesSameLevel(section.getCourseAcronym(), otherSection.getCourseAcronym())) {
-			return true;
-		}
-		return false;
+		return conflicts;
 	}
 
 	public void setRepository(ProgramSheetRepository repository) {
