@@ -7,31 +7,27 @@ import java.util.List;
 import cours.ulaval.glo4003.controller.model.utils.TimeSlotComparator;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
-import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeSlot;
-import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
-import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
 
 public class CalendarModel {
 
-	private String[] days = {"monday", "tuesday", "wednesday", "thursday", "friday"};
-	private String[] jours = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"};
-	
+	private String[] days = { "monday", "tuesday", "wednesday", "thursday", "friday" };
+	private String[] jours = { "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi" };
+
 	private ScheduleInformationModel scheduleInfo;
-	
+
 	private List<CourseSlotModel> monday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> tuesday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> wednesday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> thursday = new ArrayList<CourseSlotModel>();
 	private List<CourseSlotModel> friday = new ArrayList<CourseSlotModel>();
 
-
 	public CalendarModel(Schedule schedule) {
 		scheduleInfo = new ScheduleInformationModel(schedule);
 
 		for (Section section : schedule.getSectionsList()) {
-			for (TimeSlot timeSlot : section.getCoursesAndLabTimeSlots()) {
+			for (TimeSlot timeSlot : section.getCourseTimeSlots()) {
 				addToList(section, timeSlot, false);
 			}
 			if (section.getLabTimeSlot() != null) {
@@ -40,7 +36,7 @@ public class CalendarModel {
 		}
 
 		sortCoursesByTime();
-		
+
 		associateConflictsToACourseSlot(schedule.getConflicts());
 	}
 
@@ -193,8 +189,7 @@ public class CalendarModel {
 	public void setFriday(List<CourseSlotModel> friday) {
 		this.friday = friday;
 	}
-	
-	
+
 	public String[] getDays() {
 		return days;
 	}
@@ -211,5 +206,4 @@ public class CalendarModel {
 		this.jours = jours;
 	}
 
-	
 }

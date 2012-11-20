@@ -54,8 +54,13 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 		class : 'event-name',
 		text : cs.acronym + ' - ' + cs.group,
 	}).appendTo(event);
-
-	if (cs.conflicts.length > 0) {
+	
+	if(cs.isLab) {
+		event.addClass('lab');
+	}
+	
+	
+	if(cs.conflicts.length > 0) {
 		var conflictDescription = "";
 
 		for ( var i = 0; i < cs.conflicts.length; i++) {
@@ -65,17 +70,25 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 			conflictDescription += getConflictSecondNrc(cs.conflicts[i]);
 		}
 
+		var conflictTitle = "Conflit";
+		if(cs.conflicts.length > 1) {
+			conflictTitle += "s";
+		}
+		
 		var conflictIcon = $('<i/>', {
 			class : 'icon-fire icon-white conflictIcon',
 		}).appendTo(course);
 		conflictIcon.popover({
-			placement : "right",
-			trigger : "hover",
-			title : "Conflit",
-			content : conflictDescription
+			placement: "right",
+			trigger: "hover",
+			title: conflictTitle,
+			content: conflictDescription
 		});
 
-		event.css('background-color', 'rgba(255, 0, 0, 0.5)');
+		if(event.hasClass('lab')) {
+			event.removeClass('lab');
+		}
+		event.addClass('red');
 	}
 }
 

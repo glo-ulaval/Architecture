@@ -85,3 +85,15 @@
 .red{
 	background-color: rgba(255,0,0,0.5);
 }
+
+.red:hover {
+	background-color: rgba(255,0,0,0.3);
+}
+
+.lab{
+	background-color: rgba(255,200,0,0.7);
+}
+
+.lab:hover {
+	background-color: rgba(255,200,0,0.5);
+}
