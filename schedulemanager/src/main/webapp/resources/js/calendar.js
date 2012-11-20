@@ -2,34 +2,55 @@ console.log(schedule);
 
 $(function() {
 
+	generateMonday();
+	generateTuesday();
+	generateWednesday();
+	generateThursday();
+	generateFriday();
+
+	$('.hour').disableSelection();
+
+});
+
+function generateMonday(){
 	for ( var i = 0; i < schedule.monday.length; i++) {
 		var cs = schedule.monday[i];
 		generateCourses(cs, i);
 	}
 	$('#monday').css('height', schedule.monday.length * 25 + 'px');
+}
+
+function generateTuesday() {
 	for ( var i = 0; i < schedule.tuesday.length; i++) {
 		var cs = schedule.tuesday[i];
 		generateCourses(cs, i);
 	}
 	$('#tuesday').css('height', schedule.tuesday.length * 25 + 'px');
+}
+
+function generateWednesday(){
 	for ( var i = 0; i < schedule.wednesday.length; i++) {
 		var cs = schedule.wednesday[i];
 		generateCourses(cs, i);
 	}
 	$('#wednesday').css('height', schedule.wednesday.length * 25 + 'px');
+} 
+
+function generateThursday(){
 	for ( var i = 0; i < schedule.thursday.length; i++) {
 		var cs = schedule.thursday[i];
 		generateCourses(cs, i);
 	}
 	$('#thursday').css('height', schedule.thursday.length * 25 + 'px');
+}
+
+function generateFriday(){
 	for ( var i = 0; i < schedule.friday.length; i++) {
 		var cs = schedule.friday[i];
 		generateCourses(cs, i);
 	}
 	$('#friday').css('height', schedule.friday.length * 25 + 'px');
-	$('.hour').disableSelection();
-
-});
+}
 
 function generateCourses(cs, height) {
 	var durationInHours = parseInt(cs.duration);
@@ -115,7 +136,7 @@ function getConflictSecondNrc(conflict) {
 				+ '</span></b> et de <b><span class="blue">'
 				+ conflict.secondStartTime
 				+ '</span></b> à <b><span class="blue">'
-				+ conflict.secondEndTime + '</span></b>.';
+				+ conflict.secondEndTime + '</span></b>.<br/>';
 	}
 	return '';
 }
