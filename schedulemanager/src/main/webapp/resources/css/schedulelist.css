@@ -1,0 +1,33 @@
+.ligne-conflit  li ul li, .ligne-conflit  li {
+	display:inline;
+}
+
+.pull-right {
+	margin-left:10px;
+}
+
+tr.conflicts td{
+	padding:0;
+}
+
+li.conflict ul li {
+	background-color:#FFD7A3;
+	border-top:solid #000 1px;
+}
+li.conflict ul li.details-conflict {
+	border:none;
+	margin-bottom:2px;
+	background-color:#FFF;
+}
+
+li.conflict ul li .btn {
+	margin-top:-5px;
+}
+
+li.conflict, li.conflict ul li{
+	list-style-type:none;
+}
+
+.conflict ul li {
+	padding:12px 7px;
+}
