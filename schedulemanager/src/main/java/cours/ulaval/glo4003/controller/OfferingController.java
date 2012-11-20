@@ -19,7 +19,7 @@ import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 @Controller
 @RequestMapping(value = "/offering")
 public class OfferingController {
-
+ 
 	@Inject
 	CourseRepository courseRepository;
 

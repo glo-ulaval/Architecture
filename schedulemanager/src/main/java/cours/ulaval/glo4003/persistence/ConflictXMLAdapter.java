@@ -38,10 +38,10 @@ public class ConflictXMLAdapter extends XmlAdapter<Conflict, Conflict> {
 						conflict.getSecondTimeSlot());
 			}
 		}
-		if (conflict.getScore() == DisponibilityConflict.SCORE && conflict.getTeacher() != "") {
+		if (conflict.getScore() == DisponibilityConflict.SCORE && !conflict.getTeacher().isEmpty()) {
 			return new DisponibilityConflict(conflict.getFirstNrc(), conflict.getTeacher(), conflict.getFirstTimeSlot());
 		}
 		return conflict;
 	}
-
+	
 }

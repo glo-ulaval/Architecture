@@ -20,30 +20,6 @@ public class Time {
 		hour += hoursToAdd;
 	}
 
-	public boolean after(Time time) {
-		if (hour > time.getHour()) {
-			return true;
-		} else if (hour == time.getHour()) {
-			if (minute > time.getMinute()) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public boolean before(Time time) {
-		if (hour < time.getHour()) {
-			return true;
-		} else if (hour == time.getHour()) {
-			if (minute < time.getMinute()) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	private String adjustTime(String time) {
 		String modifiedTime = time;
 
@@ -54,20 +30,37 @@ public class Time {
 		return modifiedTime;
 	}
 
+	public boolean after(Time time) {
+		if (hour > time.getHour()) {
+			return true;
+		} else if (hour == time.getHour() && minute > time.getMinute()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean before(Time time) {
+		if (hour < time.getHour()) {
+			return true;
+		} else if (hour == time.getHour() && minute < time.getMinute()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
 	public Integer getHour() {
 		return hour;
 	}
 
-	public void setHour(Integer hour) {
-		this.hour = hour;
-	}
-
 	public Integer getMinute() {
 		return minute;
-	}
-
-	public void setMinute(Integer minute) {
-		this.minute = minute;
 	}
 
 	@Override
@@ -75,9 +68,12 @@ public class Time {
 		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+	public void setHour(Integer hour) {
+		this.hour = hour;
+	}
+
+	public void setMinute(Integer minute) {
+		this.minute = minute;
 	}
 
 	@Override

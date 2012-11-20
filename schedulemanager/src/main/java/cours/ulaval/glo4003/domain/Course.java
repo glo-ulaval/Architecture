@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Course {
 
-	public static int HOURS_PER_CREDITS = 3;
+	public final static int HOURS_PER_CREDITS = 3;
 
 	private String acronym;
 	private String title;

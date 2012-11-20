@@ -5,8 +5,7 @@ import java.util.Properties;
 
 public final class ConfigManager {
 
-	private static String CONFIG_FILE_PATH = "/Configs.properties";
-
+	private static String configFilePath = "/Configs.properties";
 	private static ConfigManager configManager;
 
 	private Properties properties;
@@ -14,7 +13,7 @@ public final class ConfigManager {
 	private ConfigManager() {
 		try {
 			properties = new Properties();
-			properties.load(ConfigManager.class.getResourceAsStream(CONFIG_FILE_PATH));
+			properties.load(ConfigManager.class.getResourceAsStream(configFilePath));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -53,6 +52,6 @@ public final class ConfigManager {
 
 	// Use for tests
 	public static void setConfigFilePath(String path) {
-		CONFIG_FILE_PATH = path;
+		configFilePath = path;
 	}
 }

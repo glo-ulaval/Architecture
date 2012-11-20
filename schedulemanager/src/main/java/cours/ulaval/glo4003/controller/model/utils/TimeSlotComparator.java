@@ -30,19 +30,19 @@ public class TimeSlotComparator implements Comparator<CourseSlotModel> {
 	}
 
 	private Integer getDayValue(String day) {
-		if (day.toLowerCase().equals("monday")) {
+		if (day.equalsIgnoreCase("monday")) {
 			return 1;
 		}
-		if (day.toLowerCase().equals("tuesday")) {
+		if (day.equalsIgnoreCase("tuesday")) {
 			return 2;
 		}
-		if (day.toLowerCase().equals("wednesday")) {
+		if (day.equalsIgnoreCase("wednesday")) {
 			return 3;
 		}
-		if (day.toLowerCase().equals("thursday")) {
+		if (day.equalsIgnoreCase("thursday")) {
 			return 4;
 		}
-		if (day.toLowerCase().equals("friday")) {
+		if (day.equalsIgnoreCase("friday")) {
 			return 5;
 		}
 		return 0;
