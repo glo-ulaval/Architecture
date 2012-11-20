@@ -3,6 +3,7 @@ package cours.ulaval.glo4003.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -27,6 +28,7 @@ import cours.ulaval.glo4003.domain.Time;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
+import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
@@ -48,6 +50,9 @@ public class ScheduleController {
 	@Inject
 	private UserRepository userRepository;
 
+	@Inject
+	private ConflictDetector conflictDetector;
+
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -67,7 +72,9 @@ public class ScheduleController {
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
 	public ModelAndView scheduleView(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
 
-		CalendarModel calendarModel = new CalendarModel(scheduleRepository.findById(id));
+		Schedule schedule = scheduleRepository.findById(id);
+		detectAndAddConflictsToSchedule(schedule);
+		CalendarModel calendarModel = new CalendarModel(schedule);
 
 		ModelAndView mv;
 		if (view.contentEquals("calendar")) {
@@ -176,6 +183,9 @@ public class ScheduleController {
 		ModelAndView mv = new ModelAndView("createschedule");
 		try {
 			Schedule schedule = scheduleRepository.findById(id);
+
+			detectAndAddConflictsToSchedule(schedule);
+			Logger.getAnonymousLogger().info("postEditSection - postConflits");
 			updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
 			mv.addObject("error", ControllerMessages.SUCCESS);
@@ -196,6 +206,10 @@ public class ScheduleController {
 			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 
 		Schedule schedule = scheduleRepository.findById(id);
+
+		detectAndAddConflictsToSchedule(schedule);
+		Logger.getAnonymousLogger().info("postEditSectionAndReturnToLastView - postConflits");
+
 		updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
 		return scheduleView(id, view, principal);
@@ -319,5 +333,10 @@ public class ScheduleController {
 			sections.add(new SectionModel(sectionInSchedule));
 		}
 		return sections;
+	}
+
+	private void detectAndAddConflictsToSchedule(Schedule schedule) {
+		schedule.clearConflicts();
+		conflictDetector.detectConflict(schedule);
 	}
 }

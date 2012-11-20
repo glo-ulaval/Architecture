@@ -79,4 +79,13 @@ public class ScheduleTest {
 
 		assertEquals(2, schedule.getConflicts().size());
 	}
+
+	@Test
+	public void canClearConflictsList() {
+		schedule.addAll(Arrays.asList((Conflict) conflict, (Conflict) conflict));
+
+		schedule.clearConflicts();
+
+		assertEquals(0, schedule.getConflicts().size());
+	}
 }

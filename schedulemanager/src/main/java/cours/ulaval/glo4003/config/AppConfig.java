@@ -7,6 +7,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
 import cours.ulaval.glo4003.domain.conflictdetection.ConcomittingCoursesFilter;
+import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
 import cours.ulaval.glo4003.domain.conflictdetection.CourseLevelFilter;
 import cours.ulaval.glo4003.domain.conflictdetection.SameTeacherFilter;
 import cours.ulaval.glo4003.domain.conflictdetection.UnavailableTeacherFilter;
@@ -79,6 +80,11 @@ public class AppConfig {
 	@Bean
 	public UnavailableTeacherFilter unavailableTeacherFilter() {
 		return new UnavailableTeacherFilter();
+	}
+
+	@Bean
+	public ConflictDetector conflictDetector() {
+		return new ConflictDetector();
 	}
 
 	@Bean
