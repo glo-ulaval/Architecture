@@ -33,7 +33,6 @@ public class SameTeacherFilterTest {
 
 		when(section.getNrc()).thenReturn("AN_NRC");
 		when(section.getTeachers()).thenReturn(Arrays.asList(TEACHER));
-		when(section.generateSameTeacherConflicts(section2, TEACHER)).thenReturn(conflicts);
 
 		when(section2.getNrc()).thenReturn("AN_NRC2");
 		when(section2.hasTeacher(TEACHER)).thenReturn(true);

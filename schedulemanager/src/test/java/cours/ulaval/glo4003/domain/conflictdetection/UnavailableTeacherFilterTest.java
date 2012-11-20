@@ -60,7 +60,5 @@ public class UnavailableTeacherFilterTest {
 		filter.run(scheduleMock);
 
 		verify(scheduleMock, atLeast(1)).addAll(anyListOf(Conflict.class));
-		verify(aSectionMock).generateUnavailableTeacherConflicts(repositoryMock);
-		verify(anotherSectionMock).generateUnavailableTeacherConflicts(repositoryMock);
 	}
 }

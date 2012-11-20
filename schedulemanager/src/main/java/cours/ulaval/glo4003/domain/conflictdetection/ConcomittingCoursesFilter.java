@@ -1,12 +1,15 @@
 package cours.ulaval.glo4003.domain.conflictdetection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.TimeSlot;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
+import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 
 public class ConcomittingCoursesFilter extends Filter {
@@ -21,12 +24,26 @@ public class ConcomittingCoursesFilter extends Filter {
 			for (int j = i + 1; j < sections.size(); j++) {
 				Section section = sections.get(i);
 				Section otherSection = sections.get(j);
-				if (areConcomitting(section, otherSection)) {
-					schedule.addAll(section.generateConcomittingConflicts(otherSection));
+				if (section.areConcomitting(otherSection)) {
+					schedule.addAll(generateConcomittingConflicts(section, otherSection));
 				}
 			}
 		}
 		nextPipe(schedule);
+	}
+
+	private List<Conflict> generateConcomittingConflicts(Section section, Section otherSection) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		for (TimeSlot sectionTimeSlots : section.getCoursesAndLabTimeSlots()) {
+			for (TimeSlot otherSectionTimeSlots : otherSection.getCoursesAndLabTimeSlots()) {
+				if (sectionTimeSlots.isOverlapping(otherSectionTimeSlots)) {
+					ConcomittingCoursesConflict conflict = new ConcomittingCoursesConflict(section.getNrc(),
+							otherSection.getNrc(), sectionTimeSlots, otherSectionTimeSlots);
+					conflicts.add(conflict);
+				}
+			}
+		}
+		return conflicts;
 	}
 
 	@Override
@@ -34,18 +51,6 @@ public class ConcomittingCoursesFilter extends Filter {
 		if (nextPipe != null) {
 			nextPipe.run(schedule);
 		}
-	}
-
-	private boolean areConcomitting(Section section, Section otherSection) {
-		Course course = repository.findByAcronym(section.getCourseAcronym());
-		Course otherCourse = repository.findByAcronym(otherSection.getCourseAcronym());
-		if (course.isConcomitting(otherCourse)) {
-			return true;
-		}
-		if (otherCourse.isConcomitting(course)) {
-			return true;
-		}
-		return false;
 	}
 
 	// WARNING -- DO NOT USE -- for test only
