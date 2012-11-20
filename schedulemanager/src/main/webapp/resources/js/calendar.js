@@ -59,10 +59,10 @@ function createEventDiv(height, durationInHours, cs, nextTime) {
 		event.addClass('lab');
 	}
 	
-	generateConflictsPopover();
+	generateConflictsPopover(cs, event, course);
 }
 
-function generateConflictsPopover(){
+function generateConflictsPopover(cs, event, course){
 	if(cs.conflicts.length > 0) {
 		var conflictDescription = "";
 
