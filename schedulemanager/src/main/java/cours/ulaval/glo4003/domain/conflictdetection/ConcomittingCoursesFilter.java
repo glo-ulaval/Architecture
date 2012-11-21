@@ -34,9 +34,17 @@ public class ConcomittingCoursesFilter extends Filter {
 		return conflicts;
 	}
 
-	public void compareWithSchedule(Section anotherSectionMock, Schedule scheduleMock) {
-		// TODO Auto-generated method stub
-
+	@Override
+	public List<Conflict> run(Schedule schedule, Section section) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		List<Section> sections = schedule.getSectionsList();
+		for (Section otherSection : sections) {
+			if (section.areConcomitting(otherSection)) {
+				conflicts.addAll(generateConcomittingConflicts(section, otherSection));
+			}
+		}
+		conflicts.addAll(nextFilter.run(schedule));
+		return conflicts;
 	}
 
 	private List<Conflict> generateConcomittingConflicts(Section section, Section otherSection) {

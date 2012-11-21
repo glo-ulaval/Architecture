@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 
 public class ConflictDetector extends Source {
@@ -25,9 +26,20 @@ public class ConflictDetector extends Source {
 		schedule.calculateScore();
 	}
 
-	protected List<Conflict> run(Schedule schedule) {
+	public void detectConflictForSection(Schedule schedule, Section section) {
+		List<Conflict> conflicts = run(schedule, section);
+		schedule.addAll(conflicts);
+		schedule.calculateScore();
+	}
+
+	private List<Conflict> run(Schedule schedule) {
 		connectFilters();
 		return startPipe(schedule);
+	}
+
+	private List<Conflict> run(Schedule schedule, Section section) {
+		connectFilters();
+		return startPipe(schedule, section);
 	}
 
 	private void connectFilters() {
@@ -42,6 +54,14 @@ public class ConflictDetector extends Source {
 		List<Conflict> conflicts = new ArrayList<Conflict>();
 		if (firstFilter != null) {
 			conflicts.addAll(firstFilter.run(schedule));
+		}
+		return conflicts;
+	}
+
+	private List<Conflict> startPipe(Schedule schedule, Section section) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		if (firstFilter != null) {
+			conflicts.addAll(firstFilter.run(schedule, section));
 		}
 		return conflicts;
 	}

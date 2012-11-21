@@ -34,6 +34,19 @@ public class CourseLevelFilter extends Filter {
 		return conflicts;
 	}
 
+	@Override
+	public List<Conflict> run(Schedule schedule, Section section) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		List<Section> sections = schedule.getSectionsList();
+		for (Section otherSection : sections) {
+			if (section.areSameLevel(otherSection)) {
+				conflicts.addAll(generateSameLevelCoursesConflicts(section, otherSection));
+			}
+		}
+		conflicts.addAll(nextFilter.run(schedule));
+		return conflicts;
+	}
+
 	private List<Conflict> generateSameLevelCoursesConflicts(Section section, Section otherSection) {
 		List<Conflict> conflicts = new ArrayList<Conflict>();
 		for (TimeSlot sectionTimeSlots : section.getCoursesAndLabTimeSlots()) {

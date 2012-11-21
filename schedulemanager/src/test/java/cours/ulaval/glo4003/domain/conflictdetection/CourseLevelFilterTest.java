@@ -21,6 +21,7 @@ public class CourseLevelFilterTest {
 	private Section aSectionMock;
 	private Section anotherSectionMock;
 	private Filter nextFilterMock;
+	private CourseLevelFilter filter;
 
 	@Before
 	public void setUp() {
@@ -43,6 +44,8 @@ public class CourseLevelFilterTest {
 		when(scheduleMock.getSectionsList()).thenReturn(sectionsMocks);
 
 		nextFilterMock = mock(Filter.class);
+		filter = new CourseLevelFilter();
+		filter.connectToFilter(nextFilterMock);
 	}
 
 	@Test
@@ -54,10 +57,15 @@ public class CourseLevelFilterTest {
 
 	@Test
 	public void canDetectSameLevelCourseConflict() {
-		CourseLevelFilter filter = new CourseLevelFilter();
-		filter.connectToFilter(nextFilterMock);
-
 		List<Conflict> conflicts = filter.run(scheduleMock);
+
+		assertEquals(1, conflicts.size());
+		verify(aSectionMock).areSameLevel(anotherSectionMock);
+	}
+
+	@Test
+	public void canSayIfSectionWouldCauseSameLevelCourseConflictWithSchedule() {
+		List<Conflict> conflicts = filter.run(scheduleMock, aSectionMock);
 
 		assertEquals(1, conflicts.size());
 		verify(aSectionMock).areSameLevel(anotherSectionMock);

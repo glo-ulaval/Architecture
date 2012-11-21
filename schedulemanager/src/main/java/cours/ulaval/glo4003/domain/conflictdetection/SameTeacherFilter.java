@@ -30,6 +30,21 @@ public class SameTeacherFilter extends Filter {
 		return conflicts;
 	}
 
+	@Override
+	public List<Conflict> run(Schedule schedule, Section section) {
+		List<Conflict> conflicts = new ArrayList<Conflict>();
+		List<Section> sections = schedule.getSectionsList();
+		for (String teacher : section.getTeachers()) {
+			for (Section secondSection : sections) {
+				if (secondSection.hasTeacher(teacher)) {
+					conflicts.addAll(generateSameTeacherConflicts(section, secondSection, teacher));
+				}
+			}
+		}
+		conflicts.addAll(nextFilter.run(schedule));
+		return conflicts;
+	}
+
 	private List<Conflict> generateSameTeacherConflicts(Section section, Section otherSection, String teacher) {
 		List<Conflict> conflicts = new ArrayList<Conflict>();
 		for (TimeSlot sectionTimeSlots : section.getCoursesAndLabTimeSlots()) {

@@ -21,6 +21,7 @@ public class ConcomittingCoursesFilterTest {
 	private Section aSectionMock;
 	private Section anotherSectionMock;
 	private Filter nextFilterMock;
+	private ConcomittingCoursesFilter filter;
 
 	@Before
 	public void setUp() {
@@ -41,6 +42,8 @@ public class ConcomittingCoursesFilterTest {
 		when(scheduleMock.getSectionsList()).thenReturn(sectionsMocks);
 
 		nextFilterMock = mock(Filter.class);
+		filter = new ConcomittingCoursesFilter();
+		filter.connectToFilter(nextFilterMock);
 	}
 
 	@Test
@@ -52,23 +55,17 @@ public class ConcomittingCoursesFilterTest {
 
 	@Test
 	public void canDetectConcimittingCoursesConflicts() {
-		ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
-		filter.connectToFilter(nextFilterMock);
-
 		List<Conflict> conflicts = filter.run(scheduleMock);
 
 		assertEquals(1, conflicts.size());
 		verify(aSectionMock).areConcomitting(anotherSectionMock);
 	}
 
-	// @Test
-	// public void
-	// canSayIfSectionWouldCauseConcomittingCourseConflictWithSchedule() {
-	// ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
-	//
-	// filter.compareWithSchedule(anotherSectionMock, scheduleMock);
-	//
-	// verify(scheduleMock).addAll(anyListOf(Conflict.class));
-	// verify(aSectionMock).areConcomitting(anotherSectionMock);
-	// }
+	@Test
+	public void canSayIfSectionWouldCauseConcomittingCourseConflictWithSchedule() {
+		List<Conflict> conflicts = filter.run(scheduleMock, aSectionMock);
+
+		assertEquals(1, conflicts.size());
+		verify(aSectionMock).areConcomitting(anotherSectionMock);
+	}
 }
