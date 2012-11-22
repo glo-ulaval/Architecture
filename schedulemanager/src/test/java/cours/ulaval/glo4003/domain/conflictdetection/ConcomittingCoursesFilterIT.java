@@ -36,6 +36,7 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 	private Section ift2004Section;
 	private Section ift2002Section;
 	private Filter nextFilterMock;
+	private ConcomittingCoursesFilter filter;
 
 	@Before
 	public void setup()
@@ -75,6 +76,10 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 		ift2002Section.setCourseRepository(courseRepository);
 
 		nextFilterMock = mock(Filter.class);
+
+		filter = new ConcomittingCoursesFilter();
+		filter.setRepository(courseRepository);
+		filter.connectToFilter(nextFilterMock);
 	}
 
 	@After
@@ -88,10 +93,6 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 		Schedule schedule = new Schedule("h2012");
 		schedule.add(ift2002Section);
 		schedule.add(glo2002Section);
-
-		ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
-		filter.setRepository(courseRepository);
-		filter.connectToFilter(nextFilterMock);
 
 		List<Conflict> conflicts = filter.run(schedule);
 
@@ -108,14 +109,36 @@ public class ConcomittingCoursesFilterIT extends ITTestBase {
 		schedule.add(ift2002Section);
 		schedule.add(ift2004Section);
 
-		ConcomittingCoursesFilter filter = new ConcomittingCoursesFilter();
-		filter.setRepository(courseRepository);
-		filter.connectToFilter(nextFilterMock);
-
 		List<Conflict> conflicts = filter.run(schedule);
 
 		assertEquals(0, conflicts.size());
 		verify(nextFilterMock).run(schedule);
+	}
+
+	@Test
+	public void shouldDetectConcomittingCoursesConflictForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(ift2002Section);
+
+		List<Conflict> conflicts = filter.run(schedule, glo2002Section);
+
+		assertEquals(1, conflicts.size());
+		assertEquals("87134", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof ConcomittingCoursesConflict);
+		verify(nextFilterMock).run(schedule, glo2002Section);
+	}
+
+	@Test
+	public void shouldNotDetectConflictWhenCoursesNotConcomittingForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(ift2002Section);
+
+		List<Conflict> conflicts = filter.run(schedule, ift2004Section);
+
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule, ift2004Section);
 	}
 
 	private Time generateTimeSlotStartTime() {

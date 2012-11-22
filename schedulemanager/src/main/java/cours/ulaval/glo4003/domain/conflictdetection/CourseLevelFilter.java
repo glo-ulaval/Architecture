@@ -43,7 +43,7 @@ public class CourseLevelFilter extends Filter {
 				conflicts.addAll(generateSameLevelCoursesConflicts(section, otherSection));
 			}
 		}
-		conflicts.addAll(nextFilter.run(schedule));
+		conflicts.addAll(nextFilter.run(schedule, section));
 		return conflicts;
 	}
 

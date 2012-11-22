@@ -59,6 +59,7 @@ public class ConcomittingCoursesFilterTest {
 
 		assertEquals(1, conflicts.size());
 		verify(aSectionMock).areConcomitting(anotherSectionMock);
+		verify(nextFilterMock).run(scheduleMock);
 	}
 
 	@Test
@@ -67,5 +68,6 @@ public class ConcomittingCoursesFilterTest {
 
 		assertEquals(1, conflicts.size());
 		verify(aSectionMock).areConcomitting(anotherSectionMock);
+		verify(nextFilterMock).run(scheduleMock, aSectionMock);
 	}
 }

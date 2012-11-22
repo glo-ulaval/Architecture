@@ -71,7 +71,7 @@ public class ConflictDetectorIT extends ITTestBase {
 	}
 
 	@Before
-	public void setup()
+	public void setUp()
 			throws Exception {
 		Prerequisite concomittingPrerequisite = new Prerequisite();
 		concomittingPrerequisite.setAcronyms(Arrays.asList("IFT-2002"));

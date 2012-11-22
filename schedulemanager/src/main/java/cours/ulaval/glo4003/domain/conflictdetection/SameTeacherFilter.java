@@ -41,7 +41,7 @@ public class SameTeacherFilter extends Filter {
 				}
 			}
 		}
-		conflicts.addAll(nextFilter.run(schedule));
+		conflicts.addAll(nextFilter.run(schedule, section));
 		return conflicts;
 	}
 

@@ -70,6 +70,7 @@ public class UnavailableTeacherFilterTest {
 		assertEquals(1, conflicts.size());
 		verify(availabilityMock, atLeast(1)).isAvailableForTimeSlot(timeSlotMock);
 		verify(otherAvailabilityMock, atLeast(1)).isAvailableForTimeSlot(timeSlotMock);
+		verify(nextFilterMock).run(scheduleMock);
 	}
 
 	@Test
@@ -79,6 +80,7 @@ public class UnavailableTeacherFilterTest {
 		assertEquals(1, conflicts.size());
 		verify(availabilityMock, atLeast(1)).isAvailableForTimeSlot(timeSlotMock);
 		verify(otherAvailabilityMock, atLeast(1)).isAvailableForTimeSlot(timeSlotMock);
+		verify(nextFilterMock).run(scheduleMock, aSectionMock);
 	}
 
 }

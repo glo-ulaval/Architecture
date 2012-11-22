@@ -79,6 +79,38 @@ public class SameTeacherFilterIT extends ITTestBase {
 		verify(nextFilterMock).run(schedule);
 	}
 
+	@Test
+	public void shouldDetectConflictWhenSectionsHaveSameTeachersForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(glo1901Section);
+
+		SameTeacherFilter filter = new SameTeacherFilter();
+		filter.connectToFilter(nextFilterMock);
+
+		List<Conflict> conflicts = filter.run(schedule, glo1010Section);
+
+		assertEquals(1, conflicts.size());
+		assertEquals("90876", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof SameTeacherConflict);
+		verify(nextFilterMock).run(schedule, glo1010Section);
+	}
+
+	@Test
+	public void shouldNotDetectConflictWhenSectionsHaveDifferentTeachersForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(glo1901Section);
+
+		SameTeacherFilter filter = new SameTeacherFilter();
+		filter.connectToFilter(nextFilterMock);
+
+		List<Conflict> conflicts = filter.run(schedule, glo2000Section);
+
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule, glo2000Section);
+	}
+
 	private Time generateTimeSlotStartTime() {
 		Time startTime = new Time(A_HOUR, A_MINUTE);
 		return startTime;

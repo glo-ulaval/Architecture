@@ -37,7 +37,7 @@ public class UnavailableTeacherFilter extends Filter {
 	public List<Conflict> run(Schedule schedule, Section section) {
 		List<Conflict> conflicts = new ArrayList<Conflict>();
 		conflicts.addAll(generateUnavailableTeacherConflicts(section, repository));
-		conflicts.addAll(nextFilter.run(schedule));
+		conflicts.addAll(nextFilter.run(schedule, section));
 		return conflicts;
 	}
 

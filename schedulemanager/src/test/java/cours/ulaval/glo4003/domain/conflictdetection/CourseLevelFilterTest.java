@@ -61,6 +61,7 @@ public class CourseLevelFilterTest {
 
 		assertEquals(1, conflicts.size());
 		verify(aSectionMock).areSameLevel(anotherSectionMock);
+		verify(nextFilterMock).run(scheduleMock);
 	}
 
 	@Test
@@ -69,6 +70,7 @@ public class CourseLevelFilterTest {
 
 		assertEquals(1, conflicts.size());
 		verify(aSectionMock).areSameLevel(anotherSectionMock);
+		verify(nextFilterMock).run(scheduleMock, aSectionMock);
 	}
 
 }

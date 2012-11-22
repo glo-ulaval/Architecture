@@ -42,6 +42,7 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 	private Section glo1010Section;
 	private Section glo2000Section;
 	private Filter nextFilterMock;
+	private UnavailableTeacherFilter filter;
 
 	@BeforeClass
 	public static void setupClass()
@@ -68,6 +69,9 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 				null);
 
 		nextFilterMock = mock(Filter.class);
+		filter = new UnavailableTeacherFilter();
+		filter.setRepository(availabilityRepository);
+		filter.connectToFilter(nextFilterMock);
 	}
 
 	@Test
@@ -75,10 +79,6 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 			throws Exception {
 		Schedule schedule = new Schedule("h2012");
 		schedule.add(glo1010Section);
-
-		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
-		filter.setRepository(availabilityRepository);
-		filter.connectToFilter(nextFilterMock);
 
 		List<Conflict> conflicts = filter.run(schedule);
 
@@ -94,10 +94,6 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 		Schedule schedule = new Schedule("h2012");
 		schedule.add(glo2000Section);
 
-		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
-		filter.setRepository(availabilityRepository);
-		filter.connectToFilter(nextFilterMock);
-
 		List<Conflict> conflicts = filter.run(schedule);
 
 		assertEquals(1, conflicts.size());
@@ -112,14 +108,50 @@ public class UnavailableTeacherFilterIT extends ITTestBase {
 		Schedule schedule = new Schedule("h2012");
 		schedule.add(glo1901Section);
 
-		UnavailableTeacherFilter filter = new UnavailableTeacherFilter();
-		filter.setRepository(availabilityRepository);
-		filter.connectToFilter(nextFilterMock);
-
 		List<Conflict> conflicts = filter.run(schedule);
 
 		assertEquals(0, conflicts.size());
 		verify(nextFilterMock).run(schedule);
+	}
+
+	@Test
+	public void shouldDetectConflictWhenATeacherIsPreferedNotAvailableForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(glo1010Section);
+
+		List<Conflict> conflicts = filter.run(schedule, glo1010Section);
+
+		assertEquals(1, conflicts.size());
+		assertEquals("90876", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof DisponibilityConflict);
+		verify(nextFilterMock).run(schedule, glo1010Section);
+	}
+
+	@Test
+	public void shouldDetectConflictWhenATeacherIsUnavailableForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(glo2000Section);
+
+		List<Conflict> conflicts = filter.run(schedule, glo2000Section);
+
+		assertEquals(1, conflicts.size());
+		assertEquals("09088", conflicts.get(0).getFirstNrc());
+		assertTrue(conflicts.get(0) instanceof UnavailableTeacherConflict);
+		verify(nextFilterMock).run(schedule, glo2000Section);
+	}
+
+	@Test
+	public void shouldNotDetectConflictWhenTeacherIsAvailableForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(glo1901Section);
+
+		List<Conflict> conflicts = filter.run(schedule, glo1901Section);
+
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule, glo1901Section);
 	}
 
 	private Time generateTimeSlotStartTime() {

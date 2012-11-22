@@ -121,6 +121,61 @@ public class CourseLevelFilterIT extends ITTestBase {
 		verify(nextFilterMock).run(schedule);
 	}
 
+	@Test
+	public void shouldDetectSameCourseLevelConflictInGLOProgramSheetForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(glo1010Section);
+
+		CourseLevelFilter filter = new CourseLevelFilter();
+		filter.setRepository(programSheetRepository);
+		filter.connectToFilter(nextFilterMock);
+
+		List<Conflict> conflicts = filter.run(schedule, glo1901Section);
+
+		assertEquals(1, conflicts.size());
+		assertEquals("87134", conflicts.get(0).getFirstNrc());
+		assertEquals("90876", conflicts.get(0).getSecondNrc());
+		assertTrue(conflicts.get(0) instanceof SameLevelCourseConflict);
+		verify(nextFilterMock).run(schedule, glo1901Section);
+	}
+
+	@Test
+	public void shouldDetectSameCourseLevelConflictInIFTProgramSheetForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(ift2002Section);
+
+		CourseLevelFilter filter = new CourseLevelFilter();
+		filter.setRepository(programSheetRepository);
+		filter.connectToFilter(nextFilterMock);
+
+		List<Conflict> conflicts = filter.run(schedule, ift1000Section);
+
+		assertEquals(1, conflicts.size());
+		assertEquals("21345", conflicts.get(0).getFirstNrc());
+		assertEquals("11765", conflicts.get(0).getSecondNrc());
+		assertTrue(conflicts.get(0) instanceof SameLevelCourseConflict);
+		verify(nextFilterMock).run(schedule, ift1000Section);
+	}
+
+	@Test
+	public void shouldNotDetectConflictWhenCoursesAreNotSameLevelForSection()
+			throws Exception {
+		Schedule schedule = new Schedule("h2012");
+		schedule.add(ift2901Section);
+		schedule.add(glo1901Section);
+
+		CourseLevelFilter filter = new CourseLevelFilter();
+		filter.setRepository(programSheetRepository);
+		filter.connectToFilter(nextFilterMock);
+
+		List<Conflict> conflicts = filter.run(schedule, ift2002Section);
+
+		assertEquals(0, conflicts.size());
+		verify(nextFilterMock).run(schedule, ift2002Section);
+	}
+
 	private Time generateTimeSlotStartTime() {
 		Time startTime = new Time(A_HOUR, A_MINUTE);
 		return startTime;

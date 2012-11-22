@@ -58,6 +58,7 @@ public class SameTeacherFilterTest {
 
 		assertEquals(1, conflicts.size());
 		verify(anotherSectionMock).hasTeacher(anyString());
+		verify(nextFilterMock).run(scheduleMock);
 	}
 
 	@Test
@@ -66,6 +67,7 @@ public class SameTeacherFilterTest {
 
 		assertEquals(1, conflicts.size());
 		verify(aSectionMock).hasTeacher(TEACHER);
+		verify(nextFilterMock).run(scheduleMock, aSectionMock);
 	}
 
 }

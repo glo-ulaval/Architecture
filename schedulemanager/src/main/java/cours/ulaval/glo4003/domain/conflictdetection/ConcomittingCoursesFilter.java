@@ -43,7 +43,7 @@ public class ConcomittingCoursesFilter extends Filter {
 				conflicts.addAll(generateConcomittingConflicts(section, otherSection));
 			}
 		}
-		conflicts.addAll(nextFilter.run(schedule));
+		conflicts.addAll(nextFilter.run(schedule, section));
 		return conflicts;
 	}
 
