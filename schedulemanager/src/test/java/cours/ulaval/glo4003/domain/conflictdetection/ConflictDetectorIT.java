@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -50,6 +51,8 @@ public class ConflictDetectorIT extends ITTestBase {
 	private Section glo1010Section;
 	private Section ift2901Section;
 	private Section glo3013Section;
+	private Schedule schedule;
+	private ConflictDetector conflictDetector;
 
 	@BeforeClass
 	public static void setupClass()
@@ -63,10 +66,9 @@ public class ConflictDetectorIT extends ITTestBase {
 		addTeacherAvailability("teacher5");
 	}
 
-	@After
-	public void tearDown()
+	@AfterClass
+	public static void tearDownClass()
 			throws Exception {
-		courseRepository.clear();
 		availabilityRepository.clear();
 	}
 
@@ -142,12 +144,8 @@ public class ConflictDetectorIT extends ITTestBase {
 				null);
 		glo3013Section.setCourseRepository(courseRepository);
 		glo3013Section.setProgramSheetRepository(programSheetRepository);
-	}
 
-	@Test
-	public void canDetectConflicts()
-			throws Exception {
-		Schedule schedule = new Schedule("h2012");
+		schedule = new Schedule("h2012");
 		schedule.add(ift2002Section);
 		schedule.add(glo2002Section);
 		schedule.add(ift2004Section);
@@ -163,13 +161,23 @@ public class ConflictDetectorIT extends ITTestBase {
 		unavailableTeacherFilter.setRepository(availabilityRepository);
 		Sink sink = new Sink();
 
-		ConflictDetector conflictDetector = new ConflictDetector();
+		conflictDetector = new ConflictDetector();
 		conflictDetector.setConcomittingCoursesFilter(concomittingCoursesFilter);
 		conflictDetector.setCourseLevelFilter(coursesLevelFilter);
 		conflictDetector.setSameTeacherFilter(sameTeacherFilter);
 		conflictDetector.setUnavailableTeacherFilter(unavailableTeacherFilter);
 		conflictDetector.setSink(sink);
+	}
 
+	@After
+	public void tearDown()
+			throws Exception {
+		courseRepository.clear();
+	}
+
+	@Test
+	public void canDetectConflicts()
+			throws Exception {
 		conflictDetector.detectConflict(schedule);
 
 		assertEquals(5, schedule.getConflicts().size());
@@ -177,6 +185,17 @@ public class ConflictDetectorIT extends ITTestBase {
 		// 190 is the score for a schedule with one type of each generated
 		// conflict. This score should change if conflicts values or number of
 		// conflicts changes
+	}
+
+	@Test
+	public void canDetectConflictsForSchedule()
+			throws Exception {
+		conflictDetector.detectConflictForSection(schedule, glo2002Section);
+
+		assertEquals(2, schedule.getConflicts().size());
+		assertEquals(90, (int) schedule.getScore());
+		// 90 is the score for the generated conflicts. This score should change
+		// if conflicts values or number of conflicts changes
 	}
 
 	private static void addTeacherAvailability(String teacherIdul)
