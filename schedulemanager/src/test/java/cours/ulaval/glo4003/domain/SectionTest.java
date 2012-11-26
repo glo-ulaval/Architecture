@@ -101,6 +101,21 @@ public class SectionTest {
 		verify(repositoryMock, times(2)).findByAcronym(anyString());
 	}
 
+	@Test
+	public void canCloneASection() {
+		Section clonedSection = section.clone();
+
+		assertEquals(nrc, clonedSection.getNrc());
+		assertEquals(group, clonedSection.getGroup());
+		assertEquals(personInCharge, clonedSection.getPersonInCharge());
+		assertEquals(teachers, clonedSection.getTeachers());
+		assertEquals(timeDedicated, clonedSection.getTimeDedicated());
+		assertEquals(teachMode, clonedSection.getTeachMode());
+		assertEquals(courseTimeSlot.size(), clonedSection.getCourseTimeSlots().size());
+		assertEquals(labTimeSlot.getStartTime(), clonedSection.getLabTimeSlot().getStartTime());
+		assertEquals(courseAcronym, clonedSection.getCourseAcronym());
+	}
+
 	private Time generateTimeSlotStartTime() {
 		Time startTime = new Time(A_HOUR, A_MINUTE);
 		return startTime;

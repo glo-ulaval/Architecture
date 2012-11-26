@@ -15,7 +15,7 @@
                     <minute>30</minute>
                 </startTime>
             </firstTimeSlot>
-            <score>40</score>
+            <score>50</score>
             <teacher>Thierry Eude</teacher>
         </conflicts>
 		<conflicts>
@@ -32,8 +32,8 @@
                     <minute>30</minute>
                 </startTime>
             </firstTimeSlot>
-            <score>40</score>
-            <teacher>Thierry Eude</teacher>
+            <score>50</score>
+            <teacher></teacher>
         </conflicts>
         <id>2011-2012-Automne-1</id>
         <personInCharge>Nadia Tawbi</personInCharge>
