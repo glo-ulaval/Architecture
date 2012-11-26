@@ -91,7 +91,7 @@
 							</li>
 							
 							<li class="pull-right">
-								<a class="btn btn-info" href="${editsection}/${section.nrc}"><i class="icon-edit icon-white"></i></a>
+								<a class="btn btn-info" href="${editsection}/${section.nrc}/list"><i class="icon-edit icon-white"></i></a>
 							</li>
 							</sec:authorize>
 

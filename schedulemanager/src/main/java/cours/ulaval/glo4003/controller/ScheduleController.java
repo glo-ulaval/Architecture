@@ -2,7 +2,9 @@ package cours.ulaval.glo4003.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -150,9 +152,9 @@ public class ScheduleController {
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
 		mv.addObject("id", id);
-		List<String> teachers = new ArrayList<String>();
+		Map<String, String> teachers = new HashMap<String, String>();
 		for (User teacher : userRepository.findByRole(Role.ROLE_Enseignant)) {
-			teachers.add(teacher.getName());
+			teachers.put(teacher.getIdul(), teacher.getName());
 		}
 		mv.addObject("teachers", teachers);
 
