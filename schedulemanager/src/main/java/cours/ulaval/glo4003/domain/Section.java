@@ -93,19 +93,27 @@ public class Section {
 
 	public Section clone() {
 		Section section = new Section(nrc, group, personInCharge, null, teachMode, null, courseAcronym, null, null);
-		section.setLabTimeSlot(labTimeSlot.clone());
-		List<TimeSlot> coursesTimeSlot = new ArrayList<TimeSlot>();
-		for (TimeSlot timeSlot : courseTimeSlots) {
-			coursesTimeSlot.add(timeSlot.clone());
+		if (labTimeSlot != null) {
+			section.setLabTimeSlot(labTimeSlot.clone());
 		}
-		section.setCourseTimeSlots(coursesTimeSlot);
-		List<String> clonedTeachers = new ArrayList<String>();
-		for (String teacher : teachers) {
-			clonedTeachers.add(teacher);
+		if (courseTimeSlots != null) {
+			List<TimeSlot> coursesTimeSlot = new ArrayList<TimeSlot>();
+			for (TimeSlot timeSlot : courseTimeSlots) {
+				coursesTimeSlot.add(timeSlot.clone());
+			}
+			section.setCourseTimeSlots(coursesTimeSlot);
 		}
-		section.setTeachers(clonedTeachers);
-		section.setTimeDedicated(new TimeDedicated(timeDedicated.getCourseHours(), timeDedicated.getLabHours(), timeDedicated
-				.getOtherHours()));
+		if (teachers != null) {
+			List<String> clonedTeachers = new ArrayList<String>();
+			for (String teacher : teachers) {
+				clonedTeachers.add(teacher);
+			}
+			section.setTeachers(clonedTeachers);
+		}
+		if (timeDedicated != null) {
+			section.setTimeDedicated(new TimeDedicated(timeDedicated.getCourseHours(), timeDedicated.getLabHours(), timeDedicated
+					.getOtherHours()));
+		}
 		return section;
 
 	}
