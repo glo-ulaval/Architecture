@@ -27,8 +27,7 @@
 			</div>
 		</div>
 		<div class="btn-group" id="myTab" data-toggle="buttons-radio">
-			<button class="active btn btn-info btn-large" onClick=changeGroup("InCourse","A")><a class="tab_a" href="#InCourse" data-toggle="tab">En
-					classe</a></button>
+			<button class="active btn btn-info btn-large" onClick=changeGroup("InCourse","A")><a class="tab_a" href="#InCourse" data-toggle="tab">En classe</a></button>
 			<button class = "btn btn-info btn-large" onClick=changeGroup("Virtual","Z3")><a class="tab_a" href="#Virtual" data-toggle="tab">Virtuel</a></button>
 			<button class = "btn btn-info btn-large" onClick=changeGroup("Remotly","Z1")><a class="tab_a" href="#Remotly" data-toggle="tab">À distance</a></button>
 		</div>

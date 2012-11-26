@@ -43,4 +43,10 @@
         <password>pass</password>
         <roles>ROLE_Usager</roles>
     </users>
+        <users>
+        <idul>THEUD</idul>
+        <name>Thierry Eude</name>
+        <password>pass</password>
+        <roles>ROLE_Usager</roles>
+    </users>
 </users>

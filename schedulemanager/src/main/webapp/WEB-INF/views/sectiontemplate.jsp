@@ -15,7 +15,7 @@
 			<div class="span8 controls">
 				<select class="input-xlarge" name="personInCharge" value="teachers">
 					<c:forEach items="${teachers}" var="teacher">
-						<option>${teacher}</option>
+						<option value="${teacher.key}">${teacher.value}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -26,7 +26,7 @@
 				<div class="teachers">
 					<select class="input-xlarge teachersDropdown" name="teachers"><c:forEach
 							items="${teachers}" var="teacher">
-							<option>${teacher}</option>
+							<option value="${teacher.key}">${teacher.value}</option>
 						</c:forEach></select>
 				</div>
 				<a class="btn btn-success" onClick=addTeacher("${param.teachmode}")><i
@@ -58,7 +58,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="hours_class_div">
+				<c:if test="${course.timeDedicated.courseHours == 0}"><div class="hours_class_div" style="display: none;"></c:if>
+				<c:if test="${course.timeDedicated.courseHours > 0}"><div class="hours_class_div" style="display: block;"></c:if>
 					<div class="span8" id="bordered">
 						<label class="span3 control-label">Heures en classe :</label>
 						<div class="span9 controls">
@@ -83,7 +84,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="hours_labo_div">
+				<c:if test="${course.timeDedicated.labHours == 0}"><div class="hours_labo_div" style="display: none;"></c:if>
+				<c:if test="${course.timeDedicated.labHours > 0}"><div class="hours_labo_div" style="display: block;"></c:if>
 					<div class="span8" id="bordered">
 						<label class="span3 control-label">Heures en labo/travail
 							dirigé :</label>

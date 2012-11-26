@@ -16,7 +16,7 @@
                 </startTime>
             </firstTimeSlot>
             <score>50</score>
-            <teacher>Thierry Eude</teacher>
+            <teacher>THEUD</teacher>
         </conflicts>
 		<conflicts>
             <firstNrc>90111</firstNrc>
@@ -36,7 +36,7 @@
             <teacher></teacher>
         </conflicts>
         <id>2011-2012-Automne-1</id>
-        <personInCharge>Nadia Tawbi</personInCharge>
+        <personInCharge>NATAW</personInCharge>
         <sections>
             <entry>
                 <key>90659</key>
@@ -58,7 +58,7 @@
                     <nrc>90659</nrc>
                     <personInCharge>Thierry Eude</personInCharge>
                     <teachMode>Virtual</teachMode>
-                    <teachers>Thierry Eude</teachers>
+                    <teachers>THEUD</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
@@ -83,9 +83,9 @@
                     </courseTimeSlots>
                     <group>B</group>
                     <nrc>90111</nrc>
-                    <personInCharge>Thierry Eude</personInCharge>
+                    <personInCharge>THEUD</personInCharge>
                     <teachMode>Virtual</teachMode>
-                    <teachers>Thierry Eude</teachers>
+                    <teachers>THEUD</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
@@ -110,9 +110,9 @@
                     </courseTimeSlots>
                     <group>B</group>
                     <nrc>90623</nrc>
-                    <personInCharge>Thierry Eude</personInCharge>
+                    <personInCharge>THEUD</personInCharge>
                     <teachMode>Virtual</teachMode>
-                    <teachers>Thiery Eude</teachers>
+                    <teachers>THEUD</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
@@ -137,10 +137,9 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>87135</nrc>
-                    <personInCharge>Luc Lamontagne</personInCharge>
+                    <personInCharge>LULAM</personInCharge>
                     <teachMode>InCourse</teachMode>
-                    <teachers>Luc Lamontagne</teachers>
-                    <teachers>Jean-Nicolas Viens</teachers>
+                    <teachers>LULAM</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>2</labHours>
@@ -165,9 +164,9 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>86453</nrc>
-                    <personInCharge>Nadia Tawbi</personInCharge>
+                    <personInCharge>NATAW</personInCharge>
                     <teachMode>InCourse</teachMode>
-                    <teachers>Marc-Philippe Parent</teachers>
+                    <teachers>MPPAR3</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
@@ -192,9 +191,9 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>83014</nrc>
-                    <personInCharge>Robert Beaubrun</personInCharge>
+                    <personInCharge></personInCharge>
                     <teachMode>InCourse</teachMode>
-                    <teachers>Robert Beaubrun</teachers>
+                    <teachers>MPPAR3</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>2</labHours>
@@ -219,9 +218,9 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>84789</nrc>
-                    <personInCharge>Philippe Giguère</personInCharge>
+                    <personInCharge>MPPAR3</personInCharge>
                     <teachMode>InCourse</teachMode>
-                    <teachers>Philippe Giguère</teachers>
+                    <teachers>MPPAR3</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
@@ -258,9 +257,9 @@
                         </startTime>
                     </labTimeSlot>
                     <nrc>89782</nrc>
-                    <personInCharge>Nadir Belkhiter</personInCharge>
+                    <personInCharge>DELAU</personInCharge>
                     <teachMode>InCourse</teachMode>
-                    <teachers>Nadir Belkhiter</teachers>
+                    <teachers>DELAU</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>0</labHours>
