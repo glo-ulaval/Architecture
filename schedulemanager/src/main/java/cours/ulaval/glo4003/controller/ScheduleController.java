@@ -63,6 +63,7 @@ public class ScheduleController {
 		List<ScheduleInformationModel> scheduleModels = new ArrayList<ScheduleInformationModel>();
 
 		for (Schedule schedule : scheduleRepository.findAll()) {
+			schedule.calculateScore();
 			scheduleModels.add(new ScheduleInformationModel(schedule));
 		}
 
