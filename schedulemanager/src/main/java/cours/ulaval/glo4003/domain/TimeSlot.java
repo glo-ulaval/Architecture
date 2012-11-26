@@ -34,6 +34,15 @@ public class TimeSlot {
 		endTime.addHours(duration);
 	}
 
+	public TimeSlot clone() {
+		TimeSlot clonedTimeSlot = new TimeSlot();
+		clonedTimeSlot.setDayOfWeek(dayOfWeek);
+		clonedTimeSlot.setDuration(duration);
+		clonedTimeSlot.setStartTime(new Time(startTime.getHour(), startTime.getMinute()));
+		clonedTimeSlot.setEndTime(new Time(endTime.getHour(), endTime.getMinute()));
+		return clonedTimeSlot;
+	}
+
 	public boolean isOverlapping(TimeSlot timeslot) {
 		if (dayOfWeek != timeslot.dayOfWeek) {
 			return false;

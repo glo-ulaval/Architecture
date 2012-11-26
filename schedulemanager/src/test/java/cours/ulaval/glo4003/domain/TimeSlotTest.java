@@ -72,6 +72,16 @@ public class TimeSlotTest {
 		assertFalse(times2.isOverlapping(times1));
 	}
 
+	@Test
+	public void canCloneATimeSlot() {
+		TimeSlot timeSlot = new TimeSlot(new Time(4, 0), 3, DayOfWeek.MONDAY);
+
+		TimeSlot clonedTimeSlot = timeSlot.clone();
+
+		assertEquals(timeSlot.getStartTime(), clonedTimeSlot.getStartTime());
+		assertEquals(timeSlot.getDuration(), clonedTimeSlot.getDuration());
+	}
+
 	private Time generateEndTime() {
 		Time endTime = new Time();
 		endTime.setHour(A_HOUR + A_DURATION);
