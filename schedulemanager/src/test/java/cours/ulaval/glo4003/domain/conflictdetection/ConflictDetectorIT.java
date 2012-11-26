@@ -33,7 +33,7 @@ import cours.ulaval.glo4003.persistence.XMLCourseRepository;
 import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
 
 public class ConflictDetectorIT extends ITTestBase {
-	private static final String JSON_STRING = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,2,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
+	private static final String JSON_STRING = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,1,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
 	private static final int A_HOUR = 10;
 	private static final int A_MINUTE = 30;
 
@@ -53,6 +53,7 @@ public class ConflictDetectorIT extends ITTestBase {
 	private Section glo3013Section;
 	private Schedule schedule;
 	private ConflictDetector conflictDetector;
+	private Section ift2002SectionFriday;
 
 	@BeforeClass
 	public static void setupClass()
@@ -124,6 +125,11 @@ public class ConflictDetectorIT extends ITTestBase {
 						DayOfWeek.MONDAY)), null);
 		ift2002Section.setCourseRepository(courseRepository);
 		ift2002Section.setProgramSheetRepository(programSheetRepository);
+		ift2002SectionFriday = new Section("88769", "A", "a responsable person", Arrays.asList("teacher3"), TeachMode.InCourse,
+				new TimeDedicated(), "IFT-2002",
+				Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.WEDNESDAY)), null);
+		ift2002SectionFriday.setCourseRepository(courseRepository);
+		ift2002SectionFriday.setProgramSheetRepository(programSheetRepository);
 		glo1901Section = new Section("87009", "A", "a responsable person", Arrays.asList("teacher5"), TeachMode.InCourse,
 				new TimeDedicated(), "GLO-1901", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3, DayOfWeek.MONDAY)),
 				null);
@@ -196,6 +202,22 @@ public class ConflictDetectorIT extends ITTestBase {
 		assertEquals(90, (int) schedule.getScore());
 		// 90 is the score for the generated conflicts. This score should change
 		// if conflicts values or number of conflicts changes
+	}
+
+	@Test
+	public void canTellThatSectionWillNotGenerateConflict()
+			throws Exception {
+		boolean result = conflictDetector.willSectionGenerateConflict(schedule, ift2002SectionFriday);
+
+		assertFalse(result);
+	}
+
+	@Test
+	public void canTellThatSectionWillGenerateConflict()
+			throws Exception {
+		boolean result = conflictDetector.willSectionGenerateConflict(schedule, glo2002Section);
+
+		assertTrue(result);
 	}
 
 	private static void addTeacherAvailability(String teacherIdul)
