@@ -1,9 +1,10 @@
-package cours.ulaval.glo4003.domain.conflictdetection;
+package cours.ulaval.glo4003.domain;
 
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
@@ -13,17 +14,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.controller.model.AvailabilityModel;
-import cours.ulaval.glo4003.domain.Availability;
-import cours.ulaval.glo4003.domain.Course;
-import cours.ulaval.glo4003.domain.Cycle;
-import cours.ulaval.glo4003.domain.Prerequisite;
-import cours.ulaval.glo4003.domain.Schedule;
-import cours.ulaval.glo4003.domain.Section;
-import cours.ulaval.glo4003.domain.TeachMode;
-import cours.ulaval.glo4003.domain.Time;
-import cours.ulaval.glo4003.domain.TimeDedicated;
-import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
+import cours.ulaval.glo4003.domain.conflictdetection.ConcomittingCoursesFilter;
+import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
+import cours.ulaval.glo4003.domain.conflictdetection.CourseLevelFilter;
+import cours.ulaval.glo4003.domain.conflictdetection.SameTeacherFilter;
+import cours.ulaval.glo4003.domain.conflictdetection.Sink;
+import cours.ulaval.glo4003.domain.conflictdetection.UnavailableTeacherFilter;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.ProgramSheetRepository;
@@ -32,7 +29,7 @@ import cours.ulaval.glo4003.persistence.XMLAvailabilityRepository;
 import cours.ulaval.glo4003.persistence.XMLCourseRepository;
 import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
 
-public class ConflictDetectorIT extends ITTestBase {
+public class ScheduleGeneratorIT extends ITTestBase {
 	private static final String JSON_STRING = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,1,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
 	private static final int A_HOUR = 10;
 	private static final int A_MINUTE = 30;
@@ -111,8 +108,7 @@ public class ConflictDetectorIT extends ITTestBase {
 		courseRepository.store(glo3013);
 
 		glo2002Section = new Section("87134", "A", "a responsable person", Arrays.asList("teacher1"), TeachMode.InCourse,
-				new TimeDedicated(3, 0, 6), "GLO-2002", Arrays.asList(new TimeSlot(generateTimeSlotStartTime(), 3,
-						DayOfWeek.MONDAY)), null);
+				new TimeDedicated(3, 0, 6), "GLO-2002", null, null);
 		glo2002Section.setCourseRepository(courseRepository);
 		glo2002Section.setProgramSheetRepository(programSheetRepository);
 		ift2004Section = new Section("90876", "A", "a responsable person", Arrays.asList("teacher2"), TeachMode.InCourse,
@@ -153,7 +149,6 @@ public class ConflictDetectorIT extends ITTestBase {
 
 		schedule = new Schedule("h2012");
 		schedule.add(ift2002Section);
-		schedule.add(glo2002Section);
 		schedule.add(ift2004Section);
 		schedule.add(glo1901Section);
 		schedule.add(glo1010Section);
@@ -175,49 +170,23 @@ public class ConflictDetectorIT extends ITTestBase {
 		conflictDetector.setSink(sink);
 	}
 
+	@Test
+	public void canProposeTimeSpotsForSection()
+			throws Exception {
+		ScheduleGenerator scheduleGenerator = new ScheduleGenerator();
+		scheduleGenerator.setAvailabilityRepository(availabilityRepository);
+		scheduleGenerator.setConflictDetector(conflictDetector);
+
+		List<Section> possibleSections = scheduleGenerator.proposeTimeSlotsForSection(glo2002Section, schedule);
+
+		assertEquals(3, possibleSections.size());
+		assertEquals(glo2002Section.getNrc(), possibleSections.get(0).getNrc());
+	}
+
 	@After
 	public void tearDown()
 			throws Exception {
 		courseRepository.clear();
-	}
-
-	@Test
-	public void canDetectConflicts()
-			throws Exception {
-		conflictDetector.detectConflict(schedule);
-
-		assertEquals(5, schedule.getConflicts().size());
-		assertEquals(190, (int) schedule.getScore());
-		// 190 is the score for a schedule with one type of each generated
-		// conflict. This score should change if conflicts values or number of
-		// conflicts changes
-	}
-
-	@Test
-	public void canDetectConflictsForSchedule()
-			throws Exception {
-		conflictDetector.detectConflictForSection(schedule, glo2002Section);
-
-		assertEquals(2, schedule.getConflicts().size());
-		assertEquals(90, (int) schedule.getScore());
-		// 90 is the score for the generated conflicts. This score should change
-		// if conflicts values or number of conflicts changes
-	}
-
-	@Test
-	public void canTellThatSectionWillNotGenerateConflict()
-			throws Exception {
-		boolean result = conflictDetector.willSectionGenerateConflict(schedule, ift2002SectionFriday);
-
-		assertFalse(result);
-	}
-
-	@Test
-	public void canTellThatSectionWillGenerateConflict()
-			throws Exception {
-		boolean result = conflictDetector.willSectionGenerateConflict(schedule, glo2002Section);
-
-		assertTrue(result);
 	}
 
 	private static void addTeacherAvailability(String teacherIdul)
