@@ -32,6 +32,11 @@ public class ConflictDetector extends Source {
 		schedule.calculateScore();
 	}
 
+	public boolean willSectionGenerateConflict(Schedule schedule, Section section) {
+		List<Conflict> conflicts = run(schedule, section);
+		return !conflicts.isEmpty();
+	}
+
 	private List<Conflict> run(Schedule schedule) {
 		connectFilters();
 		return startPipe(schedule);

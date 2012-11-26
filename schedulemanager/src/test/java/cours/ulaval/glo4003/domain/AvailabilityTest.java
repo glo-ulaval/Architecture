@@ -80,4 +80,13 @@ public class AvailabilityTest {
 		assertEquals(AvailabilityLevel.PreferedNotAvailable, level);
 	}
 
+	@Test
+	public void canGeneratePossibleTimeSlots() {
+		List<TimeSlot> possibleTimeSlots = availabilities.generatePossibleTimeSlots(3);
+
+		assertFalse(possibleTimeSlots.isEmpty());
+		// assertEquals(17, possibleTimeSlots.size());
+		assertEquals(3, (int) possibleTimeSlots.get(0).getDuration());
+	}
+
 }
