@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Cycle;
+import cours.ulaval.glo4003.domain.Prerequisite;
 import cours.ulaval.glo4003.domain.TimeDedicated;
 
 public class CourseParser extends Parser {
@@ -59,8 +60,26 @@ public class CourseParser extends Parser {
 	}
 
 	public List<String> getPrerequisites() {
-		List<String> prerequisitesAcronyms = new ArrayList<String>();
+		List<String> prerequisitesAcronyms = getPrerequisitesAcronyms();
+		List<String> prerequisitesDelimiters = getPrerequisitesDelimiters();
 
+		List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
+		return prerequisitesAcronyms;
+	}
+
+	private List<String> getPrerequisitesDelimiters() {
+		List<String> prerequisitesDelimiters = new ArrayList<String>();
+		Elements elements = htmlParser.parse(document, DESCRIPTION_SELECTOR);
+		elements = elements.select("b");
+		for (Element element : elements) {
+			prerequisitesDelimiters.add(element.ownText());
+		}
+
+		return prerequisitesDelimiters;
+	}
+
+	private List<String> getPrerequisitesAcronyms() {
+		List<String> prerequisitesAcronyms = new ArrayList<String>();
 		Elements elements = htmlParser.parse(document, DESCRIPTION_SELECTOR);
 		elements = elements.select("a");
 		for (Element element : elements) {
@@ -69,6 +88,7 @@ public class CourseParser extends Parser {
 				prerequisitesAcronyms.add(element.ownText().replace(" ", "-"));
 			}
 		}
+
 		return prerequisitesAcronyms;
 	}
 }
