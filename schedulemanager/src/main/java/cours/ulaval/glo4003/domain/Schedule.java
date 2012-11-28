@@ -6,23 +6,28 @@ import java.util.List;
 import java.util.Map;
 
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
+import cours.ulaval.glo4003.domain.repository.OfferingRepository;
+import cours.ulaval.glo4003.persistence.XMLOfferingRepository;
 
 public class Schedule {
+
+	private OfferingRepository offeringRepository;
 
 	private String id;
 	private String year;
 	private Semester semester;
-	private Map<String, Section> sections;
+	private Map<String, Section> sections = new HashMap<String, Section>();
 	private String personInCharge;
 	private List<Conflict> conflicts = new ArrayList<Conflict>();
 	private Integer score = 0;
 
 	public Schedule() {
+		initializeRepository();
 	}
 
 	public Schedule(String id) {
 		this.id = id;
-		sections = new HashMap<String, Section>();
+		initializeRepository();
 	}
 
 	public void add(Section section) {
@@ -50,8 +55,13 @@ public class Schedule {
 		}
 	}
 
-	private boolean sectionExist(String nrc) {
-		return sections.containsKey(nrc);
+	public void copySectionsFromOtherSchedule(Schedule schedule) {
+		Offering offering = offeringRepository.find(schedule.getYear());
+		for (Section section : schedule.getSectionsList()) {
+			if (offering.hasCourse(section.getCourseAcronym())) {
+				add(section.clone());
+			}
+		}
 	}
 
 	public String getId() {
@@ -119,6 +129,23 @@ public class Schedule {
 
 	public void clearConflicts() {
 		this.conflicts.clear();
+	}
+
+	private boolean sectionExist(String nrc) {
+		return sections.containsKey(nrc);
+	}
+
+	private void initializeRepository() {
+		try {
+			offeringRepository = new XMLOfferingRepository();
+		} catch (Exception e) {
+
+		}
+	}
+
+	// DO NOT USE -- for tests only
+	public void setOfferingRepository(OfferingRepository offeringRepository) {
+		this.offeringRepository = offeringRepository;
 	}
 
 }

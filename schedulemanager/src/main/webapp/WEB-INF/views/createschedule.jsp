@@ -95,7 +95,9 @@
 			</div>
 		</div>
 		<c:url var="generateurl" value="/schedule/${id}/list"></c:url>
-		<a class="btn btn-success pull-right" href="${generateurl}">Générer</a>
+		<a class="btn btn-success pull-right actionbutton" href="${generateurl}">Générer</a>
+		<c:url var="reusescheduleurl" value="/schedule/${id}/reuseschedule"></c:url>
+		<a class="btn btn-success pull-right" href="${reusescheduleurl}">Réutiliser un horaire</a>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
