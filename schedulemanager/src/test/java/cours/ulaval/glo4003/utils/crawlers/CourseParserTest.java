@@ -100,10 +100,12 @@ public class CourseParserTest {
 	private void prepareDescription() {
 		element = element.html(A_COMPLETE_DESCRIPTION);
 		when(elements.first()).thenReturn(element);
+		parser.parseDescription();
 	}
 
 	private void prepareTitle() {
 		element = element.text(A_TITLE);
 		when(elements.first()).thenReturn(element);
+		parser.parseTitle();
 	}
 }
