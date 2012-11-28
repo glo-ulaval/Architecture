@@ -171,7 +171,7 @@ public class ScheduleGeneratorIT extends ITTestBase {
 	}
 
 	@Test
-	public void canProposeTimeSpotsForSection()
+	public void canProposeTimeSpotsForSectionForCourse()
 			throws Exception {
 		ScheduleGenerator scheduleGenerator = new ScheduleGenerator();
 		scheduleGenerator.setAvailabilityRepository(availabilityRepository);
@@ -180,6 +180,21 @@ public class ScheduleGeneratorIT extends ITTestBase {
 		List<TimeSlot> possibleTimeSlots = scheduleGenerator.proposeTimeSlotsForSectionForCourses(glo2002Section, schedule);
 
 		assertEquals(3, possibleTimeSlots.size());
+	}
+
+	@Test
+	public void canProposeTimeSpotsForSectionForLab()
+			throws Exception {
+		ScheduleGenerator scheduleGenerator = new ScheduleGenerator();
+		scheduleGenerator.setAvailabilityRepository(availabilityRepository);
+		scheduleGenerator.setConflictDetector(conflictDetector);
+
+		List<TimeSlot> possibleTimeSlots = scheduleGenerator.proposeTimeSlotsForSectionForLab(glo2002Section, schedule);
+
+		assertEquals(3, possibleTimeSlots.size());
+		assertEquals(DayOfWeek.FRIDAY, possibleTimeSlots.get(0).getDayOfWeek());
+		assertEquals(DayOfWeek.FRIDAY, possibleTimeSlots.get(1).getDayOfWeek());
+		assertEquals(DayOfWeek.FRIDAY, possibleTimeSlots.get(2).getDayOfWeek());
 	}
 
 	@After
