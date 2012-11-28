@@ -37,11 +37,11 @@ public class Schedule {
 	}
 
 	public void add(Conflict conflict) {
-		conflicts.add(conflict);
+		this.conflicts.add(conflict);
 	}
 
 	public void addAll(List<Conflict> conflicts) {
-		conflicts.addAll(conflicts);
+		this.conflicts.addAll(conflicts);
 	}
 
 	public void delete(String sectionNrc) {
