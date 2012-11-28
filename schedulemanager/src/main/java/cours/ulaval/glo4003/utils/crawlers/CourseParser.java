@@ -15,56 +15,90 @@ public class CourseParser extends Parser {
 
 	private static final String FULL_TITLE_SELECTOR = "table.datadisplaytable tbody tr td.nttitle";
 	private static final String DESCRIPTION_SELECTOR = "table.datadisplaytable tbody tr td.ntdefault";
+	private static final String AND_PREREQUISITE_DELIMITER = "ET";
+
+	private Course course = new Course();
 
 	public CourseParser(String uri) throws Exception {
 		super(uri);
 	}
 
 	public Course getCourse() {
-		return new Course();
+		return course;
 	}
 
-	public String getAcronym() {
+	public Course getCompleteCourse() {
+		addAcronym();
+		addTitle();
+		addDescription();
+		addCredits();
+		addCycle();
+		addTimeDedicated();
+		addPrerequisites();
+		return course;
+	}
+
+	public void addAcronym() {
 		String fullTitle = htmlParser.parse(document, FULL_TITLE_SELECTOR).first().ownText();
-		return fullTitle.split(" - ")[0].replace(" ", "-");
+		String acronym = fullTitle.split(" - ")[0].replace(" ", "-");
+		course.setAcronym(acronym);
 	}
 
-	public String getTitle() {
+	public void addTitle() {
 		String fullTitle = htmlParser.parse(document, FULL_TITLE_SELECTOR).first().ownText();
-		return fullTitle.split(" - ")[1];
+		String stripTitle = fullTitle.split(" - ")[1];
+		course.setTitle(stripTitle);
 	}
 
-	public String getDescription() {
+	public void addDescription() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		return text.split(" <br /> ")[0];
+		String description = text.split(" <br /> ")[0];
+		course.setDescription(description);
 	}
 
-	public int getCredits() {
+	public void addCredits() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		return Integer.valueOf(text.split(" <br /> ")[1].split(",")[0]);
+		int credits = Integer.valueOf(text.split(" <br /> ")[1].split(",")[0]);
+		course.setCredits(credits);
 	}
 
-	public Cycle getCycle() {
+	public void addCycle() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
 		String cycle = text.split(" <br /> ")[5].split(" </span> ")[1].replace(" cycle", "");
-		return Cycle.valueOf(cycle);
+		course.setCycle(Cycle.valueOf(cycle));
 	}
 
-	public TimeDedicated getTimeDedicated() {
+	public void addTimeDedicated() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
 		int courseHours = Integer.valueOf(text.split(" <br /> ")[2].split(",")[0]);
 		int laboHours = Integer.valueOf(text.split(" <br /> ")[3].split(",")[0]);
 		int otherHours = Integer.valueOf(text.split(" <br /> ")[4].split(",")[0]);
 
-		return new TimeDedicated(courseHours, laboHours, otherHours);
+		course.setTimeDedicated(new TimeDedicated(courseHours, laboHours, otherHours));
 	}
 
-	public List<String> getPrerequisites() {
+	public void addPrerequisites() {
 		List<String> prerequisitesAcronyms = getPrerequisitesAcronyms();
 		List<String> prerequisitesDelimiters = getPrerequisitesDelimiters();
 
+		int delimiterCounter = 0;
+		int acronymCounter = 0;
 		List<Prerequisite> prerequisites = new ArrayList<Prerequisite>();
-		return prerequisitesAcronyms;
+		while (acronymCounter < prerequisitesAcronyms.size()) {
+			Prerequisite prerequisite = new Prerequisite();
+			while (delimiterCounter < prerequisitesDelimiters.size()
+					&& !prerequisitesDelimiters.get(delimiterCounter).equals(AND_PREREQUISITE_DELIMITER)) {
+				prerequisite.addAcronym(prerequisitesAcronyms.get(acronymCounter));
+				delimiterCounter++;
+				acronymCounter++;
+			}
+
+			delimiterCounter++;
+			prerequisite.addAcronym(prerequisitesAcronyms.get(acronymCounter++));
+			prerequisites.add(prerequisite);
+		}
+
+		course.setPrerequisites(prerequisites);
 	}
 
 	private List<String> getPrerequisitesDelimiters() {
@@ -90,5 +124,11 @@ public class CourseParser extends Parser {
 		}
 
 		return prerequisitesAcronyms;
+	}
+
+	// For tests only
+	public CourseParser(HTMLLoader loader, HTMLParser parser) {
+		htmlLoader = loader;
+		htmlParser = parser;
 	}
 }

@@ -11,6 +11,10 @@ public class Prerequisite {
 	private List<String> acronyms = new ArrayList<String>();
 	private Boolean isConcomitant;
 
+	public void addAcronym(String acronym) {
+		acronyms.add(acronym);
+	}
+
 	public boolean containsAcronym(String acronym) {
 		return acronyms.contains(acronym);
 	}
