@@ -47,7 +47,7 @@
 	conçernant un cours.</p>
 </sec:authorize>
 <div class="btn-group">
-  <a href="list" type="button" class="btn">Liste</a>
+  <a href="/schedulemanager/schedule/${id}/list" type="button" class="btn">Liste</a>
   <a href="#" type="button" class="btn active">Calendrier</a>
 </div>
 <table class="table table-striped">
