@@ -13,6 +13,9 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 
 public class CourseParser extends Parser {
 
+	private static final String GLO_ACRONYM = "GLO";
+	private static final String IFT_ACRONYM = "IFT";
+	private static final String COURSE_HOURS = "Heures de cours";
 	private static final String FULL_TITLE_SELECTOR = "table.datadisplaytable tr td.nttitle";
 	private static final String DESCRIPTION_SELECTOR = "table.datadisplaytable tr td.ntdefault";
 	private static final String AND_PREREQUISITE_DELIMITER = "ET";
@@ -29,9 +32,9 @@ public class CourseParser extends Parser {
 	}
 
 	public boolean courseShouldBeAddedToCourseList() {
-		boolean shouldBeAdded = parsedDescription.contains("Heures de cours");
+		boolean shouldBeAdded = parsedDescription.contains(COURSE_HOURS);
 		if (shouldBeAdded) {
-			shouldBeAdded = parsedTitle.contains("IFT") || parsedTitle.contains("GLO");
+			shouldBeAdded = parsedTitle.contains(IFT_ACRONYM) || parsedTitle.contains(GLO_ACRONYM);
 		}
 
 		return shouldBeAdded;
