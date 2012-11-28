@@ -41,6 +41,29 @@ public class ScheduleGenerator {
 		return possibleTimeSlots;
 	}
 
+	public List<TimeSlot> proposeTimeSlotsForSectionForLab(Section section, Schedule schedule)
+			throws Exception {
+		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
+		Availability availability = availabilityRepository.findByIdul(section.getTeachers().get(0));
+		List<TimeSlot> labTimeSlots = availability.generatePossibleTimeSlotsForLab(section.getTimeDedicated().getCourseHours());
+		while (possibleTimeSlots.size() < 3 && !labTimeSlots.isEmpty()) {
+			int index = getRandomIndex(labTimeSlots.size() - 1);
+			TimeSlot timeSlot = labTimeSlots.get(index);
+			section.setLabTimeSlot(timeSlot);
+			if (conflictDetector.willSectionGenerateConflict(schedule, section)) {
+				labTimeSlots.remove(index);
+			} else {
+				possibleTimeSlots.add(timeSlot);
+				labTimeSlots.remove(index);
+			}
+		}
+		if (possibleTimeSlots.isEmpty()) {
+			throw new Exception(
+					"Impossible de proposer une plage horaire de laboratoire qui ne génère pas de conflit pour cette section");
+		}
+		return possibleTimeSlots;
+	}
+
 	private int getRandomIndex(int maximum) {
 		return (int) (Math.random() * maximum);
 	}

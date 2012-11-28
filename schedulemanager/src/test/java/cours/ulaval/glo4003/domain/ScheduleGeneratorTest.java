@@ -44,7 +44,7 @@ public class ScheduleGeneratorTest {
 	}
 
 	@Test
-	public void canProposeTimeSpotsForSection()
+	public void canProposeTimeSpotsForSectionForCourse()
 			throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
 		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(10));
@@ -56,7 +56,7 @@ public class ScheduleGeneratorTest {
 	}
 
 	@Test(expected = Exception.class)
-	public void shouldThrowExceptionWhenNoPropositionPossible()
+	public void shouldThrowExceptionWhenNoPropositionPossibleForCourse()
 			throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(true);
 
@@ -64,12 +64,44 @@ public class ScheduleGeneratorTest {
 	}
 
 	@Test
-	public void shouldTwoProposeTimeSlotsWhenOnlyTwoArePossible()
+	public void shouldTwoProposeTimeSlotsWhenOnlyTwoArePossibleForCourse()
 			throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
-		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(2));
+		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
 
-		List<TimeSlot> possibleTimeSlots = scheduleGenerator.proposeTimeSlotsForSectionForCourses(sectionMock, scheduleMock);
+		List<TimeSlot> possibleTimeSlots = scheduleGenerator.proposeTimeSlotsForSectionForLab(sectionMock, scheduleMock);
+
+		assertEquals(2, possibleTimeSlots.size());
+		verify(conflictDetectorMock, atLeast(2)).willSectionGenerateConflict(scheduleMock, sectionMock);
+	}
+
+	@Test
+	public void canProposeTimeSpotsForSectionForLab()
+			throws Exception {
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
+		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(10));
+
+		List<TimeSlot> possibleTimeSlots = scheduleGenerator.proposeTimeSlotsForSectionForLab(sectionMock, scheduleMock);
+
+		assertEquals(3, possibleTimeSlots.size());
+		verify(conflictDetectorMock, atLeast(3)).willSectionGenerateConflict(scheduleMock, sectionMock);
+	}
+
+	@Test(expected = Exception.class)
+	public void shouldThrowExceptionWhenNoPropositionPossibleForLab()
+			throws Exception {
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(true);
+
+		scheduleGenerator.proposeTimeSlotsForSectionForLab(sectionMock, scheduleMock);
+	}
+
+	@Test
+	public void shouldTwoProposeTimeSlotsWhenOnlyTwoArePossibleForLab()
+			throws Exception {
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
+		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
+
+		List<TimeSlot> possibleTimeSlots = scheduleGenerator.proposeTimeSlotsForSectionForLab(sectionMock, scheduleMock);
 
 		assertEquals(2, possibleTimeSlots.size());
 		verify(conflictDetectorMock, atLeast(2)).willSectionGenerateConflict(scheduleMock, sectionMock);
