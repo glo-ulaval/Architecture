@@ -177,10 +177,9 @@ public class ScheduleGeneratorIT extends ITTestBase {
 		scheduleGenerator.setAvailabilityRepository(availabilityRepository);
 		scheduleGenerator.setConflictDetector(conflictDetector);
 
-		List<Section> possibleSections = scheduleGenerator.proposeTimeSlotsForSection(glo2002Section, schedule);
+		List<TimeSlot> possibleTimeSlots = scheduleGenerator.proposeTimeSlotsForSectionForCourses(glo2002Section, schedule);
 
-		assertEquals(3, possibleSections.size());
-		assertEquals(glo2002Section.getNrc(), possibleSections.get(0).getNrc());
+		assertEquals(3, possibleTimeSlots.size());
 	}
 
 	@After

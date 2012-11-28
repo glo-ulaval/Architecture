@@ -49,13 +49,24 @@ public class Availability {
 		return AvailabilityLevel.Available;
 	}
 
-	public List<TimeSlot> generatePossibleTimeSlots(Integer timeSlotDuration) {
+	public List<TimeSlot> generatePossibleTimeSlotsForCourse(Integer timeSlotDuration) {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		possibleTimeSlots.addAll(generatePossibleTimeSlotForDay(monday, DayOfWeek.MONDAY, timeSlotDuration));
 		possibleTimeSlots.addAll(generatePossibleTimeSlotForDay(tuesday, DayOfWeek.TUESDAY, timeSlotDuration));
 		possibleTimeSlots.addAll(generatePossibleTimeSlotForDay(wednesday, DayOfWeek.WEDNESDAY, timeSlotDuration));
 		possibleTimeSlots.addAll(generatePossibleTimeSlotForDay(thursday, DayOfWeek.THURSDAY, timeSlotDuration));
 		possibleTimeSlots.addAll(generatePossibleTimeSlotForDay(friday, DayOfWeek.FRIDAY, timeSlotDuration));
+		return possibleTimeSlots;
+	}
+
+	public List<TimeSlot> generatePossibleTimeSlotsForLab(Integer timeSlotDuration) {
+		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
+		for (int i = 0; i <= friday.size() - timeSlotDuration; i++) {
+			if (friday.get(i) == AvailabilityLevel.Available && friday.get(i + 1) == AvailabilityLevel.Available
+					&& friday.get(i + 2) == AvailabilityLevel.Available) {
+				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), 2, DayOfWeek.FRIDAY));
+			}
+		}
 		return possibleTimeSlots;
 	}
 

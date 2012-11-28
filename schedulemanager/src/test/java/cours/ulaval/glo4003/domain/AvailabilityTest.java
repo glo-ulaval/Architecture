@@ -82,11 +82,20 @@ public class AvailabilityTest {
 
 	@Test
 	public void canGeneratePossibleTimeSlots() {
-		List<TimeSlot> possibleTimeSlots = availabilities.generatePossibleTimeSlots(3);
+		List<TimeSlot> possibleTimeSlots = availabilities.generatePossibleTimeSlotsForCourse(3);
 
 		assertFalse(possibleTimeSlots.isEmpty());
-		// assertEquals(17, possibleTimeSlots.size());
+		assertEquals(17, possibleTimeSlots.size());
 		assertEquals(3, (int) possibleTimeSlots.get(0).getDuration());
+	}
+
+	@Test
+	public void canGeneratePossibleTimeSlotsForLab() {
+		List<TimeSlot> possibleTimeSlots = availabilities.generatePossibleTimeSlotsForLab(2);
+
+		assertFalse(possibleTimeSlots.isEmpty());
+		assertEquals(2, (int) possibleTimeSlots.get(0).getDuration());
+		assertEquals(4, possibleTimeSlots.size());
 	}
 
 }

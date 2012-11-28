@@ -17,29 +17,28 @@ public class ScheduleGenerator {
 	@Inject
 	private ConflictDetector conflictDetector;
 
-	public List<Section> proposeTimeSlotsForSection(Section section, Schedule schedule)
+	public List<TimeSlot> proposeTimeSlotsForSectionForCourses(Section section, Schedule schedule)
 			throws Exception {
-		List<Section> possibleSections = new ArrayList<Section>();
+		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		Availability availability = availabilityRepository.findByIdul(section.getTeachers().get(0));
-		List<TimeSlot> courseTimeSlots = availability.generatePossibleTimeSlots(section.getTimeDedicated().getCourseHours());
-		while (possibleSections.size() < 3 && !courseTimeSlots.isEmpty()) {
+		List<TimeSlot> courseTimeSlots = availability.generatePossibleTimeSlotsForCourse(section.getTimeDedicated()
+				.getCourseHours());
+		while (possibleTimeSlots.size() < 3 && !courseTimeSlots.isEmpty()) {
 			int index = getRandomIndex(courseTimeSlots.size() - 1);
 			TimeSlot timeSlot = courseTimeSlots.get(index);
 			section.setCourseTimeSlots(Arrays.asList(timeSlot));
 			if (conflictDetector.willSectionGenerateConflict(schedule, section)) {
 				courseTimeSlots.remove(index);
-				section.setCourseTimeSlots(new ArrayList<TimeSlot>());
 			} else {
-				Section newSection = section.clone();
-				possibleSections.add(newSection);
+				possibleTimeSlots.add(timeSlot);
 				courseTimeSlots.remove(index);
-				section.setCourseTimeSlots(new ArrayList<TimeSlot>());
 			}
 		}
-		if (possibleSections.isEmpty()) {
-			throw new Exception("Impossible de proposer une plage horaire qui ne génère pas de conflit pour cette section");
+		if (possibleTimeSlots.isEmpty()) {
+			throw new Exception(
+					"Impossible de proposer une plage horaire de cours qui ne génère pas de conflit pour cette section");
 		}
-		return possibleSections;
+		return possibleTimeSlots;
 	}
 
 	private int getRandomIndex(int maximum) {
