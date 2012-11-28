@@ -52,27 +52,29 @@ public class CourseParser extends Parser {
 
 	public void addDescription() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		String description = text.split(" <br /> ")[0];
+		String description = text.split("<br />")[0];
+		description = description.trim();
 		course.setDescription(description);
 	}
 
 	public void addCredits() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		int credits = Integer.valueOf(text.split(" <br /> ")[1].split(",")[0]);
+		text = text.split("<br />")[1].split(",")[0];
+		int credits = Integer.valueOf(text.trim());
 		course.setCredits(credits);
 	}
 
 	public void addCycle() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		String cycle = text.split(" <br /> ")[5].split(" </span> ")[1].replace(" cycle", "");
+		String cycle = text.split("<br />")[6].trim().split("</span>")[1].trim().replace(" cycle", "");
 		course.setCycle(Cycle.valueOf(cycle));
 	}
 
 	public void addTimeDedicated() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		int courseHours = Integer.valueOf(text.split(" <br /> ")[2].split(",")[0]);
-		int laboHours = Integer.valueOf(text.split(" <br /> ")[3].split(",")[0]);
-		int otherHours = Integer.valueOf(text.split(" <br /> ")[4].split(",")[0]);
+		int courseHours = Integer.valueOf(text.split("<br />")[2].trim().split(",")[0]);
+		int laboHours = Integer.valueOf(text.split("<br />")[3].trim().split(",")[0]);
+		int otherHours = Integer.valueOf(text.split("<br />")[4].trim().split(",")[0]);
 
 		course.setTimeDedicated(new TimeDedicated(courseHours, laboHours, otherHours));
 	}
