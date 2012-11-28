@@ -14,11 +14,11 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 
 public class CourseParserIT {
 
+	private static final String A_COURSE_URL = "https://capsuleweb.ulaval.ca/pls/etprod7/bwckctlg.p_disp_course_detail?cat_term_in=201301&subj_code_in=GLO&crse_numb_in=2001";
 	private static final int A_COURSE_CREDITS = 3;
 	private static final String A_COURSE_ACRONYM = "GLO-2001";
 	private static final String A_COURSE_TITLE = "Systèmes d'exploitation pour ingénieurs";
 	private static final String A_COURSE_DESCRIPTION = "Historique et &eacute;volution. R&ocirc;les, composantes et fonctions d'un syst&egrave;me d'exploitation. Protection et performance d'un syst&egrave;me. Structures mat&eacute;rielles n&eacute;cessaires. Processus et allocation du CPU. Gestion de la m&eacute;moire et m&eacute;moire virtuelle. M&eacute;moire secondaire et cache. Gestion des entr&eacute;es/sorties. Syst&egrave;mes de fichiers. Coordination de processus et impasses. Programmation concurrente. &Eacute;tude de cas&nbsp;: UNIX, DOS, VMS, VM, WINDOWS.";
-	private static final String A_COURSE_URL = "https://capsuleweb.ulaval.ca/pls/etprod7/bwckctlg.p_disp_course_detail?cat_term_in=201301&subj_code_in=GLO&crse_numb_in=2001";
 	private static final String A_SECOND_PREREQUISITE_ACRONYM = "GIF-1001";
 	private static final String A_FIRST_PREREQUISITE_ACRONYM = "IFT-1002";
 

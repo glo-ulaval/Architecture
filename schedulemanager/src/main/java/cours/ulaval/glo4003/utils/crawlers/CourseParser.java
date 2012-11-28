@@ -59,6 +59,10 @@ public class CourseParser extends Parser {
 	public void addCredits() {
 		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
 		int credits = Integer.valueOf(text.split(" <br /> ")[1].split(",")[0]);
+		if (credits == 0) {
+			String creditsORString = text.split(" <br /> ")[1].split(",")[1];
+			credits = Integer.valueOf(creditsORString.split(" OR ")[1]);
+		}
 		course.setCredits(credits);
 	}
 
