@@ -67,3 +67,7 @@ body {
 .blue {
 	color : #2E64FE;
 }
+
+.loading {
+	margin:10px;
+}

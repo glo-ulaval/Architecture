@@ -72,8 +72,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
-	public ModelAndView scheduleView(@PathVariable String id, @PathVariable String view, Principal principal)
-			throws Exception {
+	public ModelAndView scheduleView(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
 
 		Schedule schedule = scheduleRepository.findById(id);
 		detectAndAddConflictsToSchedule(schedule);
@@ -83,6 +82,7 @@ public class ScheduleController {
 		if (view.contentEquals("calendar")) {
 			mv = new ModelAndView("schedulecalendar");
 			mv.addObject("schedule", convertToJson(calendarModel));
+			mv.addObject("id", schedule.getId());
 		} else {
 			mv = new ModelAndView("schedulelist");
 			mv.addObject("schedule", calendarModel);
@@ -102,8 +102,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView addSchedule()
-			throws Exception {
+	public ModelAndView addSchedule() throws Exception {
 		ModelAndView mv = new ModelAndView("addschedule");
 		mv.addObject("years", offeringRepository.findYears());
 
@@ -111,8 +110,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/add/{year}/{semester}", method = RequestMethod.GET)
-	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester)
-			throws Exception {
+	public ModelAndView addSchedule(@PathVariable String year, @PathVariable Semester semester) throws Exception {
 		Schedule schedule = new Schedule(scheduleRepository.getId(year, semester));
 		schedule.setYear(year);
 		schedule.setSemester(semester);
@@ -130,8 +128,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.POST)
 	public ModelAndView postSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@ModelAttribute("section") SectionModel section)
-			throws Exception {
+			@ModelAttribute("section") SectionModel section) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		schedule.add(section.convertToSection());
 		scheduleRepository.store(schedule);
@@ -185,9 +182,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
 	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section,
-			Principal principal)
-			throws Exception {
+			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 		ModelAndView mv = new ModelAndView("createschedule");
 		try {
 			Schedule schedule = scheduleRepository.findById(id);
@@ -209,10 +204,8 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.POST)
-	public ModelAndView postEditSectionAndReturnToLastView(@PathVariable String id, @PathVariable String year,
-			@PathVariable Semester semester, @PathVariable String sectionNrc, @PathVariable String view,
-			@ModelAttribute("section") SectionModel section, Principal principal)
-			throws Exception {
+	public ModelAndView postEditSectionAndReturnToLastView(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 
 		Schedule schedule = scheduleRepository.findById(id);
 
@@ -223,8 +216,7 @@ public class ScheduleController {
 		return scheduleView(id, view, principal);
 	}
 
-	private void updateSectionAndSaveToSchedule(String sectionNrc, SectionModel section, Schedule schedule)
-			throws Exception {
+	private void updateSectionAndSaveToSchedule(String sectionNrc, SectionModel section, Schedule schedule) throws Exception {
 		schedule.delete(sectionNrc);
 		section.setNrc(sectionNrc);
 		schedule.add(section.convertToSection());
@@ -233,12 +225,10 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay,
-			String newTimeStart, String duration, Principal principal)
-			throws Exception {
+	public ModelAndView updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
+			String duration, Principal principal) throws Exception {
 
-		TimeSlot newTimeSlot = new TimeSlot(new Time(getHour(newTimeStart), getMinutes(newTimeStart)), getDuration(duration),
-				getDayOfWeek(newDay));
+		TimeSlot newTimeSlot = new TimeSlot(new Time(getHour(newTimeStart), getMinutes(newTimeStart)), getDuration(duration), getDayOfWeek(newDay));
 
 		Time oldTmStart = new Time(getHour(oldTimeStart), getMinutes(oldTimeStart));
 
@@ -263,8 +253,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}/reuseschedule", method = RequestMethod.GET)
-	public ModelAndView reuseSchedule(@PathVariable String id, Principal principal)
-			throws Exception {
+	public ModelAndView reuseSchedule(@PathVariable String id, Principal principal) throws Exception {
 		ModelAndView mv = new ModelAndView("scheduleselection");
 
 		List<ScheduleInformationModel> scheduleModels = new ArrayList<ScheduleInformationModel>();
@@ -280,8 +269,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/{id}/reuseschedule/{oldid}", method = RequestMethod.GET)
-	public ModelAndView reuseSelectedSchedule(@PathVariable String id, @PathVariable String oldid, Principal principal)
-			throws Exception {
+	public ModelAndView reuseSelectedSchedule(@PathVariable String id, @PathVariable String oldid, Principal principal) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		Schedule selectedScheduleToReuse = scheduleRepository.findById(oldid);
 		schedule.copySectionsFromOtherSchedule(selectedScheduleToReuse);
@@ -351,8 +339,8 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/deletesection/{scheduleId}/{year}/{semester}/{sectionNrc}", method = RequestMethod.GET)
-	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc,
-			@PathVariable String year, @PathVariable Semester semester) {
+	public ModelAndView deleteSection(@PathVariable String scheduleId, @PathVariable String sectionNrc, @PathVariable String year,
+			@PathVariable Semester semester) {
 		ModelAndView mv = new ModelAndView("createschedule");
 
 		try {

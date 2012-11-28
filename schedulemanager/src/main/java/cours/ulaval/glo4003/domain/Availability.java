@@ -62,8 +62,7 @@ public class Availability {
 	public List<TimeSlot> generatePossibleTimeSlotsForLab(Integer timeSlotDuration) {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		for (int i = 0; i <= friday.size() - timeSlotDuration; i++) {
-			if (friday.get(i) == AvailabilityLevel.Available && friday.get(i + 1) == AvailabilityLevel.Available
-					&& friday.get(i + 2) == AvailabilityLevel.Available) {
+			if (friday.get(i) == AvailabilityLevel.Available && friday.get(i + 1) == AvailabilityLevel.Available) {
 				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), 2, DayOfWeek.FRIDAY));
 			}
 		}
