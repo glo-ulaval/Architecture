@@ -288,6 +288,8 @@ public class ScheduleController {
 		detectAndAddConflictsToSchedule(schedule);
 		CalendarModel calendarModel = new CalendarModel(schedule);
 
+		scheduleRepository.store(schedule);
+
 		ModelAndView mv;
 		mv = new ModelAndView("schedulelist");
 		mv.addObject("schedule", calendarModel);

@@ -38,7 +38,7 @@
 		</b> <br /> <br />
 		<div class="btn-group">
 			<a href="#" type="button" class="btn active">Liste</a> <a
-				href="calendar" type="button" class="btn">Calendrier</a>
+				href="/schedulemanager/schedule/${id}/calendar" type="button" class="btn">Calendrier</a>
 		</div>
 		<div class="schedule_details">
 			<c:url var="editsection" value="/schedule/editsection/${id}/${year}/${semester}"></c:url>
