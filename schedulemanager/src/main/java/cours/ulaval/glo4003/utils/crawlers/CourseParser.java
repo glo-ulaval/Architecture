@@ -13,14 +13,28 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 
 public class CourseParser extends Parser {
 
-	private static final String FULL_TITLE_SELECTOR = "table.datadisplaytable tbody tr td.nttitle";
-	private static final String DESCRIPTION_SELECTOR = "table.datadisplaytable tbody tr td.ntdefault";
+	private static final String FULL_TITLE_SELECTOR = "table.datadisplaytable tr td.nttitle";
+	private static final String DESCRIPTION_SELECTOR = "table.datadisplaytable tr td.ntdefault";
 	private static final String AND_PREREQUISITE_DELIMITER = "ET";
+
+	private String parsedDescription;
+	private String parsedTitle;
 
 	private Course course = new Course();
 
 	public CourseParser(String uri) throws Exception {
 		super(uri);
+		parseDescription();
+		parseTitle();
+	}
+
+	public boolean courseShouldBeAddedToCourseList() {
+		boolean shouldBeAdded = parsedDescription.contains("Heures de cours");
+		if (shouldBeAdded) {
+			shouldBeAdded = parsedTitle.contains("IFT") || parsedTitle.contains("GLO");
+		}
+
+		return shouldBeAdded;
 	}
 
 	public Course getCourse() {
@@ -39,30 +53,26 @@ public class CourseParser extends Parser {
 	}
 
 	public void addAcronym() {
-		String fullTitle = htmlParser.parse(document, FULL_TITLE_SELECTOR).first().ownText();
-		String acronym = fullTitle.split(" - ")[0].replace(" ", "-");
+		String acronym = parsedTitle.split(" - ")[0].replace(" ", "-");
 		course.setAcronym(acronym);
 	}
 
 	public void addTitle() {
-		String fullTitle = htmlParser.parse(document, FULL_TITLE_SELECTOR).first().ownText();
-		String stripTitle = fullTitle.split(" - ")[1];
+		String stripTitle = parsedTitle.split(" - ")[1];
 		course.setTitle(stripTitle);
 	}
 
 	public void addDescription() {
-		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		String description = text.split("<br />")[0];
+		String description = parsedDescription.split("<br />")[0];
 		description = description.trim();
 		course.setDescription(description);
 	}
 
 	public void addCredits() {
-		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		String creditsString = text.split("<br />")[1].split(",")[0];
+		String creditsString = parsedDescription.split("<br />")[1].split(",")[0];
 		int credits = Integer.valueOf(creditsString.trim());
 		if (credits == 0) {
-			String creditsORString = text.split("<br />")[1].split(",")[1];
+			String creditsORString = parsedDescription.split("<br />")[1].split(",")[1];
 			if (creditsORString.contains("OR")) {
 				credits = Integer.valueOf(creditsORString.split(" OR ")[1]);
 			} else {
@@ -73,16 +83,14 @@ public class CourseParser extends Parser {
 	}
 
 	public void addCycle() {
-		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		String cycle = text.split("<br />")[6].trim().split("</span>")[1].trim().replace(" cycle", "");
+		String cycle = parsedDescription.split("<br />")[6].trim().split("</span>")[1].trim().replace(" cycle", "");
 		course.setCycle(Cycle.valueOf(cycle));
 	}
 
 	public void addTimeDedicated() {
-		String text = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
-		int courseHours = Integer.valueOf(text.split("<br />")[2].trim().split(",")[0]);
-		int laboHours = Integer.valueOf(text.split("<br />")[3].trim().split(",")[0]);
-		int otherHours = Integer.valueOf(text.split("<br />")[4].trim().split(",")[0]);
+		int courseHours = Integer.valueOf(parsedDescription.split("<br />")[2].trim().split(",")[0]);
+		int laboHours = Integer.valueOf(parsedDescription.split("<br />")[3].trim().split(",")[0]);
+		int otherHours = Integer.valueOf(parsedDescription.split("<br />")[4].trim().split(",")[0]);
 
 		course.setTimeDedicated(new TimeDedicated(courseHours, laboHours, otherHours));
 	}
@@ -140,5 +148,13 @@ public class CourseParser extends Parser {
 	public CourseParser(HTMLLoader loader, HTMLParser parser) {
 		htmlLoader = loader;
 		htmlParser = parser;
+	}
+
+	public void parseDescription() {
+		parsedDescription = htmlParser.parse(document, DESCRIPTION_SELECTOR).first().html();
+	}
+
+	public void parseTitle() {
+		parsedTitle = htmlParser.parse(document, FULL_TITLE_SELECTOR).first().ownText();
 	}
 }
