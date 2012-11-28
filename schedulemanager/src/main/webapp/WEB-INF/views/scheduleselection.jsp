@@ -62,8 +62,8 @@
 							</c:choose>
 						</td>
 						<td class="centered">
-							<a class="btn btn-label" href="<c:url value="/${scheduleurl}/${id}/reuseschedure/${schedule.id}" />">
-								<i class="icon-list"></i> Ajouter
+							<a class="btn btn-label" href="<c:url value="/${scheduleurl}/${id}/reuseschedule/${schedule.id}" />">
+								<i class="icon-plus"></i> Ajouter
 							</a>
 						</td>
 					</tr>
