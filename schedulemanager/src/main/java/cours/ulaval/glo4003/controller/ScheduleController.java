@@ -21,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import cours.ulaval.glo4003.controller.model.CalendarModel;
 import cours.ulaval.glo4003.controller.model.ScheduleInformationModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.TimeSlotModel;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.ScheduleGenerator;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.Time;
@@ -53,6 +55,9 @@ public class ScheduleController {
 
 	@Inject
 	private ConflictDetector conflictDetector;
+
+	@Inject
+	private ScheduleGenerator generator;
 
 	private ObjectMapper mapper = new ObjectMapper();
 
@@ -122,6 +127,25 @@ public class ScheduleController {
 		mv.addObject("semester", semester);
 		mv.addObject("id", schedule.getId());
 		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/proposesection/{id}/{year}/{semester}", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView proposeSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
+			@ModelAttribute("section") SectionModel sectionModel) throws Exception {
+		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");
+
+		Schedule schedule = scheduleRepository.findById(id);
+		Section section = sectionModel.convertToSection();
+
+		List<TimeSlot> proposedSlots = generator.proposeTimeSlotsForSectionForCourses(section, schedule);
+		List<TimeSlotModel> proposedSlotsModels = new ArrayList<TimeSlotModel>();
+		for (TimeSlot slot : proposedSlots) {
+			proposedSlotsModels.add(new TimeSlotModel(slot));
+		}
+		mv.addObject("timeSlots", proposedSlotsModels);
 
 		return mv;
 	}

@@ -23,6 +23,10 @@ $(document).ready(function() {
 			$('.hours_other_div').show();
 		}
 	});
+	
+	$('#proposeCourses').click(function() {
+		alert('allo');
+	});
 
 });
 

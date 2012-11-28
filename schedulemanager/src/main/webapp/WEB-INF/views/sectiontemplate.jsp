@@ -36,6 +36,7 @@
 		<c:choose>
 			<c:when test="${!param.isdistance}">
 				<div class="span8" id="bordered">
+					<button id="proposeCourses" class="button button-primary">Proposer des heures</button>
 					<label class="span3 control-label">Temps consacré :</label>
 					<div class="span8 controls">
 						<div id="hour_group">

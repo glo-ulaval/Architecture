@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
+import cours.ulaval.glo4003.domain.ScheduleGenerator;
 import cours.ulaval.glo4003.domain.conflictdetection.ConcomittingCoursesFilter;
 import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
 import cours.ulaval.glo4003.domain.conflictdetection.CourseLevelFilter;
@@ -85,6 +86,11 @@ public class AppConfig {
 	@Bean
 	public ConflictDetector conflictDetector() {
 		return new ConflictDetector();
+	}
+
+	@Bean
+	public ScheduleGenerator scheduleGenerator() {
+		return new ScheduleGenerator();
 	}
 
 	@Bean
