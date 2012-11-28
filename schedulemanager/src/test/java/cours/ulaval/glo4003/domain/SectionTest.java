@@ -116,6 +116,26 @@ public class SectionTest {
 		assertEquals(courseAcronym, clonedSection.getCourseAcronym());
 	}
 
+	@Test
+	public void canTellIfASectionIsSupposedToHaveLabTimeSlot() {
+		TimeDedicated timeDedicated = new TimeDedicated(3, 2, 4);
+		section.setTimeDedicated(timeDedicated);
+
+		boolean result = section.isSupposedToHaveLab();
+
+		assertTrue(result);
+	}
+
+	@Test
+	public void canTellIfASectionIsNotSupposedToHaveLabTimeSlot() {
+		TimeDedicated timeDedicated = new TimeDedicated(3, 0, 6);
+		section.setTimeDedicated(timeDedicated);
+
+		boolean result = section.isSupposedToHaveLab();
+
+		assertFalse(result);
+	}
+
 	private Time generateTimeSlotStartTime() {
 		Time startTime = new Time(A_HOUR, A_MINUTE);
 		return startTime;
