@@ -25,12 +25,7 @@ public class Section {
 	private TimeSlot labTimeSlot;
 
 	public Section() {
-		try {
-			programSheetRepository = new XMLProgramSheetRepository();
-			courseRepository = new XMLCourseRepository();
-		} catch (Exception e) {
-
-		}
+		initializeRepositories();
 	}
 
 	public Section(String nrc, String group, String personInCharge, List<String> teachers, TeachMode teachMode,
@@ -46,12 +41,7 @@ public class Section {
 		this.courseTimeSlots = courseTimeSlots;
 		this.labTimeSlot = labTimeSlot;
 
-		try {
-			programSheetRepository = new XMLProgramSheetRepository();
-			courseRepository = new XMLCourseRepository();
-		} catch (Exception e) {
-
-		}
+		initializeRepositories();
 	}
 
 	public List<TimeSlot> getCoursesAndLabTimeSlots() {
@@ -89,6 +79,10 @@ public class Section {
 			areConcomitting = true;
 		}
 		return areConcomitting;
+	}
+
+	public boolean isSupposedToHaveLab() {
+		return (timeDedicated.getLabHours() > 0);
 	}
 
 	public Section clone() {
@@ -192,6 +186,15 @@ public class Section {
 
 	public void setLabTimeSlot(TimeSlot labTimeSlot) {
 		this.labTimeSlot = labTimeSlot;
+	}
+
+	private void initializeRepositories() {
+		try {
+			programSheetRepository = new XMLProgramSheetRepository();
+			courseRepository = new XMLCourseRepository();
+		} catch (Exception e) {
+
+		}
 	}
 
 	// WARNING - this method is for test purpose only

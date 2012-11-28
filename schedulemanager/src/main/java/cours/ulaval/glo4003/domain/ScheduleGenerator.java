@@ -21,18 +21,18 @@ public class ScheduleGenerator {
 			throws Exception {
 		List<Section> possibleSections = new ArrayList<Section>();
 		Availability availability = availabilityRepository.findByIdul(section.getTeachers().get(0));
-		List<TimeSlot> timeSlots = availability.generatePossibleTimeSlots(section.getTimeDedicated().getCourseHours());
-		while (possibleSections.size() < 3 && !timeSlots.isEmpty()) {
-			int index = getRandomIndex(timeSlots.size() - 1);
-			TimeSlot timeSlot = timeSlots.get(index);
+		List<TimeSlot> courseTimeSlots = availability.generatePossibleTimeSlots(section.getTimeDedicated().getCourseHours());
+		while (possibleSections.size() < 3 && !courseTimeSlots.isEmpty()) {
+			int index = getRandomIndex(courseTimeSlots.size() - 1);
+			TimeSlot timeSlot = courseTimeSlots.get(index);
 			section.setCourseTimeSlots(Arrays.asList(timeSlot));
 			if (conflictDetector.willSectionGenerateConflict(schedule, section)) {
-				timeSlots.remove(index);
+				courseTimeSlots.remove(index);
 				section.setCourseTimeSlots(new ArrayList<TimeSlot>());
 			} else {
 				Section newSection = section.clone();
 				possibleSections.add(newSection);
-				timeSlots.remove(index);
+				courseTimeSlots.remove(index);
 				section.setCourseTimeSlots(new ArrayList<TimeSlot>());
 			}
 		}

@@ -30,6 +30,7 @@ public class ScheduleGeneratorTest {
 		sectionMock = mock(Section.class);
 		when(sectionMock.getTimeDedicated()).thenReturn(timeDedicatedMock);
 		when(sectionMock.getTeachers()).thenReturn(Arrays.asList("A_TEACHER"));
+		when(sectionMock.isSupposedToHaveLab()).thenReturn(false);
 		conflictDetectorMock = mock(ConflictDetector.class);
 
 		availabilityMock = mock(Availability.class);
