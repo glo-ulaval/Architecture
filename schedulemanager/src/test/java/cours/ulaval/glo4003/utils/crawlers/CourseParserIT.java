@@ -22,11 +22,15 @@ public class CourseParserIT {
 	private static final String A_SECOND_PREREQUISITE_ACRONYM = "GIF-1001";
 	private static final String A_FIRST_PREREQUISITE_ACRONYM = "IFT-1002";
 
+	private static final String ANOTHER_COURSE_URL = "https://capsuleweb.ulaval.ca/pls/etprod7/bwckctlg.p_disp_course_detail?cat_term_in=201301&subj_code_in=GEL&crse_numb_in=1001";
+
 	private CourseParser courseParser;
+	private CourseParser specialCourseParser;
 
 	@Before
 	public void setUp() throws Exception {
 		courseParser = new CourseParser(A_COURSE_URL);
+		specialCourseParser = new CourseParser(ANOTHER_COURSE_URL);
 	}
 
 	@Test
@@ -85,5 +89,12 @@ public class CourseParserIT {
 
 		assertTrue(acronyms.contains(A_FIRST_PREREQUISITE_ACRONYM));
 		assertTrue(acronyms.contains(A_SECOND_PREREQUISITE_ACRONYM));
+	}
+
+	@Test
+	public void canParseSpecialCaseCredits() {
+		specialCourseParser.addCredits();
+		Course course = specialCourseParser.getCourse();
+		assertEquals(A_COURSE_CREDITS, course.getCredits());
 	}
 }
