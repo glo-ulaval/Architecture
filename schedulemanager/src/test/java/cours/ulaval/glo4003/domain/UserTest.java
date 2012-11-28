@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import cours.ulaval.glo4003.domain.notification.AbstractNotification;
+import cours.ulaval.glo4003.domain.notification.NewScheduleNotification;
+
 public class UserTest {
 
 	private static String IDUL = "brgaa";
@@ -12,12 +15,17 @@ public class UserTest {
 	private static String PASSWORD = "motdepasse";
 	private static Role ROLE = Role.ROLE_Directeur;
 	private static String WRONG_PASSWORD = "mauvaismotdepasse";
+	private static String VALID_EMAIL_ADRESS = "email@schedulemanager.com";
+	private static String INVALID_EMAIL_ADRESS = "herpetyderp";
+	private static AbstractNotification notification;
 
 	private User user;
 
 	@Before
 	public void setUp() {
 		user = new User(IDUL, NAME, PASSWORD, ROLE);
+		notification = new NewScheduleNotification("path");
+		user.addNotification(notification);
 	}
 
 	@Test
@@ -39,6 +47,26 @@ public class UserTest {
 	}
 
 	@Test
+	public void canVerifyInvalidEmailAdress() {
+		user.setEmailAdress(INVALID_EMAIL_ADRESS);
+
+		assertFalse(user.hasValidEmailAdress());
+	}
+
+	@Test
+	public void canVerifyEmptyEmailAdress() {
+
+		assertFalse(user.hasValidEmailAdress());
+	}
+
+	@Test
+	public void canVerifyValidEmailAdress() {
+		user.setEmailAdress(VALID_EMAIL_ADRESS);
+
+		assertTrue(user.hasValidEmailAdress());
+	}
+
+	@Test
 	public void canValidateCredentials() {
 
 		assertTrue(user.validateCredentials(PASSWORD));
@@ -55,5 +83,26 @@ public class UserTest {
 		user.addRole(Role.ROLE_Enseignant);
 
 		assertTrue(user.getRoles().contains(Role.ROLE_Enseignant));
+	}
+
+	@Test
+	public void canAddNotificationToUser() {
+
+		assertTrue(user.hasNotification());
+	}
+
+	@Test
+	public void canRemoveNotificationToUser() {
+		user.removeNotification(notification);
+
+		assertFalse(user.getNotifications().contains(notification));
+	}
+
+	@Test
+	public void cannotAddMoreThanOnceTheSameNotification() {
+		int numberOfNotifications = user.getNotifications().size();
+		user.addNotification(notification);
+
+		assertEquals(numberOfNotifications, user.getNotifications().size());
 	}
 }
