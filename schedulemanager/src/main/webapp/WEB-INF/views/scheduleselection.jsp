@@ -46,27 +46,29 @@
 					</tr>
 				</thead>
 				<c:forEach var="schedule" items="${schedules}">
-					<tr id="${schedule.id}">
-						<td class="span12">[${schedule.semester} ${schedule.year}] ${schedule.id}</td>
-						<td class="centered">
-							<c:choose>
-							      <c:when test="${schedule.score <= 300}">
-							      	<span class="badge badge-success">${schedule.score}</span>
-							      </c:when>
-    							  <c:when test="${schedule.score <= 600 && schedule.score > 300}">
-							      	<span class="badge badge-warning">${schedule.score}</span>
-							      </c:when>
-							      <c:otherwise>
-							      	<span class="badge badge-important">${schedule.score}</span>
-							      </c:otherwise>
-							</c:choose>
-						</td>
-						<td class="centered">
-							<a class="btn btn-label" href="<c:url value="/${scheduleurl}/${id}/reuseschedure/${schedule.id}" />">
-								<i class="icon-list"></i> Ajouter
-							</a>
-						</td>
-					</tr>
+					<c:if test="${id != schedule.id}">
+						<tr id="${schedule.id}">
+							<td class="span12">[${schedule.semester} ${schedule.year}] ${schedule.id}</td>
+							<td class="centered">
+								<c:choose>
+								      <c:when test="${schedule.score <= 300}">
+								      	<span class="badge badge-success">${schedule.score}</span>
+								      </c:when>
+	    							  <c:when test="${schedule.score <= 600 && schedule.score > 300}">
+								      	<span class="badge badge-warning">${schedule.score}</span>
+								      </c:when>
+								      <c:otherwise>
+								      	<span class="badge badge-important">${schedule.score}</span>
+								      </c:otherwise>
+								</c:choose>
+							</td>
+							<td class="centered">
+								<a class="btn btn-label" href="<c:url value="/${scheduleurl}/${id}/reuseschedule/${schedule.id}" />">
+									<i class="icon-plus"></i> Ajouter
+								</a>
+							</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</table>
 			

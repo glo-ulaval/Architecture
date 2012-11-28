@@ -73,7 +73,7 @@
 						</td>
 						<sec:authorize access="hasRole('ROLE_Responsable')">
 						<td class="centered">
-							<a class="btn btn-danger" href="<c:url value="/${scheduleurl}/delete/${schedule.id}/list" />">
+							<a class="btn btn-danger" href="<c:url value="/${scheduleurl}/delete/${schedule.id}" />">
 								<i class="icon-trash icon-white"></i>
 							</a>
 						</td>
