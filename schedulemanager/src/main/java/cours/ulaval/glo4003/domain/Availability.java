@@ -62,7 +62,7 @@ public class Availability {
 	public List<TimeSlot> generatePossibleTimeSlotsForLab(Integer timeSlotDuration) {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		for (int i = 0; i <= friday.size() - timeSlotDuration; i++) {
-			if (friday.get(i) == AvailabilityLevel.Available && friday.get(i + 1) == AvailabilityLevel.Available) {
+			if (isAvailableForDuration(timeSlotDuration, friday, i)) {
 				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), 2, DayOfWeek.FRIDAY));
 			}
 		}
@@ -120,11 +120,20 @@ public class Availability {
 	private List<TimeSlot> generatePossibleTimeSlotForDay(List<AvailabilityLevel> day, DayOfWeek dayOfWeek, int duration) {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		for (int i = 0; i <= day.size() - duration; i++) {
-			if (day.get(i) == AvailabilityLevel.Available && day.get(i + 1) == AvailabilityLevel.Available
-					&& day.get(i + 2) == AvailabilityLevel.Available) {
+			if (isAvailableForDuration(duration, day, i)) {
 				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), 3, dayOfWeek));
 			}
 		}
 		return possibleTimeSlots;
+	}
+
+	private boolean isAvailableForDuration(int duration, List<AvailabilityLevel> day, int index) {
+		boolean available = true;
+		for (int i = 0; i < duration; i++) {
+			if (day.get(index + i) != AvailabilityLevel.Available) {
+				available = false;
+			}
+		}
+		return available;
 	}
 }
