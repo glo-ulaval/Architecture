@@ -1,5 +1,6 @@
 package cours.ulaval.glo4003.config;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
@@ -97,6 +98,11 @@ public class AppConfig {
 	@Bean
 	public ModifiedSectionAspect modifiedSectionAspect() {
 		return new ModifiedSectionAspect();
+	}
+
+	@Bean
+	public ObjectMapper objectMapper() {
+		return new ObjectMapper();
 	}
 
 	@Bean
