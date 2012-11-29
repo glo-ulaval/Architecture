@@ -25,7 +25,22 @@ $(document).ready(function() {
 	});
 	
 	$('#proposeCourses').click(function() {
-		alert('allo');
+		var teachers = new Array();
+		$('.active .teachers').find('select option:selected').each(function () {
+			if ($.inArray($(this).val(), teachers) == -1) {
+				console.log($(this).val());
+				teachers.push($(this).val());
+			}
+        });
+		$.ajax({
+			type : "POST",
+			
+			url : '/schedulemanager/schedule/proposesection/'+ id + "/" + year + '/' + semester,
+			data : {
+				teachers : JSON.stringify(teachers),
+				courseHours : courseHours
+			},
+		});
 	});
 
 });
@@ -51,9 +66,8 @@ function addHours(teachmode, hours) {
 }
 
 function addTeacher(teachmode) {
-	var newDiv = $('<div/>', {
-		class : 'divteacher'
-	});
+	var newDiv = document.createElement('div');  	
+	newDiv.setAttribute('class', 'divteacher');
 	$('.teachersDropdown').first().clone().appendTo(newDiv);
 	var a = $('<a/>', {
 		class : 'btn btn-danger removeTeacher',
@@ -72,9 +86,9 @@ function addTeacher(teachmode) {
 }
 
 function removeTeacher(teachmode) {
-	var pane = $('#'+teachmode);
-	var teacher = pane.find('.teachers')[0];
-	var teachers = teacher.find('.divteacher');
+	var pane = document.getElementById(teachmode);
+	var teacher = pane.getElementsByClassName("teachers")[0]; 	
+	var teachers = teacher.getElementsByClassName('divteacher');
 	teacher.removeChild(teachers[teachers.length-1]);
 }
 

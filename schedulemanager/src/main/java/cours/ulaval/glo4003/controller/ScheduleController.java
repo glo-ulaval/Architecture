@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import cours.ulaval.glo4003.domain.ScheduleGenerator;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.Time;
+import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
@@ -133,12 +135,16 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/proposesection/{id}/{year}/{semester}", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView proposeSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@ModelAttribute("section") SectionModel sectionModel) throws Exception {
+	public ModelAndView proposeSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
+			int courseHours) throws Exception {
 		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");
 
 		Schedule schedule = scheduleRepository.findById(id);
-		Section section = sectionModel.convertToSection();
+		Section section = new Section();
+		List<String> teachersList = mapper.readValue(teachers, new TypeReference<List<String>>() {
+		});
+		section.setTeachers(teachersList);
+		section.setTimeDedicated(new TimeDedicated(courseHours, 0, 0));
 
 		List<TimeSlot> proposedSlots = generator.proposeTimeSlotsForSectionForCourses(section, schedule);
 		List<TimeSlotModel> proposedSlotsModels = new ArrayList<TimeSlotModel>();
