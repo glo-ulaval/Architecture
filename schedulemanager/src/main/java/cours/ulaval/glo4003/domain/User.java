@@ -3,7 +3,8 @@ package cours.ulaval.glo4003.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import cours.ulaval.glo4003.domain.notification.AbstractNotification;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class User {
 
@@ -15,7 +16,7 @@ public class User {
 	private String emailAdress = "";
 	private static final String EMAIL_VALIDATION_REGEX = "^[a-z0-9-]+(\\.[a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*\\.[a-z]{2,6}$";
 
-	private List<AbstractNotification> notifications = new ArrayList<AbstractNotification>();
+	private List<Notification> notifications = new ArrayList<Notification>();
 
 	public User() {
 
@@ -82,26 +83,36 @@ public class User {
 		return role;
 	}
 
-	public void addNotification(AbstractNotification notification) {
+	public void addNotification(Notification notification) {
 		if (!notifications.contains(notification)) {
 			notifications.add(notification);
 		}
 	}
 
-	public void removeNotification(AbstractNotification notification) {
+	public void removeNotification(Notification notification) {
 		notifications.remove(notification);
 	}
 
-	public List<AbstractNotification> getNotifications() {
+	public List<Notification> getNotifications() {
 		return notifications;
 	}
 
-	public void setNotifications(List<AbstractNotification> notifications) {
+	public void setNotifications(List<Notification> notifications) {
 		this.notifications = notifications;
 	}
 
 	public boolean hasNotification() {
 		return notifications.size() > 0;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 }

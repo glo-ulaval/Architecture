@@ -5,9 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import cours.ulaval.glo4003.domain.notification.AbstractNotification;
-import cours.ulaval.glo4003.domain.notification.NewScheduleNotification;
-
 public class UserTest {
 
 	private static String IDUL = "brgaa";
@@ -17,14 +14,15 @@ public class UserTest {
 	private static String WRONG_PASSWORD = "mauvaismotdepasse";
 	private static String VALID_EMAIL_ADRESS = "email@schedulemanager.com";
 	private static String INVALID_EMAIL_ADRESS = "herpetyderp";
-	private static AbstractNotification notification;
+	private static Notification notification;
+	private static final String A_PATH = "path";
 
 	private User user;
 
 	@Before
 	public void setUp() {
 		user = new User(IDUL, NAME, PASSWORD, ROLE);
-		notification = new NewScheduleNotification("path");
+		notification = new Notification(Notification.NEW_SCHEDULE, A_PATH);
 		user.addNotification(notification);
 	}
 

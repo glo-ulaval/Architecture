@@ -1,12 +1,25 @@
-package cours.ulaval.glo4003.domain.notification;
+package cours.ulaval.glo4003.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-public abstract class AbstractNotification {
+public class Notification {
 
-	protected String message;
-	protected String referencePath;
+	// Les messages des notifications
+	public static final String NEW_SCHEDULE = "Un nouvel horaire est disponible pour approbation.";
+	public static final String SECTION_MODIFIED = "Une de vos section(s) de cours a été modifiée.";
+
+	private String message;
+	private String path;
+
+	public Notification() {
+
+	}
+
+	public Notification(String message, String path) {
+		this.message = message;
+		this.path = path;
+	}
 
 	public String getMessage() {
 		return message;
@@ -17,11 +30,11 @@ public abstract class AbstractNotification {
 	}
 
 	public String getReferencePath() {
-		return referencePath;
+		return path;
 	}
 
 	public void setReferencePath(String referencePath) {
-		this.referencePath = referencePath;
+		this.path = referencePath;
 	}
 
 	@Override

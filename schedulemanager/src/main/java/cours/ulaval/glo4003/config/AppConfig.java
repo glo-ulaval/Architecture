@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import cours.ulaval.glo4003.aspect.ModifiedSectionAspect;
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
 import cours.ulaval.glo4003.domain.conflictdetection.ConcomittingCoursesFilter;
 import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
@@ -85,6 +86,11 @@ public class AppConfig {
 	@Bean
 	public ConflictDetector conflictDetector() {
 		return new ConflictDetector();
+	}
+
+	@Bean
+	public ModifiedSectionAspect modifiedSectionAspect() {
+		return new ModifiedSectionAspect();
 	}
 
 	@Bean

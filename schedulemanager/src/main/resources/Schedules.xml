@@ -137,9 +137,9 @@
                     </courseTimeSlots>
                     <group>A</group>
                     <nrc>87135</nrc>
-                    <personInCharge>LULAM</personInCharge>
+                    <personInCharge>LULAM50</personInCharge>
                     <teachMode>InCourse</teachMode>
-                    <teachers>LULAM</teachers>
+                    <teachers>LULAM50</teachers>
                     <timeDedicated>
                         <courseHours>3</courseHours>
                         <labHours>2</labHours>

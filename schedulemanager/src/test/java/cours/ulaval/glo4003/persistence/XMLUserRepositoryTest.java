@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import cours.ulaval.glo4003.domain.Notification;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.User;
 
@@ -65,14 +66,13 @@ public class XMLUserRepositoryTest {
 
 	@Test
 	public void canFindUserByIdul() throws Exception {
-
 		User utilisateur = new User("utilisateur", "Utilisateur", "pass", Role.ROLE_Usager);
+		utilisateur.setEmailAdress("asd@email.com");
+		utilisateur.addNotification(new Notification("message", "path"));
 
 		repository.store(utilisateur);
 
-		assertEquals(utilisateur.getIdul(), repository.findByIdul("utilisateur").getIdul());
-		assertEquals(utilisateur.getRoles(), repository.findByIdul("utilisateur").getRoles());
-		assertEquals(utilisateur.getName(), repository.findByIdul("utilisateur").getName());
+		assertTrue(utilisateur.equals(repository.findByIdul("utilisateur")));
 	}
 
 	@Test
