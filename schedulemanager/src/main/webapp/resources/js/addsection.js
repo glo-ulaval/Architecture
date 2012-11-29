@@ -24,30 +24,72 @@ $(document).ready(function() {
 		}
 	});
 	
+	
+	$('#enterManually').click(function() {
+		$('.active .enterManuallyResult').show();
+		$('.active #proposeCourses').hide();
+		$('.active #enterManually').hide();
+	});
+	
+	$('#enterManuallyLab').click(function() {
+		$('.active .lab').show();
+		$('.active #proposeLab').hide();
+		$('.active #enterManuallyLab').hide();
+	});
+	
 	$('#proposeCourses').click(function() {
-		var teachers = new Array();
-		$('.active .teachers').find('select option:selected').each(function () {
-			if ($.inArray($(this).val(), teachers) == -1) {
-				console.log($(this).val());
-				teachers.push($(this).val());
-			}
-        });
-		$.ajax({
-			type : "POST",
-			
-			url : '/schedulemanager/schedule/proposesection/'+ id + "/" + year + '/' + semester,
-			data : {
-				teachers : JSON.stringify(teachers),
-				courseHours : courseHours
-			},
-			success : function(data) {
-				console.log(data);
-				$('.active .proposedHours').html(data);
-			}
-		});
+		postTimeSlots(false);
+		$('#enterManually').hide();
+		$('#proposeCourses').hide();
+	});
+	
+	$('#proposeLab').click(function() {
+		postTimeSlots(true);
+		$('#enterManuallyLab').hide();
+		$('#proposeLab').hide();
 	});
 
 });
+
+function postTimeSlots(isLab) {
+	var teachers = new Array();
+	$('.active .teachers').find('select option:selected').each(function () {
+		if ($.inArray($(this).val(), teachers) == -1) {
+			console.log($(this).val());
+			teachers.push($(this).val());
+		}
+    });
+	var data;
+	var url;
+	if (isLab) {
+		url='/schedulemanager/schedule/proposelabsection/'+ id + "/" + year + '/' + semester;
+		data = {
+				teachers : JSON.stringify(teachers),
+				labHours : $('.active .hours_labo').val()
+			};
+	} else {
+		url='/schedulemanager/schedule/proposesection/'+ id + "/" + year + '/' + semester;
+		data = {
+				teachers : JSON.stringify(teachers),
+				courseHours : $('.active .hours_class').val()
+			};
+	}
+	
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : data,
+		success : function(data) {
+			if (isLab) {
+				$('.active .proposedHoursLab').show();
+				$('.active .proposedHoursLab').html(data);
+			} else {
+				$('.active .proposedHours').show();
+				$('.active .proposedHours').html(data);
+			}
+		}
+	});
+}
 
 function addHours(teachmode, hours) {
 	var element;

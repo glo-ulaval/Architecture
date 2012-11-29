@@ -16,6 +16,7 @@ import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 
 public class SectionModel {
+	public static final Map<DayOfWeek, String> inverseDaysAssociations;
 
 	private static final String VENDREDI = "Vendredi";
 	private static final String JEUDI = "Jeudi";
@@ -23,7 +24,6 @@ public class SectionModel {
 	private static final String MARDI = "Mardi";
 	private static final String LUNDI = "Lundi";
 	private static final Map<String, DayOfWeek> daysAssociations;
-	private static final Map<DayOfWeek, String> inverseDaysAssociations;
 	static {
 		Map<String, DayOfWeek> days = new HashMap<String, DayOfWeek>();
 		days.put(LUNDI, DayOfWeek.MONDAY);

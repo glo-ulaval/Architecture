@@ -11,7 +11,6 @@
 <link href="<c:url value="/resources/css/addsection.css" />"
 	rel="stylesheet">
 <script type="text/javascript">
-  var courseHours = ${course.timeDedicated.courseHours};
   var id = "${id}";
   var semester = "${semester}";
   var year = "${year}";

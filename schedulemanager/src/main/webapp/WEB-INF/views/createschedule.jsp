@@ -79,7 +79,7 @@
 							<tr id="${section.nrc}">
 								<td><b>${section.acronym} - ${section.nrc} -
 										${section.group}</b></td>
-								<c:url value="/schedule/editsection/${id}/${year}/${semester}/${section.nrc}"
+								<c:url value="/schedule/editsection/${id}/${year}/${semester}/${section.nrc}/list"
 									var="url" />
 								<c:url value="/schedule/deletesection/${id}/${year}/${semester}/${section.nrc}"
 									var="deleteurl" />

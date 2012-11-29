@@ -133,6 +133,29 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/proposelabsection/{id}/{year}/{semester}", method = RequestMethod.POST)
+	public ModelAndView proposeLabSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
+			int labHours) throws Exception {
+		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");
+
+		Schedule schedule = scheduleRepository.findById(id);
+		Section section = new Section();
+		List<String> teachersList = mapper.readValue(teachers, new TypeReference<List<String>>() {
+		});
+		section.setTeachers(teachersList);
+		section.setTimeDedicated(new TimeDedicated(0, labHours, 0));
+
+		List<TimeSlot> proposedSlots = generator.proposeTimeSlotsForSectionForLab(section, schedule);
+		List<TimeSlotModel> proposedSlotsModels = new ArrayList<TimeSlotModel>();
+		for (TimeSlot slot : proposedSlots) {
+			proposedSlotsModels.add(new TimeSlotModel(slot));
+		}
+		mv.addObject("timeSlots", proposedSlotsModels);
+		mv.addObject("isLab", true);
+
+		return mv;
+	}
+
 	@RequestMapping(value = "/proposesection/{id}/{year}/{semester}", method = RequestMethod.POST)
 	public ModelAndView proposeSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
 			int courseHours) throws Exception {
@@ -150,6 +173,7 @@ public class ScheduleController {
 		for (TimeSlot slot : proposedSlots) {
 			proposedSlotsModels.add(new TimeSlotModel(slot));
 		}
+		mv.addObject("isLab", false);
 		mv.addObject("timeSlots", proposedSlotsModels);
 
 		return mv;
