@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -24,6 +26,7 @@ import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.Offering;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.ScheduleGenerator;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.TeachMode;
@@ -62,6 +65,10 @@ public class ScheduleControllerTest {
 	private UserRepository mockedUserRepository;
 	@Mock
 	private ConflictDetector mockedConflictDetector;
+	@Mock
+	private ObjectMapper mapper;
+	@Mock
+	private ScheduleGenerator generator;
 
 	@InjectMocks
 	private ScheduleController controller;
@@ -119,8 +126,7 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleViewListReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void scheduleViewListReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.scheduleView(A_SCHEDULE_ID, "list", principal);
 
 		assertTrue(mv.getModel().get("schedule") instanceof CalendarModel);
@@ -128,17 +134,15 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleViewCalendarReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void scheduleViewCalendarReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.scheduleView(A_SCHEDULE_ID, "calendar", principal);
 
-		assertTrue(mv.getModel().get("schedule") instanceof String); // JSON_STRING
+		assertTrue(mv.getModel().containsKey("schedule"));
 		assertEquals("schedulecalendar", mv.getViewName());
 	}
 
 	@Test
-	public void scheduleByIdListViewReturnsTheCorrectModelWithSimpleConflict()
-			throws Exception {
+	public void scheduleByIdListViewReturnsTheCorrectModelWithSimpleConflict() throws Exception {
 		Time time = new Time(8, 30);
 		TimeSlot timeSlot = new TimeSlot(time, 2, DayOfWeek.TUESDAY);
 		Conflict conflict = new UnavailableTeacherConflict(A_SECTION_NRC, A_USERNAME, timeSlot);
@@ -151,8 +155,7 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void scheduleByIdListViewReturnsTheCorrectModelWithConflictWithTwoSlots()
-			throws Exception {
+	public void scheduleByIdListViewReturnsTheCorrectModelWithConflictWithTwoSlots() throws Exception {
 		Time time = new Time(8, 30);
 		TimeSlot firstTimeSlot = new TimeSlot(time, 2, DayOfWeek.TUESDAY);
 		Conflict conflict = new ConcomittingCoursesConflict(A_SECTION_NRC, A_SECTION_NRC, firstTimeSlot, firstTimeSlot);
@@ -165,16 +168,14 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void addScheduleReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void addScheduleReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.addSchedule();
 
 		assertEquals(mockedOfferingRepository.findYears(), mv.getModel().get("years"));
 	}
 
 	@Test
-	public void addScheduleWithYearReturnsTheCorrectModelAndView()
-			throws Exception {
+	public void addScheduleWithYearReturnsTheCorrectModelAndView() throws Exception {
 		ModelAndView mv = controller.addSchedule(A_YEAR, A_SEMESTER);
 
 		assertEquals(A_YEAR, mv.getModel().get("year"));
@@ -207,8 +208,7 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canEditASectionWithinListView()
-			throws Exception {
+	public void canEditASectionWithinListView() throws Exception {
 		SectionModel model = mock(SectionModel.class);
 		Principal principal = mock(Principal.class);
 		when(principal.getName()).thenReturn(AN_IDUL);
@@ -227,8 +227,7 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canPostASection()
-			throws Exception {
+	public void canPostASection() throws Exception {
 		SectionModel model = mock(SectionModel.class);
 		Section section = createSection();
 		when(model.convertToSection()).thenReturn(section);
@@ -249,8 +248,7 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canDeleteASection()
-			throws Exception {
+	public void canDeleteASection() throws Exception {
 		ModelAndView mv = controller.deleteSection(A_SCHEDULE_ID, A_SECTION_NRC, A_YEAR, A_SEMESTER);
 
 		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
@@ -266,16 +264,14 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canDeleteASchedule()
-			throws Exception {
+	public void canDeleteASchedule() throws Exception {
 		controller.deleteSchedule(A_SCHEDULE_ID);
 
 		verify(mockedScheduleRepository).delete(A_SCHEDULE_ID);
 	}
 
 	@Test
-	public void canSelectAScheduleToReuse()
-			throws Exception {
+	public void canSelectAScheduleToReuse() throws Exception {
 		ModelAndView mv = controller.reuseSchedule(A_SCHEDULE_ID, principal);
 
 		verify(mockedScheduleRepository).findAll();
@@ -284,8 +280,7 @@ public class ScheduleControllerTest {
 	}
 
 	@Test
-	public void canReuseASelectedSchedule()
-			throws Exception {
+	public void canReuseASelectedSchedule() throws Exception {
 		ModelAndView mv = controller.reuseSelectedSchedule(A_SCHEDULE_ID, SELECTED_SCHEDULE_ID, principal);
 
 		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
@@ -293,6 +288,28 @@ public class ScheduleControllerTest {
 		verify(schedule).copySectionsFromOtherSchedule(schedule);
 		assertTrue(mv.getModel().containsKey("schedule"));
 		assertEquals("schedulelist", mv.getViewName());
+	}
+
+	@Test
+	public void canProposeCourseSection() throws Exception {
+		String teachers = "teacher";
+		when(mapper.readValue(any(String.class), any(TypeReference.class))).thenReturn(Arrays.asList(teachers));
+		when(generator.proposeTimeSlotsForSectionForCourses(any(Section.class), any(Schedule.class))).thenReturn(new ArrayList<TimeSlot>());
+		ModelAndView mv = controller.proposeSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, teachers, 3);
+
+		assertEquals(false, mv.getModel().get("isLab"));
+		assertTrue(mv.getModel().containsKey("timeSlots"));
+	}
+
+	@Test
+	public void canProposeLabSection() throws Exception {
+		String teachers = "teacher";
+		when(mapper.readValue(any(String.class), any(TypeReference.class))).thenReturn(Arrays.asList(teachers));
+		when(generator.proposeTimeSlotsForSectionForLab(any(Section.class), any(Schedule.class))).thenReturn(new ArrayList<TimeSlot>());
+		ModelAndView mv = controller.proposeLabSection(A_SCHEDULE_ID, A_YEAR, A_SEMESTER, teachers, 3);
+
+		assertEquals(true, mv.getModel().get("isLab"));
+		assertTrue(mv.getModel().containsKey("timeSlots"));
 	}
 
 	private Section createSection() {

@@ -61,7 +61,8 @@ public class ScheduleController {
 	@Inject
 	private ScheduleGenerator generator;
 
-	private ObjectMapper mapper = new ObjectMapper();
+	@Inject
+	private ObjectMapper mapper;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
@@ -134,7 +135,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/proposelabsection/{id}/{year}/{semester}", method = RequestMethod.POST)
-	public ModelAndView proposeLabSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
+	public ModelAndView proposeLabSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
 			int labHours) throws Exception {
 		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");
 
@@ -145,19 +146,14 @@ public class ScheduleController {
 		section.setTeachers(teachersList);
 		section.setTimeDedicated(new TimeDedicated(0, labHours, 0));
 
-		List<TimeSlot> proposedSlots = generator.proposeTimeSlotsForSectionForLab(section, schedule);
-		List<TimeSlotModel> proposedSlotsModels = new ArrayList<TimeSlotModel>();
-		for (TimeSlot slot : proposedSlots) {
-			proposedSlotsModels.add(new TimeSlotModel(slot));
-		}
-		mv.addObject("timeSlots", proposedSlotsModels);
 		mv.addObject("isLab", true);
+		mv.addObject("timeSlots", getTimeSlotModels(generator.proposeTimeSlotsForSectionForLab(section, schedule)));
 
 		return mv;
 	}
 
 	@RequestMapping(value = "/proposesection/{id}/{year}/{semester}", method = RequestMethod.POST)
-	public ModelAndView proposeSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
+	public ModelAndView proposeSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
 			int courseHours) throws Exception {
 		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");
 
@@ -168,15 +164,19 @@ public class ScheduleController {
 		section.setTeachers(teachersList);
 		section.setTimeDedicated(new TimeDedicated(courseHours, 0, 0));
 
-		List<TimeSlot> proposedSlots = generator.proposeTimeSlotsForSectionForCourses(section, schedule);
-		List<TimeSlotModel> proposedSlotsModels = new ArrayList<TimeSlotModel>();
-		for (TimeSlot slot : proposedSlots) {
-			proposedSlotsModels.add(new TimeSlotModel(slot));
-		}
 		mv.addObject("isLab", false);
-		mv.addObject("timeSlots", proposedSlotsModels);
+		mv.addObject("timeSlots", getTimeSlotModels(generator.proposeTimeSlotsForSectionForCourses(section, schedule)));
 
 		return mv;
+	}
+
+	private List<TimeSlotModel> getTimeSlotModels(List<TimeSlot> timeSlots) {
+		List<TimeSlotModel> slotsModels = new ArrayList<TimeSlotModel>();
+		for (TimeSlot slot : timeSlots) {
+			slotsModels.add(new TimeSlotModel(slot));
+		}
+
+		return slotsModels;
 	}
 
 	@RequestMapping(value = "/addsection/{id}/{year}/{semester}", method = RequestMethod.POST)
