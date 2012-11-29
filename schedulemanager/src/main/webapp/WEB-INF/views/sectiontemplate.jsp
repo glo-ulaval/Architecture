@@ -57,13 +57,16 @@
 								value="${course.timeDedicated.otherHours}">
 						</div>
 					</div>
+					<a id="proposeCourses" class="btn btn-info pull-right">Proposer des heures de cours</a>
+          <a id="enterManually" class="btn btn-info pull-right">Entrer manuellement</a>
 				</div>
+				<div class="span8 proposedHours" id="bordered" style="display:none;"></div>
 				<c:if test="${course.timeDedicated.courseHours == 0}"><div class="hours_class_div" style="display: none;"></c:if>
 				<c:if test="${course.timeDedicated.courseHours > 0}"><div class="hours_class_div" style="display: block;"></c:if>
-					<div class="span8" id="bordered">
+					<div class="span8 enterManuallyResult" id="bordered" style="display:none;">
 						<label class="span3 control-label">Heures en classe :</label>
 						<div class="span9 controls">
-							<div class="btn-group" data-toggle="buttons-radio">
+							<div class="btn-group sessionButtons" data-toggle="buttons-radio">
 								<button type="button" class="btn btn-info active"
 									onClick=addHours("${param.teachmode}",1)>1 séance</button>
 								<button type="button" class="btn btn-info" onClick=addHours("${param.teachmode}",2)>2
@@ -77,8 +80,8 @@
 									<option>Mercredi</option>
 									<option>Jeudi</option>
 									<option>Vendredi</option></select><input type="text" placeholder="HH:MM"
-									class="input-small" name="timeSlotStarts" /> &agrave; <input
-									type="text" placeholder="HH:MM" class="input-small"
+									class="input-small startingHourCourse" name="timeSlotStarts" /> &agrave; <input
+									type="text" placeholder="HH:MM" class="input-small endHourCourse"
 									name="timeSlotEnds" /> <br />
 							</div>
 						</div>
@@ -86,21 +89,24 @@
 				</div>
 				<c:if test="${course.timeDedicated.labHours == 0}"><div class="hours_labo_div" style="display: none;"></c:if>
 				<c:if test="${course.timeDedicated.labHours > 0}"><div class="hours_labo_div" style="display: block;"></c:if>
+					<div class="span8 proposedHoursLab" id="bordered" style="display:none;"></div>
 					<div class="span8" id="bordered">
 						<label class="span3 control-label">Heures en labo/travail
 							dirigé :</label>
-						<div class="span8 controls">
+						<div class="span8 controls lab" style="display: none;">
 							<div class="hoursLab">
 								<select class="input-medium labDay" name="labDay"><option>Lundi</option>
 									<option>Mardi</option>
 									<option>Mercredi</option>
 									<option>Jeudi</option>
 									<option>Vendredi</option></select> <input type="text"
-									placeholder="HH:MM" class="input-small"
+									placeholder="HH:MM" class="input-small startingHourLab"
 									name="laboTimeSlotStart"> à <input type="text"
-									placeholder="HH:MM" class="input-small" name="laboTimeSlotEnd">
+									placeholder="HH:MM" class="input-small endHourLab" name="laboTimeSlotEnd">
 							</div>
 						</div>
+					<a id="proposeLab" class="btn btn-info pull-right">Proposer des heures de labo</a>
+           <a id="enterManuallyLab" class="btn btn-info pull-right">Entrer manuellement</a>
 					</div>
 				</div>
 			</c:when>

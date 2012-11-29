@@ -7,6 +7,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.aspect.ModifiedSectionAspect;
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
+import cours.ulaval.glo4003.domain.ScheduleGenerator;
 import cours.ulaval.glo4003.domain.conflictdetection.ConcomittingCoursesFilter;
 import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
 import cours.ulaval.glo4003.domain.conflictdetection.CourseLevelFilter;
@@ -88,6 +89,11 @@ public class AppConfig {
 		return new ConflictDetector();
 	}
 
+	@Bean
+	public ScheduleGenerator scheduleGenerator() {
+		return new ScheduleGenerator();
+	}
+	
 	@Bean
 	public ModifiedSectionAspect modifiedSectionAspect() {
 		return new ModifiedSectionAspect();

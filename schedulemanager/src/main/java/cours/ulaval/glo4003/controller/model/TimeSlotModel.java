@@ -16,7 +16,7 @@ public class TimeSlotModel {
 	public TimeSlotModel(TimeSlot timeSlot) {
 		this.startTime = timeSlot.getStartTime().toString();
 		this.endTime = timeSlot.getEndTime().toString();
-		this.dayOfWeek = timeSlot.getDayOfWeek().toString();
+		this.dayOfWeek = SectionModel.inverseDaysAssociations.get(timeSlot.getDayOfWeek());
 		this.duration = timeSlot.getDuration();
 	}
 

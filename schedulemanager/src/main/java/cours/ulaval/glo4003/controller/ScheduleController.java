@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,11 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 import cours.ulaval.glo4003.controller.model.CalendarModel;
 import cours.ulaval.glo4003.controller.model.ScheduleInformationModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
+import cours.ulaval.glo4003.controller.model.TimeSlotModel;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
+import cours.ulaval.glo4003.domain.ScheduleGenerator;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.Time;
+import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
@@ -53,6 +57,9 @@ public class ScheduleController {
 
 	@Inject
 	private ConflictDetector conflictDetector;
+
+	@Inject
+	private ScheduleGenerator generator;
 
 	private final ObjectMapper mapper = new ObjectMapper();
 
@@ -82,6 +89,7 @@ public class ScheduleController {
 		if (view.contentEquals("calendar")) {
 			mv = new ModelAndView("schedulecalendar");
 			mv.addObject("schedule", convertToJson(calendarModel));
+			mv.addObject("id", schedule.getId());
 		} else {
 			mv = new ModelAndView("schedulelist");
 			mv.addObject("schedule", calendarModel);
@@ -121,6 +129,52 @@ public class ScheduleController {
 		mv.addObject("semester", semester);
 		mv.addObject("id", schedule.getId());
 		mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/proposelabsection/{id}/{year}/{semester}", method = RequestMethod.POST)
+	public ModelAndView proposeLabSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
+			int labHours) throws Exception {
+		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");
+
+		Schedule schedule = scheduleRepository.findById(id);
+		Section section = new Section();
+		List<String> teachersList = mapper.readValue(teachers, new TypeReference<List<String>>() {
+		});
+		section.setTeachers(teachersList);
+		section.setTimeDedicated(new TimeDedicated(0, labHours, 0));
+
+		List<TimeSlot> proposedSlots = generator.proposeTimeSlotsForSectionForLab(section, schedule);
+		List<TimeSlotModel> proposedSlotsModels = new ArrayList<TimeSlotModel>();
+		for (TimeSlot slot : proposedSlots) {
+			proposedSlotsModels.add(new TimeSlotModel(slot));
+		}
+		mv.addObject("timeSlots", proposedSlotsModels);
+		mv.addObject("isLab", true);
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/proposesection/{id}/{year}/{semester}", method = RequestMethod.POST)
+	public ModelAndView proposeSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
+			int courseHours) throws Exception {
+		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");
+
+		Schedule schedule = scheduleRepository.findById(id);
+		Section section = new Section();
+		List<String> teachersList = mapper.readValue(teachers, new TypeReference<List<String>>() {
+		});
+		section.setTeachers(teachersList);
+		section.setTimeDedicated(new TimeDedicated(courseHours, 0, 0));
+
+		List<TimeSlot> proposedSlots = generator.proposeTimeSlotsForSectionForCourses(section, schedule);
+		List<TimeSlotModel> proposedSlotsModels = new ArrayList<TimeSlotModel>();
+		for (TimeSlot slot : proposedSlots) {
+			proposedSlotsModels.add(new TimeSlotModel(slot));
+		}
+		mv.addObject("isLab", false);
+		mv.addObject("timeSlots", proposedSlotsModels);
 
 		return mv;
 	}
@@ -226,7 +280,6 @@ public class ScheduleController {
 	@ResponseBody
 	public ModelAndView updateSection(@PathVariable String id, String nrc, String oldDay, String oldTimeStart, String newDay, String newTimeStart,
 			String duration, Principal principal) throws Exception {
-		System.out.println("UPPPPPPPPPDAAAAAAAAAAAATEEEEEEEEEEEE----------------------");
 		TimeSlot newTimeSlot = new TimeSlot(new Time(getHour(newTimeStart), getMinutes(newTimeStart)), getDuration(duration), getDayOfWeek(newDay));
 
 		Time oldTmStart = new Time(getHour(oldTimeStart), getMinutes(oldTimeStart));

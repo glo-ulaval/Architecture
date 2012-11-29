@@ -23,8 +23,73 @@ $(document).ready(function() {
 			$('.hours_other_div').show();
 		}
 	});
+	
+	
+	$('#enterManually').click(function() {
+		$('.active .enterManuallyResult').show();
+		$('.active #proposeCourses').hide();
+		$('.active #enterManually').hide();
+	});
+	
+	$('#enterManuallyLab').click(function() {
+		$('.active .lab').show();
+		$('.active #proposeLab').hide();
+		$('.active #enterManuallyLab').hide();
+	});
+	
+	$('#proposeCourses').click(function() {
+		postTimeSlots(false);
+		$('#enterManually').hide();
+		$('#proposeCourses').hide();
+	});
+	
+	$('#proposeLab').click(function() {
+		postTimeSlots(true);
+		$('#enterManuallyLab').hide();
+		$('#proposeLab').hide();
+	});
 
 });
+
+function postTimeSlots(isLab) {
+	var teachers = new Array();
+	$('.active .teachers').find('select option:selected').each(function () {
+		if ($.inArray($(this).val(), teachers) == -1) {
+			console.log($(this).val());
+			teachers.push($(this).val());
+		}
+    });
+	var data;
+	var url;
+	if (isLab) {
+		url='/schedulemanager/schedule/proposelabsection/'+ id + "/" + year + '/' + semester;
+		data = {
+				teachers : JSON.stringify(teachers),
+				labHours : $('.active .hours_labo').val()
+			};
+	} else {
+		url='/schedulemanager/schedule/proposesection/'+ id + "/" + year + '/' + semester;
+		data = {
+				teachers : JSON.stringify(teachers),
+				courseHours : $('.active .hours_class').val()
+			};
+	}
+	
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : data,
+		success : function(data) {
+			if (isLab) {
+				$('.active .proposedHoursLab').show();
+				$('.active .proposedHoursLab').html(data);
+			} else {
+				$('.active .proposedHours').show();
+				$('.active .proposedHours').html(data);
+			}
+		}
+	});
+}
 
 function addHours(teachmode, hours) {
 	var element;
@@ -47,9 +112,8 @@ function addHours(teachmode, hours) {
 }
 
 function addTeacher(teachmode) {
-	var newDiv = $('<div/>', {
-		class : 'divteacher'
-	});
+	var newDiv = document.createElement('div');  	
+	newDiv.setAttribute('class', 'divteacher');
 	$('.teachersDropdown').first().clone().appendTo(newDiv);
 	var a = $('<a/>', {
 		class : 'btn btn-danger removeTeacher',
@@ -68,9 +132,9 @@ function addTeacher(teachmode) {
 }
 
 function removeTeacher(teachmode) {
-	var pane = $('#'+teachmode);
-	var teacher = pane.find('.teachers')[0];
-	var teachers = teacher.find('.divteacher');
+	var pane = document.getElementById(teachmode);
+	var teacher = pane.getElementsByClassName("teachers")[0]; 	
+	var teachers = teacher.getElementsByClassName('divteacher');
 	teacher.removeChild(teachers[teachers.length-1]);
 }
 
