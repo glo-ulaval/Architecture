@@ -59,6 +59,7 @@
 					</div>
 					<a id="proposeCourses" class="btn btn-info pull-right">Proposer des heures</a>
 				</div>
+				<div class="proposedHours"></div>
 				<c:if test="${course.timeDedicated.courseHours == 0}"><div class="hours_class_div" style="display: none;"></c:if>
 				<c:if test="${course.timeDedicated.courseHours > 0}"><div class="hours_class_div" style="display: block;"></c:if>
 					<div class="span8" id="bordered">

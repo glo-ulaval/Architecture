@@ -134,7 +134,6 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/proposesection/{id}/{year}/{semester}", method = RequestMethod.POST)
-	@ResponseBody
 	public ModelAndView proposeSectionPost(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester, String teachers,
 			int courseHours) throws Exception {
 		ModelAndView mv = new ModelAndView("partialViews/proposedCourse");

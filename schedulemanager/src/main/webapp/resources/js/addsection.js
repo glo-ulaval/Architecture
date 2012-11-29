@@ -40,6 +40,10 @@ $(document).ready(function() {
 				teachers : JSON.stringify(teachers),
 				courseHours : courseHours
 			},
+			success : function(data) {
+				console.log(data);
+				$('.active .proposedHours').html(data);
+			}
 		});
 	});
 
