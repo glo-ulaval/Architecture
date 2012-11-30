@@ -40,6 +40,10 @@ body {
 	text-transform: capitalize;
 }
 
+.brightyellow {
+  background-color : #FFFF00;
+}
+
 .yellow {
 	background-color : #FFD078;
 }
