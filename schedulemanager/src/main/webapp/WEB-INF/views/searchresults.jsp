@@ -24,7 +24,7 @@
 				<div class="hero-unit">
 					<h1>Résultats de recherche</h1>
 				</div>
-				<h4>${fn:length(courses)} résultats de recherche pour
+				<h4>${fn:length(courses)} résultat<c:if test="${fn:length(courses)} > 1">s</c:if> de recherche pour
 					"${keywords}".</h4>
 				<c:url var="courseurl" value="/course/"></c:url>
 				<c:forEach var="course" items="${courses}">

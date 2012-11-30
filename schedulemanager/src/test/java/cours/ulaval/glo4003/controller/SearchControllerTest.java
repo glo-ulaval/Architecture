@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.ModelAndView;
 
+import cours.ulaval.glo4003.controller.model.CourseModel;
 import cours.ulaval.glo4003.domain.Course;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 
@@ -44,7 +45,7 @@ public class SearchControllerTest {
 	public void controllerReturnsCorrectModelAndViewWhenCourseDoesntContainKeyword() throws Exception {
 		ModelAndView mv = controller.search("toto");
 
-		List<Course> courses = (List<Course>) mv.getModel().get("courses");
+		List<CourseModel> courses = (List<CourseModel>) mv.getModel().get("courses");
 		assertEquals(0, courses.size());
 	}
 
@@ -54,7 +55,7 @@ public class SearchControllerTest {
 
 		ModelAndView mv = controller.search(A_KEYWORD);
 
-		List<Course> courses = (List<Course>) mv.getModel().get("courses");
+		List<CourseModel> courses = (List<CourseModel>) mv.getModel().get("courses");
 		assertEquals(1, courses.size());
 	}
 
@@ -62,7 +63,7 @@ public class SearchControllerTest {
 	public void controllerCanCorrectlyHighlightWords() throws Exception {
 		ModelAndView mv = controller.search(A_KEYWORD);
 
-		Course course = ((List<Course>) mv.getModel().get("courses")).get(0);
+		CourseModel course = ((List<CourseModel>) mv.getModel().get("courses")).get(0);
 		assertEquals(course.getDescription(), "This is <span class=\"brightyellow\">description</span>");
 	}
 
