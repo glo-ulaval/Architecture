@@ -9,16 +9,16 @@
 				</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-					   <c:choose>
-					   <c:when test="${not empty user.idul}">
-					   <li><a href="<c:url value="/logout" />">Accueil</a></li>
-					   </c:when>
-					   <c:otherwise>
-            <li><a href="/schedulemanager">Accueil</a></li>
-					   </c:otherwise>
-					   </c:choose>
+						<c:choose>
+							<c:when test="${not empty user.idul}">
+								<li><a href="<c:url value="/logout" />">Accueil</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/schedulemanager">Accueil</a></li>
+							</c:otherwise>
+						</c:choose>
 						<c:if test="${not empty user.idul}">
-						  <c:url var="menu" value="/menu"></c:url>
+							<c:url var="menu" value="/menu"></c:url>
 							<li><a href="${menu}">Menu</a></li>
 						</c:if>
 						<li><a href="#">À propos</a></li>
@@ -26,18 +26,20 @@
 					</ul>
 					<c:url var="profileUrl" value="/profile/${user.idul}"></c:url>
 					<c:if test="${not empty user.idul}">
-            <div class="floatRight">
-              <a class="btn btn-info profil" href="${profileUrl}"><b>Modifier mon profil</b></a>
-            </div>
+						<div class="floatRight">
+							<a class="btn btn-info profil" href="${profileUrl}"><b>Modifier
+									mon profil</b></a>
+						</div>
 						<div class="btn-group floatRight">
-							<a class="btn btn-inverse"> <i
-								class="icon-user icon-white"></i><b class="username">${user.idul}</b>
+							<a class="btn btn-inverse"> <i class="icon-user icon-white"></i><b
+								class="username">${user.idul}</b>
 							</a> <a class="btn btn-inverse" href="<c:url value="/logout" />">
 								<i class="icon-remove icon-white"></i>
 							</a>
 						</div>
 					</c:if>
 				</div>
+
 			</div>
 		</div>
 	</div>

@@ -21,11 +21,21 @@
 <body>
 	<c:import url="header.jsp" />
 	<div class="container">
-	 <c:if test="${confirm == true}">
-		<div class="alert alert-info">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-			<p>Vous êtes connecté en tant que : ${user.name}</p>
+		<c:url value="/search" var="searchurl" />
+		<div class="pull-right">
+			<form action="${searchurl}" method=POST scope="request">
+				<input type="text" name="keywords"
+					scope="request">
+					<input type="submit" class="btn btn-inverse"
+    value="Rechercher" style="margin-top:-10px;">
+			</form>
 		</div>
+		<br /> <br />
+		<c:if test="${confirm == true}">
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<p>Vous êtes connecté en tant que : ${user.name}</p>
+			</div>
 		</c:if>
 		<div class="hero-unit">
 			<h1>Menu</h1>
