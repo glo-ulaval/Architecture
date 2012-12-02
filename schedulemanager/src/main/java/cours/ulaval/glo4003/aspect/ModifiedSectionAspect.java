@@ -30,7 +30,7 @@ public class ModifiedSectionAspect {
 		Section section = schedule.getSections().get(nrc);
 
 		for (String teacherIdul : section.getTeachers()) {
-			String path = "/editsection/" + id + "/" + schedule.getYear() + "/" + schedule.getSemester().toString() + "/" + nrc + "/calendar";
+			String path = "schedule/editsection/" + id + "/" + schedule.getYear() + "/" + schedule.getSemester().toString() + "/" + nrc + "/calendar";
 			User user = userRepository.findByIdul(teacherIdul);
 			user.addNotification(new Notification(Notification.SECTION_MODIFIED, path));
 

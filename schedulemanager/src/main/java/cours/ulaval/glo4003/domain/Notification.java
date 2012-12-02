@@ -29,12 +29,12 @@ public class Notification {
 		this.message = message;
 	}
 
-	public String getReferencePath() {
+	public String getPath() {
 		return path;
 	}
 
-	public void setReferencePath(String referencePath) {
-		this.path = referencePath;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	@Override

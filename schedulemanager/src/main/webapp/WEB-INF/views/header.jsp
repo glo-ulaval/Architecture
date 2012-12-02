@@ -41,22 +41,11 @@
 								<i class="icon-remove icon-white"></i>
 							</a>
 						</div>				
-						<c:choose>
-							<c:when test="${true}">
-								<div class="btn-group floatRight">
-									<a id="notificationBtn" class="btn btn-inverse" href="#">
-										<i class="icon-comment icon-white"></i>
-									</a>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="btn-group floatRight">
-									<a id="notificationBtnDisabled" class="btn btn-inverse disabled">
-										<i class="icon-comment"></i>
-									</a>
-								</div>
-							</c:otherwise>
-						</c:choose>
+						<div class="btn-group floatRight">
+							<a id="notificationBtn" class="btn btn-inverse disabled">
+								<i class="icon-comment"></i>
+							</a>
+						</div>
 					</c:if>
 				</div>
 
