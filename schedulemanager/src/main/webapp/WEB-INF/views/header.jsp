@@ -1,4 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript">
+	var idul = "${user.idul}";
+</script>
+<script type="text/javascript" src="<c:url value="/resources/js/header.js" />" /></script>
 <header>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
@@ -36,7 +40,23 @@
 							</a> <a class="btn btn-inverse" href="<c:url value="/logout" />">
 								<i class="icon-remove icon-white"></i>
 							</a>
-						</div>
+						</div>				
+						<c:choose>
+							<c:when test="${true}">
+								<div class="btn-group floatRight">
+									<a id="notificationBtn" class="btn btn-inverse" href="#">
+										<i class="icon-comment icon-white"></i>
+									</a>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="btn-group floatRight">
+									<a id="notificationBtnDisabled" class="btn btn-inverse disabled">
+										<i class="icon-comment"></i>
+									</a>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</c:if>
 				</div>
 
