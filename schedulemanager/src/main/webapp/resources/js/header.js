@@ -39,12 +39,8 @@ function enableNotificationBtn() {
 
 function convertData(data) {
 	var msg = "";
-	console.log(data);
 	for (var i = 0; i < data.length; i++) {
 		msg += '<a href="' + data[i].path + '">' + data[i].message + '</a><br/>';
 	}
-	
-	console.log(msg);
-	
 	return msg;
 }

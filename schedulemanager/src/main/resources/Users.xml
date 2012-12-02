@@ -48,15 +48,11 @@
         <name>Thierry Eude</name>
         <notifications>
             <message>Une de vos section(s) de cours a été modifiée.</message>
-            <path>/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90659/calendar</path>
+            <path>/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90659/calendar</path>
         </notifications>
         <notifications>
             <message>Une de vos section(s) de cours a été modifiée.</message>
-            <path>/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111/calendar</path>
-        </notifications>
-        <notifications>
-            <message>Une de vos section(s) de cours a été modifiée.</message>
-            <path>/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111/calendar</path>
+            <path>/schedulemanager/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111/calendar</path>
         </notifications>
         <password>pass</password>
         <roles>ROLE_Usager</roles>
