@@ -22,6 +22,7 @@ public class UserModelTest {
 		assertEquals(user.getIdul(), model.getIdul());
 		assertEquals(user.getName(), model.getName());
 		assertEquals(user.getPassword(), model.getPassword());
+		assertEquals(user.getEmailAddress(), model.getEmailAddress());
 	}
 
 	@Test

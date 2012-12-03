@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <users>
   <users>
-    <emailAdress>lulam50@ulaval.ca</emailAdress>
+    <emailAddress>lulam50@ulaval.ca</emailAddress>
     <idul>LULAM50</idul>
     <name>Luc Lamontagne</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>chche6@ulaval.ca</emailAdress>
+    <emailAddress>chche6@ulaval.ca</emailAddress>
     <idul>CHCHE6</idul>
     <name>Christian Chevalier</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>mppar3@ulaval.ca</emailAdress>
+    <emailAddress>mppar3@ulaval.ca</emailAddress>
     <idul>MPPAR3</idul>
     <name>Marc-Philippe Parent</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>glo4003.architecture@gmail.com</emailAdress>
+    <emailAddress>glo4003.architecture@gmail.com</emailAddress>
     <idul>NADUC33</idul>
     <name>Nancy Duchesneau</name>
     <password>pass</password>
     <roles>ROLE_Responsable</roles>
   </users>
   <users>
-    <emailAdress>phgig4@ulaval.ca</emailAdress>
+    <emailAddress>phgig4@ulaval.ca</emailAddress>
     <idul>PHGIG4</idul>
     <name>Philippe Giguère</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>bemou@ulaval.ca</emailAdress>
+    <emailAddress>bemou@ulaval.ca</emailAddress>
     <idul>BEMOU</idul>
     <name>Bernard Moulin</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>nataw@ulaval.ca</emailAdress>
+    <emailAddress>nataw@ulaval.ca</emailAddress>
     <idul>NATAW</idul>
     <name>Nadia Tawbi</name>
     <password>pass</password>
@@ -51,21 +51,21 @@
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>robea130@ulaval.ca</emailAdress>
+    <emailAddress>robea130@ulaval.ca</emailAddress>
     <idul>ROBEA130</idul>
     <name>Ronald Beaubrun</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>admin@gmail.com</emailAdress>
+    <emailAddress>admin@gmail.com</emailAddress>
     <idul>ADMIN</idul>
     <name>Administrateur</name>
     <password>admin</password>
     <roles>ROLE_Administrateur</roles>
   </users>
   <users>
-    <emailAdress>theud@ulaval.ca</emailAdress>
+    <emailAddress>theud@ulaval.ca</emailAddress>
     <idul>THEUD</idul>
     <name>Thierry Eude</name>
     <notifications>
@@ -82,56 +82,56 @@
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>pates@ulaval.ca</emailAdress>
+    <emailAddress>pates@ulaval.ca</emailAddress>
     <idul>PATES16</idul>
     <name>Pascal Tesson</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>fabob@ulaval.ca</emailAdress>
+    <emailAddress>fabob@ulaval.ca</emailAddress>
     <idul>FABOB</idul>
     <name>Félix-Antoine Bourbonnais-Bigras</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>momej@ulaval.ca</emailAdress>
+    <emailAddress>momej@ulaval.ca</emailAddress>
     <idul>MOMEJ</idul>
     <name>Mohamed Mejri</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>nabel@ulaval.ca</emailAdress>
+    <emailAddress>nabel@ulaval.ca</emailAddress>
     <idul>NABEL</idul>
     <name>Nadir Belkhiter</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>dadub100@ulaval.ca</emailAdress>
+    <emailAddress>dadub100@ulaval.ca</emailAddress>
     <idul>DADUB100</idul>
     <name>Danny Dubé</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>abali@ulaval.ca</emailAdress>
+    <emailAddress>abali@ulaval.ca</emailAddress>
     <idul>ABALI</idul>
     <name>Abderrahim Alikacem</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>delau@ulaval.ca</emailAdress>
+    <emailAddress>delau@ulaval.ca</emailAddress>
     <idul>DELAU</idul>
     <name>Denis Laurendeau</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAdress>eloud@ulaval.ca</emailAdress>
+    <emailAddress>eloud@ulaval.ca</emailAddress>
     <idul>ELOUD</idul>
     <name>Elisabeth Oudar</name>
     <password>pass</password>

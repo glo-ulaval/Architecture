@@ -8,9 +8,10 @@ import cours.ulaval.glo4003.domain.User;
 
 public class UserModel {
 
-	private String idul;
-	private String name;
-	private String password;
+	private String idul = "";
+	private String name = "";
+	private String password = "";
+	private String emailAddress = "";
 	private List<String> roles = new ArrayList<String>();
 
 	public UserModel() {
@@ -21,6 +22,7 @@ public class UserModel {
 		idul = user.getIdul();
 		name = user.getName();
 		password = user.getPassword();
+		emailAddress = user.getEmailAddress();
 		for (Role role : user.getRoles()) {
 			roles.add(role.toString().replace("ROLE_", ""));
 		}
@@ -31,6 +33,7 @@ public class UserModel {
 		user.setIdul(idul);
 		user.setName(name);
 		user.setPassword(password);
+		user.setEmailAddress(emailAddress);
 		for (String role : roles) {
 			user.addRole(Role.valueOf("ROLE_" + role));
 		}
@@ -69,4 +72,13 @@ public class UserModel {
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
 }

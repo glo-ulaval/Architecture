@@ -46,7 +46,7 @@ public class UserTest {
 
 	@Test
 	public void canVerifyInvalidEmailAdress() {
-		user.setEmailAdress(INVALID_EMAIL_ADRESS);
+		user.setEmailAddress(INVALID_EMAIL_ADRESS);
 
 		assertFalse(user.hasValidEmailAdress());
 	}
@@ -59,7 +59,7 @@ public class UserTest {
 
 	@Test
 	public void canVerifyValidEmailAdress() {
-		user.setEmailAdress(VALID_EMAIL_ADRESS);
+		user.setEmailAddress(VALID_EMAIL_ADRESS);
 
 		assertTrue(user.hasValidEmailAdress());
 	}

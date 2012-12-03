@@ -71,6 +71,7 @@ public class UserController {
 		User user = userRepository.findByIdul(idul);
 		user.setName(model.getName());
 		user.setPassword(model.getPassword());
+		user.setEmailAddress(model.getEmailAddress());
 		try {
 			userRepository.store(user);
 			mv.addObject("error", ControllerMessages.SUCCESS);

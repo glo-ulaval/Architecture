@@ -13,7 +13,7 @@ public class User {
 	private String password;
 	private List<Role> role = new ArrayList<Role>();
 
-	private String emailAdress = "";
+	private String emailAddress = "";
 	private static final String EMAIL_VALIDATION_REGEX = "^[a-z0-9-]+(\\.[a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*\\.[a-z]{2,6}$";
 
 	private List<Notification> notifications = new ArrayList<Notification>();
@@ -61,16 +61,16 @@ public class User {
 		this.role = role;
 	}
 
-	public String getEmailAdress() {
-		return emailAdress;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public void setEmailAdress(String emailAdress) {
-		this.emailAdress = emailAdress;
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 	public boolean hasValidEmailAdress() {
-		return emailAdress.matches(EMAIL_VALIDATION_REGEX);
+		return emailAddress.matches(EMAIL_VALIDATION_REGEX);
 	}
 
 	public void addRole(Role role) {
