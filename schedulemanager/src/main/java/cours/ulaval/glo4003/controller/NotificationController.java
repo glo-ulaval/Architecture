@@ -4,9 +4,11 @@ import javax.inject.Inject;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cours.ulaval.glo4003.domain.Notification;
 import cours.ulaval.glo4003.domain.User;
@@ -39,6 +41,23 @@ public class NotificationController {
 		msg += "]";
 
 		return msg;
+	}
+
+	@RequestMapping(value = "/{idul}/{id}", method = RequestMethod.GET)
+	public ModelAndView handleNotification(@PathVariable int id, @PathVariable String idul) throws Exception {
+		User user = userRepository.findByIdul(idul);
+
+		// for (Notification notification : user.getNotifications()) {
+		//
+		// if (notification.getId() == id) {
+		// user.removeNotification(notification);
+		// userRepository.store(user);
+		// return new ModelAndView("redirect:" + notification.getPath());
+		// }
+		// }
+		ModelAndView mv = new ModelAndView("menu");
+		mv.addObject("error", "L'usager ou la notification sont introuvables. Veuillez contacter Jonathan Rochette");
+		return mv;
 	}
 
 	private String convertToJson(Notification notification) {

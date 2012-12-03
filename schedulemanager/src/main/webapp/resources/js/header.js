@@ -40,7 +40,7 @@ function enableNotificationBtn() {
 function convertData(data) {
 	var msg = "";
 	for (var i = 0; i < data.length; i++) {
-		msg += '<a href="' + data[i].path + '">' + data[i].message + '</a><br/>';
+		msg += '<a href="/schedulemanager/notification/' + idul + '/' + data[i].id + '">' + data[i].message + '</a><br/>';
 	}
 	return msg;
 }
