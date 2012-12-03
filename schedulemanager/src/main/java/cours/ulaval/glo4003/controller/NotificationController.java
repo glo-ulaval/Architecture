@@ -47,14 +47,13 @@ public class NotificationController {
 	public ModelAndView handleNotification(@PathVariable int id, @PathVariable String idul) throws Exception {
 		User user = userRepository.findByIdul(idul);
 
-		// for (Notification notification : user.getNotifications()) {
-		//
-		// if (notification.getId() == id) {
-		// user.removeNotification(notification);
-		// userRepository.store(user);
-		// return new ModelAndView("redirect:" + notification.getPath());
-		// }
-		// }
+		for (Notification notification : user.getNotifications()) {
+			if (notification.getId() == id) {
+				user.removeNotification(notification);
+				userRepository.store(user);
+				return new ModelAndView("redirect:" + notification.getPath());
+			}
+		}
 		ModelAndView mv = new ModelAndView("menu");
 		mv.addObject("error", "L'usager ou la notification sont introuvables. Veuillez contacter Jonathan Rochette");
 		return mv;
