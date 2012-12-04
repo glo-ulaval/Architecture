@@ -10,6 +10,9 @@ import javax.inject.Inject;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,7 @@ import cours.ulaval.glo4003.controller.model.CalendarModel;
 import cours.ulaval.glo4003.controller.model.ScheduleInformationModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.controller.model.TimeSlotModel;
+import cours.ulaval.glo4003.domain.Notification;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.ScheduleGenerator;
@@ -63,6 +67,9 @@ public class ScheduleController {
 
 	@Inject
 	private ObjectMapper mapper;
+
+	@Inject
+	JavaMailSenderImpl mailSender;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
@@ -411,6 +418,32 @@ public class ScheduleController {
 		}
 
 		return mv;
+	}
+
+	@RequestMapping(value = "/{id}/sendEmail", method = RequestMethod.POST)
+	@ResponseBody
+	public String sendNewScheduleReadyNotificationEmail(@PathVariable String id) {
+		for (String idul : scheduleRepository.findById(id).getConcernedUsers()) {
+			User user = userRepository.findByIdul(idul);
+			if (user.hasValidEmailAdress()) {
+				sendEmailTo(user.getEmailAddress());
+			}
+		}
+
+		return "success";
+	}
+
+	private void sendEmailTo(String emailAddress) {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("noreply@gmail.com");
+		msg.setTo(emailAddress);
+		msg.setSubject("Schedule Manager - Nouvel horaire");
+		msg.setText(Notification.NEW_SCHEDULE);
+		try {
+			mailSender.send(msg);
+		} catch (MailException ex) {
+			System.err.println(ex.getMessage());
+		}
 	}
 
 	private List<SectionModel> getSections(Schedule schedule) {

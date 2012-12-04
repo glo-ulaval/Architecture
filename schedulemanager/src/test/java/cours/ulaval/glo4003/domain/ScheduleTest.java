@@ -3,7 +3,9 @@ package cours.ulaval.glo4003.domain;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -123,5 +125,17 @@ public class ScheduleTest {
 		verify(sectionMock).getCourseAcronym();
 		verify(oldSectionMock).getCourseAcronym();
 		assertEquals(1, newSchedule.getSectionsList().size());
+	}
+
+	@Test
+	public void canGetCorrectConcernedUsers() {
+		List<String> teachers = new ArrayList<String>();
+		teachers.add("THEUD");
+		teachers.add("NATAW");
+
+		when(sectionMock.getTeachers()).thenReturn(teachers);
+		schedule.add(sectionMock);
+
+		assertEquals(teachers.size(), schedule.getConcernedUsers().size());
 	}
 }

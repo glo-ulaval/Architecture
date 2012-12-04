@@ -143,6 +143,18 @@ public class Schedule {
 		}
 	}
 
+	public List<String> getConcernedUsers() {
+		List<String> concernedUsers = new ArrayList<String>();
+		for (Section section : sections.values()) {
+			for (String idul : section.getTeachers()) {
+				if (!concernedUsers.contains(idul)) {
+					concernedUsers.add(idul);
+				}
+			}
+		}
+		return concernedUsers;
+	}
+
 	// DO NOT USE -- for tests only
 	public void setOfferingRepository(OfferingRepository offeringRepository) {
 		this.offeringRepository = offeringRepository;
