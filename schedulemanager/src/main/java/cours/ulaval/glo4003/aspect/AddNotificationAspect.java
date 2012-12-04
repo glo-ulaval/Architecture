@@ -14,7 +14,7 @@ import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
 import cours.ulaval.glo4003.domain.repository.UserRepository;
 
 @Aspect
-public class ModifiedSectionAspect {
+public class AddNotificationAspect {
 
 	@Inject
 	ScheduleRepository scheduleRepository;
@@ -38,4 +38,5 @@ public class ModifiedSectionAspect {
 			userRepository.store(user);
 		}
 	}
+
 }

@@ -3,10 +3,12 @@ package cours.ulaval.glo4003.config;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import cours.ulaval.glo4003.aspect.ModifiedSectionAspect;
+import cours.ulaval.glo4003.aspect.AddNotificationAspect;
+import cours.ulaval.glo4003.aspect.SendEmailOnModifyAspect;
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
 import cours.ulaval.glo4003.domain.ScheduleGenerator;
 import cours.ulaval.glo4003.domain.conflictdetection.ConcomittingCoursesFilter;
@@ -26,6 +28,7 @@ import cours.ulaval.glo4003.persistence.XMLOfferingRepository;
 import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
 import cours.ulaval.glo4003.persistence.XMLScheduleRepository;
 import cours.ulaval.glo4003.persistence.XMLUserRepository;
+import cours.ulaval.glo4003.utils.ConfigManager;
 
 @Configuration
 public class AppConfig {
@@ -94,15 +97,34 @@ public class AppConfig {
 	public ScheduleGenerator scheduleGenerator() {
 		return new ScheduleGenerator();
 	}
-	
+
 	@Bean
-	public ModifiedSectionAspect modifiedSectionAspect() {
-		return new ModifiedSectionAspect();
+	public AddNotificationAspect modifiedSectionAspect() {
+		return new AddNotificationAspect();
+	}
+
+	@Bean
+	public SendEmailOnModifyAspect sendEmailOnModifyAspect() {
+		return new SendEmailOnModifyAspect();
 	}
 
 	@Bean
 	public ObjectMapper objectMapper() {
 		return new ObjectMapper();
+	}
+
+	@Bean
+	public JavaMailSenderImpl mailSender() {
+		ConfigManager configManager = ConfigManager.getConfigManager();
+
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost(configManager.getSMTPServerHost());
+		mailSender.setPort(configManager.getSMTPServerPort());
+		mailSender.setUsername(configManager.getSMTPServerUsername());
+		mailSender.setPassword(configManager.getSMTPServerPassword());
+		mailSender.setProtocol(configManager.getSMTPServerProtocol());
+
+		return mailSender;
 	}
 
 	@Bean

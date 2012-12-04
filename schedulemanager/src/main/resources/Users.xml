@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <users>
   <users>
-    <emailAddress>lulam50@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>LULAM50</idul>
     <name>Luc Lamontagne</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>chche6@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>CHCHE6</idul>
     <name>Christian Chevalier</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>mppar3@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>MPPAR3</idul>
     <name>Marc-Philippe Parent</name>
     <password>pass</password>
@@ -29,21 +29,21 @@
     <roles>ROLE_Responsable</roles>
   </users>
   <users>
-    <emailAddress>phgig4@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>PHGIG4</idul>
     <name>Philippe Giguère</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>bemou@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>BEMOU</idul>
     <name>Bernard Moulin</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>nataw@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>NATAW</idul>
     <name>Nadia Tawbi</name>
     <password>pass</password>
@@ -51,21 +51,21 @@
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>robea130@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>ROBEA130</idul>
     <name>Ronald Beaubrun</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>admin@gmail.com</emailAddress>
+   <emailAddress></emailAddress>
     <idul>ADMIN</idul>
     <name>Administrateur</name>
     <password>admin</password>
     <roles>ROLE_Administrateur</roles>
   </users>
   <users>
-    <emailAddress>theud@ulaval.ca</emailAddress>
+    <emailAddress>glo4003.architecture@gmail.com</emailAddress>
     <idul>THEUD</idul>
     <name>Thierry Eude</name>
     <notifications>
@@ -82,56 +82,56 @@
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>pates@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>PATES16</idul>
     <name>Pascal Tesson</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>fabob@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>FABOB</idul>
     <name>Félix-Antoine Bourbonnais-Bigras</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>momej@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>MOMEJ</idul>
     <name>Mohamed Mejri</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>nabel@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>NABEL</idul>
     <name>Nadir Belkhiter</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>dadub100@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>DADUB100</idul>
     <name>Danny Dubé</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>abali@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>ABALI</idul>
     <name>Abderrahim Alikacem</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>delau@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>DELAU</idul>
     <name>Denis Laurendeau</name>
     <password>pass</password>
     <roles>ROLE_Enseignant</roles>
   </users>
   <users>
-    <emailAddress>eloud@ulaval.ca</emailAddress>
+    <emailAddress></emailAddress>
     <idul>ELOUD</idul>
     <name>Elisabeth Oudar</name>
     <password>pass</password>
