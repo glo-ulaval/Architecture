@@ -60,9 +60,6 @@ public class ScheduleController {
 	private UserRepository userRepository;
 
 	@Inject
-	private ConflictDetector conflictDetector;
-
-	@Inject
 	private ScheduleGenerator generator;
 
 	@Inject
@@ -70,6 +67,9 @@ public class ScheduleController {
 
 	@Inject
 	JavaMailSenderImpl mailSender;
+
+	@Inject
+	private ConflictDetector conflictDetector;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule() {
@@ -88,9 +88,7 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
 	public ModelAndView scheduleView(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
-
 		Schedule schedule = scheduleRepository.findById(id);
-		detectAndAddConflictsToSchedule(schedule);
 		CalendarModel calendarModel = new CalendarModel(schedule);
 
 		ModelAndView mv;
@@ -226,7 +224,6 @@ public class ScheduleController {
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.GET)
 	public ModelAndView editSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc, @PathVariable String view) {
-
 		ModelAndView mv = new ModelAndView("editsection");
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
@@ -247,7 +244,6 @@ public class ScheduleController {
 		try {
 			Schedule schedule = scheduleRepository.findById(id);
 
-			detectAndAddConflictsToSchedule(schedule);
 			updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
 			mv.addObject("error", ControllerMessages.SUCCESS);
@@ -268,9 +264,6 @@ public class ScheduleController {
 			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 
 		Schedule schedule = scheduleRepository.findById(id);
-
-		detectAndAddConflictsToSchedule(schedule);
-
 		updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
 		return scheduleView(id, view, principal);
@@ -293,20 +286,25 @@ public class ScheduleController {
 
 		List<TimeSlot> courseTimeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCourseTimeSlots();
 
+		Schedule schedule = scheduleRepository.findById(id);
 		for (TimeSlot slot : courseTimeSlots) {
 			if (getDayOfWeekAbreviation(slot) == oldDay || slot.getStartTime().equals(oldTmStart)) {
 				courseTimeSlots.remove(slot);
 				courseTimeSlots.add(newTimeSlot);
-				scheduleRepository.findById(id).getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
+				schedule.getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
 			}
 		}
 
 		TimeSlot labTimeSlot = scheduleRepository.findById(id).getSections().get(nrc).getLabTimeSlot();
 		if (labTimeSlot != null) {
 			if (getDayOfWeekAbreviation(labTimeSlot) == oldDay || labTimeSlot.getStartTime().equals(oldTmStart)) {
-				scheduleRepository.findById(id).getSections().get(nrc).setLabTimeSlot(newTimeSlot);
+				schedule.getSections().get(nrc).setLabTimeSlot(newTimeSlot);
 			}
 		}
+
+		schedule.clearConflicts();
+		conflictDetector.detectConflict(schedule);
+		scheduleRepository.store(schedule);
 
 		return scheduleView(id, "calendar", principal);
 	}
@@ -332,7 +330,6 @@ public class ScheduleController {
 		Schedule schedule = scheduleRepository.findById(id);
 		Schedule selectedScheduleToReuse = scheduleRepository.findById(oldid);
 		schedule.copySectionsFromOtherSchedule(selectedScheduleToReuse);
-		detectAndAddConflictsToSchedule(schedule);
 		CalendarModel calendarModel = new CalendarModel(schedule);
 
 		scheduleRepository.store(schedule);
@@ -454,13 +451,4 @@ public class ScheduleController {
 		return sections;
 	}
 
-	private void detectAndAddConflictsToSchedule(Schedule schedule) {
-		schedule.clearConflicts();
-		conflictDetector.detectConflict(schedule);
-	}
-
-	// WARNING : FOR TEST PURPOSE ONLY
-	public void setConflictDetector(ConflictDetector conflictDetector) {
-		this.conflictDetector = conflictDetector;
-	}
 }

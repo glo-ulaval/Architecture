@@ -31,7 +31,7 @@ public class SendEmailOnModifyAspect {
 	UserRepository userRepository;
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.updateSection(..))")
-	private void sendEmailOnModifySection(JoinPoint pjp) throws Exception {
+	private void onUpdateSection(JoinPoint pjp) throws Exception {
 		String id = pjp.getArgs()[0].toString();
 		String nrc = pjp.getArgs()[1].toString();
 
@@ -44,7 +44,7 @@ public class SendEmailOnModifyAspect {
 	}
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..))")
-	private void addNotificationOnUpdate(JoinPoint pjp) throws Exception {
+	private void onEditSectionAndRedirect(JoinPoint pjp) throws Exception {
 		String id = pjp.getArgs()[0].toString();
 		String nrc = pjp.getArgs()[3].toString();
 

@@ -26,7 +26,7 @@ public class AddNotificationAspect {
 	UserRepository userRepository;
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.updateSection(..))")
-	private void addNotificationOnModify(JoinPoint pjp) throws Exception {
+	private void onUpdateSection(JoinPoint pjp) throws Exception {
 		String id = pjp.getArgs()[0].toString();
 		String nrc = pjp.getArgs()[1].toString();
 		Schedule schedule = scheduleRepository.findById(id);
@@ -35,12 +35,26 @@ public class AddNotificationAspect {
 		addNotification(id, nrc, schedule.getYear(), schedule.getSemester().toString(), section.getTeachers());
 	}
 
-	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..))")
-	private void addNotificationOnUpdate(JoinPoint pjp) throws Exception {
+	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSection(..))")
+	private void onPostEditSection(JoinPoint pjp) throws Exception {
 		String id = pjp.getArgs()[0].toString();
 		String nrc = pjp.getArgs()[3].toString();
 		String year = pjp.getArgs()[1].toString();
 		Semester semester = (Semester) pjp.getArgs()[2];
+
+		Schedule schedule = scheduleRepository.findById(id);
+		Section section = schedule.getSections().get(nrc);
+
+		addNotification(id, nrc, year, semester.toString(), section.getTeachers());
+	}
+
+	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..))")
+	private void onEditSectionAndRedirect(JoinPoint pjp) throws Exception {
+		String id = pjp.getArgs()[0].toString();
+		String nrc = pjp.getArgs()[3].toString();
+		String year = pjp.getArgs()[1].toString();
+		Semester semester = (Semester) pjp.getArgs()[2];
+
 		Schedule schedule = scheduleRepository.findById(id);
 		Section section = schedule.getSections().get(nrc);
 
