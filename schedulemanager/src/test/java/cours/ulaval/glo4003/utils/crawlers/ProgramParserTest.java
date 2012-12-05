@@ -18,6 +18,7 @@ public class ProgramParserTest {
 	private HTMLParser htmlParser = mock(HTMLParser.class);
 	private HTMLLoader htmlLoader = mock(HTMLLoader.class);
 	private ProgramParser parser;
+	private static final String COURSE_URL = "https://capsuleweb.ulaval.ca/pls/etprod7/bwckctlg.p_disp_course_detail?cat_term_in=201201&subj_code_in=GLO&crse_numb_in=1001";
 
 	@Before
 	public void setUp() throws Exception {
@@ -32,12 +33,13 @@ public class ProgramParserTest {
 		String firstCourseLink = coursesList.get(0);
 
 		assertEquals(1, coursesList.size());
-		assertTrue(firstCourseLink.contains(ProgramParser.BASE_URL));
+		assertTrue(firstCourseLink.contains(COURSE_URL));
 	}
 
 	private Elements createElements() {
 		Elements elements = new Elements();
 		Element element = new Element(Tag.valueOf("a"), "");
+		element.text("GLO-1001");
 		elements.add(element);
 
 		return elements;
