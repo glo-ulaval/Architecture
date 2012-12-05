@@ -20,6 +20,7 @@ public class Schedule {
 	private String personInCharge;
 	private List<Conflict> conflicts = new ArrayList<Conflict>();
 	private Integer score = 0;
+	private Map<String, ScheduleStatus> statuses = new HashMap<String, ScheduleStatus>();
 
 	public Schedule() {
 		initializeRepository();
@@ -94,6 +95,22 @@ public class Schedule {
 
 	public List<Section> getSectionsList() {
 		return new ArrayList<Section>(sections.values());
+	}
+
+	public Map<String, ScheduleStatus> getStatuses() {
+		return statuses;
+	}
+
+	public void setStatuses(Map<String, ScheduleStatus> statuses) {
+		this.statuses = statuses;
+	}
+
+	public void addStatus(String idul, ScheduleStatus status) {
+		statuses.put(idul, status);
+	}
+
+	public ScheduleStatus getStatus(String idul) {
+		return statuses.get(idul);
 	}
 
 	public void setSections(Map<String, Section> sections) {

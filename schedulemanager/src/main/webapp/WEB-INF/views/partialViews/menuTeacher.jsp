@@ -11,7 +11,7 @@
 </div>
 <div class="row-fluid">
   <div class="span6">
-    <a class="btn btn-large" href="#">Sélectionner &raquo;</a>
+    <a class="btn btn-large" href="schedule">Sélectionner &raquo;</a>
   </div>
 	<div class="span6">
 		<a class="btn btn-large" href="availabilities">Sélectionner &raquo;</a>
