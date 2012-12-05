@@ -7,8 +7,8 @@ import cours.ulaval.glo4003.domain.repository.CourseRepository;
 
 public class Crawler {
 
-	private final static String GLO_URL = "https://capsuleweb.ulaval.ca/pls/etprod7/y_bwckprog.p_afficher_fiche?p_session=200909&p_code_prog=B-GLO&p_code_majr=GLO&p_code_camp=";
-	private final static String IFT_URL = "https://capsuleweb.ulaval.ca/pls/etprod7/y_bwckprog.p_afficher_fiche?p_type_index=4&p_code_prog=B-IFT&p_code_majr=IFT&p_code_camp=";
+	private final static String GLO_URL = "http://www2.ulaval.ca/les-etudes/programmes/repertoire/details/baccalaureat-en-genie-logiciel-b-ing.html";
+	private final static String IFT_URL = "http://www2.ulaval.ca/les-etudes/programmes/repertoire/details/baccalaureat-en-informatique-b-sc-a.html";
 
 	private CourseRepository courseRepository;
 

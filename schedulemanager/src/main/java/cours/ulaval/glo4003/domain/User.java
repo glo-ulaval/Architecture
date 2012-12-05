@@ -29,6 +29,12 @@ public class User {
 		this.role.add(role);
 	}
 
+	public void acceptSchedule(Schedule schedule, ScheduleStatus status) {
+		if (role.contains(Role.ROLE_Enseignant)) {
+			schedule.addStatus(idul, status);
+		}
+	}
+
 	public boolean validateCredentials(String password) {
 		return this.password.equals(password);
 	}

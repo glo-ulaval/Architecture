@@ -11,6 +11,7 @@
 <link href="<c:url value="/resources/css/app.css" />" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/app.js" />" /></script>
+<script type="text/javascript" src="<c:url value="/resources/js/acceptschedule.js" />" /></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.js" />" /></script>
 </head>
 <body>
@@ -43,6 +44,17 @@
 					<tr>
 						<th>Horaires :</th>
 						<th></th>
+						<th></th>
+						<th></th>
+						<sec:authorize access="hasRole('ROLE_Enseignant')">
+            <th class="centered">Accepter</th>
+            <th class="centered">Refuser</th>
+            <th class="centered">Votre choix</th>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_Responsable')">
+            <th></th>
+            <th class="centered">Choix</th>
+            </sec:authorize>
 					</tr>
 				</thead>
 				<c:forEach var="schedule" items="${schedules}">
@@ -77,7 +89,18 @@
 								<i class="icon-trash icon-white"></i>
 							</a>
 						</td>
+						<td></td>
 						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_Enseignant')">
+						<td><a class="badge badge-success btnAccept" href="#" title ="Accepter l'horaire"><i class="icon icon-ok icon-white"></i></a></td>
+						<td><a class="badge badge-important btnRefuse" href="#" title ="Refuser l'horaire"><i class="icon icon-remove icon-white"></i></a></td>
+            <td class="centered choice">
+            <c:choose>
+            <c:when test = "${statuses[schedule.id] == 'Accepted'}"><b><span class="badge badge-success"><i class="icon icon-ok icon-white"></i></span></b></c:when>
+            <c:when test = "${statuses[schedule.id] == 'Refused'}"><b><span class="badge badge-important"><i class="icon icon-remove icon-white"></i></span></b></c:when>
+            <c:otherwise><b>?</b></c:otherwise>
+            </c:choose>
+            </sec:authorize>
 					</tr>
 				</c:forEach>
 			</table>

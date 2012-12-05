@@ -30,6 +30,7 @@ import cours.ulaval.glo4003.domain.Notification;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.ScheduleGenerator;
+import cours.ulaval.glo4003.domain.ScheduleStatus;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.Time;
@@ -72,16 +73,19 @@ public class ScheduleController {
 	private ConflictDetector conflictDetector;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView schedule() {
+	public ModelAndView schedule(Principal principal) {
 		ModelAndView mv = new ModelAndView("schedule");
 
 		List<ScheduleInformationModel> scheduleModels = new ArrayList<ScheduleInformationModel>();
+		Map<String, String> statuses = new HashMap<String, String>();
 
 		for (Schedule schedule : scheduleRepository.findAll()) {
 			schedule.calculateScore();
 			scheduleModels.add(new ScheduleInformationModel(schedule));
+			statuses.put(schedule.getId(), String.valueOf(schedule.getStatus(principal.getName())));
 		}
 
+		mv.addObject("statuses", statuses);
 		mv.addObject("schedules", scheduleModels);
 		return mv;
 	}
@@ -373,8 +377,22 @@ public class ScheduleController {
 		return newDayOfWeek;
 	}
 
+	@RequestMapping(value = "/accept/{scheduleId}", method = RequestMethod.POST)
+	@ResponseBody
+	public String acceptSchedule(@PathVariable String scheduleId, Principal principal, String status) {
+		Schedule schedule = scheduleRepository.findById(scheduleId);
+		User user = userRepository.findByIdul(principal.getName());
+		user.acceptSchedule(schedule, Enum.valueOf(ScheduleStatus.class, status));
+		try {
+			scheduleRepository.store(schedule);
+		} catch (Exception e) {
+		}
+
+		return ControllerMessages.SUCCESS;
+	}
+
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
-	public ModelAndView deleteSchedule(@PathVariable String scheduleId) {
+	public ModelAndView deleteSchedule(@PathVariable String scheduleId, Principal principal) {
 		Boolean error = false;
 		String errorMessage = "";
 		try {
@@ -384,7 +402,7 @@ public class ScheduleController {
 			errorMessage = e.getMessage();
 		}
 
-		ModelAndView mv = schedule();
+		ModelAndView mv = schedule(principal);
 		if (error) {
 			mv.addObject("error", errorMessage);
 		} else {
