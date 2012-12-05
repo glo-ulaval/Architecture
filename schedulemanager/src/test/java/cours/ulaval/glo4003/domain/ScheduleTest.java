@@ -72,6 +72,13 @@ public class ScheduleTest {
 	}
 
 	@Test
+	public void canAddStatus() {
+		schedule.addStatus("THEUD", ScheduleStatus.Accepted);
+
+		assertEquals(ScheduleStatus.Accepted, schedule.getStatus("THEUD"));
+	}
+
+	@Test
 	public void canCalculateScore() {
 		schedule.add(conflictMock);
 
