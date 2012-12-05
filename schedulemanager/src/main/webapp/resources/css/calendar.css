@@ -97,3 +97,12 @@
 .lab:hover {
 	background-color: rgba(255,200,0,0.5);
 }
+
+.ajaxNotification {
+	display:none;
+	padding:12px;
+}
+
+#sendEmailBtn {
+	margin-top:0px;
+}

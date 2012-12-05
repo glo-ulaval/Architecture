@@ -1,6 +1,7 @@
 $(function() {
 	initializeDraggableCalendar();
 	setDoubleClickEdit();
+	initializeSendEmailBtn();
 });
 
 function initializeDraggableCalendar() {
@@ -41,6 +42,33 @@ function setDoubleClickEdit() {
 		redirectToEditSection(event);
 	});
 }
+
+function initializeSendEmailBtn() {
+	$("#sendEmailDiv").show();
+	$("#sendEmailBtn").click( function() {
+		
+		$('.loading').show();
+		$('#emailSuccess').hide();	
+		$('#emailFail').hide();
+		
+		$.ajax({
+			type : "POST",
+			url : '/schedulemanager/schedule/' +  schedule.scheduleInfo.id + '/sendEmail',
+			data : {
+			},
+			success : function(data) {
+				if(data == "success") {
+					$('#emailSuccess').show();
+				}
+				else {
+					$('#emailFail').show();
+				}
+				$('.loading').hide();
+			}
+		});
+	});
+}
+
 
 function redirectToEditSection() {
 	var nrc = $(event.target).attr('id');

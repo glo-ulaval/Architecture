@@ -245,6 +245,20 @@
 		</td>
 	</tr>
 </table>
+<div id="sendEmailDiv" style="display : none;">
+	<div class="pull-right" style="padding-right:50px;">
+		<img class="loading" src="<c:url value="/resources/img/ajax-loader.gif" />" alt=""  style="display : none;"/>
+		<span id="emailSuccess" class="badge badge-success ajaxNotification"><i class="icon-ok icon-white"></i></span>
+		<span id="emailFail" class="badge badge-important ajaxNotification"><i class="icon-remove icon-white"></i></span>
+	<a id="sendEmailBtn" class="btn btn-large">
+		Envoyer un courriel*
+	</a>
+	</div>
+	<br/><br/><br/>
+	<div class="pull-right" style="padding-right:50px;">
+		*Envoie un courriel aux usagers concernés par cet horaire pour les avertir qu'un nouvel horaire est disponible.
+	</div>
+</div>
 </body>
 </html>
 

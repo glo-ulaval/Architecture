@@ -7,6 +7,8 @@ $(function() {
 	generateFriday();
 
 	$('.hour').disableSelection();
+	
+	$("#sendEmailDiv").hide();
 
 });
 
