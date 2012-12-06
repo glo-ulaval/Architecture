@@ -1,5 +1,7 @@
 package cours.ulaval.glo4003.aspect;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.aspectj.lang.JoinPoint;
@@ -29,20 +31,38 @@ public class SendEmailOnModifyAspect {
 	UserRepository userRepository;
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.updateSection(..))")
-	private void sendEmailOnModifySection(JoinPoint pjp) throws Exception {
+	private void onUpdateSection(JoinPoint pjp) throws Exception {
 		String id = pjp.getArgs()[0].toString();
 		String nrc = pjp.getArgs()[1].toString();
 
 		Schedule schedule = scheduleRepository.findById(id);
 		Section section = schedule.getSections().get(nrc);
 
-		for (String teacherIdul : section.getTeachers()) {
+		// Normalement on partirais un thread pour éviter à l'usager le long
+		// traitement
+		sendEmailToAll(section.getTeachers());
+	}
+
+	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..))")
+	private void onEditSectionAndRedirect(JoinPoint pjp) throws Exception {
+		String id = pjp.getArgs()[0].toString();
+		String nrc = pjp.getArgs()[3].toString();
+
+		Schedule schedule = scheduleRepository.findById(id);
+		Section section = schedule.getSections().get(nrc);
+
+		// Normalement on partirais un thread pour éviter à l'usager le long
+		// traitement
+		sendEmailToAll(section.getTeachers());
+	}
+
+	private void sendEmailToAll(List<String> teachers) {
+		for (String teacherIdul : teachers) {
 			User user = userRepository.findByIdul(teacherIdul);
 			if (user.hasValidEmailAdress()) {
 				sendEmailTo(user.getEmailAddress());
 			}
 		}
-
 	}
 
 	private void sendEmailTo(String emailAddress) {

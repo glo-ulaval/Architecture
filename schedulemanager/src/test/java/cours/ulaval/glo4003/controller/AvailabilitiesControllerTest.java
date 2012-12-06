@@ -82,6 +82,6 @@ public class AvailabilitiesControllerTest {
 
 	@Test
 	public void canGetAvailibilitiesEditView() throws Exception {
-		assertEquals("Vos disponibilités ont été enregistrées avec succès", controller.availabilities(JSON_STRING, request));
+		assertEquals("Vos disponibilités ont été enregistrées avec succès", controller.editAvailabilities(JSON_STRING, request));
 	}
 }

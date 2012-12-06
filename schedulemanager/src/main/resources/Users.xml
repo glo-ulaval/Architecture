@@ -69,12 +69,12 @@
     <idul>THEUD</idul>
     <name>Thierry Eude</name>
     <notifications>
-      <id>1</id> 
+      <id>34563456</id> 
       <message>Une de vos section(s) de cours a été modifiée.</message>
       <path>/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90659/calendar</path>
     </notifications>
     <notifications>
-      <id>2</id>
+      <id>34883456</id>
       <message>Une de vos section(s) de cours a été modifiée.</message>
       <path>/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111/calendar</path>
     </notifications>

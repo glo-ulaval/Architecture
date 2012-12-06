@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.aspect.AddNotificationAspect;
+import cours.ulaval.glo4003.aspect.DetectConflictAspect;
 import cours.ulaval.glo4003.aspect.SendEmailOnModifyAspect;
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
 import cours.ulaval.glo4003.domain.ScheduleGenerator;
@@ -106,6 +107,11 @@ public class AppConfig {
 	@Bean
 	public SendEmailOnModifyAspect sendEmailOnModifyAspect() {
 		return new SendEmailOnModifyAspect();
+	}
+
+	@Bean
+	public DetectConflictAspect detectConflictAspect() {
+		return new DetectConflictAspect();
 	}
 
 	@Bean
