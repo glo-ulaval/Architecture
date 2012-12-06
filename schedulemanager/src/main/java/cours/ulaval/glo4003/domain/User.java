@@ -29,9 +29,15 @@ public class User {
 		this.role.add(role);
 	}
 
-	public void acceptSchedule(Schedule schedule, ScheduleStatus status) {
+	public void acceptSchedule(Schedule schedule) {
 		if (role.contains(Role.ROLE_Enseignant)) {
-			schedule.addStatus(idul, status);
+			schedule.addStatus(idul, ScheduleStatus.Accepted);
+		}
+	}
+
+	public void refuseSchedule(Schedule schedule) {
+		if (role.contains(Role.ROLE_Enseignant)) {
+			schedule.addStatus(idul, ScheduleStatus.Refused);
 		}
 	}
 

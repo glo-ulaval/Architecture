@@ -75,3 +75,11 @@ body {
 .loading {
 	margin:10px;
 }
+
+.green {
+	color : #088A08;
+}
+
+.redtext {
+	color : #FE2E2E;
+}

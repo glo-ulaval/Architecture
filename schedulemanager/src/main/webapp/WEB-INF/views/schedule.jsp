@@ -84,12 +84,14 @@
 							</a>
 						</td>
 						<sec:authorize access="hasRole('ROLE_Responsable')">
+						<input type="hidden" id="approvedUsers" name="approvedUsers" value="${schedule.approvedUsers}"/>
+						<input type="hidden" id="refusedUsers" name="refusedUsers" value="${schedule.refusedUsers}"/>
 						<td class="centered">
 							<a class="btn btn-danger" href="<c:url value="/${scheduleurl}/delete/${schedule.id}" />">
 								<i class="icon-trash icon-white"></i>
 							</a>
 						</td>
-						<td></td>
+						<td><a class="btn btn-info btnSeeAccepted"><i class="icon-comment icon-white"></i></a></td>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_Enseignant')">
 						<td><a class="badge badge-success btnAccept" href="#" title ="Accepter l'horaire"><i class="icon icon-ok icon-white"></i></a></td>

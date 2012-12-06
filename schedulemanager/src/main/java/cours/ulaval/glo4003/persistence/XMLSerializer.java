@@ -5,14 +5,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
 
+import javax.inject.Inject;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.lang.SerializationException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import cours.ulaval.glo4003.utils.ResourcesLoader;
 
@@ -20,8 +19,7 @@ public class XMLSerializer<T> {
 
 	private Class<T> type;
 
-	@Autowired
-	@Qualifier("ResourcesLoader")
+	@Inject
 	private ResourcesLoader resourcesLoader;
 	private Marshaller marshaller;
 	private Unmarshaller unmarshaller;

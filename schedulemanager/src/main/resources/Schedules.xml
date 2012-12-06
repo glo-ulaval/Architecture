@@ -2,26 +2,69 @@
 <schedules>
     <schedule>
 		<conflicts>
-            <firstNrc>90111</firstNrc>
+            <firstNrc>90659</firstNrc>
             <firstTimeSlot>
                 <dayOfWeek>MONDAY</dayOfWeek>
                 <duration>3</duration>
                 <endTime>
-                    <hour>11</hour>
+                    <hour>16</hour>
                     <minute>30</minute>
                 </endTime>
                 <startTime>
-                    <hour>8</hour>
+                    <hour>13</hour>
                     <minute>30</minute>
                 </startTime>
             </firstTimeSlot>
             <score>50</score>
+            <secondNrc>90623</secondNrc>
+            <secondTimeSlot>
+                <dayOfWeek>MONDAY</dayOfWeek>
+                <duration>3</duration>
+                <endTime>
+                    <hour>14</hour>
+                    <minute>30</minute>
+                </endTime>
+                <startTime>
+                    <hour>11</hour>
+                    <minute>30</minute>
+                </startTime>
+            </secondTimeSlot>
+            <teacher></teacher>
+        </conflicts>
+        <conflicts>
+            <firstNrc>90659</firstNrc>
+            <firstTimeSlot>
+                <dayOfWeek>MONDAY</dayOfWeek>
+                <duration>3</duration>
+                <endTime>
+                    <hour>16</hour>
+                    <minute>30</minute>
+                </endTime>
+                <startTime>
+                    <hour>13</hour>
+                    <minute>30</minute>
+                </startTime>
+            </firstTimeSlot>
+            <score>50</score>
+            <secondNrc>90623</secondNrc>
+            <secondTimeSlot>
+                <dayOfWeek>MONDAY</dayOfWeek>
+                <duration>3</duration>
+                <endTime>
+                    <hour>14</hour>
+                    <minute>30</minute>
+                </endTime>
+                <startTime>
+                    <hour>11</hour>
+                    <minute>30</minute>
+                </startTime>
+            </secondTimeSlot>
             <teacher>THEUD</teacher>
         </conflicts>
-		<conflicts>
-            <firstNrc>90111</firstNrc>
+        <conflicts>
+            <firstNrc>84789</firstNrc>
             <firstTimeSlot>
-                <dayOfWeek>MONDAY</dayOfWeek>
+                <dayOfWeek>WEDNESDAY</dayOfWeek>
                 <duration>3</duration>
                 <endTime>
                     <hour>11</hour>
@@ -32,8 +75,63 @@
                     <minute>30</minute>
                 </startTime>
             </firstTimeSlot>
-            <score>50</score>
-            <teacher></teacher>
+            <score>10</score>
+            <secondNrc></secondNrc>
+            <teacher>MPPAR3</teacher>
+        </conflicts>
+        <conflicts>
+            <firstNrc>83014</firstNrc>
+            <firstTimeSlot>
+                <dayOfWeek>FRIDAY</dayOfWeek>
+                <duration>3</duration>
+                <endTime>
+                    <hour>21</hour>
+                    <minute>30</minute>
+                </endTime>
+                <startTime>
+                    <hour>18</hour>
+                    <minute>30</minute>
+                </startTime>
+            </firstTimeSlot>
+            <score>40</score>
+            <secondNrc></secondNrc>
+            <teacher>MPPAR3</teacher>
+        </conflicts>
+        <conflicts>
+            <firstNrc>86453</firstNrc>
+            <firstTimeSlot>
+                <dayOfWeek>TUESDAY</dayOfWeek>
+                <duration>3</duration>
+                <endTime>
+                    <hour>13</hour>
+                    <minute>30</minute>
+                </endTime>
+                <startTime>
+                    <hour>10</hour>
+                    <minute>30</minute>
+                </startTime>
+            </firstTimeSlot>
+            <score>40</score>
+            <secondNrc></secondNrc>
+            <teacher>MPPAR3</teacher>
+        </conflicts>
+        <conflicts>
+            <firstNrc>89782</firstNrc>
+            <firstTimeSlot>
+                <dayOfWeek>THURSDAY</dayOfWeek>
+                <duration>3</duration>
+                <endTime>
+                    <hour>11</hour>
+                    <minute>30</minute>
+                </endTime>
+                <startTime>
+                    <hour>10</hour>
+                    <minute>30</minute>
+                </startTime>
+            </firstTimeSlot>
+            <score>40</score>
+            <secondNrc></secondNrc>
+            <teacher>DELAU</teacher>
         </conflicts>
         <id>2011-2012-Automne-1</id>
         <personInCharge>NATAW</personInCharge>
