@@ -132,6 +132,7 @@ public class AppConfig {
 		return new ResourcesLoader();
 	}
 
+	@Bean
 	public JavaMailSenderImpl mailSender() {
 		ConfigManager configManager = ConfigManager.getConfigManager();
 
