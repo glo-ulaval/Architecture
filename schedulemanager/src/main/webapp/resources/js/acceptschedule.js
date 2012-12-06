@@ -45,6 +45,10 @@ $(document).ready(function() {
 		for (var i=0;i<refusedUsers.length;i++) {
 			refusedUsersHtml += refusedUsers[i].replace('[', '').replace(']', '') + '<br>';
 		}
-		$(".btnSeeAccepted").unbind('hover').popover({title: "Choix des enseignants", content: "<b><span class=\"green\"> Enseignants qui ont accept&eacute; l'horaire : </span></b><br>" + approvedUsersHtml + "<br><b><span class=\"redtext\"> Enseignants qui ont refus&eacute; l'horaire : </span></b><br>" + refusedUsersHtml}).popover('show');
+		$(".btnSeeAccepted").unbind('hover').popover({title: "Choix des enseignants", content: 
+			"<b><span class=\"green\"> Enseignants qui ont accept&eacute; l'horaire : </span></b><br>" + 
+			approvedUsersHtml + 
+			"<br><b><span class=\"redtext\"> Enseignants qui ont refus&eacute; l'horaire : </span></b><br>" + 
+			refusedUsersHtml}).popover('show');
 	});
 });
