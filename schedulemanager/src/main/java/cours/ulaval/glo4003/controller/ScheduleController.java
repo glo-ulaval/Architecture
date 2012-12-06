@@ -382,7 +382,13 @@ public class ScheduleController {
 	public String acceptSchedule(@PathVariable String scheduleId, Principal principal, String status) {
 		Schedule schedule = scheduleRepository.findById(scheduleId);
 		User user = userRepository.findByIdul(principal.getName());
-		user.acceptSchedule(schedule, Enum.valueOf(ScheduleStatus.class, status));
+		ScheduleStatus statusEnumValue = Enum.valueOf(ScheduleStatus.class, status);
+		if (statusEnumValue == ScheduleStatus.Accepted) {
+			user.acceptSchedule(schedule);
+		} else if (statusEnumValue == ScheduleStatus.Refused) {
+			user.refuseSchedule(schedule);
+		}
+
 		try {
 			scheduleRepository.store(schedule);
 		} catch (Exception e) {
