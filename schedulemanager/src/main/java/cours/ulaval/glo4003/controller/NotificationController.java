@@ -69,4 +69,12 @@ public class NotificationController {
 		return JSON;
 	}
 
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	public void setObjectMapper(ObjectMapper mapper) {
+		this.mapper = mapper;
+	}
+
 }
