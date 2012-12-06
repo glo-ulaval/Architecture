@@ -32,4 +32,19 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	$(".btnSeeAccepted").bind('hover', function(event) {
+		var scheduleId = $(this).closest('tr').attr('id');
+		var approvedUsersHtml = '';
+		var approvedUsers = $('#' + scheduleId).find('#approvedUsers').val().split(",");
+		for (var i=0;i<approvedUsers.length;i++) {
+			approvedUsersHtml += approvedUsers[i].replace('[', '').replace(']', '') + '<br>';
+		}
+		var refusedUsersHtml = '';
+		var refusedUsers = $('#' + scheduleId).find('#refusedUsers').val().split(",");
+		for (var i=0;i<refusedUsers.length;i++) {
+			refusedUsersHtml += refusedUsers[i].replace('[', '').replace(']', '') + '<br>';
+		}
+		$(".btnSeeAccepted").unbind('hover').popover({title: "Choix des enseignants", content: "<b><span class=\"green\"> Enseignants qui ont accept&eacute; l'horaire : </span></b><br>" + approvedUsersHtml + "<br><b><span class=\"redtext\"> Enseignants qui ont refus&eacute; l'horaire : </span></b><br>" + refusedUsersHtml}).popover('show');
+	});
 });
