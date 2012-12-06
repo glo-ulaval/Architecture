@@ -20,26 +20,31 @@ public class DetectConflictAspect {
 	private ConflictDetector conflictDetector;
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.deleteSection(..))")
-	private void onDeleteSection(JoinPoint pjp) throws Exception {
+	private void onDeleteSection(JoinPoint pjp)
+			throws Exception {
 		detectConflictFor(pjp.getArgs()[0].toString());
 	}
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.addSection(..))")
-	private void onAddSection(JoinPoint pjp) throws Exception {
+	private void onAddSection(JoinPoint pjp)
+			throws Exception {
 		detectConflictFor(pjp.getArgs()[0].toString());
 	}
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..))")
-	private void onPostEditSectionAndRedirect(JoinPoint pjp) throws Exception {
+	private void onPostEditSectionAndRedirect(JoinPoint pjp)
+			throws Exception {
 		detectConflictFor(pjp.getArgs()[0].toString());
 	}
 
 	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.reuseSelectedSchedule(..))")
-	private void onReuseSelectedSchedule(JoinPoint pjp) throws Exception {
+	private void onReuseSelectedSchedule(JoinPoint pjp)
+			throws Exception {
 		detectConflictFor(pjp.getArgs()[0].toString());
 	}
 
-	private void detectConflictFor(String scheduleId) throws Exception {
+	private void detectConflictFor(String scheduleId)
+			throws Exception {
 		Schedule schedule = scheduleRepository.findById(scheduleId);
 		schedule.clearConflicts();
 		conflictDetector.detectConflict(schedule);

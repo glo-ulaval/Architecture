@@ -65,15 +65,19 @@ function postTimeSlots(isLab) {
 		url='/schedulemanager/schedule/proposelabsection/'+ id + "/" + year + '/' + semester;
 		data = {
 				teachers : JSON.stringify(teachers),
-				labHours : $('.active .hours_labo').val()
+				labHours : $('.active .hours_labo').val(),
+				courseAcronym : $('#courseAcronym').val()
 			};
 	} else {
 		url='/schedulemanager/schedule/proposesection/'+ id + "/" + year + '/' + semester;
 		data = {
 				teachers : JSON.stringify(teachers),
-				courseHours : $('.active .hours_class').val()
+				courseHours : $('.active .hours_class').val(),
+				courseAcronym : $('#courseAcronym').val()
 			};
 	}
+	
+	console.log(data);
 	
 	$.ajax({
 		type : "POST",

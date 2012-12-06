@@ -1,8 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url value="/schedule/addsection/${id}/${year}/${semester}" var="url" />
 <form action="${url}" method=POST scope="request" commandName="section">
-	<input type="hidden" name="teachMode" value="${param.teachmode}"
-		scope="request"> <input type="hidden" name="acronym"
+	<input id="teachMode" type="hidden" name="teachMode" value="${param.teachmode}"
+		scope="request"> <input id="courseAcronym" type="hidden" name="acronym"
 		value="${course.acronym}" scope="request">
 	<div class="row-fluid section_details">
 		<div class="span3 pull-right group">
@@ -13,7 +13,7 @@
 		<div class="span8" id="bordered">
 			<label class="span3 control-label">Titulaire :</label>
 			<div class="span8 controls">
-				<select class="input-xlarge" name="personInCharge" value="teachers">
+				<select id="personInCharge" class="input-xlarge" name="personInCharge" value="teachers">
 					<c:forEach items="${teachers}" var="teacher">
 						<option value="${teacher.key}">${teacher.value}</option>
 					</c:forEach>
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<a id="proposeCourses" class="btn btn-info pull-right">Proposer des heures de cours</a>
-          <a id="enterManually" class="btn btn-info pull-right">Entrer manuellement</a>
+                    <a id="enterManually" class="btn btn-info pull-right">Entrer manuellement</a>
 				</div>
 				<div class="span8 proposedHours" id="bordered" style="display:none;"></div>
 				<c:if test="${course.timeDedicated.courseHours == 0}"><div class="hours_class_div" style="display: none;"></c:if>
@@ -106,7 +106,7 @@
 							</div>
 						</div>
 					<a id="proposeLab" class="btn btn-info pull-right">Proposer des heures de labo</a>
-           <a id="enterManuallyLab" class="btn btn-info pull-right">Entrer manuellement</a>
+                    <a id="enterManuallyLab" class="btn btn-info pull-right">Entrer manuellement</a>
 					</div>
 				</div>
 			</c:when>

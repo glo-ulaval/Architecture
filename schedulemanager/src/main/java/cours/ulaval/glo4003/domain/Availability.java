@@ -63,7 +63,7 @@ public class Availability {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		for (int i = 0; i <= friday.size() - timeSlotDuration; i++) {
 			if (isAvailableForDuration(timeSlotDuration, friday, i)) {
-				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), 2, DayOfWeek.FRIDAY));
+				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), timeSlotDuration, DayOfWeek.FRIDAY));
 			}
 		}
 		return possibleTimeSlots;
@@ -121,7 +121,7 @@ public class Availability {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		for (int i = 0; i <= day.size() - duration; i++) {
 			if (isAvailableForDuration(duration, day, i)) {
-				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), 3, dayOfWeek));
+				possibleTimeSlots.add(new TimeSlot(new Time(i + 8, 30), duration, dayOfWeek));
 			}
 		}
 		return possibleTimeSlots;

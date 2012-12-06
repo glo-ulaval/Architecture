@@ -17,10 +17,12 @@ public class ScheduleGenerator {
 	@Inject
 	private ConflictDetector conflictDetector;
 
-	public List<TimeSlot> proposeTimeSlotsForSectionForCourses(Section section, Schedule schedule) throws Exception {
+	public List<TimeSlot> proposeTimeSlotsForSectionForCourses(Section section, Schedule schedule)
+			throws Exception {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		Availability availability = availabilityRepository.findByIdul(section.getTeachers().get(0));
-		List<TimeSlot> courseTimeSlots = availability.generatePossibleTimeSlotsForCourse(section.getTimeDedicated().getCourseHours());
+		List<TimeSlot> courseTimeSlots = availability.generatePossibleTimeSlotsForCourse(section.getTimeDedicated()
+				.getCourseHours());
 		while (possibleTimeSlots.size() < 3 && !courseTimeSlots.isEmpty()) {
 			int index = getRandomIndex(courseTimeSlots.size() - 1);
 			TimeSlot timeSlot = courseTimeSlots.get(index);
@@ -33,12 +35,14 @@ public class ScheduleGenerator {
 			}
 		}
 		if (possibleTimeSlots.isEmpty()) {
-			throw new Exception("Impossible de proposer une plage horaire de cours qui ne génère pas de conflit pour cette section");
+			throw new Exception(
+					"Impossible de proposer une plage horaire de cours qui ne génère pas de conflit pour cette section");
 		}
 		return possibleTimeSlots;
 	}
 
-	public List<TimeSlot> proposeTimeSlotsForSectionForLab(Section section, Schedule schedule) throws Exception {
+	public List<TimeSlot> proposeTimeSlotsForSectionForLab(Section section, Schedule schedule)
+			throws Exception {
 		List<TimeSlot> possibleTimeSlots = new ArrayList<TimeSlot>();
 		Availability availability = availabilityRepository.findByIdul(section.getTeachers().get(0));
 		List<TimeSlot> labTimeSlots = availability.generatePossibleTimeSlotsForLab(section.getTimeDedicated().getLabHours());
@@ -54,7 +58,8 @@ public class ScheduleGenerator {
 			}
 		}
 		if (possibleTimeSlots.isEmpty()) {
-			throw new Exception("Impossible de proposer une plage horaire de laboratoire qui ne génère pas de conflit pour cette section");
+			throw new Exception(
+					"Impossible de proposer une plage horaire de laboratoire qui ne génère pas de conflit pour cette section");
 		}
 		return possibleTimeSlots;
 	}
