@@ -1,214 +1,763 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <courses>
-  <courses>
-    <acronym>IFT-2007</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>L'objectif principal de ce cours est de former
-      l'étudiant à la conception d'applications logicielles d'envergure
-      selon les principes fondamentaux du génie logiciel et de la
-      programmation par objets. L'approche « Unified », combinée à
-      l'apprentissage du langage UML, est présentée et mise en pratique
-      dans un projet de conception et d'implantation d'un système
-      logiciel réalisé en groupe. Le langage de programmation Java est
-      utilisé comme outil d'implantation.
-    </description>
-    <prerequisites>
-      <acronyms>GIF-1003</acronyms>
-      <acronyms>IFT-2005</acronyms>
-      <isConcomitant>false</isConcomitant>
-    </prerequisites>
-    <prerequisites>
-      <acronyms>IFT-1003</acronyms>
-      <isConcomitant>true</isConcomitant>
-    </prerequisites>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>0</labHours>
-      <otherHours>6</otherHours>
-    </timeDedicated>
-    <title>Analyse et conception des systèmes orientés objets</title>
-  </courses>
-  <courses>
-    <acronym>GLO-1901</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>Ce cours introduit les principaux paradigmes de
-      programmation servant à la résolution de problèmes en
-      informatique. Il couvre notamment les programmations procédurale,
-      fonctionnelle, orientée objet et événementielle. Pour illustrer
-      ces paradigmes, il utilise le langage Python.
-    </description>
-    <title>Introduction à la programmation avec Python</title>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>2</labHours>
-      <otherHours>4</otherHours>
-    </timeDedicated>
-  </courses>
-  <courses>
-    <acronym>GLO-4002</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>Caractéristiques et facteurs de la qualité
-      (maintenabilité, sécurité, fiabilité, etc.), normes et standards
-      internationaux, qualité dans les processus logiciels, mesures et
-      métriques. Validation et vérification : types d'essais (test
-      unitaire, fonctionnel, système, intégration, acceptation),
-      techniques, pratiques et outils (xUnit, détection automatisée des
-      anomalies, etc.). Bonnes pratiques de programmation, de conception
-      orientée objet et architecturales. Application et prise en charge
-      de la qualité dans un projet (suivi des anomalies, intégration
-      continue, etc.). Audit et certification. Outils spécialisés et
-      automatisation.
-    </description>
-    <prerequisites>
-      <acronyms>IFT-1904</acronyms>
-      <acronyms>IFT-2005</acronyms>
-      <acronyms>GLO-1900</acronyms>
-      <acronyms>GIF-1003</acronyms>
-      <acronyms>GLO-1901</acronyms>
-      <isConcomitant>false</isConcomitant>
-    </prerequisites>
-    <title>Qualité et métriques du logiciel</title>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>2</labHours>
-      <otherHours>4</otherHours>
-    </timeDedicated>
-  </courses>
-  <courses>
-    <acronym>GLO-1010</acronym>
-    <credits>1</credits>
-    <cycle>Premier</cycle>
-    <description>Exposés animés la plupart par des ingénieurs logiciels
-      œuvrant tant en milieu industriel qu'en recherche pour donner à
-      l'étudiant une image plus concrète et plus globale des domaines
-      d'intervention de l'ingénieur logiciel. Il vise à faire connaître
-      différents aspects de la carrière en génie logiciel et à amener
-      l'étudiant à mieux définir ses objectifs de carrière. On y fait
-      également un survol des données sur le marché du travail et des
-      meilleures stratégies de réussite.
-    </description>
-    <timeDedicated>
-      <courseHours>1</courseHours>
-      <labHours>1</labHours>
-      <otherHours>1</otherHours>
-    </timeDedicated>
-    <title>Pratique du génie logiciel</title>
-  </courses>
-  <courses>
-    <acronym>IFT-2002</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>Introduction à la théorie des machines abstraites et
-      des langages formels. Classification des machines abstraites:
-      automates finis, automates à pile, machine de Turing.
-      Classification des langages: réguliers, non contextuels,
-      récursifs, récursivement énumérables, non récursivement
-      énumérables. Grammaires: syntaxe, classification de Chomsky,
-      rapports avec les machines abstraites et les langages. Théorie des
-      séquences. Ensembles finis, infinis, dénombrables et non
-      dénombrables.
-    </description>
-    <prerequisites>
-      <acronyms>MAT-1902</acronyms>
-      <acronyms>MAT-1919</acronyms>
-      <acronyms>MAT-1310</acronyms>
-      <isConcomitant>false</isConcomitant>
-    </prerequisites>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>0</labHours>
-      <otherHours>6</otherHours>
-    </timeDedicated>
-    <title>Informatique théorique</title>
-  </courses>
-  <courses>
-    <acronym>GLO-2100</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>Conception et analyse d'algorithmes : notions d'ordre;
-      comportement du meilleur, du moyen et du pire cas. Conception et
-      développement d'algorithmes : notion de types abstraits et
-      modularité, programmation générique, structures de données
-      classiques : les listes, les piles, les files (avec et sans
-      priorité), les arborescences, les graphes, les tables de
-      dispersion et les monceaux binaires, algorithmes de tri.
-    </description>
-    <prerequisites>
-      <acronyms>GIF-1003</acronyms>
-      <isConcomitant>false</isConcomitant>
-    </prerequisites>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>0</labHours>
-      <otherHours>6</otherHours>
-    </timeDedicated>
-    <title>Algorithmes et structures de données pour ingénieurs</title>
-  </courses>
-  <courses>
-    <acronym>GLO-4444</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>Derp derp herp derp McDerpington</description>
-    <prerequisites>
-      <acronyms>GLO-2004</acronyms>
-      <acronyms>GLO-1001</acronyms>
-      <isConcomitant>true</isConcomitant>
-    </prerequisites>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>2</labHours>
-      <otherHours>4</otherHours>
-    </timeDedicated>
-    <title>Architecture Logicielle</title>
-  </courses>
-  <courses>
-    <acronym>GLO-2003</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>Concepts fondamentaux des processus de génie logiciel.
-      Cycle de vie du développement logiciel. Outils et modélisation du
-      processus unifié. Disciplines techniques du processus de génie
-      logiciel et leurs pratiques : exigences, analyse et conception,
-      implémentation et tests. Disciplines de gestion du processus de
-      génie logiciel : gestion des modifications et des configurations,
-      gestion de projet. Notions d'équipe. Évaluation et amélioration
-      des processus. Processus agiles et méthodes.
-    </description>
-    <prerequisites>
-      <acronyms>GLO-2004</acronyms>
-      <acronyms>IFT-2007</acronyms>
-      <acronyms>IFT-2901</acronyms>
-      <isConcomitant>false</isConcomitant>
-    </prerequisites>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>0</labHours>
-      <otherHours>6</otherHours>
-    </timeDedicated>
-    <title>Introduction aux processus du génie logiciel</title>
-  </courses>
-  <courses>
-    <acronym>IFT-3101</acronym>
-    <credits>3</credits>
-    <cycle>Premier</cycle>
-    <description>Processus général de la compilation. Analyse lexicale
-      et automates finis. Analyse syntaxique descendante prédictive et
-      grammaires hors contexte. Forme intermédiaire. Grammaires
-      attribuées. Typage. Infrastructure d'exécution. Allocation de la
-      mémoire. Génération du code. Optimisation.
-    </description>
-    <prerequisites>
-      <acronyms>IFT-2002</acronyms>
-      <isConcomitant>false</isConcomitant>
-    </prerequisites>
-    <timeDedicated>
-      <courseHours>3</courseHours>
-      <labHours>0</labHours>
-      <otherHours>6</otherHours>
-    </timeDedicated>
-    <title>Compilation et interprétation</title>
-  </courses>
+    <courses>
+        <acronym>GLO-3002</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>&amp;Eacute;tude et solutions d'un probl&amp;egrave;me scientifique sur ordinateur en lien avec l'une des concentrations du programme: analyse du probl&amp;egrave;me, d&amp;eacute;termination de la m&amp;eacute;thode de solution, description des algorithmes et programmation.</description>
+        <prerequisites>
+            <acronyms>GLO-3101</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>GLO-4000</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>GLO-4002</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>1</courseHours>
+            <labHours>3</labHours>
+            <otherHours>5</otherHours>
+        </timeDedicated>
+        <title>Projet en génie logiciel</title>
+    </courses>
+    <courses>
+        <acronym>GLO-4003</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Patrons de conception (cr&amp;eacute;ation, structure, comportement), styles architecturaux, refactorisation de code, architecture orient&amp;eacute;e aspect, approches agiles, conception architecturale, tactiques de conception se basant sur les attributs de qualit&amp;eacute;, vues et documentation, &amp;eacute;valuation d'architectures, ligne de produits logiciels, th&amp;egrave;mes connexes.</description>
+        <prerequisites>
+            <acronyms>IFT-2007</acronyms>
+            <acronyms>IFT-2901</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Architecture logicielle</title>
+    </courses>
+    <courses>
+        <acronym>GLO-4002</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Caract&amp;eacute;ristiques et facteurs de la qualit&amp;eacute; (maintenabilit&amp;eacute;, s&amp;eacute;curit&amp;eacute;, fiabilit&amp;eacute;, etc.), normes et standards internationaux, qualit&amp;eacute; dans les processus logiciels, mesures et m&amp;eacute;triques. Validation et v&amp;eacute;rification&amp;nbsp;: types d'essais (test unitaire, fonctionnel, syst&amp;egrave;me, int&amp;eacute;gration, acceptation), techniques, pratiques et outils (xUnit, d&amp;eacute;tection automatis&amp;eacute;e des anomalies, etc.). Bonnes pratiques de programmation, de conception orient&amp;eacute;e objet et architecturales. Application et prise en charge de la qualit&amp;eacute; dans un projet (suivi des anomalies, int&amp;eacute;gration continue, etc.). Audit et certification. Outils sp&amp;eacute;cialis&amp;eacute;s et automatisation.</description>
+        <prerequisites>
+            <acronyms>IFT-1904</acronyms>
+            <acronyms>IFT-2005</acronyms>
+            <acronyms>GLO-1900</acronyms>
+            <acronyms>GIF-1003</acronyms>
+            <acronyms>GLO-1901</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Qualité et métriques du logiciel</title>
+    </courses>
+    <courses>
+        <acronym>GLO-3004</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>M&amp;eacute;thodes de d&amp;eacute;veloppement formelles. V&amp;eacute;rification de mod&amp;egrave;les. Langages de sp&amp;eacute;cification formelle comme VDM, Z ou Lotos. Utilisation de logiciels de v&amp;eacute;rification de mod&amp;egrave;les.</description>
+        <prerequisites>
+            <acronyms>IFT-2002</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>GIF-1003</acronyms>
+            <acronyms>IFT-2005</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Spécification formelle et vérification de logiciels</title>
+    </courses>
+    <courses>
+        <acronym>GLO-4001</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Ce cours offre un aper&amp;ccedil;u des principes g&amp;eacute;n&amp;eacute;raux de la robotique mobile. Les composantes de bases utilis&amp;eacute;es en robotique mobile, telles que les actionneurs et les capteurs (sonar, laser, cam&amp;eacute;ras et centrale inertielle), sont pr&amp;eacute;sent&amp;eacute;es. Une br&amp;egrave;ve introduction aux boucles d'asservissement est aussi abord&amp;eacute;e. La partie algorithmique du cours traite de la locomotion, la localisation, la navigation, l'exploration et la cartographie de l'environnement.</description>
+        <prerequisites>
+            <acronyms>IFT-2000</acronyms>
+            <acronyms>IFT-2008</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>STT-1000</acronyms>
+            <acronyms>STT-2920</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Introduction à la robotique mobile</title>
+    </courses>
+    <courses>
+        <acronym>IFT-1010</acronym>
+        <credits>1</credits>
+        <cycle>Premier</cycle>
+        <description>Expos&amp;eacute;s anim&amp;eacute;s par des informaticiens œuvrant tant en milieu industriel qu'en recherche pour donner &amp;agrave; l'&amp;eacute;tudiant une image plus concr&amp;egrave;te et plus globale des domaines d'intervention de l'informaticien. Il vise &amp;agrave; faire conna&amp;icirc;tre diff&amp;eacute;rents aspects de la carri&amp;egrave;re en informatique et &amp;agrave; amener l'&amp;eacute;tudiant &amp;agrave; mieux d&amp;eacute;finir ses objectifs de carri&amp;egrave;re. On y fait &amp;eacute;galement un survol des donn&amp;eacute;es du march&amp;eacute; du travail et des meilleures strat&amp;eacute;gies de r&amp;eacute;ussite.</description>
+        <timeDedicated>
+            <courseHours>1</courseHours>
+            <labHours>0</labHours>
+            <otherHours>2</otherHours>
+        </timeDedicated>
+        <title>Pratique de l'informatique</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2501</acronym>
+        <credits>1</credits>
+        <cycle>Premier</cycle>
+        <description>Au terme de ce stage, l'&amp;eacute;tudiant doit soumettre un rapport oral et &amp;eacute;crit qui fera l'objet d'une &amp;eacute;valuation p&amp;eacute;dagogique. Des renseignements concernant la pr&amp;eacute;sentation orale du stage ainsi que la r&amp;eacute;daction du rapport seront transmis &amp;agrave; l'&amp;eacute;tudiant par le professeur responsable du s&amp;eacute;minaire. La pr&amp;eacute;sence de l'&amp;eacute;tudiant au s&amp;eacute;minaire est obligatoire.</description>
+        <prerequisites>
+            <acronyms>IFT-2500</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>1</courseHours>
+            <labHours>1</labHours>
+            <otherHours>1</otherHours>
+        </timeDedicated>
+        <title>Séminaire de stage coopératif en informatique I</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3002</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Origine d'une enqu&amp;ecirc;te informatique (&lt;i&gt;computer forensics&lt;/i&gt;) et techniques d'enqu&amp;ecirc;te. Aspects informatique et judiciaire de la collecte et de l'analyse d'information, afin d'en assurer l'utilisation lors d'un proc&amp;egrave;s. Localisation, extraction et divulgation des informations sur les syst&amp;egrave;mes d'exploitation, de stockage, les r&amp;eacute;seaux et les p&amp;eacute;riph&amp;eacute;riques. Obstacle &amp;agrave; l'enqu&amp;ecirc;te informatique. &amp;Eacute;tude de cas r&amp;eacute;els.</description>
+        <prerequisites>
+            <acronyms>IFT-2001</acronyms>
+            <acronyms>GLO-2001</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Informatique d'enquête</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3001</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Analyse de l'efficacit&amp;eacute; des algorithmes: analyse asymptotique, analyse en pire cas et en moyenne. Notation asymptotique, r&amp;eacute;solutions de r&amp;eacute;currences. Strat&amp;eacute;gies dans la conception d'algorithmes: algorithmes voraces, &amp;laquo;diviser pour r&amp;eacute;gner&amp;raquo;, &amp;laquo;diminuer pour r&amp;eacute;gner&amp;raquo;, programmation dynamique. Algorithmes probabilistes. &amp;Eacute;l&amp;eacute;ments de complexit&amp;eacute; du calcul.</description>
+        <prerequisites>
+            <acronyms>IFT-2000</acronyms>
+            <acronyms>IFT-2900</acronyms>
+            <acronyms>IFT-2008</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>STT-1000</acronyms>
+            <acronyms>STT-2920</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>MAT-1310</acronyms>
+            <acronyms>MAT-1902</acronyms>
+            <acronyms>MAT-1919</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Conception et analyse d'algorithmes</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3000</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Paradigmes de programmation. Lambda-calcul, s&amp;eacute;mantique dynamique, s&amp;eacute;mantique statique et inf&amp;eacute;rence de types. Programmation fonctionnelle, abstraction fonctionnelle et application. Programmation orient&amp;eacute;e objet, classes, objets, messages et h&amp;eacute;ritage (simple et multiple). Programmation parall&amp;egrave;le et distribu&amp;eacute;e. Modularit&amp;eacute; et structuration. Langages ML, Objective CAML, SmallTalk, Java et Concurrent ML.</description>
+        <prerequisites>
+            <acronyms>IFT-2005</acronyms>
+            <acronyms>IFT-2900</acronyms>
+            <acronyms>GIF-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Langages de programmation</title>
+    </courses>
+    <courses>
+        <acronym>GLO-2001</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Historique et &amp;eacute;volution. R&amp;ocirc;les, composantes et fonctions d'un syst&amp;egrave;me d'exploitation. Protection et performance d'un syst&amp;egrave;me. Structures mat&amp;eacute;rielles n&amp;eacute;cessaires. Processus et allocation du CPU. Gestion de la m&amp;eacute;moire et m&amp;eacute;moire virtuelle. M&amp;eacute;moire secondaire et cache. Gestion des entr&amp;eacute;es/sorties. Syst&amp;egrave;mes de fichiers. Coordination de processus et impasses. Programmation concurrente. &amp;Eacute;tude de cas&amp;nbsp;: UNIX, DOS, VMS, VM, WINDOWS.</description>
+        <prerequisites>
+            <acronyms>IFT-1002</acronyms>
+            <acronyms>GIF-1001</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>IFT-2000</acronyms>
+            <acronyms>IFT-2900</acronyms>
+            <acronyms>GLO-2100</acronyms>
+            <acronyms>IFT-2008</acronyms>
+            <acronyms>GIF-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Systèmes d'exploitation pour ingénieurs</title>
+    </courses>
+    <courses>
+        <acronym>GLO-2000</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Caract&amp;eacute;ristiques mat&amp;eacute;rielles et logicielles des r&amp;eacute;seaux d'ordinateurs: topologie, mod&amp;egrave;le en couches. Couche physique: techniques de transmission, bande passante, d&amp;eacute;bit binaire, multiplexage, techniques de commutation. Contr&amp;ocirc;le de liaison: contr&amp;ocirc;le d'erreurs, contr&amp;ocirc;le de flux, protocoles avec fen&amp;ecirc;tre d'anticipation. Contr&amp;ocirc;le d'acc&amp;egrave;s au m&amp;eacute;dium dans les r&amp;eacute;seaux locaux. Couche r&amp;eacute;seau: protocole IP, routage, contr&amp;ocirc;le de congestion, interconnexion de r&amp;eacute;seaux. Couche transport: notion de qualit&amp;eacute; de service, protocoles de transport d'Internet. Couche application: syst&amp;egrave;me de noms de domaines, messagerie &amp;eacute;lectronique, Web.</description>
+        <prerequisites>
+            <acronyms>IFT-1002</acronyms>
+            <acronyms>GIF-1001</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Réseaux pour ingénieurs</title>
+    </courses>
+    <courses>
+        <acronym>GLO-2100</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Conception et analyse d'algorithmes&amp;nbsp;: notions d'ordre; comportement du meilleur, du moyen et du pire cas. Conception et d&amp;eacute;veloppement d'algorithmes&amp;nbsp;: notion de types abstraits et modularit&amp;eacute;, programmation g&amp;eacute;n&amp;eacute;rique, structures de donn&amp;eacute;es classiques&amp;nbsp;: les listes, les piles, les files (avec et sans priorit&amp;eacute;), les arborescences, les graphes, les tables de dispersion et les monceaux binaires, algorithmes de tri.</description>
+        <prerequisites>
+            <acronyms>GIF-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Algorithmes et structures de données pour ingénieurs</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3202</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>L'objectif g&amp;eacute;n&amp;eacute;ral du cours est la ma&amp;icirc;trise des techniques objets pour la mise en œuvre int&amp;eacute;grale des mod&amp;egrave;les de donn&amp;eacute;es d&amp;eacute;riv&amp;eacute;s de l'analyse UML, y compris toutes les contraintes sous-jacentes de mani&amp;egrave;re &amp;agrave; assurer la coh&amp;eacute;rence et le respect int&amp;eacute;gral de toutes les r&amp;egrave;gles de gestion des donn&amp;eacute;es. Tous les cas de figure des mod&amp;egrave;les UML sont trait&amp;eacute;s, ainsi que l'implantation int&amp;eacute;grale des interfaces. Caract&amp;eacute;ristiques des divers objets: objet d'analyse, de travail, de table et de colonne. &amp;Eacute;tude de l'implantation de l'h&amp;eacute;ritage par sp&amp;eacute;cialisation. Red&amp;eacute;finition et surcharge des m&amp;eacute;thodes. Les applications devant utiliser uniquement les interfaces d'un mod&amp;egrave;le pour acc&amp;eacute;der aux donn&amp;eacute;es, elles doivent utiliser une gamme compl&amp;egrave;te de m&amp;eacute;thodes afin de garantir l'encapsulation des traitements de la base de donn&amp;eacute;es objets. Les applications n'ont plus &amp;agrave; faire directement appel au langage SQL et DML. Les techniques d'implantation des contraintes par les &amp;laquo;triggers&amp;raquo; et les m&amp;eacute;thodes Static, Member, Map et Order sont &amp;eacute;tudi&amp;eacute;es et illustr&amp;eacute;es par des exemples en PL/SQL. Ce cours permet d'acqu&amp;eacute;rir une connaissance et un savoir-faire que doivent partager le DBA et les d&amp;eacute;veloppeurs dans l'exploitation d'une base de donn&amp;eacute;es corporative &amp;agrave; haut niveau d'int&amp;eacute;grit&amp;eacute;. Plusieurs travaux pratiques utilisant PL/SQL et les &amp;laquo;packages&amp;raquo; permettent d'illustrer les notions essentielles. Un projet assign&amp;eacute; par &amp;eacute;quipe permet de concr&amp;eacute;tiser les techniques &amp;eacute;tudi&amp;eacute;es.</description>
+        <prerequisites>
+            <acronyms>IFT-2004</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>IFT-2005</acronyms>
+            <acronyms>GIF-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Bases de données orientées objets</title>
+    </courses>
+    <courses>
+        <acronym>GLO-2003</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Concepts fondamentaux des processus de g&amp;eacute;nie logiciel. Cycle de vie du d&amp;eacute;veloppement logiciel. Outils et mod&amp;eacute;lisation du processus unifi&amp;eacute;. Disciplines techniques du processus de g&amp;eacute;nie logiciel et leurs pratiques&amp;nbsp;: exigences, analyse et conception, impl&amp;eacute;mentation et tests. Disciplines de gestion du processus de g&amp;eacute;nie logiciel&amp;nbsp;: gestion des modifications et des configurations, gestion de projet. Notions d'&amp;eacute;quipe. &amp;Eacute;valuation et am&amp;eacute;lioration des processus. Processus agiles et m&amp;eacute;thodes.</description>
+        <prerequisites>
+            <acronyms>IFT-2007</acronyms>
+            <acronyms>IFT-2901</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Introduction aux processus du génie logiciel</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3201</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Concepts de base de la s&amp;eacute;curit&amp;eacute; dans les r&amp;eacute;seaux informatiques. Les faiblesses des protocoles r&amp;eacute;seau. Les principales attaques r&amp;eacute;seau. Mise en place d'une politique de s&amp;eacute;curit&amp;eacute; r&amp;eacute;seau. Propositions de strat&amp;eacute;gies de s&amp;eacute;curit&amp;eacute; r&amp;eacute;seau: p&amp;eacute;rim&amp;egrave;tre de s&amp;eacute;curit&amp;eacute;, goulet d'&amp;eacute;tranglement, moindre privil&amp;egrave;ge, confidentialit&amp;eacute; des flux r&amp;eacute;seau. Survol des technologies mat&amp;eacute;rielles et logicielles. Protection des acc&amp;egrave;s distants.</description>
+        <prerequisites>
+            <acronyms>IFT-2006</acronyms>
+            <acronyms>GIF-3001</acronyms>
+            <acronyms>GLO-2000</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Sécurité dans les réseaux informatiques</title>
+    </courses>
+    <courses>
+        <acronym>GLO-2004</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>L'objectif principal de ce cours est de former l'&amp;eacute;tudiant &amp;agrave; la conception d'applications logicielles d'envergure selon les principes fondamentaux du g&amp;eacute;nie logiciel et de la programmation par objets. L'approche &amp;laquo;&amp;nbsp;Unified&amp;nbsp;&amp;raquo;, combin&amp;eacute;e &amp;agrave; l'apprentissage du langage UML, est pr&amp;eacute;sent&amp;eacute;e et mise en pratique dans un projet de conception et d'implantation d'un syst&amp;egrave;me logiciel r&amp;eacute;alis&amp;eacute; en groupe. Le langage de programmation Java est utilis&amp;eacute; comme outil d'implantation.</description>
+        <prerequisites>
+            <acronyms>GIF-1003</acronyms>
+            <acronyms>IFT-1904</acronyms>
+            <acronyms>IFT-2005</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>3</labHours>
+            <otherHours>3</otherHours>
+        </timeDedicated>
+        <title>Génie logiciel orienté objet</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3104</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Architecture des syst&amp;egrave;mes r&amp;eacute;partis: mod&amp;egrave;les et objectifs. R&amp;eacute;seaux d'ordinateurs, protocoles de communication et mod&amp;egrave;les d'interconnexion des syst&amp;egrave;mes ouverts. Appels de proc&amp;eacute;dures &amp;agrave; distance: arguments, nommage, s&amp;eacute;mantique et implantation. Architecture client serveur. Syst&amp;egrave;me distribu&amp;eacute; orient&amp;eacute; objets: architecture, concept et programmation. M&amp;eacute;canismes de coordination. Notions d'algorithmes distribu&amp;eacute;s, syst&amp;egrave;mes intelligents distribu&amp;eacute;s. Exemples: CORBA, DCOM. &amp;Eacute;tude de cas.</description>
+        <prerequisites>
+            <acronyms>IFT-2001</acronyms>
+            <acronyms>GLO-2001</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>IFT-2005</acronyms>
+            <acronyms>IFT-1702</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Systèmes informatiques répartis</title>
+    </courses>
+    <courses>
+        <acronym>GLO-3013</acronym>
+        <credits>4</credits>
+        <cycle>Premier</cycle>
+        <description>Ce cours vise &amp;agrave; approfondir la formation de l'&amp;eacute;tudiant avec des activit&amp;eacute;s de synth&amp;egrave;se, de conception et de design afin de d&amp;eacute;velopper ses connaissances de l'ing&amp;eacute;nierie, son sens critique, sa cr&amp;eacute;ativit&amp;eacute; et sa motivation dans la perspective d'une meilleure int&amp;eacute;gration des connaissances. La m&amp;eacute;thodologie et l'optimisation sont les principaux th&amp;egrave;mes abord&amp;eacute;s &amp;agrave; l'occasion de ce projet. Le travail en &amp;eacute;quipe, la gestion d'un projet, des m&amp;eacute;thodes de recherche de l'information, des techniques de communication &amp;eacute;crite, orale et visuelle sont hautement privil&amp;eacute;gi&amp;eacute;s.</description>
+        <prerequisites>
+            <acronyms>IFT-2901</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>2</courseHours>
+            <labHours>4</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Projet de conception multidisciplinaire</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3105</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>L'&amp;eacute;tudiant, au sein d'une &amp;eacute;quipe, est plac&amp;eacute; en situation de responsabilit&amp;eacute;, avec des d&amp;eacute;cisions &amp;agrave; prendre dans un contexte de projet &amp;agrave; r&amp;eacute;aliser. Cette activit&amp;eacute; doit l'initier &amp;agrave; la d&amp;eacute;marche professionnelle et l'habituer &amp;agrave; r&amp;eacute;soudre des probl&amp;egrave;mes concrets auxquels les informaticiens, analystes et programmeurs, sont constamment confront&amp;eacute;s. En participant &amp;agrave; la r&amp;eacute;alisation, du d&amp;eacute;but &amp;agrave; la fin, d'un projet d'une certaine ampleur, l'&amp;eacute;tudiant fera l'acquisition d'habilet&amp;eacute;s dans les outils et m&amp;eacute;thodes de travail utilis&amp;eacute;s dans certains secteurs cibl&amp;eacute;s de l'industrie informatique.</description>
+        <timeDedicated>
+            <courseHours>0</courseHours>
+            <labHours>9</labHours>
+            <otherHours>0</otherHours>
+        </timeDedicated>
+        <title>Projet industriel</title>
+    </courses>
+    <courses>
+        <acronym>IFT-1004</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Paradigmes et langages de programmation. Introduction &amp;agrave; la r&amp;eacute;solution de probl&amp;egrave;mes avec Python. Du langage interpr&amp;eacute;t&amp;eacute;, Python, vers un langage compil&amp;eacute; et structur&amp;eacute;, le langage C. Sp&amp;eacute;cification d'un probl&amp;egrave;me et d&amp;eacute;composition fonctionnelle. Programmation modulaire. Notions de bo&amp;icirc;te noire, d'interface, de pr&amp;eacute;condition et de postcondition. Traitement des erreurs et m&amp;eacute;canisme de gestion des exceptions. R&amp;eacute;cursivit&amp;eacute;. Introduction &amp;agrave; la complexit&amp;eacute; des algorithmes. Normes de programmation.</description>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Introduction à la programmation</title>
+    </courses>
+    <courses>
+        <acronym>GLO-1901</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Ce cours introduit les principaux paradigmes de programmation servant &amp;agrave; la r&amp;eacute;solution de probl&amp;egrave;mes en informatique. Il couvre notamment les programmations proc&amp;eacute;durale, fonctionnelle, orient&amp;eacute;e objet et &amp;eacute;v&amp;eacute;nementielle. Pour illustrer ces paradigmes, il utilise le langage Python.</description>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>3</labHours>
+            <otherHours>3</otherHours>
+        </timeDedicated>
+        <title>Introduction à la programmation avec Python</title>
+    </courses>
+    <courses>
+        <acronym>IFT-1003</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>&amp;Eacute;tude des principales techniques de mod&amp;eacute;lisation et de conception des syst&amp;egrave;mes d'information. Phases de d&amp;eacute;veloppement d'un syst&amp;egrave;me d'information. Caract&amp;eacute;risation des phases d'analyse et de conception. Diff&amp;eacute;renciation des niveaux de mod&amp;eacute;lisation conceptuelle et logique et de conception physique. Principales &amp;eacute;tapes d'une analyse de besoins. Principales techniques de mod&amp;eacute;lisation conceptuelle des donn&amp;eacute;es (ex.: approche entit&amp;eacute; association) et des processus (ex.: diagrammes de flux d'information). Illustration sur un syst&amp;egrave;me existant. Principales techniques de mod&amp;eacute;lisation logique des donn&amp;eacute;es. Conception physique des donn&amp;eacute;es. Principales techniques de conception des traitements: diagrammes structur&amp;eacute;s de traitements, passage des diagrammes de flux de donn&amp;eacute;es aux diagrammes structur&amp;eacute;s de traitements, modularisation des traitements.</description>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Analyse et conception de systèmes d'information</title>
+    </courses>
+    <courses>
+        <acronym>GLO-3100</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Algorithmes de cryptographie: DES, RSA, fonction de hachage, etc.; complexit&amp;eacute; des cryptages; la crypto-analyse. Protocoles cryptographiques: protocoles d'authentification, protocoles de distribution de cl&amp;eacute;s, protocoles Zero Knowledge. Les propri&amp;eacute;t&amp;eacute;s usuelles de s&amp;eacute;curit&amp;eacute;: authentification, int&amp;eacute;grit&amp;eacute;, confidentialit&amp;eacute;, etc. Failles dans des protocoles cryptographiques: faille de type, faille de fra&amp;icirc;cheur, etc. &amp;Eacute;tude d'un cas concret: SSL.</description>
+        <prerequisites>
+            <acronyms>IFT-3001</acronyms>
+            <acronyms>IFT-3901</acronyms>
+            <acronyms>GIF-4104</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Cryptographie et sécurité informatique</title>
+    </courses>
+    <courses>
+        <acronym>GLO-3101</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Enti&amp;egrave;rement bas&amp;eacute; sur le guide du Project Management Institute (PMI), ce cours offre une formation pratique pour le d&amp;eacute;marrage, la planification, l'ex&amp;eacute;cution, la surveillance et la cl&amp;ocirc;ture d'un projet. Domaines de la gestion de projet: int&amp;eacute;gration, contenu, d&amp;eacute;lais, co&amp;ucirc;ts, qualit&amp;eacute;, ressources humaines, risques et approvisionnements. &amp;Eacute;tudes de cas et exercices en conception de logiciels.</description>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Gestion de projets informatiques: méthodes et outils</title>
+    </courses>
+    <courses>
+        <acronym>IFT-1000</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Substitution textuelle et &amp;eacute;galit&amp;eacute;. R&amp;egrave;gle de Leibniz. Op&amp;eacute;rateurs bool&amp;eacute;ens, expressions bool&amp;eacute;ennes, calcul propositionnel. Quantification, types. Calcul des pr&amp;eacute;dicats, quantificateur universel, quantificateur existentiel. Induction math&amp;eacute;matique, d&amp;eacute;finitions inductives. Autres techniques de preuve: preuves par cas, preuves par implication mutuelle, preuves par contradiction, preuves par contraposition. Applications: mod&amp;eacute;lisation de propositions &amp;eacute;nonc&amp;eacute;es en fran&amp;ccedil;ais, sp&amp;eacute;cification et v&amp;eacute;rification de programmes.</description>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Logique et techniques de preuve</title>
+    </courses>
+    <courses>
+        <acronym>IFT-4001</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Probl&amp;egrave;mes de satisfaction de contraintes. Programmation par contraintes. Mod&amp;eacute;lisation. Fouilles avec retours arri&amp;egrave;re. Heuristiques de recherche. Algorithmes de coh&amp;eacute;rence locale. Contraintes globales et leurs algorithmes de filtrage. Programmation lin&amp;eacute;aire. Algorithme du simplex. Th&amp;eacute;or&amp;egrave;me de dualit&amp;eacute;.</description>
+        <prerequisites>
+            <acronyms>IFT-3001</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Optimisation combinatoire</title>
+    </courses>
+    <courses>
+        <acronym>GLO-1010</acronym>
+        <credits>1</credits>
+        <cycle>Premier</cycle>
+        <description>Expos&amp;eacute;s anim&amp;eacute;s la plupart par des ing&amp;eacute;nieurs logiciels œuvrant tant en milieu industriel qu'en recherche pour donner &amp;agrave; l'&amp;eacute;tudiant une image plus concr&amp;egrave;te et plus globale des domaines d'intervention de l'ing&amp;eacute;nieur logiciel. Il vise &amp;agrave; faire conna&amp;icirc;tre diff&amp;eacute;rents aspects de la carri&amp;egrave;re en g&amp;eacute;nie logiciel et &amp;agrave; amener l'&amp;eacute;tudiant &amp;agrave; mieux d&amp;eacute;finir ses objectifs de carri&amp;egrave;re. On y fait &amp;eacute;galement un survol des donn&amp;eacute;es sur le march&amp;eacute; du travail et des meilleures strat&amp;eacute;gies de r&amp;eacute;ussite.</description>
+        <timeDedicated>
+            <courseHours>1</courseHours>
+            <labHours>0</labHours>
+            <otherHours>2</otherHours>
+        </timeDedicated>
+        <title>Pratique du génie logiciel</title>
+    </courses>
+    <courses>
+        <acronym>IFT-4102</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Agents intelligents. R&amp;eacute;solution de probl&amp;egrave;me par exploration&amp;nbsp;: approches classiques, inform&amp;eacute;es et d'adversit&amp;eacute;. Probl&amp;egrave;mes de satisfaction de contraintes. Apprentissage automatique&amp;nbsp;: supervis&amp;eacute; (arbres de d&amp;eacute;cision, ensembles, approches statistiques, r&amp;eacute;seaux de neurones, etc.), non supervis&amp;eacute; et par renforcement. Raisonnement probabiliste et prise de d&amp;eacute;cision (simple et complexe). Applications de l'intelligence artificielle.</description>
+        <prerequisites>
+            <acronyms>IFT-2000</acronyms>
+            <acronyms>IFT-2900</acronyms>
+            <acronyms>GLO-2100</acronyms>
+            <acronyms>IFT-2008</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>STT-1000</acronyms>
+            <acronyms>STT-2920</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Concepts avancés pour systèmes intelligents</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3103</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>&amp;Eacute;tude des notions th&amp;eacute;oriques et des technologies particuli&amp;egrave;res aux bases de donn&amp;eacute;es mises en oeuvre dans diff&amp;eacute;rents domaines d'application comme les bases &amp;agrave; r&amp;eacute;f&amp;eacute;rences spatiales, les bases d'images et de sons, les entrep&amp;ocirc;ts de donn&amp;eacute;es et les syst&amp;egrave;mes OLAP, les bases de donn&amp;eacute;es m&amp;eacute;dico-biologiques. Deux ou trois th&amp;eacute;matiques majeures sont choisies en d&amp;eacute;but du cours et les notions propres &amp;agrave; celles-ci seront introduites afin de pouvoir comprendre et r&amp;eacute;aliser une mise en oeuvre de bases de donn&amp;eacute;es dans le cadre de ces projets. Le choix des outils de r&amp;eacute;alisation tient compte des technologies en usage, comme par exemple ceux de la famille Oracle. Quelques interventions par des sp&amp;eacute;cialistes sont pr&amp;eacute;vues, afin de mieux cadrer ces applications majeures dans la pratique professionnelle.</description>
+        <prerequisites>
+            <acronyms>IFT-2004</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>1</labHours>
+            <otherHours>5</otherHours>
+        </timeDedicated>
+        <title>Applications avancées des bases de données</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3100</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Introduction aux concepts de graphisme par ordinateur. Construction d'un progiciel graphique. Rappel des notions de base en calcul vectoriel et en g&amp;eacute;om&amp;eacute;trie et leur utilisation en infographie. Objets g&amp;eacute;om&amp;eacute;triques &amp;eacute;l&amp;eacute;mentaires et mod&amp;eacute;lisation g&amp;eacute;om&amp;eacute;trique de base. Transformations ponctuelles et visuelles. D&amp;eacute;coupage d'une sc&amp;egrave;ne. Calcul d'une sc&amp;egrave;ne visible. Illumination des objets. G&amp;eacute;n&amp;eacute;ration de texture. Mod&amp;egrave;les statiques et mod&amp;egrave;les stochastiques de repr&amp;eacute;sentation et de construction d'objets.</description>
+        <prerequisites>
+            <acronyms>IFT-2005</acronyms>
+            <acronyms>GIF-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Infographie</title>
+    </courses>
+    <courses>
+        <acronym>IFT-4003</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Introduction &amp;agrave; la th&amp;eacute;orie de l'information. Codes de Huffman. Encodage arithm&amp;eacute;tique. Techniques bas&amp;eacute;es sur les dictionnaires. Techniques par pr&amp;eacute;diction. Techniques par transform&amp;eacute;es. Techniques &amp;eacute;num&amp;eacute;ratives. Compression audio. Compression d'images. Compression vid&amp;eacute;o.</description>
+        <prerequisites>
+            <acronyms>IFT-3001</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Compression de données</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3101</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Processus g&amp;eacute;n&amp;eacute;ral de la compilation. Analyse lexicale et automates finis. Analyse syntaxique descendante pr&amp;eacute;dictive et grammaires hors contexte. Forme interm&amp;eacute;diaire. Grammaires attribu&amp;eacute;es. Typage. Infrastructure d'ex&amp;eacute;cution. Allocation de la m&amp;eacute;moire. G&amp;eacute;n&amp;eacute;ration du code. Optimisation.</description>
+        <prerequisites>
+            <acronyms>IFT-2002</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Compilation et interprétation</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2101</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Survol du shell Unix. Services offerts et logiciels correspondants: courrier &amp;eacute;lectronique, news, FTP, W3, Gopher. Choix de l'&amp;eacute;quipement: serveur, &amp;eacute;quipement de t&amp;eacute;l&amp;eacute;communications. Lien avec le r&amp;eacute;seau Internet: ISDN, T1, T3. Liens avec les clients: PPP, Slip, liens texte. Aspects logiciels: configuration du serveur, adresses IP, logiciels tels que httpd, pppd. S&amp;eacute;curit&amp;eacute;, firewalls. Gestion: cr&amp;eacute;ation de comptes, gestion des mots de passe. Langages: Perl, Java, HTML, TCL/TK, VRML. Autres architectures: NT, OS/2, MacOS. Travaux pratiques en laboratoire.</description>
+        <prerequisites>
+            <acronyms>IFT-2006</acronyms>
+            <acronyms>GIF-3001</acronyms>
+            <acronyms>GLO-2000</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Protocoles et technologies Internet</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2006</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Caract&amp;eacute;ristiques mat&amp;eacute;rielles et logicielles des r&amp;eacute;seaux d'ordinateurs: topologie, mod&amp;egrave;le en couches. Couche physique: techniques de transmission, bande passante, d&amp;eacute;bit binaire, multiplexage, techniques de commutation. Contr&amp;ocirc;le de liaison: contr&amp;ocirc;le d'erreurs, contr&amp;ocirc;le de flux, protocoles avec fen&amp;ecirc;tre d'anticipation. Contr&amp;ocirc;le d'acc&amp;egrave;s au m&amp;eacute;dium dans les r&amp;eacute;seaux locaux. Couche r&amp;eacute;seau: protocole IP, routage, contr&amp;ocirc;le de congestion, interconnexion de r&amp;eacute;seaux. Couche transport: notion de la qualit&amp;eacute; du service, protocoles de transport d'Internet. Couche application: syst&amp;egrave;me de noms de domaines, messagerie &amp;eacute;lectronique, le Web.</description>
+        <prerequisites>
+            <acronyms>IFT-1002</acronyms>
+            <acronyms>GIF-1001</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Téléinformatique</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2007</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Historique des m&amp;eacute;thodologies de conception et d'analyse des syst&amp;egrave;mes orient&amp;eacute;s objet. Langage visuel et principes de trac&amp;eacute; des diagrammes. Pr&amp;eacute;sentation des concepts, des &amp;eacute;l&amp;eacute;ments graphiques et des principes de mod&amp;eacute;lisation employ&amp;eacute;s dans UML. Pr&amp;eacute;sentation des diagrammes employ&amp;eacute;s sp&amp;eacute;cialement dans les phases d'analyse et de conception (Use Case, diagrammes d'objets et diagrammes de classe, diagrammes de collaboration et diagrammes d'activit&amp;eacute;s, diagrammes d'&amp;eacute;tats). Processus it&amp;eacute;ratif de conception d'un syst&amp;egrave;me objet. Progression synchronis&amp;eacute;e dans les diverses vues: vue fonctionnelle ou mod&amp;eacute;lisation des processus, vue dynamique ou mod&amp;eacute;lisation par &amp;eacute;tats-&amp;eacute;v&amp;eacute;nements ou par &amp;eacute;tats-actions, vue structurale ou mod&amp;eacute;lisation des relations entre les objets. Diagrammes SEN et SAN et m&amp;eacute;thode des attributs image dans la construction des syst&amp;egrave;mes complexes. Exemples et mini-projets utilisant entre autres UML.</description>
+        <prerequisites>
+            <acronyms>GIF-1003</acronyms>
+            <acronyms>IFT-2005</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>IFT-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>1</courseHours>
+            <labHours>2</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Analyse et conception des systèmes orientés objets</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2102</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Concepts de base de la s&amp;eacute;curit&amp;eacute; informatique. M&amp;eacute;thodologies, normes et analyse de risques. Survol des technologies: cryptographie, authentification, PKI, cartes &amp;agrave; puces, etc. Architecture r&amp;eacute;seau, web, firewalls, audits, s&amp;eacute;curit&amp;eacute; physique, d&amp;eacute;tection d'intrusions, v&amp;eacute;rification et maintenance d'un syst&amp;egrave;me d'information. D&amp;eacute;veloppement d'applications s&amp;eacute;curitaires. Identification des types d'outils et sources d'information.</description>
+        <prerequisites>
+            <acronyms>IFT-1003</acronyms>
+            <acronyms>SIO-2103</acronyms>
+            <acronyms>GLO-2003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>3</labHours>
+            <otherHours>3</otherHours>
+        </timeDedicated>
+        <title>Aspects pratiques de la sécurité informatique</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2004</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Architecture du logiciel SGBD. Mod&amp;egrave;le relationnel: propri&amp;eacute;t&amp;eacute;s, contraintes et alg&amp;egrave;bre relationnelle. &amp;Eacute;tude des op&amp;eacute;rateurs avanc&amp;eacute;s et de leurs propri&amp;eacute;t&amp;eacute;s: division, jointures externes et semi-jointure. D&amp;eacute;pendance fonctionnelle, calcul de la fermeture. Formes normales. &amp;Eacute;tude approfondie du langage SQL: DDL et DML. Vues relationnelles: contrainte pour la mise &amp;agrave; jour. Indexation et optimisation. Interface avec un L3G (Java). M&amp;eacute;canismes de persistance et de recouvrement des donn&amp;eacute;es et de gestion des transactions. Survol des concepts avanc&amp;eacute;s de SGBD tels que le SGBD distribu&amp;eacute;, OLAP et Objet.</description>
+        <prerequisites>
+            <acronyms>IFT-1001</acronyms>
+            <acronyms>IFT-1004</acronyms>
+            <acronyms>GLO-1900</acronyms>
+            <acronyms>GLO-1901</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Modèles et langages des bases de données</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2100</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Introduction &amp;agrave; la structure des fichiers (historique). Terminologie, concepts de base et outils pour les traitements de fichiers. Techniques de gestion des tampons. Technologie des disques optiques. Modes d'organisation des fichiers et applications: s&amp;eacute;quentiel, s&amp;eacute;quentiel index&amp;eacute;, relatif. Techniques d'acc&amp;egrave;s: s&amp;eacute;quentiel, index&amp;eacute;, direct. Traitement des fichiers &amp;agrave; cl&amp;eacute;s multiples: les fichiers invers&amp;eacute;s et les fichiers matriciels. Fusion de fichiers et tri externe. Compression de donn&amp;eacute;es. Formats de fichiers, conversion de formats. Travaux de programmation effectu&amp;eacute;s en C et C++.</description>
+        <prerequisites>
+            <acronyms>IFT-2000</acronyms>
+            <acronyms>IFT-2900</acronyms>
+            <acronyms>IFT-2008</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>3</labHours>
+            <otherHours>3</otherHours>
+        </timeDedicated>
+        <title>Gestion de fichiers</title>
+    </courses>
+    <courses>
+        <acronym>IFT-3501</acronym>
+        <credits>1</credits>
+        <cycle>Premier</cycle>
+        <description>Au terme de ce stage, l'&amp;eacute;tudiant doit soumettre un rapport oral et &amp;eacute;crit qui fera l'objet d'une &amp;eacute;valuation p&amp;eacute;dagogique. Des renseignements concernant la pr&amp;eacute;sentation orale du stage ainsi que la r&amp;eacute;daction du rapport seront transmis &amp;agrave; l'&amp;eacute;tudiant par le professeur responsable du s&amp;eacute;minaire. La pr&amp;eacute;sence de l'&amp;eacute;tudiant au s&amp;eacute;minaire est obligatoire.</description>
+        <prerequisites>
+            <acronyms>IFT-3500</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>1</courseHours>
+            <labHours>1</labHours>
+            <otherHours>1</otherHours>
+        </timeDedicated>
+        <title>Séminaire de stage coopératif en informatique II</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2008</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Notions d'ordre&amp;nbsp;: comportement du meilleur cas, du cas moyen et du pire cas. Notion de types abstraits et modularit&amp;eacute;. Programmation g&amp;eacute;n&amp;eacute;rique. Structures de donn&amp;eacute;es classiques&amp;nbsp;: les listes, les piles, les files (avec et sans priorit&amp;eacute;), les arborescences, les graphes, les tables de dispersion et les monceaux binaires. Algorithmes de tri.</description>
+        <prerequisites>
+            <acronyms>GIF-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>2</labHours>
+            <otherHours>4</otherHours>
+        </timeDedicated>
+        <title>Algorithmes et structures de données</title>
+    </courses>
+    <courses>
+        <acronym>GLO-4000</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Facteurs humains et interfaces utilisateurs. M&amp;eacute;thodes de collecte des besoins. Communication orient&amp;eacute;e utilisateurs. Analyse des t&amp;acirc;ches. Traitement de l'information par le cerveau. Standardisation nationale et internationale. Styles d'interaction et types d'interfaces. M&amp;eacute;thodes de conception et d'&amp;eacute;valuation de logiciels interactifs. Outils de d&amp;eacute;veloppement d'interfaces. R&amp;egrave;gles d'interfa&amp;ccedil;age (&amp;laquo;guidelines&amp;raquo;). Tendances en mati&amp;egrave;re d'interfaces utilisateurs du futur.</description>
+        <timeDedicated>
+            <courseHours>2</courseHours>
+            <labHours>1</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Interface personne-machine</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2002</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Introduction &amp;agrave; la th&amp;eacute;orie des machines abstraites et des langages formels. Classification des machines abstraites: automates finis, automates &amp;agrave; pile, machine de Turing. Classification des langages: r&amp;eacute;guliers, non contextuels, r&amp;eacute;cursifs, r&amp;eacute;cursivement &amp;eacute;num&amp;eacute;rables, non r&amp;eacute;cursivement &amp;eacute;num&amp;eacute;rables. Grammaires: syntaxe, classification de Chomsky, rapports avec les machines abstraites et les langages. Th&amp;eacute;orie des s&amp;eacute;quences. Ensembles finis, infinis, d&amp;eacute;nombrables et non d&amp;eacute;nombrables.</description>
+        <prerequisites>
+            <acronyms>MAT-1902</acronyms>
+            <acronyms>MAT-1919</acronyms>
+            <acronyms>MAT-1310</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Informatique théorique</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2003</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>D&amp;eacute;finition et domaines d'application de l'intelligence artificielle. Formalismes de repr&amp;eacute;sentation des connaissances: r&amp;eacute;seaux s&amp;eacute;mantiques, logique des pr&amp;eacute;dicats, logique clausale, etc. Un langage d'intelligence artificielle: Prolog. Techniques de r&amp;eacute;solution de probl&amp;egrave;mes. Applications: jeux, planification, traitement de la langue naturelle, syst&amp;egrave;mes experts. Travaux de programmation effectu&amp;eacute;s en Prolog.</description>
+        <prerequisites>
+            <acronyms>IFT-1000</acronyms>
+            <acronyms>MAT-1310</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>IFT-1004</acronyms>
+            <acronyms>GLO-1900</acronyms>
+            <acronyms>GLO-1901</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Intelligence artificielle I</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2103</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>&amp;Eacute;tude du processus complet de la conception d'un jeu vid&amp;eacute;o 3D. Sc&amp;eacute;narisation, design de personnages, mod&amp;eacute;lisation 3D, animation d'un Biped, programmation dans un environnement 3D, gestion de la cam&amp;eacute;ra, de la physique, des collisions. L'accent est mis davantage sur les r&amp;eacute;sultats et sur le d&amp;eacute;veloppement d'un projet de session qui est la production d'un jeu vid&amp;eacute;o. Des outils puissants et modernes sont utilis&amp;eacute;s pour la r&amp;eacute;alisation du travail. Le cours est donn&amp;eacute; en partie en laboratoire et en partie en classe.</description>
+        <prerequisites>
+            <acronyms>IFT-2105</acronyms>
+            <acronyms>IFT-2005</acronyms>
+            <acronyms>GIF-1003</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Programmation de jeux vidéo</title>
+    </courses>
+    <courses>
+        <acronym>IFT-2001</acronym>
+        <credits>3</credits>
+        <cycle>Premier</cycle>
+        <description>Historique et &amp;eacute;volution. R&amp;ocirc;les, composantes et fonction d'un syst&amp;egrave;me d'exploitation. Protection et performance d'un syst&amp;egrave;me. Structures mat&amp;eacute;rielles n&amp;eacute;cessaires. Processus et allocation du CPU. Gestion de la m&amp;eacute;moire et m&amp;eacute;moire virtuelle. M&amp;eacute;moire secondaire et cache. Gestion des entr&amp;eacute;es/sorties. Syst&amp;egrave;mes de fichiers. Coordination de processus et impasses. Programmation concurrente. &amp;Eacute;tude de cas: UNIX, DOS, VMS, VM, WINDOWS.</description>
+        <prerequisites>
+            <acronyms>IFT-1002</acronyms>
+            <acronyms>GIF-1001</acronyms>
+        </prerequisites>
+        <prerequisites>
+            <acronyms>IFT-2000</acronyms>
+            <acronyms>IFT-2900</acronyms>
+            <acronyms>IFT-2008</acronyms>
+        </prerequisites>
+        <timeDedicated>
+            <courseHours>3</courseHours>
+            <labHours>0</labHours>
+            <otherHours>6</otherHours>
+        </timeDedicated>
+        <title>Systèmes d'exploitation</title>
+    </courses>
 </courses>

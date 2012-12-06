@@ -10,6 +10,9 @@ import javax.inject.Inject;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +26,11 @@ import cours.ulaval.glo4003.controller.model.CalendarModel;
 import cours.ulaval.glo4003.controller.model.ScheduleInformationModel;
 import cours.ulaval.glo4003.controller.model.SectionModel;
 import cours.ulaval.glo4003.controller.model.TimeSlotModel;
+import cours.ulaval.glo4003.domain.Notification;
 import cours.ulaval.glo4003.domain.Role;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.ScheduleGenerator;
+import cours.ulaval.glo4003.domain.ScheduleStatus;
 import cours.ulaval.glo4003.domain.Section;
 import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.Time;
@@ -56,34 +61,38 @@ public class ScheduleController {
 	private UserRepository userRepository;
 
 	@Inject
-	private ConflictDetector conflictDetector;
-
-	@Inject
 	private ScheduleGenerator generator;
 
 	@Inject
 	private ObjectMapper mapper;
 
+	@Inject
+	JavaMailSenderImpl mailSender;
+
+	@Inject
+	private ConflictDetector conflictDetector;
+
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView schedule() {
+	public ModelAndView schedule(Principal principal) {
 		ModelAndView mv = new ModelAndView("schedule");
 
 		List<ScheduleInformationModel> scheduleModels = new ArrayList<ScheduleInformationModel>();
+		Map<String, String> statuses = new HashMap<String, String>();
 
 		for (Schedule schedule : scheduleRepository.findAll()) {
 			schedule.calculateScore();
 			scheduleModels.add(new ScheduleInformationModel(schedule));
+			statuses.put(schedule.getId(), String.valueOf(schedule.getStatus(principal.getName())));
 		}
 
+		mv.addObject("statuses", statuses);
 		mv.addObject("schedules", scheduleModels);
 		return mv;
 	}
 
 	@RequestMapping(value = "/{id}/{view}", method = RequestMethod.GET)
 	public ModelAndView scheduleView(@PathVariable String id, @PathVariable String view, Principal principal) throws Exception {
-
 		Schedule schedule = scheduleRepository.findById(id);
-		detectAndAddConflictsToSchedule(schedule);
 		CalendarModel calendarModel = new CalendarModel(schedule);
 
 		ModelAndView mv;
@@ -219,7 +228,6 @@ public class ScheduleController {
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.GET)
 	public ModelAndView editSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc, @PathVariable String view) {
-
 		ModelAndView mv = new ModelAndView("editsection");
 		mv.addObject("semester", semester);
 		mv.addObject("year", year);
@@ -240,7 +248,6 @@ public class ScheduleController {
 		try {
 			Schedule schedule = scheduleRepository.findById(id);
 
-			detectAndAddConflictsToSchedule(schedule);
 			updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
 			mv.addObject("error", ControllerMessages.SUCCESS);
@@ -261,9 +268,6 @@ public class ScheduleController {
 			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
 
 		Schedule schedule = scheduleRepository.findById(id);
-
-		detectAndAddConflictsToSchedule(schedule);
-
 		updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 
 		return scheduleView(id, view, principal);
@@ -286,20 +290,25 @@ public class ScheduleController {
 
 		List<TimeSlot> courseTimeSlots = scheduleRepository.findById(id).getSections().get(nrc).getCourseTimeSlots();
 
+		Schedule schedule = scheduleRepository.findById(id);
 		for (TimeSlot slot : courseTimeSlots) {
 			if (getDayOfWeekAbreviation(slot) == oldDay || slot.getStartTime().equals(oldTmStart)) {
 				courseTimeSlots.remove(slot);
 				courseTimeSlots.add(newTimeSlot);
-				scheduleRepository.findById(id).getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
+				schedule.getSections().get(nrc).setCourseTimeSlots(courseTimeSlots);
 			}
 		}
 
 		TimeSlot labTimeSlot = scheduleRepository.findById(id).getSections().get(nrc).getLabTimeSlot();
 		if (labTimeSlot != null) {
 			if (getDayOfWeekAbreviation(labTimeSlot) == oldDay || labTimeSlot.getStartTime().equals(oldTmStart)) {
-				scheduleRepository.findById(id).getSections().get(nrc).setLabTimeSlot(newTimeSlot);
+				schedule.getSections().get(nrc).setLabTimeSlot(newTimeSlot);
 			}
 		}
+
+		schedule.clearConflicts();
+		conflictDetector.detectConflict(schedule);
+		scheduleRepository.store(schedule);
 
 		return scheduleView(id, "calendar", principal);
 	}
@@ -325,7 +334,6 @@ public class ScheduleController {
 		Schedule schedule = scheduleRepository.findById(id);
 		Schedule selectedScheduleToReuse = scheduleRepository.findById(oldid);
 		schedule.copySectionsFromOtherSchedule(selectedScheduleToReuse);
-		detectAndAddConflictsToSchedule(schedule);
 		CalendarModel calendarModel = new CalendarModel(schedule);
 
 		scheduleRepository.store(schedule);
@@ -369,8 +377,22 @@ public class ScheduleController {
 		return newDayOfWeek;
 	}
 
+	@RequestMapping(value = "/accept/{scheduleId}", method = RequestMethod.POST)
+	@ResponseBody
+	public String acceptSchedule(@PathVariable String scheduleId, Principal principal, String status) {
+		Schedule schedule = scheduleRepository.findById(scheduleId);
+		User user = userRepository.findByIdul(principal.getName());
+		user.acceptSchedule(schedule, Enum.valueOf(ScheduleStatus.class, status));
+		try {
+			scheduleRepository.store(schedule);
+		} catch (Exception e) {
+		}
+
+		return ControllerMessages.SUCCESS;
+	}
+
 	@RequestMapping(value = "/delete/{scheduleId}", method = RequestMethod.GET)
-	public ModelAndView deleteSchedule(@PathVariable String scheduleId) {
+	public ModelAndView deleteSchedule(@PathVariable String scheduleId, Principal principal) {
 		Boolean error = false;
 		String errorMessage = "";
 		try {
@@ -380,7 +402,7 @@ public class ScheduleController {
 			errorMessage = e.getMessage();
 		}
 
-		ModelAndView mv = schedule();
+		ModelAndView mv = schedule(principal);
 		if (error) {
 			mv.addObject("error", errorMessage);
 		} else {
@@ -413,6 +435,32 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/{id}/sendEmail", method = RequestMethod.POST)
+	@ResponseBody
+	public String sendNewScheduleReadyNotificationEmail(@PathVariable String id) {
+		for (String idul : scheduleRepository.findById(id).getConcernedUsers()) {
+			User user = userRepository.findByIdul(idul);
+			if (user.hasValidEmailAdress()) {
+				sendEmailTo(user.getEmailAddress());
+			}
+		}
+
+		return "success";
+	}
+
+	private void sendEmailTo(String emailAddress) {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("noreply@gmail.com");
+		msg.setTo(emailAddress);
+		msg.setSubject("Schedule Manager - Nouvel horaire");
+		msg.setText(Notification.NEW_SCHEDULE);
+		try {
+			mailSender.send(msg);
+		} catch (MailException ex) {
+			System.err.println(ex.getMessage());
+		}
+	}
+
 	private List<SectionModel> getSections(Schedule schedule) {
 		List<SectionModel> sections = new ArrayList<SectionModel>();
 		for (Section sectionInSchedule : schedule.getSections().values()) {
@@ -421,13 +469,4 @@ public class ScheduleController {
 		return sections;
 	}
 
-	private void detectAndAddConflictsToSchedule(Schedule schedule) {
-		schedule.clearConflicts();
-		conflictDetector.detectConflict(schedule);
-	}
-
-	// WARNING : FOR TEST PURPOSE ONLY
-	public void setConflictDetector(ConflictDetector conflictDetector) {
-		this.conflictDetector = conflictDetector;
-	}
 }

@@ -35,7 +35,6 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
-import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.ConcomittingCoursesConflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.Conflict;
 import cours.ulaval.glo4003.domain.conflictdetection.conflict.UnavailableTeacherConflict;
@@ -64,8 +63,6 @@ public class ScheduleControllerTest {
 	@Mock
 	private UserRepository mockedUserRepository;
 	@Mock
-	private ConflictDetector mockedConflictDetector;
-	@Mock
 	private ObjectMapper mapper;
 	@Mock
 	private ScheduleGenerator generator;
@@ -87,13 +84,11 @@ public class ScheduleControllerTest {
 		user.addRole(Role.ROLE_Responsable);
 		user.addRole(Role.ROLE_Enseignant);
 
-		controller.setConflictDetector(mockedConflictDetector);
-
 		Map<String, Section> sections = new HashMap<String, Section>();
 		course = mock(Course.class);
 		schedule = mock(Schedule.class);
 		principal = mock(Principal.class);
-		when(principal.getName()).thenReturn(A_USERNAME);
+		when(principal.getName()).thenReturn(AN_IDUL);
 		when(schedule.getSemester()).thenReturn(Semester.Automne);
 		Offering offering = mock(Offering.class);
 		List<String> years = Arrays.asList(A_YEAR);
@@ -120,9 +115,10 @@ public class ScheduleControllerTest {
 
 	@Test
 	public void canGetAllSchedules() {
-		ModelAndView mv = controller.schedule();
+		ModelAndView mv = controller.schedule(principal);
 
 		assertTrue(mv.getModel().containsKey("schedules"));
+		assertTrue(mv.getModel().containsKey("statuses"));
 	}
 
 	@Test
@@ -151,7 +147,6 @@ public class ScheduleControllerTest {
 
 		CalendarModel model = (CalendarModel) mv.getModel().get("schedule");
 		assertEquals(1, model.getTuesday().get(0).getConflicts().size());
-		verify(mockedConflictDetector).detectConflict(schedule);
 	}
 
 	@Test
@@ -164,7 +159,6 @@ public class ScheduleControllerTest {
 
 		CalendarModel model = (CalendarModel) mv.getModel().get("schedule");
 		assertEquals(2, model.getTuesday().get(0).getConflicts().size());
-		verify(mockedConflictDetector).detectConflict(schedule);
 	}
 
 	@Test
@@ -223,7 +217,6 @@ public class ScheduleControllerTest {
 		verify(schedule).delete(A_SECTION_NRC);
 		verify(schedule).add(any(Section.class));
 		verify(mockedScheduleRepository).store(schedule);
-		verify(mockedConflictDetector).detectConflict(schedule);
 	}
 
 	@Test
@@ -265,7 +258,7 @@ public class ScheduleControllerTest {
 
 	@Test
 	public void canDeleteASchedule() throws Exception {
-		controller.deleteSchedule(A_SCHEDULE_ID);
+		controller.deleteSchedule(A_SCHEDULE_ID, principal);
 
 		verify(mockedScheduleRepository).delete(A_SCHEDULE_ID);
 	}
@@ -310,6 +303,17 @@ public class ScheduleControllerTest {
 
 		assertEquals(true, mv.getModel().get("isLab"));
 		assertTrue(mv.getModel().containsKey("timeSlots"));
+	}
+
+	@Test
+	public void canAcceptSchedule() throws Exception {
+		String message = controller.acceptSchedule(A_SCHEDULE_ID, principal, "Accepted");
+
+		verify(mockedScheduleRepository).findById(A_SCHEDULE_ID);
+		verify(mockedUserRepository).findByIdul(AN_IDUL);
+		verify(mockedScheduleRepository).store(schedule);
+
+		assertEquals(message, ControllerMessages.SUCCESS);
 	}
 
 	private Section createSection() {

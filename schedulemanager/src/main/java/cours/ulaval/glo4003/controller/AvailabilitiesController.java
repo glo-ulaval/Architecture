@@ -20,14 +20,13 @@ import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 @RequestMapping(value = "/availabilities")
 public class AvailabilitiesController {
 
-	private ObjectMapper mapper = new ObjectMapper();
+	private final ObjectMapper mapper = new ObjectMapper();
 
 	@Inject
 	private AvailabilityRepository repository;
 
 	@RequestMapping(value = "")
 	public ModelAndView availabilities(HttpServletRequest request) {
-
 		User user = (User) request.getSession().getAttribute("user");
 		Availability availability = repository.findByIdul(user.getIdul());
 		ModelAndView mv = new ModelAndView("availabilities");
@@ -49,8 +48,7 @@ public class AvailabilitiesController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
-	public String availabilities(@RequestBody String availabilityJSON, HttpServletRequest request) {
-
+	public String editAvailabilities(@RequestBody String availabilityJSON, HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
 
 		AvailabilityModel model;

@@ -50,6 +50,26 @@ public final class ConfigManager {
 		return properties.getProperty("ProgramSheetFilePath");
 	}
 
+	public String getSMTPServerHost() {
+		return properties.getProperty("STMP.Server.host");
+	}
+
+	public Integer getSMTPServerPort() {
+		return Integer.decode(properties.getProperty("STMP.Server.port"));
+	}
+
+	public String getSMTPServerUsername() {
+		return properties.getProperty("STMP.Server.username");
+	}
+
+	public String getSMTPServerPassword() {
+		return properties.getProperty("STMP.Server.password");
+	}
+
+	public String getSMTPServerProtocol() {
+		return properties.getProperty("STMP.Server.protocol");
+	}
+
 	// Use for tests
 	public static void setConfigFilePath(String path) {
 		configFilePath = path;

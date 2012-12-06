@@ -40,6 +40,10 @@ body {
 	text-transform: capitalize;
 }
 
+.brightyellow {
+  background-color : #FFFF00;
+}
+
 .yellow {
 	background-color : #FFD078;
 }
@@ -70,4 +74,12 @@ body {
 
 .loading {
 	margin:10px;
+}
+
+.green {
+	color : #088A08;
+}
+
+.redtext {
+	color : #FE2E2E;
 }

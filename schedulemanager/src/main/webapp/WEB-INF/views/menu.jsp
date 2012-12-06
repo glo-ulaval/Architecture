@@ -22,7 +22,7 @@
 	<c:import url="header.jsp" />
 	<div class="container">
 		<c:url value="/search" var="searchurl" />
-		<div class="pull-right">
+		<div>
 			<form action="${searchurl}" method=POST scope="request">
 				<input type="text" name="keywords"
 					scope="request">
@@ -30,7 +30,6 @@
     value="Rechercher" style="margin-top:-10px;">
 			</form>
 		</div>
-		<br /> <br />
 		<c:if test="${confirm == true}">
 			<div class="alert alert-info">
 				<button type="button" class="close" data-dismiss="alert">×</button>

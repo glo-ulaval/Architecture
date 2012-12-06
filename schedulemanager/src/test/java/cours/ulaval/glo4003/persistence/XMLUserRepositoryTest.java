@@ -67,7 +67,7 @@ public class XMLUserRepositoryTest {
 	@Test
 	public void canFindUserByIdul() throws Exception {
 		User utilisateur = new User("utilisateur", "Utilisateur", "pass", Role.ROLE_Usager);
-		utilisateur.setEmailAdress("asd@email.com");
+		utilisateur.setEmailAddress("asd@email.com");
 		utilisateur.addNotification(new Notification("message", "path"));
 
 		repository.store(utilisateur);

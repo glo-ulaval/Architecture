@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ProgramParserIT {
 
-	private final static String PROGRAM_URL = "https://capsuleweb.ulaval.ca/pls/etprod7/y_bwckprog.p_afficher_fiche?p_session=200909&p_code_prog=B-GLO&p_code_majr=GLO&p_code_camp=";
+	private final static String PROGRAM_URL = "http://www2.ulaval.ca/les-etudes/programmes/repertoire/details/baccalaureat-en-informatique-b-sc-a.html";
 
 	@Test
 	public void canGetCoursesList() throws Exception {
@@ -16,10 +16,7 @@ public class ProgramParserIT {
 
 		List<String> coursesList = parser.getCoursesList();
 
-		assertTrue(coursesList.size() > 0);
-		for (String course : coursesList) {
-			assertTrue(course.contains(ProgramParser.BASE_URL));
-		}
+		assertTrue(coursesList.size() > 40);
 	}
 
 }

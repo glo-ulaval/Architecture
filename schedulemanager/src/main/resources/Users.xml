@@ -1,52 +1,140 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <users>
-    <users>
-        <idul>NATAW</idul>
-        <name>Nadia Tawbi</name>
-        <password>pass</password>
-        <roles>ROLE_Directeur</roles>
-        <roles>ROLE_Enseignant</roles>
-    </users>
-    <users>
-        <idul>ADMIN</idul>
-        <name>Administrateur</name>
-        <password>admin</password>
-        <roles>ROLE_Administrateur</roles>
-    </users>
-    <users>
-        <idul>NADUC33</idul>
-        <name>Nancy Duchesneau</name>
-        <password>pass</password>
-        <roles>ROLE_Responsable</roles>
-    </users>
-    <users>
-        <idul>LULAM50</idul>
-        <name>Luc Lamontagne</name>
-        <password>pass</password>
-        <roles>ROLE_Enseignant</roles>
-    </users>
-    <users>
-        <idul>MPPAR3</idul>
-        <name>Marc-Philippe Parent</name>
-        <password>pass</password>
-        <roles>ROLE_Enseignant</roles>
-    </users>
-    <users>
-        <idul>DELAU</idul>
-        <name>Denis Laurendeau</name>
-        <password>pass</password>
-        <roles>ROLE_Enseignant</roles>
-    </users>
-    <users>
-        <idul>ELOUD</idul>
-        <name>Elisabeth Oudar</name>
-        <password>pass</password>
-        <roles>ROLE_Usager</roles>
-    </users>
-        <users>
-        <idul>THEUD</idul>
-        <name>Thierry Eude</name>
-        <password>pass</password>
-        <roles>ROLE_Usager</roles>
-    </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>LULAM50</idul>
+    <name>Luc Lamontagne</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>CHCHE6</idul>
+    <name>Christian Chevalier</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>MPPAR3</idul>
+    <name>Marc-Philippe Parent</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress>glo4003.architecture@gmail.com</emailAddress>
+    <idul>NADUC33</idul>
+    <name>Nancy Duchesneau</name>
+    <password>pass</password>
+    <roles>ROLE_Responsable</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>PHGIG4</idul>
+    <name>Philippe Giguère</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>BEMOU</idul>
+    <name>Bernard Moulin</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>NATAW</idul>
+    <name>Nadia Tawbi</name>
+    <password>pass</password>
+    <roles>ROLE_Directeur</roles>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>ROBEA130</idul>
+    <name>Ronald Beaubrun</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+   <emailAddress></emailAddress>
+    <idul>ADMIN</idul>
+    <name>Administrateur</name>
+    <password>admin</password>
+    <roles>ROLE_Administrateur</roles>
+  </users>
+  <users>
+    <emailAddress>glo4003.architecture@gmail.com</emailAddress>
+    <idul>THEUD</idul>
+    <name>Thierry Eude</name>
+    <notifications>
+      <id>34563456</id> 
+      <message>Une de vos section(s) de cours a été modifiée.</message>
+      <path>/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90659/calendar</path>
+    </notifications>
+    <notifications>
+      <id>34883456</id>
+      <message>Une de vos section(s) de cours a été modifiée.</message>
+      <path>/schedule/editsection/2011-2012-Automne-1/2011-2012/Automne/90111/calendar</path>
+    </notifications>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>PATES16</idul>
+    <name>Pascal Tesson</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>FABOB</idul>
+    <name>Félix-Antoine Bourbonnais-Bigras</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>MOMEJ</idul>
+    <name>Mohamed Mejri</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>NABEL</idul>
+    <name>Nadir Belkhiter</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>DADUB100</idul>
+    <name>Danny Dubé</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>ABALI</idul>
+    <name>Abderrahim Alikacem</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>DELAU</idul>
+    <name>Denis Laurendeau</name>
+    <password>pass</password>
+    <roles>ROLE_Enseignant</roles>
+  </users>
+  <users>
+    <emailAddress></emailAddress>
+    <idul>ELOUD</idul>
+    <name>Elisabeth Oudar</name>
+    <password>pass</password>
+    <roles>ROLE_Usager</roles>
+  </users>
 </users>

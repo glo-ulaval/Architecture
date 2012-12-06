@@ -9,6 +9,7 @@ public final class UserModelGenerator {
 		model.setIdul("HABBA");
 		model.setName("Derp");
 		model.setPassword("HelloILoveKitties");
+		model.setEmailAddress("derp@herp.com");
 
 		return model;
 	}
