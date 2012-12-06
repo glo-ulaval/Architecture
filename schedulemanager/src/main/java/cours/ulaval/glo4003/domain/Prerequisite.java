@@ -9,7 +9,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class Prerequisite {
 
 	private List<String> acronyms = new ArrayList<String>();
-	private Boolean isConcomitant;
+	private Boolean isConcomitant = false;
 
 	public void addAcronym(String acronym) {
 		acronyms.add(acronym);
