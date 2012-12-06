@@ -11,7 +11,7 @@ public class User {
 	private String idul;
 	private String name;
 	private String password;
-	private List<Role> role = new ArrayList<Role>();
+	private List<Role> roles = new ArrayList<Role>();
 
 	private String emailAddress = "";
 	private static final String EMAIL_VALIDATION_REGEX = "^[a-z0-9-]+(\\.[a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*\\.[a-z]{2,6}$";
@@ -26,17 +26,17 @@ public class User {
 		this.idul = idul;
 		this.name = name;
 		this.password = password;
-		this.role.add(role);
+		this.roles.add(role);
 	}
 
 	public void acceptSchedule(Schedule schedule) {
-		if (role.contains(Role.ROLE_Enseignant)) {
+		if (roles.contains(Role.ROLE_Enseignant)) {
 			schedule.addStatus(idul, ScheduleStatus.Accepted);
 		}
 	}
 
 	public void refuseSchedule(Schedule schedule) {
-		if (role.contains(Role.ROLE_Enseignant)) {
+		if (roles.contains(Role.ROLE_Enseignant)) {
 			schedule.addStatus(idul, ScheduleStatus.Refused);
 		}
 	}
@@ -70,7 +70,7 @@ public class User {
 	}
 
 	public void setRoles(List<Role> role) {
-		this.role = role;
+		this.roles = role;
 	}
 
 	public String getEmailAddress() {
@@ -86,13 +86,13 @@ public class User {
 	}
 
 	public void addRole(Role role) {
-		if (!this.role.contains(role)) {
-			this.role.add(role);
+		if (!this.roles.contains(role)) {
+			this.roles.add(role);
 		}
 	}
 
 	public List<Role> getRoles() {
-		return role;
+		return roles;
 	}
 
 	public void addNotification(Notification notification) {
