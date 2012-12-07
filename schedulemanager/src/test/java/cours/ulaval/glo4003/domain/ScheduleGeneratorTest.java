@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
+import cours.ulaval.glo4003.domain.exception.FailedScheduleGenerationException;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
 public class ScheduleGeneratorTest {
@@ -128,10 +129,10 @@ public class ScheduleGeneratorTest {
 		verify(availabilityMock).generatePossibleTimeSlotsForLab(anyInt());
 	}
 
-	@Test(expected = Exception.class)
+	@Test(expected = FailedScheduleGenerationException.class)
 	public void shouldThrowExceptionWhenASectionCourseBePlacedInSchedule() throws Exception {
 		List<Section> mockedSections = prepareSections();
-		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, any(Section.class))).thenReturn(true);
+		when(conflictDetectorMock.willSectionGenerateConflict(any(Schedule.class), any(Section.class))).thenReturn(true);
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionWithLabMock)).thenReturn(false);
 		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(3));
 		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
@@ -139,11 +140,11 @@ public class ScheduleGeneratorTest {
 		scheduleGenerator.generateSchedule(mockedSections);
 	}
 
-	@Test(expected = Exception.class)
+	@Test(expected = FailedScheduleGenerationException.class)
 	public void shouldThrowExceptionWhenASectionLabBePlacedInSchedule() throws Exception {
 		List<Section> mockedSections = prepareSections();
-		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, any(Section.class))).thenReturn(false);
-		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, any(Section.class))).thenReturn(true);
+		when(conflictDetectorMock.willSectionGenerateConflict(any(Schedule.class), any(Section.class))).thenReturn(false);
+		when(conflictDetectorMock.willSectionGenerateConflict(any(Schedule.class), any(Section.class))).thenReturn(true);
 		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(3));
 		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
 

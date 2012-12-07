@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
+import cours.ulaval.glo4003.domain.exception.FailedScheduleGenerationException;
 import cours.ulaval.glo4003.domain.exception.NoPossibleTimeSlotsException;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 
@@ -73,9 +74,8 @@ public class ScheduleGenerator {
 			} catch (NoPossibleTimeSlotsException e) {
 				// Si on attrape ce type d'exception, le cours ne peut pas être
 				// placé dans l'horaire
-				// TODO implémentation d'une manière de gérer ce cas
 				e.printStackTrace();
-				throw new Exception("Erreur dans la génération de l'horaire");
+				throw new FailedScheduleGenerationException("Erreur dans la génération de l'horaire");
 			}
 		}
 		return schedule;
@@ -105,7 +105,7 @@ public class ScheduleGenerator {
 		while (!possibleTimeSlots.isEmpty()) {
 			int timeSlotIndex = getRandomIndex(possibleTimeSlots.size() - 1);
 			TimeSlot timeSlot = possibleTimeSlots.get(timeSlotIndex);
-			sectionToAdd.setCourseTimeSlots(Arrays.asList(timeSlot));
+			sectionToAdd.setLabTimeSlot(timeSlot);
 			if (conflictDetector.willSectionGenerateConflict(schedule, sectionToAdd)) {
 				possibleTimeSlots.remove(timeSlotIndex);
 			} else {

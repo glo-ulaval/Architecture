@@ -21,6 +21,7 @@ import cours.ulaval.glo4003.domain.conflictdetection.CourseLevelFilter;
 import cours.ulaval.glo4003.domain.conflictdetection.SameTeacherFilter;
 import cours.ulaval.glo4003.domain.conflictdetection.Sink;
 import cours.ulaval.glo4003.domain.conflictdetection.UnavailableTeacherFilter;
+import cours.ulaval.glo4003.domain.exception.FailedScheduleGenerationException;
 import cours.ulaval.glo4003.domain.repository.AvailabilityRepository;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.ProgramSheetRepository;
@@ -207,7 +208,7 @@ public class ScheduleGeneratorIT extends ITTestBase {
 		assertTrue(generatedSchedule.getSectionsList().contains(glo2002Section));
 	}
 
-	@Test(expected = Exception.class)
+	@Test(expected = FailedScheduleGenerationException.class)
 	public void shouldThrowExceptionIfImpossibleToGenerateScheduleWithoutConflict() throws Exception {
 		glo1010Section.setTeachers(Arrays.asList("unavailableTeacher"));
 
