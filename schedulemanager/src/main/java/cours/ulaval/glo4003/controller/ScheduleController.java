@@ -165,6 +165,25 @@ public class ScheduleController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/generate/{id}", method = RequestMethod.GET)
+	public ModelAndView generateSchedule(@PathVariable String id, Principal principal) throws Exception {
+		Schedule schedule = scheduleRepository.findById(id);
+
+		Schedule generatedSchedule = generator.generateSchedule(schedule.getSectionsList());
+		generatedSchedule.setPersonInCharge(schedule.getPersonInCharge());
+		generatedSchedule.setSemester(schedule.getSemester());
+		generatedSchedule.setYear(schedule.getYear());
+		conflictDetector.detectConflict(generatedSchedule);
+		scheduleRepository.store(schedule);
+
+		CalendarModel calendarModel = new CalendarModel(schedule);
+		ModelAndView mv;
+		mv = new ModelAndView("schedulelist");
+		mv.addObject("schedule", calendarModel);
+
+		return mv;
+	}
+
 	@RequestMapping(value = "/accept/{scheduleId}", method = RequestMethod.POST)
 	@ResponseBody
 	public String acceptSchedule(@PathVariable String scheduleId, Principal principal, String status) {
