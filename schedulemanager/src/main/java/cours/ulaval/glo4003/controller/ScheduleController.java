@@ -39,6 +39,7 @@ import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
+import cours.ulaval.glo4003.domain.exception.FailedScheduleGenerationException;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
@@ -169,11 +170,21 @@ public class ScheduleController {
 	public ModelAndView generateSchedule(@PathVariable String id, Principal principal) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 
-		Schedule generatedSchedule = generator.generateSchedule(schedule.getSectionsList());
-		generatedSchedule.setPersonInCharge(schedule.getPersonInCharge());
-		generatedSchedule.setSemester(schedule.getSemester());
-		generatedSchedule.setYear(schedule.getYear());
-		conflictDetector.detectConflict(generatedSchedule);
+		try {
+			Schedule generatedSchedule = generator.generateSchedule(schedule.getSectionsList());
+			generatedSchedule.setPersonInCharge(schedule.getPersonInCharge());
+			generatedSchedule.setSemester(schedule.getSemester());
+			generatedSchedule.setYear(schedule.getYear());
+		} catch (FailedScheduleGenerationException e) {
+			ModelAndView mv = new ModelAndView("createschedule");
+			mv.addObject("error", e.getMessage());
+			mv.addObject("year", schedule.getYear());
+			mv.addObject("semester", schedule.getSemester());
+			mv.addObject("id", id);
+			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(schedule.getYear())));
+			mv.addObject("sections", getSections(schedule));
+			return mv;
+		}
 		scheduleRepository.store(schedule);
 
 		CalendarModel calendarModel = new CalendarModel(schedule);

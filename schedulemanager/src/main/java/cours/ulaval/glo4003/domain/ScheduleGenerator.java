@@ -61,7 +61,7 @@ public class ScheduleGenerator {
 		return possibleTimeSlots;
 	}
 
-	public Schedule generateSchedule(List<Section> sections) throws Exception {
+	public Schedule generateSchedule(List<Section> sections) throws FailedScheduleGenerationException {
 		Schedule schedule = new Schedule();
 		int numberOfTries = 0;
 		while (!sections.isEmpty() && numberOfTries < 30) {
@@ -80,7 +80,9 @@ public class ScheduleGenerator {
 			}
 		}
 		if (numberOfTries >= 30) {
-			throw new FailedScheduleGenerationException("Erreur dans la génération de l'horaire");
+			throw new FailedScheduleGenerationException(
+					"Erreur dans la génération de l'horaire. Des sections de cours n'ont pas pu être placé dans l'horaire."
+							+ " Modifier le choix des sections ou procéder au placement manuel");
 		}
 		return schedule;
 	}
