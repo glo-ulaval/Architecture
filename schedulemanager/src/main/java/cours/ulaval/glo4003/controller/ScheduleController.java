@@ -358,8 +358,6 @@ public class ScheduleController {
 			}
 		}
 
-		schedule.clearConflicts();
-		conflictDetector.detectConflict(schedule);
 		scheduleRepository.store(schedule);
 
 		return scheduleView(id, "calendar", principal);
