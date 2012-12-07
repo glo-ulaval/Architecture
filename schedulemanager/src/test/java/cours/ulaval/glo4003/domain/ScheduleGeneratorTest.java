@@ -19,6 +19,7 @@ public class ScheduleGeneratorTest {
 	private ScheduleGenerator scheduleGenerator;
 	private Section sectionMock;
 	private Schedule scheduleMock;
+	private Section sectionWithLabMock;
 	private ConflictDetector conflictDetectorMock;
 	private Availability availabilityMock;
 
@@ -27,10 +28,19 @@ public class ScheduleGeneratorTest {
 		scheduleMock = mock(Schedule.class);
 		TimeDedicated timeDedicatedMock = mock(TimeDedicated.class);
 		when(timeDedicatedMock.getCourseHours()).thenReturn(3);
+		TimeDedicated timeDedicatedWithLabHoursMock = mock(TimeDedicated.class);
+		when(timeDedicatedWithLabHoursMock.getCourseHours()).thenReturn(3);
+		when(timeDedicatedWithLabHoursMock.getLabHours()).thenReturn(2);
+
 		sectionMock = mock(Section.class);
 		when(sectionMock.getTimeDedicated()).thenReturn(timeDedicatedMock);
 		when(sectionMock.getTeachers()).thenReturn(Arrays.asList("A_TEACHER"));
 		when(sectionMock.isSupposedToHaveLab()).thenReturn(false);
+		sectionWithLabMock = mock(Section.class);
+		when(sectionWithLabMock.getTimeDedicated()).thenReturn(timeDedicatedWithLabHoursMock);
+		when(sectionWithLabMock.getTeachers()).thenReturn(Arrays.asList("A_TEACHER"));
+		when(sectionWithLabMock.isSupposedToHaveLab()).thenReturn(true);
+
 		conflictDetectorMock = mock(ConflictDetector.class);
 
 		availabilityMock = mock(Availability.class);
@@ -44,8 +54,7 @@ public class ScheduleGeneratorTest {
 	}
 
 	@Test
-	public void canProposeTimeSpotsForSectionForCourse()
-			throws Exception {
+	public void canProposeTimeSpotsForSectionForCourse() throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
 		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(10));
 
@@ -56,16 +65,14 @@ public class ScheduleGeneratorTest {
 	}
 
 	@Test(expected = Exception.class)
-	public void shouldThrowExceptionWhenNoPropositionPossibleForCourse()
-			throws Exception {
+	public void shouldThrowExceptionWhenNoPropositionPossibleForCourse() throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(true);
 
 		scheduleGenerator.proposeTimeSlotsForSectionForCourses(sectionMock, scheduleMock);
 	}
 
 	@Test
-	public void shouldTwoProposeTimeSlotsWhenOnlyTwoArePossibleForCourse()
-			throws Exception {
+	public void shouldTwoProposeTimeSlotsWhenOnlyTwoArePossibleForCourse() throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
 		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
 
@@ -76,8 +83,7 @@ public class ScheduleGeneratorTest {
 	}
 
 	@Test
-	public void canProposeTimeSpotsForSectionForLab()
-			throws Exception {
+	public void canProposeTimeSpotsForSectionForLab() throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
 		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(10));
 
@@ -88,16 +94,14 @@ public class ScheduleGeneratorTest {
 	}
 
 	@Test(expected = Exception.class)
-	public void shouldThrowExceptionWhenNoPropositionPossibleForLab()
-			throws Exception {
+	public void shouldThrowExceptionWhenNoPropositionPossibleForLab() throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(true);
 
 		scheduleGenerator.proposeTimeSlotsForSectionForLab(sectionMock, scheduleMock);
 	}
 
 	@Test
-	public void shouldTwoProposeTimeSlotsWhenOnlyTwoArePossibleForLab()
-			throws Exception {
+	public void shouldTwoProposeTimeSlotsWhenOnlyTwoArePossibleForLab() throws Exception {
 		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
 		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
 
@@ -107,11 +111,57 @@ public class ScheduleGeneratorTest {
 		verify(conflictDetectorMock, atLeast(2)).willSectionGenerateConflict(scheduleMock, sectionMock);
 	}
 
+	@Test
+	public void canProposeCompleteScheduleForSpecifiedSectionList() throws Exception {
+		List<Section> mockedSections = prepareSections();
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionMock)).thenReturn(false);
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionWithLabMock)).thenReturn(false);
+		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(3));
+		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
+
+		Schedule generatedSchedule = scheduleGenerator.generateSchedule(mockedSections);
+
+		assertNotNull(generatedSchedule);
+		assertFalse(generatedSchedule.getSectionsList().isEmpty());
+		verify(conflictDetectorMock, atLeast(2)).willSectionGenerateConflict(any(Schedule.class), any(Section.class));
+		verify(availabilityMock, times(2)).generatePossibleTimeSlotsForCourse(anyInt());
+		verify(availabilityMock).generatePossibleTimeSlotsForLab(anyInt());
+	}
+
+	@Test(expected = Exception.class)
+	public void shouldThrowExceptionWhenASectionCourseBePlacedInSchedule() throws Exception {
+		List<Section> mockedSections = prepareSections();
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, any(Section.class))).thenReturn(true);
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, sectionWithLabMock)).thenReturn(false);
+		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(3));
+		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
+
+		scheduleGenerator.generateSchedule(mockedSections);
+	}
+
+	@Test(expected = Exception.class)
+	public void shouldThrowExceptionWhenASectionLabBePlacedInSchedule() throws Exception {
+		List<Section> mockedSections = prepareSections();
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, any(Section.class))).thenReturn(false);
+		when(conflictDetectorMock.willSectionGenerateConflict(scheduleMock, any(Section.class))).thenReturn(true);
+		when(availabilityMock.generatePossibleTimeSlotsForCourse(anyInt())).thenReturn(generatePossibleTimeSlots(3));
+		when(availabilityMock.generatePossibleTimeSlotsForLab(anyInt())).thenReturn(generatePossibleTimeSlots(2));
+
+		scheduleGenerator.generateSchedule(mockedSections);
+	}
+
 	private List<TimeSlot> generatePossibleTimeSlots(int numberOfTimeSlots) {
 		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
 		for (int i = 0; i < numberOfTimeSlots; i++) {
 			timeSlots.add(mock(TimeSlot.class));
 		}
 		return timeSlots;
+	}
+
+	private List<Section> prepareSections() {
+		List<Section> sections = new ArrayList<Section>();
+		sections.add(sectionMock);
+		sections.add(sectionWithLabMock);
+		return sections;
 	}
 }
