@@ -30,7 +30,8 @@ import cours.ulaval.glo4003.persistence.XMLCourseRepository;
 import cours.ulaval.glo4003.persistence.XMLProgramSheetRepository;
 
 public class ScheduleGeneratorIT extends ITTestBase {
-	private static final String JSON_STRING = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,1,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
+	private static final String JSON_AVAILABILITY = "{\"monday\":[1,1,1,1,1,1,1,1,2,2,2,2,2],\"tuesday\":[2,2,2,2,2,1,1,1,1,1,0,0,0],\"wednesday\":[2,2,1,1,1,1,1,1,0,0,0,1,1],\"thursday\":[0,0,0,0,0,1,1,1,1,2,2,2,2],\"friday\":[0,0,0,1,1,1,1,1,0,0,0,0,0]}";
+	private static final String OTHER_JSON_AVAILALBILITY = "{\"monday\":[0,0,0,0,0,0,0,0,0,0,0,0,0],\"tuesday\":[2,2,2,2,2,0,0,0,0,0,0,0,0],\"wednesday\":[2,2,0,0,0,0,0,0,0,0,0,0,0],\"thursday\":[0,0,0,0,0,1,0,0,1,2,2,2,2],\"friday\":[0,0,0,0,1,0,0,0,0,0,0,0,0]}";
 	private static final int A_HOUR = 10;
 	private static final int A_MINUTE = 30;
 
@@ -56,11 +57,12 @@ public class ScheduleGeneratorIT extends ITTestBase {
 	public static void setupClass() throws Exception {
 		availabilityRepository = new XMLAvailabilityRepository();
 
-		addTeacherAvailability("teacher1");
-		addTeacherAvailability("teacher2");
-		addTeacherAvailability("teacher3");
-		addTeacherAvailability("teacher4");
-		addTeacherAvailability("teacher5");
+		addTeacherAvailability("teacher1", JSON_AVAILABILITY);
+		addTeacherAvailability("teacher2", JSON_AVAILABILITY);
+		addTeacherAvailability("teacher3", JSON_AVAILABILITY);
+		addTeacherAvailability("teacher4", JSON_AVAILABILITY);
+		addTeacherAvailability("teacher5", JSON_AVAILABILITY);
+		addTeacherAvailability("unavailableTeacher", OTHER_JSON_AVAILALBILITY);
 	}
 
 	@AfterClass
@@ -104,7 +106,7 @@ public class ScheduleGeneratorIT extends ITTestBase {
 		courseRepository.store(ift2901);
 		courseRepository.store(glo3013);
 
-		glo2002Section = new Section("87134", "A", "a responsable person", Arrays.asList("teacher1"), TeachMode.InCourse, new TimeDedicated(3, 2, 6),
+		glo2002Section = new Section("87134", "A", "a responsable person", Arrays.asList("teacher1"), TeachMode.InCourse, new TimeDedicated(3, 2, 4),
 				"GLO-2002", null, null);
 		glo2002Section.setCourseRepository(courseRepository);
 		glo2002Section.setProgramSheetRepository(programSheetRepository);
@@ -185,13 +187,44 @@ public class ScheduleGeneratorIT extends ITTestBase {
 		assertEquals(DayOfWeek.FRIDAY, possibleTimeSlots.get(2).getDayOfWeek());
 	}
 
+	@Test
+	public void canGenerateASchedule() throws Exception {
+		ScheduleGenerator scheduleGenerator = new ScheduleGenerator();
+		scheduleGenerator.setAvailabilityRepository(availabilityRepository);
+		scheduleGenerator.setConflictDetector(conflictDetector);
+
+		Schedule generatedSchedule = scheduleGenerator.generateSchedule(prepareSectionForScheduleGeneration());
+
+		assertNotNull(generatedSchedule);
+		assertEquals(7, generatedSchedule.getSectionsList().size());
+		assertTrue(generatedSchedule.getConflicts().isEmpty());
+		assertTrue(generatedSchedule.getSectionsList().contains(glo1010Section));
+		assertTrue(generatedSchedule.getSectionsList().contains(glo1901Section));
+		assertTrue(generatedSchedule.getSectionsList().contains(glo3013Section));
+		assertTrue(generatedSchedule.getSectionsList().contains(ift2002Section));
+		assertTrue(generatedSchedule.getSectionsList().contains(ift2004Section));
+		assertTrue(generatedSchedule.getSectionsList().contains(ift2901Section));
+		assertTrue(generatedSchedule.getSectionsList().contains(glo2002Section));
+	}
+
+	@Test(expected = Exception.class)
+	public void shouldThrowExceptionIfImpossibleToGenerateScheduleWithoutConflict() throws Exception {
+		glo1010Section.setTeachers(Arrays.asList("unavailableTeacher"));
+
+		ScheduleGenerator scheduleGenerator = new ScheduleGenerator();
+		scheduleGenerator.setAvailabilityRepository(availabilityRepository);
+		scheduleGenerator.setConflictDetector(conflictDetector);
+
+		scheduleGenerator.generateSchedule(prepareSectionForScheduleGeneration());
+	}
+
 	@After
 	public void tearDown() throws Exception {
 		courseRepository.clear();
 	}
 
-	private static void addTeacherAvailability(String teacherIdul) throws Exception {
-		availabilityModel = mapper.readValue(JSON_STRING, AvailabilityModel.class);
+	private static void addTeacherAvailability(String teacherIdul, String json) throws Exception {
+		availabilityModel = mapper.readValue(json, AvailabilityModel.class);
 		availabilities = availabilityModel.toAvailability(teacherIdul);
 		availabilityRepository.store(availabilities);
 	}
@@ -199,5 +232,15 @@ public class ScheduleGeneratorIT extends ITTestBase {
 	private Time generateTimeSlotStartTime() {
 		Time startTime = new Time(A_HOUR, A_MINUTE);
 		return startTime;
+	}
+
+	private List<Section> prepareSectionForScheduleGeneration() {
+		List<Section> sections = new ArrayList<Section>();
+		schedule.add(glo2002Section);
+		for (Section section : schedule.getSectionsList()) {
+			section.setCourseTimeSlots(new ArrayList<TimeSlot>());
+			sections.add(section);
+		}
+		return sections;
 	}
 }
