@@ -63,20 +63,24 @@ public class ScheduleGenerator {
 
 	public Schedule generateSchedule(List<Section> sections) throws Exception {
 		Schedule schedule = new Schedule();
-		while (!sections.isEmpty()) {
+		int numberOfTries = 0;
+		while (!sections.isEmpty() && numberOfTries < 30) {
 			int sectionIndex = getRandomIndex(sections.size() - 1);
 			Section sectionToAdd = sections.get(sectionIndex);
+			sectionToAdd.setCourseTimeSlots(new ArrayList<TimeSlot>());
 			try {
 				if (sectionToAdd.isSupposedToHaveLab()) {
 					placeSectionLab(sectionToAdd, schedule);
 				}
 				placeSectionCourse(sections, schedule, sectionIndex, sectionToAdd);
 			} catch (NoPossibleTimeSlotsException e) {
-				// Si on attrape ce type d'exception, le cours ne peut pas être
-				// placé dans l'horaire
-				e.printStackTrace();
-				throw new FailedScheduleGenerationException("Erreur dans la génération de l'horaire");
+				sections.addAll(schedule.getSectionsList());
+				schedule.getSections().clear();
+				numberOfTries++;
 			}
+		}
+		if (numberOfTries >= 30) {
+			throw new FailedScheduleGenerationException("Erreur dans la génération de l'horaire");
 		}
 		return schedule;
 	}

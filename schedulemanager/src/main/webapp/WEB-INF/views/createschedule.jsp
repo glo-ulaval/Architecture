@@ -94,10 +94,12 @@
 				</c:if>
 			</div>
 		</div>
-		<c:url var="generateurl" value="/schedule/${id}/list"></c:url>
-		<a class="btn btn-success pull-right actionbutton" href="${generateurl}">Générer</a>
 		<c:url var="reusescheduleurl" value="/schedule/${id}/reuseschedule"></c:url>
-		<a class="btn btn-success pull-right" href="${reusescheduleurl}">Réutiliser un horaire</a>
+		<a class="btn btn-info pull-left" href="${reusescheduleurl}">Réutiliser un horaire</a>
+		<c:url var="voirurl" value="/schedule/${id}/list"></c:url>
+		<a class="btn btn-success pull-right actionbutton" href="${voirurl}">Voir</a>
+		<c:url var="generateurl" value="/schedule/generate/${id}"></c:url>
+		<a class="btn btn-success pull-right actionbutton" href="${generateurl}">Générer</a>
 	</div>
 	<c:import url="footer.jsp" />
 </body>
