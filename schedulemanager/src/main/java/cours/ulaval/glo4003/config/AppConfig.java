@@ -9,6 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import cours.ulaval.glo4003.aspect.AddNotificationAspect;
 import cours.ulaval.glo4003.aspect.DetectConflictAspect;
+import cours.ulaval.glo4003.aspect.LoggerAspect;
 import cours.ulaval.glo4003.aspect.SendEmailOnModifyAspect;
 import cours.ulaval.glo4003.controller.security.UserSecurityService;
 import cours.ulaval.glo4003.domain.ScheduleGenerator;
@@ -36,44 +37,37 @@ import cours.ulaval.glo4003.utils.ResourcesLoader;
 public class AppConfig {
 
 	@Bean
-	public CourseRepository courseRepository()
-			throws Exception {
+	public CourseRepository courseRepository() throws Exception {
 		return new XMLCourseRepository();
 	}
 
 	@Bean
-	public OfferingRepository offeringRepository()
-			throws Exception {
+	public OfferingRepository offeringRepository() throws Exception {
 		return new XMLOfferingRepository();
 	}
 
 	@Bean
-	public ScheduleRepository scheduleRepository()
-			throws Exception {
+	public ScheduleRepository scheduleRepository() throws Exception {
 		return new XMLScheduleRepository();
 	}
 
 	@Bean
-	public UserRepository userRepository()
-			throws Exception {
+	public UserRepository userRepository() throws Exception {
 		return new XMLUserRepository();
 	}
 
 	@Bean
-	public AvailabilityRepository availabilityRepository()
-			throws Exception {
+	public AvailabilityRepository availabilityRepository() throws Exception {
 		return new XMLAvailabilityRepository();
 	}
 
 	@Bean
-	public ProgramSheetRepository programSheetRepository()
-			throws Exception {
+	public ProgramSheetRepository programSheetRepository() throws Exception {
 		return new XMLProgramSheetRepository();
 	}
 
 	@Bean
-	public UserSecurityService userSecurityService()
-			throws Exception {
+	public UserSecurityService userSecurityService() throws Exception {
 		return new UserSecurityService();
 	}
 
@@ -120,6 +114,11 @@ public class AppConfig {
 	@Bean
 	public DetectConflictAspect detectConflictAspect() {
 		return new DetectConflictAspect();
+	}
+
+	@Bean
+	public LoggerAspect loggerAspect() {
+		return new LoggerAspect();
 	}
 
 	@Bean
