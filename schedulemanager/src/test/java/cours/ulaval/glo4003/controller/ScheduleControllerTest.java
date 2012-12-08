@@ -63,8 +63,6 @@ public class ScheduleControllerTest {
 	private ObjectMapper mapper;
 	@Mock
 	private ScheduleGenerator generator;
-	// @Mock
-	// private ConflictDetector conflictDetector;
 
 	@InjectMocks
 	private ScheduleController controller;

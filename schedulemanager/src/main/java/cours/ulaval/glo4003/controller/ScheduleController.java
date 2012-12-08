@@ -38,7 +38,6 @@ import cours.ulaval.glo4003.domain.TimeDedicated;
 import cours.ulaval.glo4003.domain.TimeSlot;
 import cours.ulaval.glo4003.domain.TimeSlot.DayOfWeek;
 import cours.ulaval.glo4003.domain.User;
-import cours.ulaval.glo4003.domain.conflictdetection.ConflictDetector;
 import cours.ulaval.glo4003.domain.exception.FailedScheduleGenerationException;
 import cours.ulaval.glo4003.domain.repository.CourseRepository;
 import cours.ulaval.glo4003.domain.repository.OfferingRepository;
@@ -69,9 +68,6 @@ public class ScheduleController {
 
 	@Inject
 	JavaMailSenderImpl mailSender;
-
-	@Inject
-	private ConflictDetector conflictDetector;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView schedule(Principal principal) {
