@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.mail.MailException;
@@ -14,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import cours.ulaval.glo4003.domain.Notification;
 import cours.ulaval.glo4003.domain.Schedule;
 import cours.ulaval.glo4003.domain.Section;
+import cours.ulaval.glo4003.domain.Semester;
 import cours.ulaval.glo4003.domain.User;
 import cours.ulaval.glo4003.domain.repository.ScheduleRepository;
 import cours.ulaval.glo4003.domain.repository.UserRepository;
@@ -30,11 +30,8 @@ public class SendEmailOnModifyAspect {
 	@Inject
 	UserRepository userRepository;
 
-	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.updateSection(..))")
-	private void onUpdateSection(JoinPoint pjp) throws Exception {
-		String id = pjp.getArgs()[0].toString();
-		String nrc = pjp.getArgs()[1].toString();
-
+	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.updateSection(..)) && args(id, nrc, ..)")
+	private void onUpdateSection(String id, String nrc) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		Section section = schedule.getSections().get(nrc);
 
@@ -43,13 +40,10 @@ public class SendEmailOnModifyAspect {
 		sendEmailToAll(section.getTeachers());
 	}
 
-	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..))")
-	private void onEditSectionAndRedirect(JoinPoint pjp) throws Exception {
-		String id = pjp.getArgs()[0].toString();
-		String nrc = pjp.getArgs()[3].toString();
-
+	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..)) && args(id, year, semester, sectionNrc, ..)")
+	private void onEditSectionAndRedirect(String id, String year, Semester semester, String sectionNrc) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
-		Section section = schedule.getSections().get(nrc);
+		Section section = schedule.getSections().get(sectionNrc);
 
 		// Normalement on partirais un thread pour éviter à l'usager le long
 		// traitement

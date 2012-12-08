@@ -330,32 +330,9 @@ public class ScheduleController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}", method = RequestMethod.POST)
-	public ModelAndView postEditSection(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
-			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
-		ModelAndView mv = new ModelAndView("createschedule");
-		try {
-			Schedule schedule = scheduleRepository.findById(id);
-
-			updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
-
-			mv.addObject("error", ControllerMessages.SUCCESS);
-			mv.addObject("year", year);
-			mv.addObject("semester", semester);
-			mv.addObject("id", id);
-			mv.addObject("view", view);
-			mv.addObject("courses", courseRepository.findByOffering(offeringRepository.find(year)));
-			mv.addObject("sections", getSections(schedule));
-		} catch (Exception e) {
-			mv.addObject("error", e.getMessage());
-		}
-		return mv;
-	}
-
 	@RequestMapping(value = "/editsection/{id}/{year}/{semester}/{sectionNrc}/{view}", method = RequestMethod.POST)
 	public ModelAndView postEditSectionAndReturnToLastView(@PathVariable String id, @PathVariable String year, @PathVariable Semester semester,
 			@PathVariable String sectionNrc, @PathVariable String view, @ModelAttribute("section") SectionModel section, Principal principal) throws Exception {
-
 		Schedule schedule = scheduleRepository.findById(id);
 		updateSectionAndSaveToSchedule(sectionNrc, section, schedule);
 

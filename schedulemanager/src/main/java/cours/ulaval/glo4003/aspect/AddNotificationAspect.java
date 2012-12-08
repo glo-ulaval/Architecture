@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 
@@ -25,40 +24,20 @@ public class AddNotificationAspect {
 	@Inject
 	UserRepository userRepository;
 
-	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.updateSection(..))")
-	private void onUpdateSection(JoinPoint pjp) throws Exception {
-		String id = pjp.getArgs()[0].toString();
-		String nrc = pjp.getArgs()[1].toString();
+	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.updateSection(..)) && args(id, nrc, ..)")
+	private void onUpdateSection(String id, String nrc) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
 		Section section = schedule.getSections().get(nrc);
 
 		addNotification(id, nrc, schedule.getYear(), schedule.getSemester().toString(), section.getTeachers());
 	}
 
-	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSection(..))")
-	private void onPostEditSection(JoinPoint pjp) throws Exception {
-		String id = pjp.getArgs()[0].toString();
-		String nrc = pjp.getArgs()[3].toString();
-		String year = pjp.getArgs()[1].toString();
-		Semester semester = (Semester) pjp.getArgs()[2];
-
+	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..)) && args(id, year, semester, sectionNrc, ..)")
+	private void onEditSectionAndRedirect(String id, String year, Semester semester, String sectionNrc) throws Exception {
 		Schedule schedule = scheduleRepository.findById(id);
-		Section section = schedule.getSections().get(nrc);
+		Section section = schedule.getSections().get(sectionNrc);
 
-		addNotification(id, nrc, year, semester.toString(), section.getTeachers());
-	}
-
-	@After("execution(* cours.ulaval.glo4003.controller.ScheduleController.postEditSectionAndReturnToLastView(..))")
-	private void onEditSectionAndRedirect(JoinPoint pjp) throws Exception {
-		String id = pjp.getArgs()[0].toString();
-		String nrc = pjp.getArgs()[3].toString();
-		String year = pjp.getArgs()[1].toString();
-		Semester semester = (Semester) pjp.getArgs()[2];
-
-		Schedule schedule = scheduleRepository.findById(id);
-		Section section = schedule.getSections().get(nrc);
-
-		addNotification(id, nrc, year, semester.toString(), section.getTeachers());
+		addNotification(id, sectionNrc, year, semester.toString(), section.getTeachers());
 	}
 
 	private void addNotification(String id, String nrc, String year, String semester, List<String> teachers) throws Exception {
