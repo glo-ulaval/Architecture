@@ -25,16 +25,20 @@ Mot de passe temporaire pour l'utilisation de l'application
 ===========================================================
 
 ROLE DE DIRECTEUR
-**User :** directeur
+**User :** NATAW
 **Password :** pass
 
 ROLE D'ENSEIGNANT
-**User :** enseignant
+**User :** LULAM50 et plusieurs autres (voir Users.xml)
 **Password :** pass
 
 ROLE D'ADMINISTRATEUR
 **User :** ADMIN
 **Password :** admin
+
+ROLE DE RESPONSABLE D'HORAIRE
+**User :** NADUC33
+**Password :** pass
 
 Lancer les tests d'intégration à partir de Maven en CLI 
 =======================================================
