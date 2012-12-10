@@ -81,7 +81,7 @@ public class ScheduleGenerator {
 		}
 		if (numberOfTries >= 30) {
 			throw new FailedScheduleGenerationException(
-					"Erreur dans la génération de l'horaire. Des sections de cours n'ont pas pu être placé dans l'horaire."
+					"Erreur dans la génération de l'horaire. Des sections de cours n'ont pas pu être placées dans l'horaire."
 							+ " Modifier le choix des sections ou procéder au placement manuel");
 		}
 		return schedule;
