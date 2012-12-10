@@ -40,6 +40,12 @@ ROLE DE RESPONSABLE D'HORAIRE
 **User :** NADUC33
 **Password :** pass
 
+Compte usager pour les e-mails
+===========================================================
+
+**User :** glo4003.arhitecture@gmail.com
+**Password :** glo4003a
+
 Lancer les tests d'intégration à partir de Maven en CLI 
 =======================================================
 
