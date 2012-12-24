@@ -13,14 +13,6 @@ Membres de l'équipe
 - **Vincent Séguin** - Supra128
 - **Olivier Sylvain** - osylvain
 
-
-Légende des symboles de commits :
-
-* + Ajout de code
-* - Retrait de code
-* ! Correction d'un bug
-* * Modification de code existant
-
 Mot de passe temporaire pour l'utilisation de l'application
 ===========================================================
 
@@ -50,6 +42,11 @@ Lancer les tests d'intégration à partir de Maven en CLI
 =======================================================
 
 Entrer dans la console : mvn clean integration-test
+
+Lancer le serveur Tomcat 7 en CLI 
+=======================================================
+
+Entrer dans la console : mvn clean tomcat7:run 
 
 Configuration d'Eclipse
 =======================
