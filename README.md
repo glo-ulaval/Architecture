@@ -43,11 +43,6 @@ Lancer les tests d'intégration à partir de Maven en CLI
 
 Entrer dans la console : mvn clean integration-test
 
-Lancer le serveur Tomcat 7 en CLI 
-=======================================================
-
-Entrer dans la console : mvn clean tomcat7:run 
-
 Configuration d'Eclipse
 =======================
 
